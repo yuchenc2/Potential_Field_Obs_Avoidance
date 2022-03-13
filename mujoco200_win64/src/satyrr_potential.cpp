@@ -99,25 +99,38 @@ void scroll(GLFWwindow* window, double xoffset, double yoffset)
 }
 
 
+// geom locations
+void obstacleLocations(const mjModel* m, mjData* d){
+    printf("\n");
+    printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+2]);
+    printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+2]);
+    printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+2]);
+    printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+2]);
+    printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+2]);
+    printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3+2]);
+    printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+2]);
+    printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3+2]);
+    printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3+2]);
+    printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3+2]);
+    printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3+2]);
+}
+
+
+void mycontroller(const mjModel* m, mjData* d)
+{
+    obstacleLocations(m, d);
+}
+
 // main function
 int main(int argc, const char** argv)
 {
-    // check command-line arguments
-    if( argc!=2 )
-    {
-        printf(" USAGE:  basic modelfile\n");
-        return 0;
-    }
-
     // activate software
     mj_activate("mjkey.txt");
 
     // load and compile model
     char error[1000] = "Could not load binary model";
-    if( strlen(argv[1])>4 && !strcmp(argv[1]+strlen(argv[1])-4, ".mjb") )
-        m = mj_loadModel(argv[1], 0);
-    else
-        m = mj_loadXML(argv[1], 0, error, 1000);
+    m = mj_loadXML("../src/map1.xml", 0, error, 1000);
+
     if( !m )
         mju_error_s("Load model error: %s", error);
 
@@ -127,6 +140,10 @@ int main(int argc, const char** argv)
     // init GLFW
     if( !glfwInit() )
         mju_error("Could not initialize GLFW");
+
+    
+    // controller setup: install control callback
+    mjcb_control = mycontroller;
 
     // create window, make OpenGL context current, request v-sync
     GLFWwindow* window = glfwCreateWindow(1200, 900, "Demo", NULL, NULL);
