@@ -1,1 +1,1 @@
-# Haptic feedback with Human Machine Interface for controlling a teleoperated humanoid robot
+# Haptic feedback with Human Machine Interface for improving control performance of a teleoperated humanoid robot
