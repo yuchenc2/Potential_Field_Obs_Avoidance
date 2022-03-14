@@ -1,1 +1,1 @@
-# Potential_Field_Obs_Avoidance
+# Haptic feedback with Human Machine Interface for controlling a teleoperated humanoid robot
