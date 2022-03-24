@@ -1,0 +1,66 @@
+﻿  main.cpp
+uitools.obj : error LNK2019: unresolved external symbol __imp_mjr_addAux referenced in function uiModify
+uitools.obj : error LNK2019: unresolved external symbol __imp_mjr_findRect referenced in function uiUpdateState
+uitools.obj : error LNK2019: unresolved external symbol __imp_mjui_resize referenced in function uiModify
+uitools.obj : error LNK2019: unresolved external symbol __imp_mjui_update referenced in function uiModify
+uitools.obj : error LNK2019: unresolved external symbol __imp_mju_malloc referenced in function uiSetCallback
+uitools.obj : error LNK2019: unresolved external symbol __imp_mju_free referenced in function uiClearCallback
+uitools.obj : error LNK2019: unresolved external symbol __imp_mju_round referenced in function uiFontScale
+uitools.obj : error LNK2019: unresolved external symbol glfwGetPrimaryMonitor referenced in function uiFontScale
+uitools.obj : error LNK2019: unresolved external symbol glfwGetMonitorPhysicalSize referenced in function uiFontScale
+uitools.obj : error LNK2019: unresolved external symbol glfwGetVideoMode referenced in function uiFontScale
+uitools.obj : error LNK2019: unresolved external symbol glfwGetWindowSize referenced in function uiFontScale
+main.obj : error LNK2001: unresolved external symbol glfwGetWindowSize
+uitools.obj : error LNK2019: unresolved external symbol glfwGetFramebufferSize referenced in function uiFontScale
+main.obj : error LNK2001: unresolved external symbol glfwGetFramebufferSize
+uitools.obj : error LNK2019: unresolved external symbol glfwSetWindowUserPointer referenced in function uiClearCallback
+uitools.obj : error LNK2019: unresolved external symbol glfwGetWindowUserPointer referenced in function uiClearCallback
+uitools.obj : error LNK2019: unresolved external symbol glfwSetWindowSizeCallback referenced in function uiClearCallback
+uitools.obj : error LNK2019: unresolved external symbol glfwGetKey referenced in function uiMouseButton
+main.obj : error LNK2001: unresolved external symbol glfwGetKey
+uitools.obj : error LNK2019: unresolved external symbol glfwGetMouseButton referenced in function uiUpdateState
+main.obj : error LNK2001: unresolved external symbol glfwGetMouseButton
+uitools.obj : error LNK2019: unresolved external symbol glfwGetCursorPos referenced in function uiUpdateState
+main.obj : error LNK2001: unresolved external symbol glfwGetCursorPos
+uitools.obj : error LNK2019: unresolved external symbol glfwSetKeyCallback referenced in function uiClearCallback
+main.obj : error LNK2001: unresolved external symbol glfwSetKeyCallback
+uitools.obj : error LNK2019: unresolved external symbol glfwSetMouseButtonCallback referenced in function uiClearCallback
+main.obj : error LNK2001: unresolved external symbol glfwSetMouseButtonCallback
+uitools.obj : error LNK2019: unresolved external symbol glfwSetCursorPosCallback referenced in function uiClearCallback
+main.obj : error LNK2001: unresolved external symbol glfwSetCursorPosCallback
+uitools.obj : error LNK2019: unresolved external symbol glfwSetScrollCallback referenced in function uiClearCallback
+main.obj : error LNK2001: unresolved external symbol glfwSetScrollCallback
+uitools.obj : error LNK2019: unresolved external symbol glfwGetTime referenced in function uiKeyboard
+main.obj : error LNK2019: unresolved external symbol __imp_mj_activate referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mj_deactivate referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mj_loadXML referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mj_step referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mj_forward referenced in function "void __cdecl keyboard(struct GLFWwindow *,int,int,int,int)" (?keyboard@@YAXPEAUGLFWwindow@@HHHH@Z)
+main.obj : error LNK2019: unresolved external symbol __imp_mj_deleteModel referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mj_makeData referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mj_resetData referenced in function "void __cdecl keyboard(struct GLFWwindow *,int,int,int,int)" (?keyboard@@YAXPEAUGLFWwindow@@HHHH@Z)
+main.obj : error LNK2019: unresolved external symbol __imp_mj_deleteData referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mj_name2id referenced in function "void __cdecl obstacleLocations(struct _mjModel const *,struct _mjData *)" (?obstacleLocations@@YAXPEBU_mjModel@@PEAU_mjData@@@Z)
+main.obj : error LNK2019: unresolved external symbol __imp_mjv_defaultCamera referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mjv_moveCamera referenced in function "void __cdecl mouse_move(struct GLFWwindow *,double,double)" (?mouse_move@@YAXPEAUGLFWwindow@@NN@Z)
+main.obj : error LNK2019: unresolved external symbol __imp_mjv_defaultOption referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mjv_defaultScene referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mjv_makeScene referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mjv_freeScene referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mjv_updateScene referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mjr_defaultContext referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mjr_makeContext referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mjr_freeContext referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mjr_render referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mju_error referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mju_error_s referenced in function main
+main.obj : error LNK2019: unresolved external symbol glfwInit referenced in function main
+main.obj : error LNK2019: unresolved external symbol glfwTerminate referenced in function main
+main.obj : error LNK2019: unresolved external symbol glfwCreateWindow referenced in function main
+main.obj : error LNK2019: unresolved external symbol glfwWindowShouldClose referenced in function main
+main.obj : error LNK2019: unresolved external symbol glfwPollEvents referenced in function main
+main.obj : error LNK2019: unresolved external symbol glfwMakeContextCurrent referenced in function main
+main.obj : error LNK2019: unresolved external symbol glfwSwapBuffers referenced in function main
+main.obj : error LNK2019: unresolved external symbol glfwSwapInterval referenced in function main
+main.obj : error LNK2019: unresolved external symbol __imp_mjcb_control referenced in function main
+C:\Users\RoboDesign Lab\Desktop\BDH\Potential_Field_Obs_Avoidance-main\Potential_Field_Obs_Avoidance-main\mujoco200_win64\src\satyrr_control\x64\Debug\satyrr_control.exe : fatal error LNK1120: 55 unresolved externals
