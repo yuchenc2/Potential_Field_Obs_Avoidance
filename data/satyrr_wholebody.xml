@@ -1,5 +1,6 @@
 <mujoco model="SATYRR_NEW_V4">
-    <compiler eulerseq = "zyx" angle="radian" meshdir="C:\Users\RoboDesign Lab\Desktop\BDH\Potential_Field_Obs_Avoidance-main\Potential_Field_Obs_Avoidance-main\mujoco200_win64\src\data\satyrr_wholebody\"/>
+    <!-- <compiler eulerseq = "zyx" angle="radian" meshdir="C:\Users\RoboDesign Lab\Desktop\BDH\Potential_Field_Obs_Avoidance-main\Potential_Field_Obs_Avoidance-main\mujoco200_win64\src\data\satyrr_wholebody\"/> -->
+    <compiler eulerseq = "zyx" angle="radian" meshdir="/home/baek/.mujoco/workspace/whole_satyrr/data/robots/satyrr_wholebody/"/>
     <size njmax="500" nconmax="100" />
     <option integrator="RK4" timestep="0.001"/>
 
@@ -45,6 +46,7 @@
 			<joint axis = "1 0 0" pos = "0 0 0" name = "rotate_roll" type = "hinge" limited = "false"/>
 			<joint axis = "0 1 0" pos = "0 0 0" name = "rotate_pitch" type = "hinge" limited = "false"/>
 			<joint axis = "0 0 1" pos = "0 0 0" name = "rotate_yaw" type = "hinge" limited = "false"/>
+            <!-- <joint armature="0" damping="0" limited="false" name="robot" pos="0 0 0.0" stiffness="0" type="free"/> -->
             <geom friction="0.9" type="mesh" rgba="0.79216 0.81961 0.93333 1" mesh="Torso" mass="4.05" />
 
         <body name="Thigh_R" pos="-0.06625 0 0.36">
