@@ -7,60 +7,61 @@
         https://www.roboti.us/resourcelicense.txt
 */
 
-
 #include "mujoco.h"
 #include "glfw3.h"
 #include "stdio.h"
 #include "stdlib.h"
-#include "string.h"
-
+// #include "string.h"
+#include <string>
+#include <iostream>
+#include <chrono>
+using namespace std::chrono;
 
 // MuJoCo data structures
-mjModel* m = NULL;                  // MuJoCo model
-mjData* d = NULL;                   // MuJoCo data
-mjvCamera cam;                      // abstract camera
-mjvOption opt;                      // visualization options
-mjvScene scn;                       // abstract scene
-mjrContext con;                     // custom GPU context
+mjModel *m = NULL; // MuJoCo model
+mjData *d = NULL;  // MuJoCo data
+mjvCamera cam;     // abstract camera
+mjvOption opt;     // visualization options
+mjvScene scn;      // abstract scene
+mjrContext con;    // custom GPU context
+
+GLFWwindow *window;
 
 // mouse interaction
 bool button_left = false;
 bool button_middle = false;
-bool button_right =  false;
+bool button_right = false;
 double lastx = 0;
 double lasty = 0;
 
-
 // keyboard callback
-void keyboard(GLFWwindow* window, int key, int scancode, int act, int mods)
+void keyboard(GLFWwindow *window, int key, int scancode, int act, int mods)
 {
     // backspace: reset simulation
-    if( act==GLFW_PRESS && key==GLFW_KEY_BACKSPACE )
+    if (act == GLFW_PRESS && key == GLFW_KEY_BACKSPACE)
     {
         mj_resetData(m, d);
         mj_forward(m, d);
     }
 }
 
-
 // mouse button callback
-void mouse_button(GLFWwindow* window, int button, int act, int mods)
+void mouse_button(GLFWwindow *window, int button, int act, int mods)
 {
     // update button state
-    button_left =   (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT)==GLFW_PRESS);
-    button_middle = (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE)==GLFW_PRESS);
-    button_right =  (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT)==GLFW_PRESS);
+    button_left = (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS);
+    button_middle = (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS);
+    button_right = (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS);
 
     // update mouse position
     glfwGetCursorPos(window, &lastx, &lasty);
 }
 
-
 // mouse move callback
-void mouse_move(GLFWwindow* window, double xpos, double ypos)
+void mouse_move(GLFWwindow *window, double xpos, double ypos)
 {
     // no buttons down: nothing to do
-    if( !button_left && !button_middle && !button_right )
+    if (!button_left && !button_middle && !button_right)
         return;
 
     // compute mouse displacement, save
@@ -74,84 +75,164 @@ void mouse_move(GLFWwindow* window, double xpos, double ypos)
     glfwGetWindowSize(window, &width, &height);
 
     // get shift key state
-    bool mod_shift = (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT)==GLFW_PRESS ||
-                      glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT)==GLFW_PRESS);
+    bool mod_shift = (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ||
+                      glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS);
 
     // determine action based on mouse button
     mjtMouse action;
-    if( button_right )
+    if (button_right)
         action = mod_shift ? mjMOUSE_MOVE_H : mjMOUSE_MOVE_V;
-    else if( button_left )
+    else if (button_left)
         action = mod_shift ? mjMOUSE_ROTATE_H : mjMOUSE_ROTATE_V;
     else
         action = mjMOUSE_ZOOM;
 
     // move camera
-    mjv_moveCamera(m, action, dx/height, dy/height, &scn, &cam);
+    mjv_moveCamera(m, action, dx / height, dy / height, &scn, &cam);
 }
-
 
 // scroll callback
-void scroll(GLFWwindow* window, double xoffset, double yoffset)
+void scroll(GLFWwindow *window, double xoffset, double yoffset)
 {
     // emulate vertical mouse motion = 5% of window height
-    mjv_moveCamera(m, mjMOUSE_ZOOM, 0, -0.05*yoffset, &scn, &cam);
+    mjv_moveCamera(m, mjMOUSE_ZOOM, 0, -0.05 * yoffset, &scn, &cam);
 }
-
 
 // geom locations
-void obstacleLocations(const mjModel* m, mjData* d){
+void obstacleLocations(const mjModel *m, mjData *d)
+{
     printf("\n");
-    printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+2]);
-    printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+2]);
-    printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+2]);
-    printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+2]);
-    printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+2]);
-    printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3+2]);
-    printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+2]);
-    printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3+2]);
-    printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3+2]);
-    printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3+2]);
-    printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3+2]);
+    printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 2]);
+    printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 2]);
+    printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 2]);
+    printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 2]);
+    printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 2]);
+    printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 2]);
+    printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 2]);
+    printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 2]);
+    printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 2]);
+    printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 2]);
+    printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 2]);
 }
 
+void potentialFieldVector(const mjModel *m, mjData *d){
+    printf("Obstacle 1 to Torso: (%f, %f, %f) \n", 
+    m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3] - m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3], 
+    m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 1] - m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1], 
+    m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 2] - m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 2]);
+    // printf("Obstacle 2 to Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 2]);
+    // printf("Obstacle 3 to Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 2]);
+    // printf("Obstacle 4 to Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 2]);
+    // printf("Obstacle 5 to Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 2]);
+    
+}
 
-void mycontroller(const mjModel* m, mjData* d)
+// void write_log (const mjModel* m, mjData* d){
+//     mju_writeLog("Data",
+//                 ("\n Time: " + std::to_string(d->time) +
+//                 "\n Satyrr X:" + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3]) +
+//                 "\n Satyrr Y:" + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1]) +
+//                 "\n Satyrr Z:" + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 2]) +
+
+//                 "\n Obstacle 1X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3]) +
+//                 "\n Obstacle 1Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3 + 1]) +
+//                 "\n Obstacle 1Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3 + 2]) +
+//                 "\n Obstacle 2X " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3]) +
+//                 "\n Obstacle 2Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3 + 1]) +
+//                 "\n Obstacle 2Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3 + 2]) +
+//                 "\n Obstacle 3X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3]) +
+//                 "\n Obstacle 3Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3 + 1]) +
+//                 "\n Obstacle 3Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3 + 2]) +
+//                 "\n Obstacle 4X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3]) +
+//                 "\n Obstacle 4Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3 + 1]) +
+//                 "\n Obstacle 4Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3 + 2]) +
+//                 "\n Obstacle 5X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3]) +
+//                 "\n Obstacle 5Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3 + 1]) +
+//                 "\n Obstacle 5Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3 + 2]) +
+
+//                 "\n Start X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3]) +
+//                 "\n Start Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3 + 1]) +
+//                 "\n Start Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3 + 2]) +
+
+//                 "\n End X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3]) +
+//                 "\n End Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3 + 1]) +
+//                 "\n End Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3 + 2])
+//                 ).c_str()
+//                 );
+// }
+
+void mycontroller(const mjModel *m, mjData *d)
 {
-    obstacleLocations(m, d);
+    // printf("Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 2]);
+    // obstacleLocations(m, d);
+    potentialFieldVector(m, d);
+    float forward_backward = 0.0;
+    float left_right = 0.0;
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
+        forward_backward = -1;
+    }
+    else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
+        forward_backward = 1;
+    }
+    else{
+        forward_backward = 0;
+    }
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
+        left_right = -1;
+    }
+    else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
+        left_right = 1;
+    }
+    else{
+        left_right = 0;
+    }
+    m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] + 0.001*forward_backward;
+    m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] + 0.001*left_right;
 }
 
 // main function
-int main(int argc, const char** argv)
+int main(int argc, const char **argv)
 {
     // activate software
     mj_activate("mjkey.txt");
 
     // load and compile model
     char error[1000] = "Could not load binary model";
-    m = mj_loadXML("../src/map1.xml", 0, error, 1000);
+    // m = mj_loadXML("../src/map1.xml", 0, error, 1000);
+    m = mj_loadXML("../src/satyyr.xml", 0, error, 1000);
 
-    if( !m )
+    if (!m)
         mju_error_s("Load model error: %s", error);
 
     // make data
     d = mj_makeData(m);
 
     // init GLFW
-    if( !glfwInit() )
+    if (!glfwInit())
         mju_error("Could not initialize GLFW");
 
-    
-    // controller setup: install control callback
-    mjcb_control = mycontroller;
-
     // create window, make OpenGL context current, request v-sync
-    GLFWwindow* window = glfwCreateWindow(1200, 900, "Demo", NULL, NULL);
+    window = glfwCreateWindow(1200, 900, "Demo", NULL, NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
+    // controller setup: install control callback
+    mjcb_control = mycontroller;
+
+    // initial position
+    m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] = 19;
+    m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = 0;
+    m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 2] = 0.3;
+
+    cam.type = mjCAMERA_TRACKING;
+    cam.fixedcamid = mj_name2id(m, mjOBJ_CAMERA, "camera1");
+    cam.trackbodyid = mj_name2id(m, mjOBJ_BODY, "torso");
+    cam.azimuth = 180;
+    cam.elevation = -18;
+    cam.distance = 1.2;
+
     // initialize visualization data structures
-    mjv_defaultCamera(&cam);
+    // mjv_defaultCamera(&cam);
     mjv_defaultOption(&opt);
     mjv_defaultScene(&scn);
     mjr_defaultContext(&con);
@@ -167,14 +248,14 @@ int main(int argc, const char** argv)
     glfwSetScrollCallback(window, scroll);
 
     // run main loop, target real-time simulation and 60 fps rendering
-    while( !glfwWindowShouldClose(window) )
+    while (!glfwWindowShouldClose(window))
     {
         // advance interactive simulation for 1/60 sec
         //  Assuming MuJoCo can simulate faster than real-time, which it usually can,
         //  this loop will finish on time for the next frame to be rendered at 60 fps.
         //  Otherwise add a cpu timer and exit this loop when it is time to render.
         mjtNum simstart = d->time;
-        while( d->time - simstart < 1.0/60.0 )
+        while (d->time - simstart < 1.0 / 60.0)
             mj_step(m, d);
 
         // get framebuffer viewport
@@ -192,7 +273,7 @@ int main(int argc, const char** argv)
         glfwPollEvents();
     }
 
-    //free visualization storage
+    // free visualization storage
     mjv_freeScene(&scn);
     mjr_freeContext(&con);
 
@@ -201,10 +282,10 @@ int main(int argc, const char** argv)
     mj_deleteModel(m);
     mj_deactivate();
 
-    // terminate GLFW (crashes with Linux NVidia drivers)
-    #if defined(__APPLE__) || defined(_WIN32)
-        glfwTerminate();
-    #endif
+// terminate GLFW (crashes with Linux NVidia drivers)
+#if defined(__APPLE__) || defined(_WIN32)
+    glfwTerminate();
+#endif
 
     return 1;
 }

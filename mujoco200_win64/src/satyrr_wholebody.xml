@@ -1,5 +1,5 @@
 <mujoco model="SATYRR_NEW_V4">
-    <compiler eulerseq = "zyx" angle="radian" meshdir="/home/baek/.mujoco/workspace/whole_satyrr/data/robots/satyrr_wholebody/"/>
+    <compiler eulerseq = "zyx" angle="radian" meshdir="../src/satyrr_wholebody/"/>
     <size njmax="500" nconmax="100" />
     <option integrator="RK4" timestep="0.001"/>
 

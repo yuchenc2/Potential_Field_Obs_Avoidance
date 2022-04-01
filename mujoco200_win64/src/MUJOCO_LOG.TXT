@@ -1,6 +1,0 @@
-Sun Mar 13 13:19:54 2022
-ERROR: Could not open activation key file ./../bin/mjkey.txt
-
-Sun Mar 13 13:20:16 2022
-ERROR: Could not open activation key file ./../bin/mjkey.txt
-
