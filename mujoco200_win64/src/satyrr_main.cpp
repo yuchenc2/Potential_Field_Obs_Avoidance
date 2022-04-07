@@ -134,21 +134,21 @@ void scroll(GLFWwindow* window, double xoffset, double yoffset)
 }
 
 
-// // geom locations
-// void obstacleLocations(const mjModel* m, mjData* d){
-//     printf("\n");
-//     printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+2]);
-//     printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+2]);
-//     printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+2]);
-//     printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+2]);
-//     printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+2]);
-//     printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3+2]);
-//     printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+2]);
-//     printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3+2]);
-//     printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3+2]);
-//     printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3+2]);
-//     printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3+2]);
-// }
+// geom locations
+void obstacleLocations(const mjModel* m, mjData* d){
+    printf("\n");
+    printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+2]);
+    printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+2]);
+    printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+2]);
+    printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+2]);
+    printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+2]);
+    printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3+2]);
+    printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+2]);
+    printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body")*3+2]);
+    printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body")*3+2]);
+    printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body")*3+2]);
+    printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3+1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body")*3+2]);
+}
 
 void SATYRR_state_update(const mjModel* m, mjData* d)
 {
