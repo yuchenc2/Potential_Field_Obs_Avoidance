@@ -11,7 +11,6 @@
 #include "glfw3.h"
 #include "stdio.h"
 #include "stdlib.h"
-// #include "string.h"
 #include <string>
 #include <iostream>
 #include <chrono>
@@ -41,12 +40,13 @@ bool button_right = false;
 double lastx = 0;
 double lasty = 0;
 double wheel_torque = 0.0;
-double yaw_set = 0.0;
 double yaw_damp = 0.0;
 
 //keyboard input
-float forward_backward = 0.0;
-float left_right = 0.0;
+double sensitivity = 0.1;
+double forward_backward = 0.0;
+double left_right = 0.0;
+int cnt;
 
 //Obstacles
 #define Num_obstacles 5 
@@ -128,33 +128,22 @@ void scroll(GLFWwindow *window, double xoffset, double yoffset)
 }
 
 // geom locations
-void obstacleLocations(const mjModel *m, mjData *d)
-{
-    printf("\n");
-    printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 2]);
-    printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 2]);
-    printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 2]);
-    printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 2]);
-    printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 2]);
-    printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 2]);
-    printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 2]);
-    printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 2]);
-    printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 2]);
-    printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 2]);
-    printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 2]);
-}
+// void obstacleLocations(const mjModel *m, mjData *d)
+// {
+//     printf("\n");
+//     printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 2]);
+//     printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 2]);
+//     printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 2]);
+//     printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 2]);
+//     printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 2]);
+//     printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 2]);
+//     printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 2]);
+//     printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 2]);
+//     printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 2]);
+//     printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 2]);
+//     printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 2]);
+// }
 
-void potentialFieldVector(const mjModel *m, mjData *d){
-    // printf("Obstacle 1 to Torso: (%f, %f, %f) \n", 
-    // m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3] - m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3], 
-    // m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 1] - m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1], 
-    // m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 2] - m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 2]);
-    // printf("Obstacle 2 to Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 2]);
-    // printf("Obstacle 3 to Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 2]);
-    // printf("Obstacle 4 to Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 2]);
-    // printf("Obstacle 5 to Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 2]);
-    
-}
 
 void initalize_environment(const mjModel *m, mjData *d)
 {
@@ -242,28 +231,23 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
 
 void keyboard_input()
 {
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
-        forward_backward = -1;
-    }
-    else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
-        forward_backward = 1;
-    }
-    else{
-        forward_backward = 0;
-    }
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
-        left_right = -1;
-    }
-    else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
-        left_right = 1;
-    }
-    else{
-        left_right = 0;
-    }
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        forward_backward += 0.01;
+    else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        forward_backward -= 0.01;
+    else
+        forward_backward += 0;
 
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        left_right += 0.001;
+    
+    else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        left_right -= 0.001;
+    else
+        left_right +=0;
 }
 
-void saytrr_controller(const mjModel *m, mjData *d )
+void saytrr_controller(const mjModel *m, mjData *d, double des_x, double d_yaw)
 {
     //state update
     SATYRR_state_update(m,d);
@@ -277,17 +261,23 @@ void saytrr_controller(const mjModel *m, mjData *d )
     //printf("Knee  : (%f, %f, %f, %f) \n", SATYRR_S.q[6], SATYRR_S.q[7], SATYRR_S.q[4], SATYRR_S.q[5]);
 
     //printf("STATE X, PITCH = %f, %f \n", SATYRR_S.x, SATYRR_S.angle);
-    vector<double> des_state = {0.0, 0.0, 0.0, 0.0};
+    vector<double> des_state = {d->time, 0.0, 0.0, 0.0};
 
     //printf("x = %f, pitch = %f, wheel: %f, %f \n",SATYRR_S.x, SATYRR_S.pitch * 180 / M_PI, SATYRR_S.q[8], SATYRR_S.q[9]);
     vector<double> state_ = {SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch};
     wheel_torque = SATYRR_Cont.f_stabilizationControl(des_state, state_);
 
+    if(cnt % 100 == 0){
+        printf("state des_x=%f, x=%f, time=%f \n",des_x, SATYRR_S.x,d->time);
+        cnt = 0;
+    }
+        
 
-    vector<double> des_yaw = {yaw_set, 0.0};
-    vector<double> yaw_ = {SATYRR_S.psi, SATYRR_S.dpsi};
 
-    yaw_damp = SATYRR_Cont.f_yawControl(des_yaw, yaw_);
+    vector<double> des_yaw = {d_yaw, 0.0};
+    vector<double> curr_yaw = {SATYRR_S.psi, SATYRR_S.dpsi};
+
+    yaw_damp = SATYRR_Cont.f_yawControl(des_yaw, curr_yaw);
 
 
     // printf("x = %f, pitch = %f, torq=%f \n",SATYRR_S.x, SATYRR_S.pitch*180/M_PI, wheel_torque);
@@ -306,6 +296,7 @@ void saytrr_controller(const mjModel *m, mjData *d )
         d->ctrl[4] = -SATYRR_Cont.applied_torq[4];
         d->ctrl[5] = -SATYRR_Cont.applied_torq[5];
     }
+    cnt = cnt+1;
 }
 
 void mycontroller(const mjModel *m, mjData *d)
@@ -316,17 +307,14 @@ void mycontroller(const mjModel *m, mjData *d)
 
     //keyboard input always
     keyboard_input();
-
     //Update robot position
 
 
     //Calculate Distance 
 
     //robot controller
-    saytrr_controller(m, d);
+    saytrr_controller(m, d, sensitivity*forward_backward, sensitivity*left_right);
 
-    m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] + 0.001*forward_backward;
-    m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] + 0.001*left_right;
 }
 
 // main function
@@ -359,11 +347,6 @@ int main(int argc, const char **argv)
 
     // controller setup: install control callback
     mjcb_control = mycontroller;
-
-    // initial position
-    //robot_state[0][0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] = 19;
-    //robot_state[0][1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = 0;
-    //robot_state[0][2] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 2] = 0.3;
 
     mjtNum timezero = d->time;
     double_t update_rate = 0.001;

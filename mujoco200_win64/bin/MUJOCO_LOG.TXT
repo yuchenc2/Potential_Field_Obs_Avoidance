@@ -163182,3 +163182,1545 @@ Thu Apr  7 20:21:21 2022
 ERROR: Load model error: Error: repeated name in geom array, position 12
 Object name = obstacle_2_geom, id = 12, line = 84, column = 13
 
+Thu Apr  7 20:35:44 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 5.4200.
+
+Thu Apr  7 20:47:07 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 4.4180.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 2.6680.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:08 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:09 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:10 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Thu Apr  7 20:53:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 3.6580.
+
+Thu Apr  7 20:56:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0670.
+
+Thu Apr  7 20:56:34 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0670.
+
