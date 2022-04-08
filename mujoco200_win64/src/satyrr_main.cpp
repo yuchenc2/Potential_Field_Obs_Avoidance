@@ -16,7 +16,13 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include "satyrr_controller.hpp"
+
+#define Hip 1
+#define Knee 2
+# define M_PI           3.14159265358979323846
 using namespace std::chrono;
+using namespace std;
 
 // MuJoCo data structures
 mjModel *m = NULL; // MuJoCo model
@@ -34,16 +40,27 @@ bool button_middle = false;
 bool button_right = false;
 double lastx = 0;
 double lasty = 0;
+double wheel_torque = 0.0;
+double yaw_set = 0.0;
+double yaw_damp = 0.0;
 
 //keyboard input
 float forward_backward = 0.0;
 float left_right = 0.0;
 
+//Obstacles
 #define Num_obstacles 5 
 double obstacle_position[Num_obstacles][3];
 bool obstacle_init_flag = false;
 
-double robot_state[2][3];
+//class
+float_t ctrl_update_freq = 1000;
+mjtNum last_update = 0.0;
+int torso_Pitch, torso_Roll, torso_Yaw, torso_X, torso_Z, j_hip_l, j_hip_r, j_knee_l, j_knee_r, j_wheel_l, j_wheel_r;
+
+SATYRR_controller SATYRR_Cont;
+SATYRR_STATE SATYRR_S;
+void SATYRR_Init(const mjModel* m, mjData* d);
 
 
 // keyboard callback
@@ -155,39 +172,73 @@ void initalize_environment(const mjModel *m, mjData *d)
 
     obstacle_init_flag = true;
 }
-// void write_log (const mjModel* m, mjData* d){
-//     mju_writeLog("Data",
-//                 ("\n Time: " + std::to_string(d->time) +
-//                 "\n Satyrr X:" + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3]) +
-//                 "\n Satyrr Y:" + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1]) +
-//                 "\n Satyrr Z:" + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 2]) +
 
-//                 "\n Obstacle 1X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3]) +
-//                 "\n Obstacle 1Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3 + 1]) +
-//                 "\n Obstacle 1Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3 + 2]) +
-//                 "\n Obstacle 2X " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3]) +
-//                 "\n Obstacle 2Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3 + 1]) +
-//                 "\n Obstacle 2Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3 + 2]) +
-//                 "\n Obstacle 3X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3]) +
-//                 "\n Obstacle 3Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3 + 1]) +
-//                 "\n Obstacle 3Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3 + 2]) +
-//                 "\n Obstacle 4X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3]) +
-//                 "\n Obstacle 4Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3 + 1]) +
-//                 "\n Obstacle 4Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3 + 2]) +
-//                 "\n Obstacle 5X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3]) +
-//                 "\n Obstacle 5Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3 + 1]) +
-//                 "\n Obstacle 5Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3 + 2]) +
+void SATYRR_Init(const mjModel* m, mjData* d)
+{
+    // Convert actuator, sensor, and joint names to ID. The ids will be used in the controller function above
+    torso_Pitch = mj_name2id(m, mjOBJ_JOINT, "rotate_pitch");
+    torso_Roll = mj_name2id(m, mjOBJ_JOINT, "rotate_roll");
+    torso_Yaw = mj_name2id(m, mjOBJ_JOINT, "rotate_yaw");
+    torso_X = mj_name2id(m, mjOBJ_JOINT, "move_x");
+    torso_Z = mj_name2id(m, mjOBJ_JOINT, "move_z");
+    j_hip_l = mj_name2id(m, mjOBJ_JOINT, "Hip_L");
+    j_hip_r = mj_name2id(m, mjOBJ_JOINT, "Hip_R");
+    j_knee_l = mj_name2id(m, mjOBJ_JOINT, "Knee_L");
+    j_knee_r = mj_name2id(m, mjOBJ_JOINT, "Knee_R");
+    j_wheel_l = mj_name2id(m, mjOBJ_JOINT, "Ankle_L");
+    j_wheel_r = mj_name2id(m, mjOBJ_JOINT, "Ankle_R");
 
-//                 "\n Start X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3]) +
-//                 "\n Start Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3 + 1]) +
-//                 "\n Start Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body")*3 + 2]) +
+    //Init position
+    d->qpos[m->jnt_qposadr[torso_Z]] = -0.5;  //Initial Height Position of the Robot
+    d->qpos[m->jnt_qposadr[torso_X]] = 0.0; 
+    d->qpos[m->jnt_qposadr[torso_Pitch]] = 0;
+    d->qpos[m->jnt_qposadr[torso_Roll]] = 0;  
+    d->qpos[m->jnt_qposadr[j_hip_l]] = SATYRR_S.desHip; 
+    d->qpos[m->jnt_qposadr[j_hip_r]] = SATYRR_S.desHip; 
+    d->qpos[m->jnt_qposadr[j_knee_l]] = -SATYRR_S.desHip*2; 
+    d->qpos[m->jnt_qposadr[j_knee_r]] = -SATYRR_S.desHip*2; 
+}
 
-//                 "\n End X: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3]) +
-//                 "\n End Y: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3 + 1]) +
-//                 "\n End Z: " + std::to_string(m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3 + 2])
-//                 ).c_str()
-//                 );
-// }
+void SATYRR_state_update(const mjModel* m, mjData* d)
+{
+    //q_vel_hip_left & right
+    SATYRR_S.q[0] = d->qvel[m->jnt_dofadr[j_hip_l]];
+    SATYRR_S.q[1] = d->qvel[m->jnt_dofadr[j_hip_r]];
+
+    //q_hip_left & right
+    SATYRR_S.q[2] = d->qpos[m->jnt_qposadr[j_hip_l]];
+    SATYRR_S.q[3] = d->qpos[m->jnt_qposadr[j_hip_r]];
+
+    //q_vel_knee_left & right
+    SATYRR_S.q[4] = d->qvel[m->jnt_dofadr[j_knee_l]];
+    SATYRR_S.q[5] = d->qvel[m->jnt_dofadr[j_knee_r]];
+
+    //q_knee_left & right
+    SATYRR_S.q[6] = d->qpos[m->jnt_qposadr[j_knee_l]];
+    SATYRR_S.q[7] = d->qpos[m->jnt_qposadr[j_knee_r]];
+
+    //q_vel_wheel_left & right
+    SATYRR_S.q[8] = d->qvel[m->jnt_dofadr[j_wheel_l]];
+    SATYRR_S.q[9] = d->qvel[m->jnt_dofadr[j_wheel_r]];
+
+    //q_hip_wheel & right
+    SATYRR_S.q[10] = d->qpos[m->jnt_qposadr[j_wheel_l]];
+    SATYRR_S.q[11] = d->qpos[m->jnt_qposadr[j_wheel_r]];
+
+    //body state
+    SATYRR_S.x = d->qpos[m->jnt_qposadr[torso_X]]; //-SATYRR_r*0.5*(SATYRR_S.q[10] + SATYRR_S.q[11]);//
+    SATYRR_S.dx = (SATYRR_S.x - SATYRR_S.x_old) / (1/ctrl_update_freq);
+    SATYRR_S.x_old = SATYRR_S.x;
+
+    SATYRR_S.pitch = d->qpos[m->jnt_qposadr[torso_Pitch]];
+    SATYRR_S.dpitch = (SATYRR_S.pitch - SATYRR_S.pitch_old) / (1/ctrl_update_freq);
+    SATYRR_S.pitch_old = SATYRR_S.pitch;
+
+    SATYRR_S.psi = d->qpos[m->jnt_qposadr[torso_Yaw]];
+    SATYRR_S.dpsi = (SATYRR_S.psi - SATYRR_S.psi_old) / (1/ctrl_update_freq);
+    SATYRR_S.psi_old = SATYRR_S.psi;
+}
+
 
 void keyboard_input()
 {
@@ -212,6 +263,51 @@ void keyboard_input()
 
 }
 
+void saytrr_controller(const mjModel *m, mjData *d )
+{
+    //state update
+    SATYRR_state_update(m,d);
+
+    // Hip controller
+    SATYRR_Cont.f_jointContrl(SATYRR_S.q[2], SATYRR_S.q[3], SATYRR_S.q[0], SATYRR_S.q[1], SATYRR_S.desHip, 500 ,5, 500, 5, Hip);
+    //printf("Hip: : (%f, %f, %f, %f, %f) \n", SATYRR_S.desHip, SATYRR_S.q[0], SATYRR_S.q[1], SATYRR_S.q[2], SATYRR_S.q[3]);
+
+    // Knee controller
+    SATYRR_Cont.f_jointContrl(SATYRR_S.q[6], SATYRR_S.q[7], SATYRR_S.q[4], SATYRR_S.q[5], -SATYRR_S.desHip*2, 200 ,2, 200, 2, Knee);
+    //printf("Knee  : (%f, %f, %f, %f) \n", SATYRR_S.q[6], SATYRR_S.q[7], SATYRR_S.q[4], SATYRR_S.q[5]);
+
+    //printf("STATE X, PITCH = %f, %f \n", SATYRR_S.x, SATYRR_S.angle);
+    vector<double> des_state = {0.0, 0.0, 0.0, 0.0};
+
+    //printf("x = %f, pitch = %f, wheel: %f, %f \n",SATYRR_S.x, SATYRR_S.pitch * 180 / M_PI, SATYRR_S.q[8], SATYRR_S.q[9]);
+    vector<double> state_ = {SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch};
+    wheel_torque = SATYRR_Cont.f_stabilizationControl(des_state, state_);
+
+
+    vector<double> des_yaw = {yaw_set, 0.0};
+    vector<double> yaw_ = {SATYRR_S.psi, SATYRR_S.dpsi};
+
+    yaw_damp = SATYRR_Cont.f_yawControl(des_yaw, yaw_);
+
+
+    // printf("x = %f, pitch = %f, torq=%f \n",SATYRR_S.x, SATYRR_S.pitch*180/M_PI, wheel_torque);
+    // printf("wheel torq = %f, wheel_l = %f, wheel_r = %f \n",SATYRR_Cont.wheel_torque, SATYRR_S.q[10] , SATYRR_S.q[11]);
+
+    SATYRR_Cont.applied_torq[2] =  wheel_torque - yaw_damp; // wheel_torque;
+    SATYRR_Cont.applied_torq[5] =  wheel_torque + yaw_damp; //wheel_torque;
+
+    //Applied torque
+    if (d->time - last_update > 1.0/ctrl_update_freq)
+    {
+        d->ctrl[0] = -SATYRR_Cont.applied_torq[0];
+        d->ctrl[1] = -SATYRR_Cont.applied_torq[1];
+        d->ctrl[2] = -SATYRR_Cont.applied_torq[2];
+        d->ctrl[3] = -SATYRR_Cont.applied_torq[3];
+        d->ctrl[4] = -SATYRR_Cont.applied_torq[4];
+        d->ctrl[5] = -SATYRR_Cont.applied_torq[5];
+    }
+}
+
 void mycontroller(const mjModel *m, mjData *d)
 {
     //init position of obstacles
@@ -226,7 +322,9 @@ void mycontroller(const mjModel *m, mjData *d)
 
     //Calculate Distance 
 
-    
+    //robot controller
+    saytrr_controller(m, d);
+
     m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] + 0.001*forward_backward;
     m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] + 0.001*left_right;
 }
@@ -239,7 +337,6 @@ int main(int argc, const char **argv)
 
     // load and compile model
     char error[1000] = "Could not load binary model";
-    // m = mj_loadXML("../src/map1.xml", 0, error, 1000);
     m = mj_loadXML("../src/satyyr.xml", 0, error, 1000);
 
     if (!m)
@@ -257,15 +354,20 @@ int main(int argc, const char **argv)
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
+    // SATYRR Init
+    SATYRR_Init(m, d);
+
     // controller setup: install control callback
     mjcb_control = mycontroller;
 
     // initial position
-    robot_state[0][0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] = 19;
-    robot_state[0][1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = 0;
-    robot_state[0][2] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 2] = 0.3;
+    //robot_state[0][0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] = 19;
+    //robot_state[0][1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = 0;
+    //robot_state[0][2] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 2] = 0.3;
 
-
+    mjtNum timezero = d->time;
+    double_t update_rate = 0.001;
+    last_update = timezero-1.0/ctrl_update_freq;
 
 
     cam.type = mjCAMERA_TRACKING;

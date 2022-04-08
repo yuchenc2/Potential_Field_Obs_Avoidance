@@ -163169,3 +163169,16 @@ WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time 
 Mon Mar 21 12:36:11 2022
 WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 2.2870.
 
+Thu Apr  7 19:48:46 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.6930.
+
+Thu Apr  7 20:17:53 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 3.3050.
+
+Thu Apr  7 20:17:53 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 3.3050.
+
+Thu Apr  7 20:21:21 2022
+ERROR: Load model error: Error: repeated name in geom array, position 12
+Object name = obstacle_2_geom, id = 12, line = 84, column = 13
+
