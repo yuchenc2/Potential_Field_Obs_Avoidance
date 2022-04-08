@@ -35,6 +35,7 @@ class SATYRR_STATE
         double CoM_L[2];
 
         double x = 0.0;
+        double y = 0.0;
         double x_old = 0.0;
         double dx = 0.0;
         double pitch = 0.0;
