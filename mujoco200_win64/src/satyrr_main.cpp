@@ -17,6 +17,8 @@
 #include <vector>
 #include "satyrr_controller.hpp"
 #include "potential_field.hpp"
+#include <fstream>
+
 
 #define Hip 1
 #define Knee 2
@@ -72,6 +74,9 @@ int torso_Pitch, torso_Roll, torso_Yaw, torso_X, torso_Z, j_hip_l, j_hip_r, j_kn
 SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
 Potential_Field APF;
+ofstream myfile;
+bool data_save_flag = true;
+
 
 void SATYRR_Init(const mjModel* m, mjData* d);
 
@@ -298,6 +303,13 @@ void keyboard_input(mjData *d)
         left_right -= 0.001;
     else
         left_right +=0;
+
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
+        if (data_save_flag){
+            myfile.close();
+            printf("close file!! \n");
+        }
+    }
 }
 
 void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw, double des_x, double d_yaw)
@@ -386,6 +398,9 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("des yaw %f, yaw %f \n",compensated_des_dy, SATYRR_S.y);
         cnt = 0;
     }
+    if (data_save_flag){
+        if(cnt % 100 == 0) myfile << "%f \n" << d->time;
+    }
     cnt = cnt+1;
 }
 
@@ -416,6 +431,10 @@ int main(int argc, const char **argv)
 
     // SATYRR Init
     SATYRR_Init(m, d);
+
+    //file open
+    if (data_save_flag)
+        myfile.open("data_save.txt",ios::out);
 
     // controller setup: install control callback
     mjcb_control = mycontroller;
@@ -481,6 +500,8 @@ int main(int argc, const char **argv)
     mj_deleteData(d);
     mj_deleteModel(m);
     mj_deactivate();
+
+        
 
 // terminate GLFW (crashes with Linux NVidia drivers)
 #if defined(__APPLE__) || defined(_WIN32)

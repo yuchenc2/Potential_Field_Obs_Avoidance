@@ -113,15 +113,15 @@ bool Potential_Field::fnc_repulsive_force(double p_star, double rx, double ry, d
     }
 
     //saturation
-    // if (repulsive_force[0] > MAX_RP_FORCE)
-    //     repulsive_force[0] = MAX_RP_FORCE;
-    // else if (repulsive_force[0] < -MAX_RP_FORCE)
-    //     repulsive_force[0] = -MAX_RP_FORCE;
+    if (repulsive_force[0] > MAX_RP_FORCE)
+        repulsive_force[0] = MAX_RP_FORCE;
+    else if (repulsive_force[0] < -MAX_RP_FORCE)
+        repulsive_force[0] = -MAX_RP_FORCE;
 
-    // if (repulsive_force[1] > MAX_RP_FORCE_Y)
-    //     repulsive_force[1] = MAX_RP_FORCE_Y;
-    // else if (repulsive_force[1] < -MAX_RP_FORCE_Y)
-    //     repulsive_force[1] = -MAX_RP_FORCE_Y;
+    if (repulsive_force[1] > MAX_RP_FORCE_Y)
+        repulsive_force[1] = MAX_RP_FORCE_Y;
+    else if (repulsive_force[1] < -MAX_RP_FORCE_Y)
+        repulsive_force[1] = -MAX_RP_FORCE_Y;
 
     return true;
 }
