@@ -280,10 +280,14 @@ void keyboard_input(mjData *d)
     delta += update_rate;
     if(delta > 1)
        delta = 0;
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        forward_backward += 0.01*delta;
-    else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        forward_backward -= 0.01*delta;
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
+        forward_backward += 0.005*delta;
+        // printf("forward %f \n",forward_backward);
+        }
+    else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
+        forward_backward -= 0.005*delta;
+        // printf("forward %f \n",forward_backward);
+        }
     else
         forward_backward += 0;
 
@@ -356,10 +360,10 @@ void mycontroller(const mjModel *m, mjData *d)
     // APF.fnc_attractive_force(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y, goal_location[0], goal_location[1]);
 
     //Find closet obstacle
-    //APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
+    APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
 
     //Repulsive force
-    //APF.fnc_repulsive_force(APF.closest_obs_dist, SATYRR_S.x, SATYRR_S.y, APF.closest_obs_pos[0], APF.closest_obs_pos[1]);
+    APF.fnc_repulsive_force(APF.closest_obs_dist, SATYRR_S.x, SATYRR_S.y, APF.closest_obs_pos[0], APF.closest_obs_pos[1]);
 
     //Desired input with APF
     compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.repulsive_force[0];
@@ -373,11 +377,13 @@ void mycontroller(const mjModel *m, mjData *d)
     if(cnt % 100 == 0)
     {
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
-        // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
-        // printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
-        // printf("\n");
-        printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1] - SATYRR_S.y);
+        printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
+        printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
+        printf("comp force %f, %f \n",compensated_des_dx,compensated_des_dy);
+        printf("\n");
+        //printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1] - SATYRR_S.y);
         //printf("distance = %f \n",APF.distance_);
+        // printf("des yaw %f, yaw %f \n",compensated_des_dy, SATYRR_S.y);
         cnt = 0;
     }
     cnt = cnt+1;

@@ -98,7 +98,7 @@
 
         <!-- <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Torso" /> -->
         
-        <body name="torso" pos="-19 0.0 0.4869">
+        <body name="torso" pos="-19 1.0 0.4869">
             <!--<joint armature="0" damping="0" limited="false" name="robot" pos="0 0 0.0" stiffness="0" type="free"/> -->
             <joint axis = "1 0 0" pos = "0 0 0" name = "move_x" type = "slide" limited = "false"/>
 			<joint axis = "0 1 0" pos = "0 0 0" name = "move_y" type = "slide" limited = "false"/>
@@ -106,8 +106,8 @@
 			<joint axis = "1 0 0" pos = "0 0 0" name = "rotate_roll" type = "hinge" limited = "false"/>
 			<joint axis = "0 1 0" pos = "0 0 0" name = "rotate_pitch" type = "hinge" limited = "false"/>
 			<joint axis = "0 0 1" pos = "0 0 0" name = "rotate_yaw" type = "hinge" limited = "false"/>
-
             <geom class = 'collision-group-a' friction="0.9" type="mesh" rgba="0.79216 0.81961 0.93333 1" mesh="Torso" mass="4.05" />
+ 
 
             <body name="Thigh_R" pos="-0.06625 0 0.36">
                 <inertial pos="0 -0.080175 -0.0380315" quat="0.707107 0 0 0.707107" mass="0.904864" diaginertia="0.00325713 0.00280128 0.000871858" />

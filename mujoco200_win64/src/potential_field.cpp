@@ -29,10 +29,10 @@ double Potential_Field::fnc_cal_distance_obs(double rx, double ry, double goal_x
 
 bool Potential_Field::fnc_attractive_force(double rx, double ry, double goal_x, double goal_y) 
 {
-    const double Kp_x = 0.0001;
+    const double Kp_x = 0.0002;
     const double Kp_y = 0.000001;
     const double d_star = 2.0;
-    const int MAX_FORCE = 50;
+    const int MAX_FORCE = 10;
     
     // if (distance_ > d_star){
         // attractive_force[0] += (Kp*sin(atan2(goal_x-rx,goal_y-ry)));
@@ -68,7 +68,7 @@ bool Potential_Field::fnc_closest_obstacle(double rx, double ry, vector<double> 
     //closest_obs_dist = fnc_cal_distance_obs(rx, ry, ox[0], ox[1]);
     for (int i=0; i<size; i++){
         dist_obs_robot =  fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
-        // dist_list.push_back(dist_obs_robot);
+        dist_list.push_back(dist_obs_robot);
         if (dist_obs_robot < closest_obs_dist){
             closest_obs_dist = dist_obs_robot;
             index_ = i;
@@ -86,7 +86,7 @@ bool Potential_Field::fnc_closest_obstacle(double rx, double ry, vector<double> 
     // printf("robot x y = %f, %f \n",rx ,ry);
     // printf("closest obs=%d, dis=%f, pos= %f, %f \n",index_+1, closest_obs_dist, closest_obs_pos[0],closest_obs_pos[1]);
     // printf("\n");
-    // dist_list.clear();
+    dist_list.clear();
 
     return true;
 }
@@ -98,13 +98,13 @@ bool Potential_Field::fnc_repulsive_force(double p_star, double rx, double ry, d
     const int MAX_RP_FORCE = 3;
     const int MAX_RP_FORCE_Y = 3;
     const int p_thres = 3;
-    const int sense = 1;
+    const double sense = 0.01;
 
     if (p_star < p_thres){
         repulsive_force_raw = (neta*(1.0/p_star - 1.0/p_thres)) / (p_star*p_star);
         // printf("repu raw = %f \n",repulsive_force_raw);
 
-        repulsive_force[0] += (repulsive_force_raw*sin(atan2(ox-rx, oy-ry)));
+        repulsive_force[0] += sense*(repulsive_force_raw*sin(atan2(ox-rx, oy-ry)));
         repulsive_force[1] += sense*(repulsive_force_raw*cos(atan2(ox-rx, oy-ry)));
     }
     else{
@@ -113,15 +113,15 @@ bool Potential_Field::fnc_repulsive_force(double p_star, double rx, double ry, d
     }
 
     //saturation
-    if (repulsive_force[0] > MAX_RP_FORCE)
-        repulsive_force[0] = MAX_RP_FORCE;
-    else if (repulsive_force[0] < -MAX_RP_FORCE)
-        repulsive_force[0] = -MAX_RP_FORCE;
+    // if (repulsive_force[0] > MAX_RP_FORCE)
+    //     repulsive_force[0] = MAX_RP_FORCE;
+    // else if (repulsive_force[0] < -MAX_RP_FORCE)
+    //     repulsive_force[0] = -MAX_RP_FORCE;
 
-    if (repulsive_force[1] > MAX_RP_FORCE_Y)
-        repulsive_force[1] = MAX_RP_FORCE_Y;
-    else if (repulsive_force[1] < -MAX_RP_FORCE_Y)
-        repulsive_force[1] = -MAX_RP_FORCE_Y;
+    // if (repulsive_force[1] > MAX_RP_FORCE_Y)
+    //     repulsive_force[1] = MAX_RP_FORCE_Y;
+    // else if (repulsive_force[1] < -MAX_RP_FORCE_Y)
+    //     repulsive_force[1] = -MAX_RP_FORCE_Y;
 
     return true;
 }

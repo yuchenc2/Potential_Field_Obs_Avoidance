@@ -164787,3 +164787,197 @@ WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time 
 Fri Apr  8 14:18:39 2022
 WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 31.0410.
 
+Sun Apr 10 15:18:11 2022
+ERROR: Load model error: XML Error: attribute 'rgba' does not have enough data
+Element 'geom', line 110, column 17
+
+
+Sun Apr 10 15:18:44 2022
+ERROR: Load model error: Error: sizes must be positive in object 'arrow' (id = 18)
+Object name = arrow, id = 18, line = 110, column = 17
+
+Sun Apr 10 15:20:19 2022
+ERROR: Load model error: Error: sizes must be positive in object 'arrow' (id = 18)
+Object name = arrow, id = 18, line = 110, column = 17
+
+Sun Apr 10 15:25:23 2022
+ERROR: Load model error: Error: sizes must be positive in object 'arrow' (id = 18)
+Object name = arrow, id = 18, line = 113, column = 17
+
+Sun Apr 10 15:35:20 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 8.4030.
+
+Sun Apr 10 15:35:20 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1680.
+
+Sun Apr 10 15:35:20 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1650.
+
+Sun Apr 10 15:35:20 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1480.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1460.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.1450.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Unknown warning type Time = 0.1450.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1450.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1430.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1420.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1400.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Unknown warning type Time = 0.1390.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1390.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1360.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1330.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Unknown warning type Time = 0.1310.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1270.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1250.
+
+Sun Apr 10 15:35:21 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1250.
+
+Sun Apr 10 15:38:42 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 4.6950.
+
+Sun Apr 10 16:02:54 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 14.6750.
+
+Sun Apr 10 16:02:55 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 6.1030.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 48.5410.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 1.4610.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:05 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:06 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:06 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:06 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:06 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:06 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:06 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:06 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:06 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:06 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:06 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:07 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:07 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:07 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:07 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:07 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:07 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:07 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:07 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:07 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:07 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:08 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:08 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:08 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:08 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:08 2022
+WARNING: Unknown warning type Time = 1.4610.
+
+Sun Apr 10 16:07:08 2022
+WARNING: Unknown warning type Time = 1.4610.
+
