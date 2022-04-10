@@ -29,18 +29,22 @@ double Potential_Field::fnc_cal_distance_obs(double rx, double ry, double goal_x
 
 bool Potential_Field::fnc_attractive_force(double rx, double ry, double goal_x, double goal_y) 
 {
-    const double Kp = 0.0002;
+    const double Kp_x = 0.0001;
+    const double Kp_y = 0.000001;
     const double d_star = 2.0;
-    const int MAX_FORCE = 10;
+    const int MAX_FORCE = 50;
+    
+    // if (distance_ > d_star){
+        // attractive_force[0] += (Kp*sin(atan2(goal_x-rx,goal_y-ry)));
+        // attractive_force[1] += (Kp*cos(atan2(goal_x-rx,goal_y-ry)));
+    attractive_force[0] += Kp_x*((goal_x-rx) / sqrt((goal_x-rx)*(goal_x-rx)));
+    attractive_force[1] += Kp_y*((goal_y-ry) / sqrt((goal_y-ry)*(goal_y-ry)));
 
-    if (distance_ > d_star){
-        attractive_force[0] += (Kp*sin(atan2(goal_x-rx,goal_y-ry)));
-        attractive_force[1] += (Kp*cos(atan2(goal_x-rx,goal_y-ry)));
-    }
-    else{
-        attractive_force[0] += (Kp*(goal_x-rx));
-        attractive_force[1] += (Kp*(goal_y-ry));    
-    }
+    // }
+    // else{
+    //     attractive_force[0] += (Kp_x*(goal_x-rx));
+    //     attractive_force[1] += (Kp_y*(goal_y-ry));    
+    // }
 
     //saturation
     if (attractive_force[0] > MAX_FORCE)
