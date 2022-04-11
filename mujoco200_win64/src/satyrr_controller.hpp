@@ -54,6 +54,7 @@ class SATYRR_STATE
         const double mass_torso = 4.05;
         const double mass_upper = (0.2256 + 0.58497 + 0.111225 + 0.24689) * 2; // sholder + arm + shank + shoulder_u
         const double dt = 0.001;
+        const double width_wheel = 0.2;
         
         bool getCOM(double q_hip_l, double q_hip_r, double pitch);
 

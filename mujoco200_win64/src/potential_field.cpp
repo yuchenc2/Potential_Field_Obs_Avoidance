@@ -27,18 +27,18 @@ double Potential_Field::fnc_cal_distance_obs(double rx, double ry, double goal_x
     return sqrt((goal_x-rx)*(goal_x-rx) + (goal_y-ry)*(goal_y-ry));
 }
 
-bool Potential_Field::fnc_attractive_force(double rx, double ry, double goal_x, double goal_y) 
+bool Potential_Field::fnc_attractive_force(double dist, double rx, double ry, double goal_x, double goal_y) 
 {
-    const double Kp_x = 0.0002;
-    const double Kp_y = 0.000001;
+    const double Kp_x = 0.00001;
+    const double Kp_y = 0.00001;
     const double d_star = 2.0;
-    const int MAX_FORCE = 10;
+    const int MAX_FORCE = 1;
     
     // if (distance_ > d_star){
         // attractive_force[0] += (Kp*sin(atan2(goal_x-rx,goal_y-ry)));
         // attractive_force[1] += (Kp*cos(atan2(goal_x-rx,goal_y-ry)));
-    attractive_force[0] += Kp_x*((goal_x-rx) / sqrt((goal_x-rx)*(goal_x-rx)));
-    attractive_force[1] += Kp_y*((goal_y-ry) / sqrt((goal_y-ry)*(goal_y-ry)));
+    attractive_force[0] += Kp_x*((goal_x-rx) / dist); //sqrt((goal_x-rx)*(goal_x-rx)));
+    attractive_force[1] += Kp_y*((goal_y-ry) / dist); //sqrt((goal_y-ry)*(goal_y-ry)));
 
     // }
     // else{
@@ -65,7 +65,7 @@ bool Potential_Field::fnc_closest_obstacle(double rx, double ry, vector<double> 
 {
     
     double dist_obs_robot = 0.0;
-    //closest_obs_dist = fnc_cal_distance_obs(rx, ry, ox[0], ox[1]);
+    // closest_obs_dist = fnc_cal_distance_obs(rx, ry, ox[0], ox[1]);
     for (int i=0; i<size; i++){
         dist_obs_robot =  fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
         dist_list.push_back(dist_obs_robot);
@@ -94,18 +94,20 @@ bool Potential_Field::fnc_closest_obstacle(double rx, double ry, vector<double> 
 
 bool Potential_Field::fnc_repulsive_force(double p_star, double rx, double ry, double ox, double oy) //only closest one
 {
-    const double neta = 0.01;
-    const int MAX_RP_FORCE = 3;
-    const int MAX_RP_FORCE_Y = 3;
-    const int p_thres = 3;
+    const double neta = 0.0001;
+    const int MAX_RP_FORCE = 1;
+    const int MAX_RP_FORCE_Y = 0.5;
+    const int p_thres = 2;
     const double sense = 0.01;
 
     if (p_star < p_thres){
         repulsive_force_raw = (neta*(1.0/p_star - 1.0/p_thres)) / (p_star*p_star);
-        // printf("repu raw = %f \n",repulsive_force_raw);
 
-        repulsive_force[0] += sense*(repulsive_force_raw*sin(atan2(ox-rx, oy-ry)));
-        repulsive_force[1] += sense*(repulsive_force_raw*cos(atan2(ox-rx, oy-ry)));
+        // repulsive_force[0] += sense*(repulsive_force_raw*sin(atan2(ox-rx, oy-ry)));
+        // repulsive_force[1] += sense*(repulsive_force_raw*cos(atan2(ox-rx, oy-ry)));
+        repulsive_force[0] += sense*(repulsive_force_raw* ((ox-rx) / p_star));
+        repulsive_force[1] += sense*(repulsive_force_raw* ((oy-ry) /p_star));
+        
     }
     else{
         repulsive_force[0] += 0.0;

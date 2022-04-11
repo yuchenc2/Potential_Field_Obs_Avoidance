@@ -26,7 +26,7 @@ class Potential_Field
 
         bool fnc_cal_distance(double rx, double ry, double goal_x, double goal_y);
         double fnc_cal_distance_obs(double rx, double ry, double goal_x, double goal_y);  
-        bool fnc_attractive_force(double rx, double ry, double goal_x, double goal_y);
+        bool fnc_attractive_force(double dist, double rx, double ry, double goal_x, double goal_y);
         bool fnc_closest_obstacle(double rx, double ry, vector<double> ox, vector<double> oy, int size); 
         bool fnc_repulsive_force(double p_star, double rx, double ry, double ox, double oy);
  

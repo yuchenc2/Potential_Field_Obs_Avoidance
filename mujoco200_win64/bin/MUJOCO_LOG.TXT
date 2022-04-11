@@ -164981,3 +164981,229 @@ WARNING: Unknown warning type Time = 1.4610.
 Sun Apr 10 16:07:08 2022
 WARNING: Unknown warning type Time = 1.4610.
 
+Mon Apr 11 10:42:58 2022
+WARNING: Unknown warning type Time = 29.0400.
+
+Mon Apr 11 10:42:58 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 29.0400.
+
+Mon Apr 11 10:42:59 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 3.7800.
+
+Mon Apr 11 10:48:34 2022
+WARNING: Unknown warning type Time = 32.7990.
+
+Mon Apr 11 10:48:34 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 32.7990.
+
+Mon Apr 11 10:48:34 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 1.4600.
+
+Mon Apr 11 11:06:16 2022
+ERROR: Load model error: XML Error: invalid keyword: ' cylinder,'
+Element 'geom', line 70, column 17
+
+
+Mon Apr 11 11:08:28 2022
+ERROR: Load model error: Error: sizes must be positive in object 'obs_force_1_geom' (id = 17)
+Object name = obs_force_1_geom, id = 17, line = 100, column = 13
+
+Mon Apr 11 11:08:54 2022
+ERROR: Load model error: Error: sizes must be positive in object 'obs_force_1_geom' (id = 17)
+Object name = obs_force_1_geom, id = 17, line = 100, column = 13
+
+Mon Apr 11 11:24:02 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 10.3770.
+
+Mon Apr 11 11:24:02 2022
+WARNING: Unknown warning type Time = 10.3770.
+
+Mon Apr 11 11:24:02 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 10.3770.
+
+Mon Apr 11 11:24:02 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 7.7870.
+
+Mon Apr 11 11:53:18 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 11.3720.
+
+Mon Apr 11 11:56:45 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 14.0450.
+
+Mon Apr 11 12:25:45 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 4.2930.
+
+Mon Apr 11 12:25:45 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0660.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 23.9430.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0930.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0910.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0900.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0880.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0810.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0790.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0770.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0770.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0750.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0750.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 10. The simulation is unstable. Time = 0.0750.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0720.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0720.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon Apr 11 12:29:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 13.4820.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0970.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0870.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0770.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0740.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0700.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0690.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0680.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0680.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Unknown warning type Time = 0.0680.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0680.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0670.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0670.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0670.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0670.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Unknown warning type Time = 0.0670.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Unknown warning type Time = 0.0665.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0670.
+
+Mon Apr 11 13:48:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0660.
+

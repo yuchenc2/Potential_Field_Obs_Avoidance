@@ -64,7 +64,8 @@ vector<double> sum_obstacle_pos_y;
 
 double goal_location[3];
 bool obstacle_init_flag = false;
-double SATYRR_X_offset = -19;
+double SATYRR_X_offset = 0.0;
+double SATYRR_Y_offset = 0.0;
 
 //class
 float_t ctrl_update_freq = 1000;
@@ -178,8 +179,12 @@ void initalize_environment(const mjModel *m, mjData *d)
     for(int j=0;j<3;j++)
         goal_location[j] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + j];
 
-    printf("SATYRR START : (%f, %f) \n",SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y);
+    SATYRR_X_offset =  m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3];
+    SATYRR_Y_offset =   m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1];
+
+    printf("SATYRR START : (%f, %f) \n",SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
     printf("Goal Position : (%f, %f) \n",goal_location[0], goal_location[1]);
+
     printf("Obstacle 1 to Torso: (%f, %f, %f) \n", obstacle_position[0][0], obstacle_position[0][1], obstacle_position[0][2] );
     printf("Obstacle 2 to Torso: (%f, %f, %f) \n", obstacle_position[1][0], obstacle_position[1][1], obstacle_position[1][2] );
     printf("Obstacle 3 to Torso: (%f, %f, %f) \n", obstacle_position[2][0], obstacle_position[2][1], obstacle_position[2][2] );
@@ -191,6 +196,7 @@ void initalize_environment(const mjModel *m, mjData *d)
     printf("Obstacle 9 to Torso: (%f, %f, %f) \n", obstacle_position[8][0], obstacle_position[8][1], obstacle_position[8][2] );
     printf("Obstacle 10 to Torso: (%f, %f, %f) \n", obstacle_position[9][0], obstacle_position[9][1], obstacle_position[9][2] );
     printf("\n");
+
     for(int i=0; i<Num_obstacles; i++)
     {
         sum_obstacle_pos_x.push_back(obstacle_position[i][0]);
@@ -282,15 +288,15 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
 
 void keyboard_input(mjData *d)
 {
-    delta += update_rate;
-    if(delta > 1)
-       delta = 0;
+    // delta += update_rate;
+    // if(delta > 1)
+    //    delta = 0;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
-        forward_backward += 0.005*delta;
+        forward_backward += 0.2*0.001;
         // printf("forward %f \n",forward_backward);
         }
     else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
-        forward_backward -= 0.005*delta;
+        forward_backward -= 0.2*0.001;
         // printf("forward %f \n",forward_backward);
         }
     else
@@ -326,12 +332,12 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
     // else if (des_x < -5)
     //     des_x = -5;
 
-    vector<double> des_state = {0.0, 0.0, des_dx, 0.0};
+    vector<double> des_state = {des_x, 0.0, des_dx, 0.0};
 
     vector<double> state_ = {SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch};
     wheel_torque = SATYRR_Cont.f_stabilizationControl(des_state, state_);
        
-    vector<double> des_yaw = {d_dyaw, 0.0};
+    vector<double> des_yaw = {0.0, d_dyaw/SATYRR_S.width_wheel};
     vector<double> curr_yaw = {SATYRR_S.psi, SATYRR_S.dpsi};
 
     yaw_damp = SATYRR_Cont.f_yawControl(des_yaw, curr_yaw);
@@ -369,13 +375,13 @@ void mycontroller(const mjModel *m, mjData *d)
     APF.fnc_cal_distance(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y, goal_location[0], goal_location[1]);
     //Attractive force
 
-    // APF.fnc_attractive_force(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y, goal_location[0], goal_location[1]);
+    APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
 
     //Find closet obstacle
-    APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
+    APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
 
     //Repulsive force
-    APF.fnc_repulsive_force(APF.closest_obs_dist, SATYRR_S.x, SATYRR_S.y, APF.closest_obs_pos[0], APF.closest_obs_pos[1]);
+    APF.fnc_repulsive_force(APF.closest_obs_dist, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, APF.closest_obs_pos[0], APF.closest_obs_pos[1]);
 
     //Desired input with APF
     compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.repulsive_force[0];
@@ -383,23 +389,27 @@ void mycontroller(const mjModel *m, mjData *d)
 
     compensated_des_x += compensated_des_dx*update_rate;
     compensated_des_y += compensated_des_dy*update_rate;
+
     //robot controller
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dy, compensated_des_x, compensated_des_y);
 
-    if(cnt % 100 == 0)
+    if(cnt % 500 == 0)
     {
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
         printf("comp force %f, %f \n",compensated_des_dx,compensated_des_dy);
         printf("\n");
-        //printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1] - SATYRR_S.y);
+        // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
         //printf("distance = %f \n",APF.distance_);
         // printf("des yaw %f, yaw %f \n",compensated_des_dy, SATYRR_S.y);
         cnt = 0;
     }
     if (data_save_flag){
-        if(cnt % 100 == 0) myfile << "%f \n" << d->time;
+        if(cnt % 100 == 0){
+            myfile << d->time << ", " << SATYRR_S.x << ", " << SATYRR_S.y ;
+            myfile << "\n";
+        } 
     }
     cnt = cnt+1;
 }
@@ -434,7 +444,7 @@ int main(int argc, const char **argv)
 
     //file open
     if (data_save_flag)
-        myfile.open("data_save.txt",ios::out);
+        myfile.open("../src/data_save.txt",ios::out);
 
     // controller setup: install control callback
     mjcb_control = mycontroller;
