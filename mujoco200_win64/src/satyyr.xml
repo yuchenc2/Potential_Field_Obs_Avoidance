@@ -58,10 +58,10 @@
         </body>
 
         <body name="start_location_body" pos="-19 1 0">
-            <geom name="start_location_geom" size="1 1 0.01" type="box" rgba="0 1 0 1" />
+            <geom name="start_location_geom" size="1 1 0.001" type="box" rgba="0 1 0 1" />
         </body>
         <body name="end_location_body" pos="0 -1 0">
-            <geom name="end_location_geom" size="1 1 0.01" type="box" rgba="1 1 1 1" />
+            <geom name="end_location_geom" size="1 1 0.001" type="box" rgba="1 1 1 1" />
         </body>
          
         <!-- <body name="obstacle_1_body" pos="17 0 0">

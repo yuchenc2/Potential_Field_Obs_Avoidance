@@ -43,7 +43,7 @@ bool Potential_Field::fnc_attractive_force(double dist, double rx, double ry, do
     double thetaG = atan2(goal_y-ry, goal_x-rx);
 
     //from others
-    int goalR = 0.1;
+    int goalR = 0.01;
     double goalS = 38/5;
     
     if (dist < goalR){

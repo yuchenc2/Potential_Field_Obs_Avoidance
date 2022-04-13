@@ -29,6 +29,8 @@ int obs_case = 1; // change obs case
 #define M_PI           3.14159265358979323846
 using namespace std::chrono;
 using namespace std;
+#define min(a,b) a<b?a:b
+#define max(a,b) a>b?a:b
 
 // MuJoCo data structures
 mjModel *m = NULL; // MuJoCo model
@@ -296,27 +298,30 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
 
 void keyboard_input(mjData *d)
 {
-    // delta += update_rate;
-    // if(delta > 1)
-    //    delta = 0;
+    delta += update_rate;
+    if(delta > 1)
+       delta = 0;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
-        forward_backward += 0.2*0.001;
-        // printf("forward %f \n",forward_backward);
+        forward_backward += 0.001;
+        forward_backward = min(forward_backward, 1);
         }
     else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
-        forward_backward -= 0.2*0.001;
-        // printf("forward %f \n",forward_backward);
+        forward_backward -= 0.001;
+        forward_backward = max(forward_backward, -1);
         }
     else
-        forward_backward += 0;
+        forward_backward = 0;
 
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
         left_right += 0.001;
-    
-    else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        left_right = min(left_right, 0.5);
+        }
+    else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
         left_right -= 0.001;
+        left_right = max(left_right, -0.5);
+        }
     else
-        left_right +=0;
+        left_right =0;
 
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
         if (data_save_flag){
@@ -424,9 +429,10 @@ void mycontroller(const mjModel *m, mjData *d)
         printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
         // printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
         printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
+        printf("distance = %f \n",APF.distance_);
         printf("\n");
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
-        //printf("distance = %f \n",APF.distance_);
+        
         // printf("des yaw %f, yaw %f \n",compensated_des_dy, SATYRR_S.y);
         cnt = 0;
     }
