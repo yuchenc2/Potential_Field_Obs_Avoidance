@@ -60,11 +60,11 @@
         <body name="start_location_body" pos="-19 1 0">
             <geom name="start_location_geom" size="1 1 0.01" type="box" rgba="0 1 0 1" />
         </body>
-        <body name="end_location_body" pos="19 -1 0">
+        <body name="end_location_body" pos="0 -1 0">
             <geom name="end_location_geom" size="1 1 0.01" type="box" rgba="1 1 1 1" />
         </body>
          
-        <body name="obstacle_1_body" pos="17 0 0">
+        <!-- <body name="obstacle_1_body" pos="17 0 0">
             <geom name="obstacle_1_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.6" type="capsule" rgba="0.45 0.2 0.2 1" />
         </body>
         <body name="obstacle_2_body" pos="15 -1 0.0">
@@ -78,7 +78,22 @@
         </body>
         <body name="obstacle_5_body" pos="1 1 0.0">
             <geom name="obstacle_5_geom" class = "collision-default" fromto="0 0 0 0 0 0.4" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
+        </body> -->
+        <!-- <body name="obstacle_1_body" pos="-3 0.2 0">
+            <geom name="obstacle_1_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.6" type="capsule" rgba="0.45 0.2 0.2 1" />
         </body>
+        <body name="obstacle_2_body" pos="-7 -0.4 0.0">
+            <geom name="obstacle_2_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
+        </body>
+        <body name="obstacle_3_body" pos="-11 0.4 0.0">
+            <geom name="obstacle_3_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.35" type="capsule" rgba="0.45 0.2 0.2 1" />
+        </body> -->
+        <!-- <body name="obstacle_4_body" pos="-12 -0.2 0.0">
+            <geom name="obstacle_4_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.4" type="capsule" rgba="0.45 0.2 0.2 1" />
+        </body>
+        <body name="obstacle_5_body" pos="-13 0.2 0.0">
+            <geom name="obstacle_5_geom" class = "collision-default" fromto="0 0 0 0 0 0.4" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
+        </body> -->
 
         <body name="obstacle_6_body" pos="-2 1 0.0">
             <geom name="obstacle_6_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
@@ -94,7 +109,7 @@
         </body>
         <body name="obstacle_10_body" pos="-16 0 0.0">
             <geom name="obstacle_10_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
+        </body> 
 
         <!-- <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Torso" /> -->
         
