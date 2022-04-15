@@ -11,12 +11,23 @@
 #include "glfw3.h"
 #include "stdio.h"
 #include "stdlib.h"
-// #include "string.h"
 #include <string>
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include <thread>
 using namespace std::chrono;
+using namespace std;
+
+// UDP setup
+#include<winsock2.h>
+#pragma comment(lib,"ws2_32.lib") //Winsock Library
+#define SERVER "169.254.205.99"
+#define BUFLEN 548	// Max length of buffer
+#define PORT_SEND 54004	// The port on which to send data
+#define PORT_RECEIVE 54003	// The port on which to receive data
+#define ROBOT_DATA_COUNT 11
+#define HMI_DATA_COUNT 9
 
 // MuJoCo data structures
 mjModel *m = NULL; // MuJoCo model
@@ -44,6 +55,17 @@ double obstacle_position[Num_obstacles][3];
 bool obstacle_init_flag = false;
 
 double robot_state[2][3];
+
+
+/* UDP variables */
+// HMI_Data (receive): CRIO time variable (time_CRIO), human CoM x-postion (xH), human CoM y-postion (yH), human CoM y-velocity (ydH), human CoP y-postion (pyH),
+// human previous step SSP period (T_SSP_prev), human previous step DSP period (T_DSP_prev), human walking status (walking_status_H), human CoP x-postion (pxH)
+float HMI_Data[HMI_DATA_COUNT] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}; 
+// Robot_Data (send): HMI X force (F_HMI_X), MuJoCo time (time_sim), received CRIO time (time_CRIO_rec), robot CoP x-position (pxR), robot sw-leg x-position (sw_x), 
+// robot sw-leg z-position (sw_z), robot FSM value (FSM), robot CoM x-position (xR), robot CoM y-position (yR), robot CoM x-position traj (xR_traj), HMI Y force (F_HMI_Y)  
+float Robot_Data[ROBOT_DATA_COUNT] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};  
+float x_pos_HMI = 0.0;
+float y_pos_HMI = 0.0;
 
 
 // keyboard callback
@@ -113,18 +135,18 @@ void scroll(GLFWwindow *window, double xoffset, double yoffset)
 // geom locations
 void obstacleLocations(const mjModel *m, mjData *d)
 {
-    printf("\n");
-    printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 2]);
-    printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 2]);
-    printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 2]);
-    printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 2]);
-    printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 2]);
-    printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 2]);
-    printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 2]);
-    printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 2]);
-    printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 2]);
-    printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 2]);
-    printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 2]);
+    // printf("\n");
+    // printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 2]);
+    // printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 2]);
+    // printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 2]);
+    // printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 2]);
+    // printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 2]);
+    // printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 2]);
+    // printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 2]);
+    // printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 2]);
+    // printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 2]);
+    // printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 2]);
+    // printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 2]);
 }
 
 void potentialFieldVector(const mjModel *m, mjData *d){
@@ -137,6 +159,12 @@ void potentialFieldVector(const mjModel *m, mjData *d){
     // printf("Obstacle 4 to Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 2]);
     // printf("Obstacle 5 to Torso: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 2]);
     
+}
+
+void print_HMI_data(void){
+    x_pos_HMI = HMI_Data[1];
+    y_pos_HMI = HMI_Data[2];
+    printf("x_pos_HMI: %f, y_pos_HMI: %f \n", x_pos_HMI, y_pos_HMI);
 }
 
 void initalize_environment(const mjModel *m, mjData *d)
@@ -224,11 +252,110 @@ void mycontroller(const mjModel *m, mjData *d)
     //Update robot position
 
 
-    //Calculate Distance 
-
-    
+    //Calculate Distance     
     m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] + 0.001*forward_backward;
     m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] + 0.001*left_right;
+    float x_force = 3.0;
+    float y_force = 10.0;
+    Robot_Data[0] = x_force;
+    Robot_Data[10] = y_force;
+}
+
+
+// UDP receive
+void udp_receive()
+{
+    
+	struct sockaddr_in si_me, si_other;
+	
+	SOCKET s;
+	WSADATA wsa;
+    int i;
+    int recv_len;
+	char buf[BUFLEN];
+    int slen = sizeof(si_other);
+	
+	//Initialise winsock
+	printf("\nInitialising Winsock...");
+	if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
+	{
+		printf("Failed. Error Code : %d",WSAGetLastError());
+		exit(EXIT_FAILURE);
+	}
+	printf("Initialised.\n");
+
+	//create a UDP socket
+	if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
+	{
+		printf("Could not create socket : %d" , WSAGetLastError());
+		exit(EXIT_FAILURE);
+	}
+	printf("Socket created.\n");
+	
+	// zero out the structure
+	memset((char *) &si_me, 0, sizeof(si_me));
+	si_me.sin_family = AF_INET;
+	si_me.sin_port = htons(PORT_RECEIVE);
+	si_me.sin_addr.s_addr = htonl(INADDR_ANY);
+	
+	// bind socket to port
+	if( bind(s , (struct sockaddr*)&si_me, sizeof(si_me) ) == -1)
+	{
+		printf("Bind failed with error code : %d" , WSAGetLastError());
+		exit(EXIT_FAILURE);
+	}
+	puts("Bind done");
+
+    
+    // Measuring loop time
+    int count_itr_receive = 0;
+    bool fflag_receive = false;
+    auto begin_main_receive = std::chrono::high_resolution_clock::now();
+
+	while(1)
+	{
+        		
+		// receive a reply and print it
+		// clear the buffer by filling null, it might have previously received data
+		memset(buf,'\0', BUFLEN);
+		// try to receive some data, this is a blocking call
+		if ((recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen)) == -1)
+		{
+			exit(EXIT_FAILURE);
+		}
+        if(count_itr_receive == 0){
+            begin_main_receive = std::chrono::high_resolution_clock::now();
+        }
+        
+        // printf("RECEIVED DATA: \n");
+        int count = 0;
+        
+		char *token = strtok(buf, ",");
+		// Keep printing tokens while one of the
+		// delimiters present in str[].
+		while (count < HMI_DATA_COUNT)
+		{
+		    float received_float = strtof(token, NULL);
+		    // printf("%f ", received_float);
+            HMI_Data[count] = received_float;
+
+		    token = strtok(NULL, ",");
+            count++;
+		}
+        // printf("\n");
+        // print_HMI_data();
+        
+        count_itr_receive++;
+        auto end_main_receive = std::chrono::high_resolution_clock::now();
+        auto elapsed_main_receive = std::chrono::duration_cast<std::chrono::nanoseconds>(end_main_receive - begin_main_receive);
+        if(elapsed_main_receive.count() * 1e-9 >= 10.0000000 && fflag_receive == false){
+            printf("Receive Count: %d\n", count_itr_receive);
+            fflag_receive = true;
+        }      
+	}
+
+	closesocket(s);
+	WSACleanup();
 }
 
 // main function
@@ -265,9 +392,7 @@ int main(int argc, const char **argv)
     robot_state[0][1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = 0;
     robot_state[0][2] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 2] = 0.3;
 
-
-
-
+    // Get camera to follow the robot
     cam.type = mjCAMERA_TRACKING;
     cam.fixedcamid = mj_name2id(m, mjOBJ_CAMERA, "camera1");
     cam.trackbodyid = mj_name2id(m, mjOBJ_BODY, "torso");
@@ -291,6 +416,40 @@ int main(int argc, const char **argv)
     glfwSetMouseButtonCallback(window, mouse_button);
     glfwSetScrollCallback(window, scroll);
 
+    // UDP communication
+    // udp_receive
+    std::thread udp(udp_receive);
+    udp.detach();
+
+    // udp_send setup (client)
+    struct sockaddr_in s_other_send; 
+    std::string strg;
+    int s_send, i_send;
+    int slen=sizeof(s_other_send);
+	WSADATA wsa;
+    
+	//Initialise winsock
+	printf("\nInitialising Winsock...");
+	if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
+	{
+		printf("Failed. Error Code : %d",WSAGetLastError());
+		exit(EXIT_FAILURE);
+	}
+	printf("Initialised.\n");
+
+	//create socket
+    if ( (s_send=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
+    {
+		printf("socket() failed with error code : %d" , WSAGetLastError());
+		exit(EXIT_FAILURE);
+    }
+
+	//setup address structure
+    memset((char *) &s_other_send, 0, sizeof(s_other_send));
+    s_other_send.sin_family = AF_INET;
+    s_other_send.sin_port = htons(PORT_SEND);
+	s_other_send.sin_addr.S_un.S_addr = inet_addr(SERVER);
+
     // run main loop, target real-time simulation and 60 fps rendering
     while (!glfwWindowShouldClose(window))
     {
@@ -299,8 +458,27 @@ int main(int argc, const char **argv)
         //  this loop will finish on time for the next frame to be rendered at 60 fps.
         //  Otherwise add a cpu timer and exit this loop when it is time to render.
         mjtNum simstart = d->time;
-        while (d->time - simstart < 1.0 / 60.0)
+        while (d->time - simstart < 1.0 / 60.0){
             mj_step(m, d);
+            // Send the simulated robot's data through UDP
+            i_send = 0;     
+            while (i_send < ROBOT_DATA_COUNT - 1 ) 
+            {
+                strg = strg + to_string(Robot_Data[i_send]) + ",";
+                i_send = i_send + 1;
+            }
+            strg = strg + to_string(Robot_Data[i_send]);
+            if (sendto(s_send, strg.c_str(), strg.size() + 1, 0 , (struct sockaddr *) &s_other_send, slen) == SOCKET_ERROR)
+            {
+                printf("sendto() failed with error code : %d" , WSAGetLastError());
+                exit(EXIT_FAILURE);
+            }
+            // cout << "Data Sent: " << strg << endl;
+            strg.clear();
+        }
+
+
+
 
         // get framebuffer viewport
         mjrRect viewport = {0, 0, 0, 0};
@@ -316,6 +494,10 @@ int main(int argc, const char **argv)
         // process pending GUI events, call GLFW callbacks
         glfwPollEvents();
     }
+
+    // Close UDP Client
+	closesocket(s_send);
+	WSACleanup();
 
     // free visualization storage
     mjv_freeScene(&scn);
