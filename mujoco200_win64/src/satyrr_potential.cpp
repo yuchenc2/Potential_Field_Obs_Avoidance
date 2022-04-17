@@ -66,6 +66,7 @@ float HMI_Data[HMI_DATA_COUNT] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 float Robot_Data[ROBOT_DATA_COUNT] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};  
 float x_pos_HMI = 0.0;
 float y_pos_HMI = 0.0;
+auto begin_main_receive = std::chrono::high_resolution_clock::now();
 
 
 // keyboard callback
@@ -255,7 +256,7 @@ void mycontroller(const mjModel *m, mjData *d)
     //Calculate Distance     
     m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] + 0.001*forward_backward;
     m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] + 0.001*left_right;
-    float x_force = 3.0;
+    float x_force = 0.0;
     float y_force = 10.0;
     Robot_Data[0] = x_force;
     Robot_Data[10] = y_force;
@@ -310,7 +311,6 @@ void udp_receive()
     // Measuring loop time
     int count_itr_receive = 0;
     bool fflag_receive = false;
-    auto begin_main_receive = std::chrono::high_resolution_clock::now();
 
 	while(1)
 	{
@@ -323,9 +323,6 @@ void udp_receive()
 		{
 			exit(EXIT_FAILURE);
 		}
-        if(count_itr_receive == 0){
-            begin_main_receive = std::chrono::high_resolution_clock::now();
-        }
         
         // printf("RECEIVED DATA: \n");
         int count = 0;
@@ -343,15 +340,16 @@ void udp_receive()
             count++;
 		}
         // printf("\n");
-        // print_HMI_data();
+        print_HMI_data();
         
-        count_itr_receive++;
-        auto end_main_receive = std::chrono::high_resolution_clock::now();
-        auto elapsed_main_receive = std::chrono::duration_cast<std::chrono::nanoseconds>(end_main_receive - begin_main_receive);
-        if(elapsed_main_receive.count() * 1e-9 >= 10.0000000 && fflag_receive == false){
-            printf("Receive Count: %d\n", count_itr_receive);
-            fflag_receive = true;
-        }      
+        // count_itr_receive++;
+        // auto end_main_receive = std::chrono::high_resolution_clock::now();
+        // auto elapsed_main_receive = std::chrono::duration_cast<std::chrono::nanoseconds>(end_main_receive - begin_main_receive);
+        // printf("Elapsed time: %d\n", elapsed_main_receive.count() * 1e-9);
+        // if(elapsed_main_receive.count() * 1e-9 >= 10.0000000 && fflag_receive == false){
+        //     printf("Receive Count: %d\n", count_itr_receive);
+        //     fflag_receive = true;
+        // }      
 	}
 
 	closesocket(s);
@@ -468,6 +466,7 @@ int main(int argc, const char **argv)
                 i_send = i_send + 1;
             }
             strg = strg + to_string(Robot_Data[i_send]);
+            begin_main_receive = std::chrono::high_resolution_clock::now();
             if (sendto(s_send, strg.c_str(), strg.size() + 1, 0 , (struct sockaddr *) &s_other_send, slen) == SOCKET_ERROR)
             {
                 printf("sendto() failed with error code : %d" , WSAGetLastError());

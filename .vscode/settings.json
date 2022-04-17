@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "system_error": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "chrono": "cpp"
     }
 }

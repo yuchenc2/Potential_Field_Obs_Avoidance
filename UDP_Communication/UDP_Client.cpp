@@ -9,7 +9,7 @@
 
 #define SERVER "169.254.205.99"	//ip address of udp server
 #define BUFLEN 512	//Max length of buffer
-#define PORT 54003	//The port on which to listen for incoming data
+#define PORT 54004	//The port on which to listen for incoming data
 
 int main(void)
 {
@@ -40,19 +40,17 @@ int main(void)
 	si_other.sin_family = AF_INET;
 	si_other.sin_port = htons(PORT);
 	si_other.sin_addr.S_un.S_addr = inet_addr(SERVER);
-    auto begin = std::chrono::high_resolution_clock::now();
 	
 	//start communication
 	while(1)
 	{
 		// printf("Enter message : ");
 		// gets(message);
-		char message[32];
-		sprintf(message, "%f", begin.count()* 1e-9);
-
+		char message[32] = "0.567";
+		
 		//send the message
 		
-    	// auto begin = std::chrono::high_resolution_clock::now();
+    	auto begin = std::chrono::high_resolution_clock::now();
 		if (sendto(s, message, strlen(message) , 0 , (struct sockaddr *) &si_other, slen) == SOCKET_ERROR)
 		{
 			printf("sendto() failed with error code : %d" , WSAGetLastError());
