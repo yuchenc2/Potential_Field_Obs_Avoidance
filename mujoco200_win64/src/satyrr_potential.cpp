@@ -165,7 +165,7 @@ void potentialFieldVector(const mjModel *m, mjData *d){
 void print_HMI_data(void){
     x_pos_HMI = HMI_Data[1];
     y_pos_HMI = HMI_Data[2];
-    printf("x_pos_HMI: %f, y_pos_HMI: %f \n", x_pos_HMI, y_pos_HMI);
+    printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_pos_HMI, y_pos_HMI);
 }
 
 void initalize_environment(const mjModel *m, mjData *d)
