@@ -64,8 +64,8 @@ float HMI_Data[HMI_DATA_COUNT] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 // Robot_Data (send): HMI X force (F_HMI_X), MuJoCo time (time_sim), received CRIO time (time_CRIO_rec), robot CoP x-position (pxR), robot sw-leg x-position (sw_x), 
 // robot sw-leg z-position (sw_z), robot FSM value (FSM), robot CoM x-position (xR), robot CoM y-position (yR), robot CoM x-position traj (xR_traj), HMI Y force (F_HMI_Y)  
 float Robot_Data[ROBOT_DATA_COUNT] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};  
-float x_pos_HMI = 0.0;
-float y_pos_HMI = 0.0;
+float x_COM_HMI = 0.0;
+float y_COM_HMI = 0.0;
 auto begin_main_receive = std::chrono::high_resolution_clock::now();
 
 
@@ -163,9 +163,9 @@ void potentialFieldVector(const mjModel *m, mjData *d){
 }
 
 void print_HMI_data(void){
-    x_pos_HMI = HMI_Data[1];
-    y_pos_HMI = HMI_Data[2];
-    printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_pos_HMI, y_pos_HMI);
+    x_COM_HMI = HMI_Data[1];
+    y_COM_HMI = HMI_Data[2];
+    printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_COM_HMI, y_COM_HMI);
 }
 
 void initalize_environment(const mjModel *m, mjData *d)
@@ -256,8 +256,8 @@ void mycontroller(const mjModel *m, mjData *d)
     //Calculate Distance     
     m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 0] + 0.001*forward_backward;
     m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1] + 0.001*left_right;
-    float x_force = 0.0;
-    float y_force = 10.0;
+    float x_force = 0.0; // sagital plane
+    float y_force = 10.0; // frontal plane
     Robot_Data[0] = x_force;
     Robot_Data[10] = y_force;
 }

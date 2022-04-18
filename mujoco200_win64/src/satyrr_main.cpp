@@ -7,6 +7,18 @@
         https://www.roboti.us/resourcelicense.txt
 */
 
+
+/*   Decide cases for feedback  */
+// #define CASE1_WITHOUT_FEEDBACK
+// #define CASE2_FEEDBACK_TO_HUMAN 
+#define CASE3_COMPENSATED_CONTROLLER 
+// #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
+
+/* Decide control input */
+#define KEYBOARD_INPUT 
+// #define HMI_INPUT
+
+
 #include "mujoco.h"
 #include "glfw3.h"
 #include "stdio.h"
@@ -18,6 +30,7 @@
 #include "satyrr_controller.hpp"
 #include "potential_field.hpp"
 #include <fstream>
+#include <thread>
 
 
 #define Hip 1
@@ -85,7 +98,32 @@ Potential_Field APF;
 ofstream myfile;
 bool data_save_flag = true;
 
+// UDP setup
+#include <winsock2.h>
+#pragma comment(lib,"ws2_32.lib") //Winsock Library
+#define SERVER "169.254.205.99"
+#define BUFLEN 548	// Max length of buffer
+#define PORT_SEND 54004	// The port on which to send data
+#define PORT_RECEIVE 54003	// The port on which to receive data
+#define ROBOT_DATA_COUNT 11
+#define HMI_DATA_COUNT 9
 
+
+/* UDP variables */
+// HMI_Data (receive): CRIO time variable (time_CRIO), human CoM x-postion (xH), human CoM y-postion (yH), human CoM y-velocity (ydH), human CoP y-postion (pyH),
+// human previous step SSP period (T_SSP_prev), human previous step DSP period (T_DSP_prev), human walking status (walking_status_H), human CoP x-postion (pxH)
+float HMI_Data[HMI_DATA_COUNT] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}; 
+// Robot_Data (send): HMI X force (F_HMI_X), MuJoCo time (time_sim), received CRIO time (time_CRIO_rec), robot CoP x-position (pxR), robot sw-leg x-position (sw_x), 
+// robot sw-leg z-position (sw_z), robot FSM value (FSM), robot CoM x-position (xR), robot CoM y-position (yR), robot CoM x-position traj (xR_traj), HMI Y force (F_HMI_Y)  
+float Robot_Data[ROBOT_DATA_COUNT] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};  
+float x_COM_HMI = 0.0;
+float y_COM_HMI = 0.0;
+auto begin_main_receive = std::chrono::high_resolution_clock::now();
+
+
+// Feedback between human and HMI
+double human_repulse_x_gain = 1.0;
+double human_repulse_y_gain = 1.0;
 
 void SATYRR_Init(const mjModel* m, mjData* d);
 
@@ -298,6 +336,7 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
 
 void keyboard_input(mjData *d)
 {
+#ifdef KEYBOARD_INPUT
     delta += update_rate;
     if(delta > 1)
        delta = 0;
@@ -329,6 +368,7 @@ void keyboard_input(mjData *d)
             printf("close file!! \n");
         }
     }
+#endif
 }
 
 void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw, double des_x, double d_yaw)
@@ -371,8 +411,139 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
 
 }
 
+void print_HMI_data(void){
+    x_COM_HMI = HMI_Data[1];
+    y_COM_HMI = HMI_Data[2];
+    printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_COM_HMI, y_COM_HMI);
+#ifdef HMI_INPUT
+    if (x_COM_HMI > 0.1){
+        forward_backward += 0.001;
+        forward_backward = min(x_COM_HMI, 1);
+        printf("Commanding forward! \n");
+    }else if (x_COM_HMI < -0.1){
+        forward_backward -= 0.001;
+        forward_backward = max(x_COM_HMI, -1);
+        printf("Commanding backward! \n");
+    }else{
+        forward_backward = 0;
+        printf("Commanding nothing for Foward/backward! \n");
+    }
+
+    if (y_COM_HMI > 0.1){
+        left_right += 0.001;
+        left_right = min(y_COM_HMI, 0.5);
+        printf("Commanding Right! \n");
+    }else if (y_COM_HMI < -0.1){
+        left_right -= 0.001;
+        left_right = max(y_COM_HMI, -0.5);
+        printf("Commanding Left! \n");
+    }else{
+        left_right = 0;
+        printf("Commanding nothing for Left/Right! \n");
+    }
+#endif
+
+}
+
+
+// UDP receive
+void udp_receive()
+{
+    
+	struct sockaddr_in si_me, si_other;
+	
+	SOCKET s;
+	WSADATA wsa;
+    int i;
+    int recv_len;
+	char buf[BUFLEN];
+    int slen = sizeof(si_other);
+	
+	//Initialise winsock
+	printf("\nInitialising Winsock of receive...");
+	if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
+	{
+		printf("Failed. Error Code : %d",WSAGetLastError());
+		exit(EXIT_FAILURE);
+	}
+	printf("Initialised.\n");
+
+	//create a UDP socket
+	if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
+	{
+		printf("Could not create socket : %d" , WSAGetLastError());
+		exit(EXIT_FAILURE);
+	}
+	printf("Socket created.\n");
+	
+	// zero out the structure
+	memset((char *) &si_me, 0, sizeof(si_me));
+	si_me.sin_family = AF_INET;
+	si_me.sin_port = htons(PORT_RECEIVE);
+	si_me.sin_addr.s_addr = htonl(INADDR_ANY);
+	
+	// bind socket to port
+	if( bind(s , (struct sockaddr*)&si_me, sizeof(si_me) ) == -1)
+	{
+		printf("Bind failed with error code : %d" , WSAGetLastError());
+		exit(EXIT_FAILURE);
+	}
+	puts("Bind done");
+
+    
+    // Measuring loop time
+    int count_itr_receive = 0;
+    bool fflag_receive = false;
+
+	while(1)
+	{
+        		
+		// receive a reply and print it
+		// clear the buffer by filling null, it might have previously received data
+		memset(buf,'\0', BUFLEN);
+		// try to receive some data, this is a blocking call
+		if ((recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen)) == -1)
+		{
+			exit(EXIT_FAILURE);
+		}
+        
+        // printf("RECEIVED DATA: \n");
+        int count = 0;
+        
+		char *token = strtok(buf, ",");
+		// Keep printing tokens while one of the
+		// delimiters present in str[].
+		while (count < HMI_DATA_COUNT)
+		{
+		    float received_float = strtof(token, NULL);
+		    // printf("%f ", received_float);
+            HMI_Data[count] = received_float;
+
+		    token = strtok(NULL, ",");
+            count++;
+		}
+        // printf("\n");
+        print_HMI_data();
+        
+        // count_itr_receive++;
+        // auto end_main_receive = std::chrono::high_resolution_clock::now();
+        // auto elapsed_main_receive = std::chrono::duration_cast<std::chrono::nanoseconds>(end_main_receive - begin_main_receive);
+        // printf("Elapsed time: %d\n", elapsed_main_receive.count() * 1e-9);
+        // if(elapsed_main_receive.count() * 1e-9 >= 10.0000000 && fflag_receive == false){
+        //     printf("Receive Count: %d\n", count_itr_receive);
+        //     fflag_receive = true;
+        // }      
+	}
+
+	closesocket(s);
+	WSACleanup();
+}
+
 void mycontroller(const mjModel *m, mjData *d)
 {
+    float x_force = 0.0; // sagital plane
+    float y_force = 0.0; // frontal plane
+
     //init position of obstacles
     if (obstacle_init_flag != true)
         initalize_environment(m, d);
@@ -387,10 +558,10 @@ void mycontroller(const mjModel *m, mjData *d)
     APF.fnc_cal_distance(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
     
     //Attractive force
-    APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
+    // APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
 
     //Find closet obstacle
-    if(obs_case == Obs_closest_one){
+    if(obs_case == Obs_closest_one){ 
         APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
 
         //Repulsive force (only the closest one)
@@ -399,22 +570,46 @@ void mycontroller(const mjModel *m, mjData *d)
         //Desired input with APF
         compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.repulsive_force[0];
         compensated_des_dth = sensitivity*left_right + APF.attractive_force[1] + APF.repulsive_force[1];
-    }
-    
-    //Repulsive force (all)
-    else if(obs_case == Obs_all)
+    }else if(obs_case == Obs_all) //Repulsive force (all)
     {
         APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
         //Desired input with APF
-        compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x;
-        compensated_des_dth = sensitivity*left_right + APF.attractive_force[1] + APF.obs_repul_force_y;
-    }
-
-
-    else{
+        compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; 
+        compensated_des_dth = sensitivity*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; 
+    }else{
         compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0];
         compensated_des_dth = sensitivity*left_right + APF.attractive_force[1];
     }
+
+    
+
+#ifdef CASE1_WITHOUT_FEEDBACK
+    x_force = 0; // without force to human
+    y_force = 0; // without force to human
+    compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
+    compensated_des_dth = sensitivity*left_right + APF.attractive_force[1]; //without repulsive force for controller
+#endif
+
+#ifdef CASE2_FEEDBACK_TO_HUMAN
+    x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
+    y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
+    compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
+    compensated_des_dth = sensitivity*left_right + APF.attractive_force[1]; //without repulsive force for controller
+#endif
+
+#ifdef CASE3_COMPENSATED_CONTROLLER 
+    x_force = 0; // without force to human
+    y_force = 0; // without force to human
+    compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
+    compensated_des_dth = sensitivity*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; // with repulsive force for controller
+#endif
+
+#ifdef CASE4_COMPENSATED_CONTROLLER 
+    x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
+    y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
+    compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
+    compensated_des_dth = sensitivity*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; // with repulsive force for controller
+#endif
 
     compensated_des_x += compensated_des_dx*update_rate;
     compensated_des_th += compensated_des_dth*update_rate;
@@ -442,6 +637,11 @@ void mycontroller(const mjModel *m, mjData *d)
             myfile << "\n";
         } 
     }
+    
+    // command force to HMI
+    Robot_Data[0] = x_force; 
+    Robot_Data[10] = y_force;
+
     cnt = cnt+1;
 }
 
@@ -487,7 +687,7 @@ int main(int argc, const char **argv)
     cam.type = mjCAMERA_TRACKING;
     cam.fixedcamid = mj_name2id(m, mjOBJ_CAMERA, "camera1");
     cam.trackbodyid = mj_name2id(m, mjOBJ_BODY, "torso");
-    cam.azimuth = 180;
+    cam.azimuth = 0;
     cam.elevation = -18;
     cam.distance = 1.2;
 
@@ -507,6 +707,37 @@ int main(int argc, const char **argv)
     glfwSetMouseButtonCallback(window, mouse_button);
     glfwSetScrollCallback(window, scroll);
 
+    
+    // UDP communication
+    // udp_receive
+    std::thread udp(udp_receive);
+    udp.detach();
+    // udp_send setup (client)
+    struct sockaddr_in s_other_send; 
+    std::string strg;
+    int s_send, i_send;
+    int slen=sizeof(s_other_send);
+	WSADATA wsa;
+	//Initialise winsock
+	printf("\nInitialising Winsock for send...");
+	if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
+	{
+		printf("Failed. Error Code : %d",WSAGetLastError());
+		exit(EXIT_FAILURE);
+	}
+	printf("Initialised.\n");
+	//create socket
+    if ( (s_send=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
+    {
+		printf("socket() failed with error code : %d" , WSAGetLastError());
+		exit(EXIT_FAILURE);
+    }
+	//setup address structure
+    memset((char *) &s_other_send, 0, sizeof(s_other_send));
+    s_other_send.sin_family = AF_INET;
+    s_other_send.sin_port = htons(PORT_SEND);
+	s_other_send.sin_addr.S_un.S_addr = inet_addr(SERVER);
+
     // run main loop, target real-time simulation and 60 fps rendering
     while (!glfwWindowShouldClose(window))
     {
@@ -515,8 +746,25 @@ int main(int argc, const char **argv)
         //  this loop will finish on time for the next frame to be rendered at 60 fps.
         //  Otherwise add a cpu timer and exit this loop when it is time to render.
         mjtNum simstart = d->time;
-        while (d->time - simstart < 1.0 / 60.0)
+        while (d->time - simstart < 1.0 / 60.0){
             mj_step(m, d);
+            // Send the simulated robot's data through UDP
+            i_send = 0;     
+            while (i_send < ROBOT_DATA_COUNT - 1 ) 
+            {
+                strg = strg + to_string(Robot_Data[i_send]) + ",";
+                i_send = i_send + 1;
+            }
+            strg = strg + to_string(Robot_Data[i_send]);
+            begin_main_receive = std::chrono::high_resolution_clock::now();
+            if (sendto(s_send, strg.c_str(), strg.size() + 1, 0 , (struct sockaddr *) &s_other_send, slen) == SOCKET_ERROR)
+            {
+                printf("sendto() failed with error code : %d" , WSAGetLastError());
+                exit(EXIT_FAILURE);
+            }
+            // cout << "Data Sent: " << strg << endl;
+            strg.clear();
+        }
 
         // get framebuffer viewport
         mjrRect viewport = {0, 0, 0, 0};
