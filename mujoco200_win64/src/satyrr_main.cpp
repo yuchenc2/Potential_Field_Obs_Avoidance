@@ -9,9 +9,9 @@
 
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK
+#define CASE1_WITHOUT_FEEDBACK
 // #define CASE2_FEEDBACK_TO_HUMAN 
-#define CASE3_COMPENSATED_CONTROLLER 
+// #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
@@ -67,7 +67,8 @@ double yaw_damp = 0.0;
 
 //keyboard input
 double delta = 0.0;
-double sensitivity = 0.1;
+double keyboard_input_sensitivity_x = 0.1;
+double keyboard_input_sensitivity_y = 0.1;
 double forward_backward = 0.0;
 double left_right = 0.0;
 int cnt;
@@ -75,6 +76,7 @@ double compensated_des_dx = 0.0;
 double compensated_des_dth = 0.0;
 double compensated_des_x = 0.0;
 double compensated_des_th = 0.0;
+
 //Obstacles
 #define Num_obstacles 10 
 double obstacle_position[Num_obstacles][3];
@@ -87,7 +89,7 @@ double SATYRR_X_offset = 0.0;
 double SATYRR_Y_offset = 0.0;
 
 
-//class
+//Class
 float_t ctrl_update_freq = 1000;
 mjtNum last_update = 0.0;
 int torso_Pitch, torso_Roll, torso_Yaw, torso_X, torso_Y, torso_Z, j_hip_l, j_hip_r, j_knee_l, j_knee_r, j_wheel_l, j_wheel_r;
@@ -120,10 +122,14 @@ float x_COM_HMI = 0.0;
 float y_COM_HMI = 0.0;
 auto begin_main_receive = std::chrono::high_resolution_clock::now();
 
-
 // Feedback between human and HMI
-double human_repulse_x_gain = 1.0;
-double human_repulse_y_gain = 1.0;
+double HMI_input_sensitivity_x = 1.0;
+double HMI_input_sensitivity_y = 1.0;
+//Gains to tune
+double human_repulse_x_gain = 2000.0;
+double human_repulse_y_gain = -10000.0;
+#define HMI_COM_ACTIVATION 0.03
+#define TORQUE_CUTOFF 60
 
 void SATYRR_Init(const mjModel* m, mjData* d);
 
@@ -411,35 +417,64 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
 
 }
 
-void print_HMI_data(void){
+void robot_torque_calculation(void){
     x_COM_HMI = HMI_Data[1];
     y_COM_HMI = HMI_Data[2];
-    printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_COM_HMI, y_COM_HMI);
+    // printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_COM_HMI, y_COM_HMI);
 #ifdef HMI_INPUT
-    if (x_COM_HMI > 0.1){
-        forward_backward += 0.001;
-        forward_backward = min(x_COM_HMI, 1);
-        printf("Commanding forward! \n");
-    }else if (x_COM_HMI < -0.1){
-        forward_backward -= 0.001;
-        forward_backward = max(x_COM_HMI, -1);
-        printf("Commanding backward! \n");
+
+    // piece-wise linear function 
+    // double x_COM_HMI_sign = 0.0;
+    // double x_COM_HMI_db = ;
+    // double alpha_p1 = ;
+    // double alpha_p2 = ;
+    // double x_COM_HMI_swp = ;
+    // double x_COM_HMI_max = ;
+    // double c_swp = ;
+    // double max_x_velocity =;
+
+
+    double sensitivity_gain = 3;
+    if (x_COM_HMI > HMI_COM_ACTIVATION){
+        // left_right += 0.001;
+        forward_backward = min(x_COM_HMI*sensitivity_gain, 0.5);
+        // printf("Commanding Left! \n");
+    }else if (x_COM_HMI < -HMI_COM_ACTIVATION){
+        // left_right -= 0.001;
+        forward_backward = max(x_COM_HMI*sensitivity_gain, -0.5);
+        // printf("Commanding Right! \n");
     }else{
         forward_backward = 0;
-        printf("Commanding nothing for Foward/backward! \n");
+        // printf("Commanding nothing for Left/Right! \n");
     }
 
-    if (y_COM_HMI > 0.1){
-        left_right += 0.001;
+    // // Piece-wise velocity mapping
+    // if (x_COM_HMI > 0) x_COM_HMI_sign = 1;
+    // else if (x_COM_HMI < 0) x_COM_HMI_sign = -1;
+    // if (abs(x_COM_HMI) < x_COM_HMI_db) {
+    //     forward_backward = 0;
+    // }else if(abs(x_COM_HMI) >= x_COM_HMI_db && abs(x_COM_HMI) < x_COM_HMI_swp){
+    //     x_COM_HMI_sign*alpha_p1*(abs(x_COM_HMI) - x_COM_HMI_db);
+    //     // printf("Commanding forward! \n");
+    // }else if (abs(x_COM_HMI) >= x_COM_HMI_swp && abs(x_COM_HMI) < x_COM_HMI_max){
+    //     x_COM_HMI_sign*alpha_p2*(abs(x_COM_HMI) - x_COM_HMI_swp) + c_swp;
+    //     // printf("Commanding backward! \n");
+    // }else{
+    //     x_COM_HMI_sign*max_x_velocity;
+    //     // printf("Commanding nothing for Foward/backward! \n");
+    // }
+
+    if (y_COM_HMI > HMI_COM_ACTIVATION){
+        // left_right += 0.001;
         left_right = min(y_COM_HMI, 0.5);
-        printf("Commanding Right! \n");
-    }else if (y_COM_HMI < -0.1){
-        left_right -= 0.001;
+        // printf("Commanding Left! \n");
+    }else if (y_COM_HMI < -HMI_COM_ACTIVATION){
+        // left_right -= 0.001;
         left_right = max(y_COM_HMI, -0.5);
-        printf("Commanding Left! \n");
+        // printf("Commanding Right! \n");
     }else{
         left_right = 0;
-        printf("Commanding nothing for Left/Right! \n");
+        // printf("Commanding nothing for Left/Right! \n");
     }
 #endif
 
@@ -523,7 +558,7 @@ void udp_receive()
             count++;
 		}
         // printf("\n");
-        print_HMI_data();
+        robot_torque_calculation();
         
         // count_itr_receive++;
         // auto end_main_receive = std::chrono::high_resolution_clock::now();
@@ -543,6 +578,8 @@ void mycontroller(const mjModel *m, mjData *d)
 {
     float x_force = 0.0; // sagital plane
     float y_force = 0.0; // frontal plane
+    double sensitivity_x = 0.1;
+    double sensitivity_y = 0.1;
 
     //init position of obstacles
     if (obstacle_init_flag != true)
@@ -560,6 +597,16 @@ void mycontroller(const mjModel *m, mjData *d)
     //Attractive force
     // APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
 
+#ifdef KEYBOARD_INPUT
+    sensitivity_x = keyboard_input_sensitivity_x;
+    sensitivity_y = keyboard_input_sensitivity_y;
+#endif
+#ifdef HMI_INPUT
+    sensitivity_x = HMI_input_sensitivity_x;
+    sensitivity_y = HMI_input_sensitivity_y;
+#endif
+
+
     //Find closet obstacle
     if(obs_case == Obs_closest_one){ 
         APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
@@ -568,17 +615,17 @@ void mycontroller(const mjModel *m, mjData *d)
         APF.fnc_repulsive_force(APF.closest_obs_dist, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, APF.closest_obs_pos[0], APF.closest_obs_pos[1]);
         
         //Desired input with APF
-        compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.repulsive_force[0];
-        compensated_des_dth = sensitivity*left_right + APF.attractive_force[1] + APF.repulsive_force[1];
+        compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.repulsive_force[0];
+        compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.repulsive_force[1];
     }else if(obs_case == Obs_all) //Repulsive force (all)
     {
         APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
         //Desired input with APF
-        compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; 
-        compensated_des_dth = sensitivity*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; 
+        compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; 
+        compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; 
     }else{
-        compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0];
-        compensated_des_dth = sensitivity*left_right + APF.attractive_force[1];
+        compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0];
+        compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1];
     }
 
     
@@ -586,29 +633,29 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE1_WITHOUT_FEEDBACK
     x_force = 0; // without force to human
     y_force = 0; // without force to human
-    compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
-    compensated_des_dth = sensitivity*left_right + APF.attractive_force[1]; //without repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1]; //without repulsive force for controller
 #endif
 
 #ifdef CASE2_FEEDBACK_TO_HUMAN
     x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
     y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
-    compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
-    compensated_des_dth = sensitivity*left_right + APF.attractive_force[1]; //without repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1]; //without repulsive force for controller
 #endif
 
 #ifdef CASE3_COMPENSATED_CONTROLLER 
     x_force = 0; // without force to human
     y_force = 0; // without force to human
-    compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
-    compensated_des_dth = sensitivity*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; // with repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; // with repulsive force for controller
 #endif
 
 #ifdef CASE4_COMPENSATED_CONTROLLER 
     x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
     y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
-    compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
-    compensated_des_dth = sensitivity*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; // with repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; // with repulsive force for controller
 #endif
 
     compensated_des_x += compensated_des_dx*update_rate;
@@ -620,12 +667,12 @@ void mycontroller(const mjModel *m, mjData *d)
     if(cnt % 500 == 0)
     {
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
-        printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
-        printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
+        // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
+        // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
         // printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
-        printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
-        printf("distance = %f \n",APF.distance_);
-        printf("\n");
+        // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
+        // printf("distance = %f \n",APF.distance_);
+        // printf("\n");
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
         
         // printf("des yaw %f, yaw %f \n",compensated_des_dy, SATYRR_S.y);
@@ -639,6 +686,19 @@ void mycontroller(const mjModel *m, mjData *d)
     }
     
     // command force to HMI
+    // x_force = 0.0;
+    // y_force = 0.0;
+    printf("x_force: %f, y_force: %f \n",x_force, y_force);
+    if(x_force > TORQUE_CUTOFF){
+        x_force = TORQUE_CUTOFF;
+    }else if(x_force < -TORQUE_CUTOFF){
+        x_force = -TORQUE_CUTOFF;
+    }
+    if(y_force > TORQUE_CUTOFF){
+        y_force = TORQUE_CUTOFF;
+    }else if(y_force < -TORQUE_CUTOFF){
+        y_force = -TORQUE_CUTOFF;
+    }
     Robot_Data[0] = x_force; 
     Robot_Data[10] = y_force;
 

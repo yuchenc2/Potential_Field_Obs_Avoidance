@@ -166159,3 +166159,5550 @@ WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Ti
 Tue Apr 12 21:53:39 2022
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0830.
 
+Tue Apr 19 12:31:26 2022
+WARNING: Unknown warning type Time = 237.2840.
+
+Tue Apr 19 12:31:26 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 237.2840.
+
+Tue Apr 19 12:31:26 2022
+WARNING: Unknown warning type Time = 0.1310.
+
+Tue Apr 19 12:31:26 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1310.
+
+Tue Apr 19 12:31:26 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1300.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1300.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1300.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.1300.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Unknown warning type Time = 0.1300.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Unknown warning type Time = 0.1305.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1310.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Unknown warning type Time = 0.1300.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1300.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Unknown warning type Time = 0.1300.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.1300.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1290.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1290.
+
+Tue Apr 19 12:31:27 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1290.
+
+Tue Apr 19 12:31:28 2022
+WARNING: Unknown warning type Time = 0.1290.
+
+Tue Apr 19 12:31:28 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1290.
+
+Tue Apr 19 12:31:28 2022
+WARNING: Unknown warning type Time = 0.1290.
+
+Tue Apr 19 12:31:28 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.1290.
+
+Tue Apr 19 12:31:28 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1290.
+
+Tue Apr 19 12:31:28 2022
+WARNING: Unknown warning type Time = 0.1290.
+
+Tue Apr 19 12:31:28 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1290.
+
+Tue Apr 19 12:31:28 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1280.
+
+Tue Apr 19 12:31:28 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1280.
+
+Tue Apr 19 12:31:29 2022
+WARNING: Unknown warning type Time = 0.1280.
+
+Tue Apr 19 12:31:29 2022
+WARNING: Unknown warning type Time = 0.1280.
+
+Tue Apr 19 12:31:29 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.1280.
+
+Tue Apr 19 12:31:29 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1270.
+
+Tue Apr 19 12:31:29 2022
+WARNING: Unknown warning type Time = 0.1270.
+
+Tue Apr 19 12:31:29 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1270.
+
+Tue Apr 19 12:31:29 2022
+WARNING: Unknown warning type Time = 0.1270.
+
+Tue Apr 19 12:31:29 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1270.
+
+Tue Apr 19 12:31:29 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1270.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Unknown warning type Time = 0.1270.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Unknown warning type Time = 0.1270.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.1270.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1260.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.1260.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Unknown warning type Time = 0.1260.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1260.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1260.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Unknown warning type Time = 0.1260.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1260.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Unknown warning type Time = 0.1260.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.1260.
+
+Tue Apr 19 12:31:30 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1250.
+
+Tue Apr 19 12:31:31 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1250.
+
+Tue Apr 19 12:31:31 2022
+WARNING: Unknown warning type Time = 0.1250.
+
+Tue Apr 19 12:31:31 2022
+WARNING: Unknown warning type Time = 0.1250.
+
+Tue Apr 19 12:31:31 2022
+WARNING: Unknown warning type Time = 0.1250.
+
+Tue Apr 19 12:31:31 2022
+WARNING: Unknown warning type Time = 0.1250.
+
+Tue Apr 19 12:31:31 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1250.
+
+Tue Apr 19 12:31:31 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1240.
+
+Tue Apr 19 12:31:32 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1240.
+
+Tue Apr 19 12:31:32 2022
+WARNING: Unknown warning type Time = 0.1240.
+
+Tue Apr 19 12:31:32 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1240.
+
+Tue Apr 19 12:31:32 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1240.
+
+Tue Apr 19 12:31:32 2022
+WARNING: Unknown warning type Time = 0.1240.
+
+Tue Apr 19 12:31:32 2022
+WARNING: Unknown warning type Time = 0.1240.
+
+Tue Apr 19 12:31:32 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.1240.
+
+Tue Apr 19 12:31:32 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1230.
+
+Tue Apr 19 12:31:32 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1230.
+
+Tue Apr 19 12:31:32 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1230.
+
+Tue Apr 19 12:31:33 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1230.
+
+Tue Apr 19 12:31:33 2022
+WARNING: Unknown warning type Time = 0.1230.
+
+Tue Apr 19 12:31:33 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1230.
+
+Tue Apr 19 12:31:33 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1230.
+
+Tue Apr 19 12:31:33 2022
+WARNING: Unknown warning type Time = 0.1230.
+
+Tue Apr 19 12:31:33 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1220.
+
+Tue Apr 19 12:31:34 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.1220.
+
+Tue Apr 19 12:31:34 2022
+WARNING: Unknown warning type Time = 0.1220.
+
+Tue Apr 19 12:31:34 2022
+WARNING: Unknown warning type Time = 0.1220.
+
+Tue Apr 19 12:31:34 2022
+WARNING: Unknown warning type Time = 0.1220.
+
+Tue Apr 19 12:31:34 2022
+WARNING: Unknown warning type Time = 0.1220.
+
+Tue Apr 19 12:31:34 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.1220.
+
+Tue Apr 19 12:31:34 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1210.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1210.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Unknown warning type Time = 0.1210.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Unknown warning type Time = 0.1210.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1210.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1210.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Unknown warning type Time = 0.1210.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Unknown warning type Time = 0.1210.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1210.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1200.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1200.
+
+Tue Apr 19 12:31:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1200.
+
+Tue Apr 19 12:31:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1200.
+
+Tue Apr 19 12:31:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1190.
+
+Tue Apr 19 12:31:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1200.
+
+Tue Apr 19 12:31:36 2022
+WARNING: Unknown warning type Time = 0.1200.
+
+Tue Apr 19 12:31:36 2022
+WARNING: Unknown warning type Time = 0.1200.
+
+Tue Apr 19 12:31:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 6. The simulation is unstable. Time = 0.1200.
+
+Tue Apr 19 12:31:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Unknown warning type Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Unknown warning type Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Unknown warning type Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Unknown warning type Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Unknown warning type Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Unknown warning type Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 6. The simulation is unstable. Time = 0.1190.
+
+Tue Apr 19 12:31:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1180.
+
+Tue Apr 19 12:31:38 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1180.
+
+Tue Apr 19 12:31:38 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1180.
+
+Tue Apr 19 12:31:38 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1180.
+
+Tue Apr 19 12:31:38 2022
+WARNING: Unknown warning type Time = 0.1180.
+
+Tue Apr 19 12:31:38 2022
+WARNING: Unknown warning type Time = 0.1180.
+
+Tue Apr 19 12:31:38 2022
+WARNING: Unknown warning type Time = 0.1180.
+
+Tue Apr 19 12:31:38 2022
+WARNING: Unknown warning type Time = 0.1180.
+
+Tue Apr 19 12:31:38 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 6. The simulation is unstable. Time = 0.1180.
+
+Tue Apr 19 12:31:38 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1170.
+
+Tue Apr 19 12:31:39 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1170.
+
+Tue Apr 19 12:31:39 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1170.
+
+Tue Apr 19 12:31:39 2022
+WARNING: Unknown warning type Time = 0.1170.
+
+Tue Apr 19 12:31:39 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 2. The simulation is unstable. Time = 0.1170.
+
+Tue Apr 19 12:31:39 2022
+WARNING: Unknown warning type Time = 0.1170.
+
+Tue Apr 19 12:31:39 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.1170.
+
+Tue Apr 19 12:31:39 2022
+WARNING: Unknown warning type Time = 0.1170.
+
+Tue Apr 19 12:31:39 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1170.
+
+Tue Apr 19 12:31:40 2022
+WARNING: Unknown warning type Time = 0.1170.
+
+Tue Apr 19 12:31:40 2022
+WARNING: Unknown warning type Time = 0.1170.
+
+Tue Apr 19 12:31:40 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1170.
+
+Tue Apr 19 12:31:40 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1160.
+
+Tue Apr 19 12:31:40 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1160.
+
+Tue Apr 19 12:31:40 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1160.
+
+Tue Apr 19 12:31:40 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1170.
+
+Tue Apr 19 12:31:40 2022
+WARNING: Unknown warning type Time = 0.1160.
+
+Tue Apr 19 12:31:41 2022
+WARNING: Unknown warning type Time = 0.1160.
+
+Tue Apr 19 12:31:41 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 2. The simulation is unstable. Time = 0.1160.
+
+Tue Apr 19 12:31:41 2022
+WARNING: Unknown warning type Time = 0.1160.
+
+Tue Apr 19 12:31:41 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1160.
+
+Tue Apr 19 12:31:41 2022
+WARNING: Unknown warning type Time = 0.1160.
+
+Tue Apr 19 12:31:41 2022
+WARNING: Unknown warning type Time = 0.1160.
+
+Tue Apr 19 12:31:41 2022
+WARNING: Unknown warning type Time = 0.1160.
+
+Tue Apr 19 12:31:41 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1160.
+
+Tue Apr 19 12:31:41 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1150.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.1150.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Unknown warning type Time = 0.1150.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 2. The simulation is unstable. Time = 0.1150.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Unknown warning type Time = 0.1150.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1150.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Unknown warning type Time = 0.1150.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Unknown warning type Time = 0.1150.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Unknown warning type Time = 0.1150.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.1150.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1140.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1140.
+
+Tue Apr 19 12:31:42 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Unknown warning type Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Unknown warning type Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 4. The simulation is unstable. Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Unknown warning type Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Unknown warning type Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Unknown warning type Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Unknown warning type Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1140.
+
+Tue Apr 19 12:31:43 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1130.
+
+Tue Apr 19 12:31:44 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1130.
+
+Tue Apr 19 12:31:44 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1130.
+
+Tue Apr 19 12:31:44 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 2. The simulation is unstable. Time = 0.1130.
+
+Tue Apr 19 12:31:44 2022
+WARNING: Unknown warning type Time = 0.1130.
+
+Tue Apr 19 12:31:44 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.1130.
+
+Tue Apr 19 12:31:44 2022
+WARNING: Unknown warning type Time = 0.1130.
+
+Tue Apr 19 12:31:44 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1130.
+
+Tue Apr 19 12:31:44 2022
+WARNING: Unknown warning type Time = 0.1130.
+
+Tue Apr 19 12:31:44 2022
+WARNING: Unknown warning type Time = 0.1130.
+
+Tue Apr 19 12:31:45 2022
+WARNING: Unknown warning type Time = 0.1130.
+
+Tue Apr 19 12:31:45 2022
+WARNING: Unknown warning type Time = 0.1130.
+
+Tue Apr 19 12:31:45 2022
+WARNING: Unknown warning type Time = 0.1130.
+
+Tue Apr 19 12:31:45 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1130.
+
+Tue Apr 19 12:31:45 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1120.
+
+Tue Apr 19 12:31:45 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1120.
+
+Tue Apr 19 12:31:45 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Tue Apr 19 12:31:45 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1120.
+
+Tue Apr 19 12:31:45 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Tue Apr 19 12:31:45 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Unknown warning type Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Unknown warning type Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Unknown warning type Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Unknown warning type Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1110.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Unknown warning type Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Unknown warning type Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Unknown warning type Time = 0.1120.
+
+Tue Apr 19 12:31:46 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Unknown warning type Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Unknown warning type Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Unknown warning type Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1100.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Unknown warning type Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Unknown warning type Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Unknown warning type Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Unknown warning type Time = 0.1110.
+
+Tue Apr 19 12:31:47 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1100.
+
+Tue Apr 19 12:31:48 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1100.
+
+Tue Apr 19 12:31:48 2022
+WARNING: Unknown warning type Time = 0.1100.
+
+Tue Apr 19 12:31:48 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1100.
+
+Tue Apr 19 12:31:48 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Unknown warning type Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 6. The simulation is unstable. Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Unknown warning type Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Unknown warning type Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Unknown warning type Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Unknown warning type Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Unknown warning type Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Unknown warning type Time = 0.1100.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:49 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Unknown warning type Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Unknown warning type Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Unknown warning type Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 6. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Unknown warning type Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Unknown warning type Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Unknown warning type Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1090.
+
+Tue Apr 19 12:31:50 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:51 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:51 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:51 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:51 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:51 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:51 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:51 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 2. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Unknown warning type Time = 0.1080.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1070.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Unknown warning type Time = 0.1080.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Unknown warning type Time = 0.1080.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Unknown warning type Time = 0.1080.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1080.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Unknown warning type Time = 0.1080.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1070.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1070.
+
+Tue Apr 19 12:31:52 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1070.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1070.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1070.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1070.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Unknown warning type Time = 0.1070.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Unknown warning type Time = 0.1070.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1070.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Unknown warning type Time = 0.1070.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1070.
+
+Tue Apr 19 12:31:53 2022
+WARNING: Unknown warning type Time = 0.1070.
+
+Tue Apr 19 12:31:54 2022
+WARNING: Unknown warning type Time = 0.1070.
+
+Tue Apr 19 12:31:54 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1070.
+
+Tue Apr 19 12:31:54 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:54 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:54 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Unknown warning type Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Unknown warning type Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Unknown warning type Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Unknown warning type Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Unknown warning type Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Unknown warning type Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Unknown warning type Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1060.
+
+Tue Apr 19 12:31:55 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1050.
+
+Tue Apr 19 12:31:56 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1050.
+
+Tue Apr 19 12:31:56 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1050.
+
+Tue Apr 19 12:31:56 2022
+WARNING: Unknown warning type Time = 0.1050.
+
+Tue Apr 19 12:31:56 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1050.
+
+Tue Apr 19 12:31:56 2022
+WARNING: Unknown warning type Time = 0.1050.
+
+Tue Apr 19 12:31:56 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1050.
+
+Tue Apr 19 12:31:56 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1050.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Unknown warning type Time = 0.1050.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1040.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Unknown warning type Time = 0.1050.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1050.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1040.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Unknown warning type Time = 0.1050.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1050.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Unknown warning type Time = 0.1050.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1050.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Unknown warning type Time = 0.1050.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1050.
+
+Tue Apr 19 12:31:57 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1040.
+
+Tue Apr 19 12:31:58 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1040.
+
+Tue Apr 19 12:31:58 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1040.
+
+Tue Apr 19 12:31:58 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1040.
+
+Tue Apr 19 12:31:58 2022
+WARNING: Unknown warning type Time = 0.1040.
+
+Tue Apr 19 12:31:58 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.1040.
+
+Tue Apr 19 12:31:58 2022
+WARNING: Unknown warning type Time = 0.1040.
+
+Tue Apr 19 12:31:58 2022
+WARNING: Unknown warning type Time = 0.1040.
+
+Tue Apr 19 12:31:58 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1040.
+
+Tue Apr 19 12:31:59 2022
+WARNING: Unknown warning type Time = 0.1040.
+
+Tue Apr 19 12:31:59 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1040.
+
+Tue Apr 19 12:31:59 2022
+WARNING: Unknown warning type Time = 0.1040.
+
+Tue Apr 19 12:31:59 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1040.
+
+Tue Apr 19 12:31:59 2022
+WARNING: Unknown warning type Time = 0.1040.
+
+Tue Apr 19 12:31:59 2022
+WARNING: Unknown warning type Time = 0.1040.
+
+Tue Apr 19 12:31:59 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:31:59 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:31:59 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Unknown warning type Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Unknown warning type Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Unknown warning type Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Unknown warning type Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Unknown warning type Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Unknown warning type Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:32:00 2022
+WARNING: Unknown warning type Time = 0.1030.
+
+Tue Apr 19 12:32:01 2022
+WARNING: Unknown warning type Time = 0.1030.
+
+Tue Apr 19 12:32:01 2022
+WARNING: Unknown warning type Time = 0.1030.
+
+Tue Apr 19 12:32:01 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1030.
+
+Tue Apr 19 12:32:01 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1020.
+
+Tue Apr 19 12:32:01 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1020.
+
+Tue Apr 19 12:32:01 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1020.
+
+Tue Apr 19 12:32:02 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1020.
+
+Tue Apr 19 12:32:02 2022
+WARNING: Unknown warning type Time = 0.1020.
+
+Tue Apr 19 12:32:02 2022
+WARNING: Unknown warning type Time = 0.1020.
+
+Tue Apr 19 12:32:02 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.1020.
+
+Tue Apr 19 12:32:02 2022
+WARNING: Unknown warning type Time = 0.1020.
+
+Tue Apr 19 12:32:02 2022
+WARNING: Unknown warning type Time = 0.1020.
+
+Tue Apr 19 12:32:02 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1020.
+
+Tue Apr 19 12:32:02 2022
+WARNING: Unknown warning type Time = 0.1020.
+
+Tue Apr 19 12:32:02 2022
+WARNING: Unknown warning type Time = 0.1020.
+
+Tue Apr 19 12:32:02 2022
+WARNING: Unknown warning type Time = 0.1020.
+
+Tue Apr 19 12:32:03 2022
+WARNING: Unknown warning type Time = 0.1020.
+
+Tue Apr 19 12:32:03 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Unknown warning type Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Unknown warning type Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 2. The simulation is unstable. Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Unknown warning type Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Unknown warning type Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Unknown warning type Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Unknown warning type Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Unknown warning type Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Unknown warning type Time = 0.1010.
+
+Tue Apr 19 12:32:04 2022
+WARNING: Unknown warning type Time = 0.1010.
+
+Tue Apr 19 12:32:05 2022
+WARNING: Unknown warning type Time = 0.1010.
+
+Tue Apr 19 12:32:05 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1000.
+
+Tue Apr 19 12:32:05 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.1000.
+
+Tue Apr 19 12:32:05 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1000.
+
+Tue Apr 19 12:32:06 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1000.
+
+Tue Apr 19 12:32:06 2022
+WARNING: Unknown warning type Time = 0.1000.
+
+Tue Apr 19 12:32:06 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0990.
+
+Tue Apr 19 12:32:06 2022
+WARNING: Unknown warning type Time = 0.1000.
+
+Tue Apr 19 12:32:06 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1000.
+
+Tue Apr 19 12:32:06 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0990.
+
+Tue Apr 19 12:32:06 2022
+WARNING: Unknown warning type Time = 0.1000.
+
+Tue Apr 19 12:32:06 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1000.
+
+Tue Apr 19 12:32:06 2022
+WARNING: Unknown warning type Time = 0.1000.
+
+Tue Apr 19 12:32:07 2022
+WARNING: Unknown warning type Time = 0.1000.
+
+Tue Apr 19 12:32:07 2022
+WARNING: Unknown warning type Time = 0.1000.
+
+Tue Apr 19 12:32:07 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.1000.
+
+Tue Apr 19 12:32:07 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0990.
+
+Tue Apr 19 12:32:07 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0990.
+
+Tue Apr 19 12:32:07 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0990.
+
+Tue Apr 19 12:32:08 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0990.
+
+Tue Apr 19 12:32:08 2022
+WARNING: Unknown warning type Time = 0.0990.
+
+Tue Apr 19 12:32:08 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:08 2022
+WARNING: Unknown warning type Time = 0.0990.
+
+Tue Apr 19 12:32:08 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0990.
+
+Tue Apr 19 12:32:08 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:08 2022
+WARNING: Unknown warning type Time = 0.0990.
+
+Tue Apr 19 12:32:08 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0990.
+
+Tue Apr 19 12:32:09 2022
+WARNING: Unknown warning type Time = 0.0990.
+
+Tue Apr 19 12:32:09 2022
+WARNING: Unknown warning type Time = 0.0990.
+
+Tue Apr 19 12:32:09 2022
+WARNING: Unknown warning type Time = 0.0990.
+
+Tue Apr 19 12:32:09 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:09 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:09 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:09 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:09 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:10 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:10 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:10 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:10 2022
+WARNING: Unknown warning type Time = 0.0980.
+
+Tue Apr 19 12:32:10 2022
+WARNING: Unknown warning type Time = 0.0980.
+
+Tue Apr 19 12:32:10 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:10 2022
+WARNING: Unknown warning type Time = 0.0980.
+
+Tue Apr 19 12:32:10 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Unknown warning type Time = 0.0980.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Unknown warning type Time = 0.0980.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Unknown warning type Time = 0.0980.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Unknown warning type Time = 0.0980.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Unknown warning type Time = 0.0980.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0980.
+
+Tue Apr 19 12:32:11 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:12 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:12 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:12 2022
+WARNING: Unknown warning type Time = 0.0970.
+
+Tue Apr 19 12:32:12 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:12 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:12 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Unknown warning type Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0960.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Unknown warning type Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0960.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Unknown warning type Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Unknown warning type Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Unknown warning type Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Unknown warning type Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Unknown warning type Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0970.
+
+Tue Apr 19 12:32:13 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0960.
+
+Tue Apr 19 12:32:14 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0960.
+
+Tue Apr 19 12:32:14 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0960.
+
+Tue Apr 19 12:32:14 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0960.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Unknown warning type Time = 0.0960.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Unknown warning type Time = 0.0960.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0950.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Unknown warning type Time = 0.0960.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0960.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0950.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Unknown warning type Time = 0.0960.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0960.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Unknown warning type Time = 0.0960.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Unknown warning type Time = 0.0960.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Unknown warning type Time = 0.0960.
+
+Tue Apr 19 12:32:15 2022
+WARNING: Unknown warning type Time = 0.0960.
+
+Tue Apr 19 12:32:16 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0950.
+
+Tue Apr 19 12:32:16 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0950.
+
+Tue Apr 19 12:32:16 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0950.
+
+Tue Apr 19 12:32:17 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0950.
+
+Tue Apr 19 12:32:17 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Tue Apr 19 12:32:17 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Tue Apr 19 12:32:17 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0950.
+
+Tue Apr 19 12:32:17 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Tue Apr 19 12:32:17 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Tue Apr 19 12:32:17 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Tue Apr 19 12:32:17 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0950.
+
+Tue Apr 19 12:32:18 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Tue Apr 19 12:32:18 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Tue Apr 19 12:32:18 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Tue Apr 19 12:32:18 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Tue Apr 19 12:32:18 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Tue Apr 19 12:32:18 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0950.
+
+Tue Apr 19 12:32:18 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0940.
+
+Tue Apr 19 12:32:19 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0940.
+
+Tue Apr 19 12:32:19 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0940.
+
+Tue Apr 19 12:32:19 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Unknown warning type Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Unknown warning type Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Unknown warning type Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Unknown warning type Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Unknown warning type Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Unknown warning type Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Unknown warning type Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Unknown warning type Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Unknown warning type Time = 0.0940.
+
+Tue Apr 19 12:32:20 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:21 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:21 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:21 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:21 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:22 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:22 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:22 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:22 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 2. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:22 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:22 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:22 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:22 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0930.
+
+Tue Apr 19 12:32:23 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0920.
+
+Tue Apr 19 12:32:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0920.
+
+Tue Apr 19 12:32:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0910.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Tue Apr 19 12:32:25 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Tue Apr 19 12:32:26 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Tue Apr 19 12:32:26 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Tue Apr 19 12:32:26 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0920.
+
+Tue Apr 19 12:32:26 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0910.
+
+Tue Apr 19 12:32:27 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0910.
+
+Tue Apr 19 12:32:27 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0910.
+
+Tue Apr 19 12:32:27 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:27 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0910.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0910.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0910.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0910.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:28 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:29 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:29 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:29 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.0910.
+
+Tue Apr 19 12:32:29 2022
+WARNING: Unknown warning type Time = 0.0910.
+
+Tue Apr 19 12:32:29 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:30 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:30 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:30 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:30 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:31 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:32 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:32 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:32 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Tue Apr 19 12:32:32 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0900.
+
+Tue Apr 19 12:32:32 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:32 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:33 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:33 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:33 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:33 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:34 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 7. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:35 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:35 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:35 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0890.
+
+Tue Apr 19 12:32:35 2022
+WARNING: Unknown warning type Time = 0.0890.
+
+Tue Apr 19 12:32:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 4. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0870.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0870.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:37 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:38 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:38 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:38 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:38 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:38 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:38 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Tue Apr 19 12:32:38 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0880.
+
+Tue Apr 19 12:32:38 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0870.
+
+Tue Apr 19 12:32:39 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0870.
+
+Tue Apr 19 12:32:39 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0870.
+
+Tue Apr 19 12:32:40 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0870.
+
+Tue Apr 19 12:32:40 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:40 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:40 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Tue Apr 19 12:32:41 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:42 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:42 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:42 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:42 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:43 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:43 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 4. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:44 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:45 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:45 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:45 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:45 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0860.
+
+Tue Apr 19 12:32:45 2022
+WARNING: Unknown warning type Time = 0.0860.
+
+Tue Apr 19 12:32:45 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:46 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:46 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:46 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:46 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:47 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Unknown warning type Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Tue Apr 19 12:32:48 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:49 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:49 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:49 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:49 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:50 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:50 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:51 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:52 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:52 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:52 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:52 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:52 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0840.
+
+Tue Apr 19 12:32:52 2022
+WARNING: Unknown warning type Time = 0.0840.
+
+Tue Apr 19 12:32:52 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:53 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:53 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:53 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:53 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:54 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 6. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0820.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0820.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:55 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:56 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:56 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:56 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:56 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:56 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:56 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0830.
+
+Tue Apr 19 12:32:56 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Tue Apr 19 12:32:56 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0820.
+
+Tue Apr 19 12:32:57 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0820.
+
+Tue Apr 19 12:32:57 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0820.
+
+Tue Apr 19 12:32:58 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0820.
+
+Tue Apr 19 12:32:59 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:32:59 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:32:59 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:32:59 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:32:59 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:32:59 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0820.
+
+Tue Apr 19 12:32:59 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:32:59 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:32:59 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 6. The simulation is unstable. Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Tue Apr 19 12:33:00 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:01 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:01 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:01 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:01 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:02 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:03 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:03 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:03 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:03 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:03 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:03 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:03 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:03 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:04 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:04 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:04 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:04 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:04 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 5. The simulation is unstable. Time = 0.0810.
+
+Tue Apr 19 12:33:04 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Tue Apr 19 12:33:04 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:05 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:05 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:06 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:06 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:06 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:06 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:06 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 6. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0790.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0790.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:07 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:08 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:08 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:08 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:08 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:08 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.0800.
+
+Tue Apr 19 12:33:08 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:08 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Tue Apr 19 12:33:08 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0790.
+
+Tue Apr 19 12:33:09 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0790.
+
+Tue Apr 19 12:33:09 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0790.
+
+Tue Apr 19 12:33:10 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:10 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:11 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:12 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:12 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:12 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:12 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:12 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0790.
+
+Tue Apr 19 12:33:12 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Tue Apr 19 12:33:12 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:13 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:13 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:13 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:13 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:15 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:15 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:16 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 5. The simulation is unstable. Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Tue Apr 19 12:33:17 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:18 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:18 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:19 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:19 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 2. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:20 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:21 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:21 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:21 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:21 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:21 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:21 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:21 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:21 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:21 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:22 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:22 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:22 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:22 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:22 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:22 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0770.
+
+Tue Apr 19 12:33:22 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:22 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Tue Apr 19 12:33:22 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:26 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:26 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:26 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:26 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 5. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:27 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:28 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:28 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:28 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:28 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:28 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Unknown warning type Time = 0.0755.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0760.
+
+Tue Apr 19 12:33:29 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:31 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:31 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:31 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:31 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:34 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:34 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:34 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:34 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:35 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 6. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:36 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:37 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:37 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:37 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 1. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0745.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0745.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Unknown warning type Time = 0.0745.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0750.
+
+Tue Apr 19 12:33:39 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:42 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:42 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:42 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:42 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:46 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:46 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:46 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:46 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:46 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:46 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 10. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:47 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:47 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:48 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:48 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:48 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:48 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:48 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:49 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:50 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:55 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:56 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 7. The simulation is unstable. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:57 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Unknown warning type Time = 0.0735.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Tue Apr 19 12:33:58 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:34:03 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:34:04 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:34:15 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:15 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:15 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:15 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:15 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:16 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:34:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:23 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:24 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:25 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:26 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:26 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:26 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:26 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0720.
+
+Tue Apr 19 12:34:27 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:27 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:28 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:29 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:30 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:31 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:31 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:34:31 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:55 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:56 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:57 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:58 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:35:59 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:00 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:01 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:02 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:03 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:04 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:05 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:06 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:07 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Tue Apr 19 12:36:51 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 9. The simulation is unstable. Time = 9.7270.
+
+Tue Apr 19 12:36:52 2022
+WARNING: Unknown warning type Time = 0.1550.
+
+Tue Apr 19 12:36:52 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1550.
+
+Tue Apr 19 12:36:52 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.6140.
+
+Tue Apr 19 12:36:52 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.5050.
+
+Tue Apr 19 12:36:52 2022
+WARNING: Unknown warning type Time = 0.5050.
+
+Tue Apr 19 12:36:52 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.2840.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.4130.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.1400.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Unknown warning type Time = 0.1400.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1400.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.1400.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Unknown warning type Time = 0.1400.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Unknown warning type Time = 0.1395.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.1400.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1400.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 2. The simulation is unstable. Time = 0.1400.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Unknown warning type Time = 0.4680.
+
+Tue Apr 19 12:36:53 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.4680.
+
+Tue Apr 19 12:53:12 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 72.7880.
+
+Tue Apr 19 12:53:13 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:13 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.8410.
+
+Tue Apr 19 12:53:13 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:14 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:14 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:14 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:14 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:14 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:15 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:15 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:15 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:15 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:15 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:15 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:15 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:16 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:16 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:16 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:16 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:16 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:16 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:16 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:17 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:17 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:17 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:17 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:17 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:17 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:17 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:18 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:18 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:18 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:18 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:18 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:18 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:19 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:19 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:19 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:19 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:19 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:19 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:19 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:20 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:20 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:20 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:20 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:20 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:21 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:21 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:21 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:22 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:22 2022
+WARNING: Unknown warning type Time = 0.8410.
+
+Tue Apr 19 12:53:23 2022
+WARNING: Unknown warning type Time = 0.8410.
+
