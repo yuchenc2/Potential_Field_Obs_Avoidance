@@ -36,7 +36,7 @@ double Potential_Field::fnc_cal_distance_obs(double rx, double ry, double goal_x
 
 bool Potential_Field::fnc_attractive_force(double dist, double rx, double ry, double goal_x, double goal_y) 
 {
-    const double Kp = 0.01;
+    const double Kp = 0.003;
     const double d_star = 2.0;
     const int MAX_FORCE = 1;
 
@@ -44,21 +44,24 @@ bool Potential_Field::fnc_attractive_force(double dist, double rx, double ry, do
 
     //from others
     int goalR = 0.01;
-    double goalS = 38/5;
+    double goalS = 19.0/5.0;
     
-    if (dist < goalR){
-        attractive_force[0] = 0;
-        attractive_force[1] = 0;
-    }
-    else if((goalS+goalR >= dist) && (dist >=goalR))
-    {
-        attractive_force[0] = Kp*(dist - goalR);
-        attractive_force[1] = Kp*thetaG;
-    }
-    else{
-        attractive_force[0] = Kp*goalS;
-        attractive_force[1] = Kp*thetaG;
-    }
+    attractive_force[0] = Kp*(dist - goalR);
+    attractive_force[1] = Kp*(dist - goalR)*thetaG;
+
+    // if (dist < goalR){
+    //     attractive_force[0] = 0;
+    //     attractive_force[1] = 0;
+    // }
+    // else if((goalS+goalR >= dist) && (dist >=goalR))
+    // {
+    //     attractive_force[0] = Kp*(dist - goalR);
+    //     attractive_force[1] = Kp*(dist - goalR)*thetaG;
+    // }
+    // else{
+    //     attractive_force[0] = Kp*goalS;
+    //     attractive_force[1] = Kp*thetaG;
+    // }
 
     // else if((goalS+goalR >= dist) && (dist >=goalR))
     // {
@@ -185,18 +188,22 @@ bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<doubl
     // }
 
     //from others
-    const int obsRad = 1;
-    const double obsS = 38/5;
+    const double obsRad = 0.3;
+    const double obsS = 19.0/5.0;
     const double inf = 0.001;
     const double beta = 0.001;
+    const double DTR = M_PI/180.0;
 
     obs_repul_force_x = 0.0;
     obs_repul_force_y = 0.0;
+    printf("obs reset %f %f \n",obs_repul_force_x,obs_repul_force_y);
 
     for (int i=0; i<size; i++){ //Number of obstacles
         distance_each_obs =  fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
         thetaO = atan2(oy[i]-ry, ox[i]-rx);
     
+        dist_list.push_back(distance_each_obs); 
+        th_list.push_back(thetaO);
         // if(distance_each_obs < obsRad)
         // {
         //     repulsive_force[0] = -(sgn(cos(thetaO))) * inf;
@@ -206,22 +213,52 @@ bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<doubl
         //     repulsive_force[0] = -beta*(obsS + obsRad - distance_each_obs)*cos(thetaO);
         //     repulsive_force[1] = -beta*(obsS + obsRad - distance_each_obs)*sin(thetaO);
         // }
-        if(distance_each_obs < obsRad)
-        {
-            repulsive_force[0] = - inf;
-            repulsive_force[1] = inf*thetaO;
-        }
-        else if((distance_each_obs<(obsS + obsRad)) && (distance_each_obs>=obsRad)){
+        // if(distance_each_obs < obsRad)
+        // {
+        //     printf("case 1 \n");
+        //     repulsive_force[0] = - inf;
+        //     repulsive_force[1] = inf*thetaO;
+        // }
+        if((distance_each_obs < (obsS + obsRad)) && (distance_each_obs>=obsRad)){
             repulsive_force[0] = -beta*(obsS + obsRad - distance_each_obs);
-            repulsive_force[1] = beta*thetaO;
+            repulsive_force[1] = -beta*(obsS + obsRad - distance_each_obs)*thetaO;
         }
         else{
             repulsive_force[0] = 0.0;
-            repulsive_force[1] = 0.0;  
+            repulsive_force[1] = 0.0;
         }
+
+        if(repulsive_force[1] > 360.0 * DTR)
+             repulsive_force[1] = repulsive_force[1] - 360.0 * DTR;
+
+        else if(repulsive_force[1] < - 360.0 * DTR)
+             repulsive_force[1] = repulsive_force[1] + 360.0 * DTR;
+
+
         obs_repul_force_x += repulsive_force[0];
         obs_repul_force_y += repulsive_force[1];
+
+        if(obs_repul_force_y > 360 *M_PI/180){
+             obs_repul_force_y = obs_repul_force_y - 360 *M_PI/180;
+             printf("reset\n");
+        }
+
+        else if(obs_repul_force_y < - 360 *M_PI/180){
+             obs_repul_force_y= obs_repul_force_y + 360 *M_PI/180;
+             printf("reset\n");
+        }
     }
+
+    printf("obs_repul_force= %f, %f \n",obs_repul_force_x, obs_repul_force_y);
+    printf("obs = (%f, %f, %f, %f, %f, %f, %f, %f, %f, %f) \n",dist_list[0],dist_list[1],dist_list[2],dist_list[3],
+    dist_list[4],dist_list[5],dist_list[6],dist_list[7],dist_list[8],dist_list[9]);
+
+    printf("obs th = (%f, %f, %f, %f, %f) \n",th_list[0],th_list[1],th_list[2],th_list[3],
+    th_list[4]);
+
+    printf("\n");
+    dist_list.clear();
+    th_list.clear();
 
     return true;
 }

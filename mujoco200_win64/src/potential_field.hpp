@@ -8,6 +8,8 @@
 
 using namespace std;
 #define sgn(v) ( ( (v) < 0 ) ? -1 : ( (v) > 0 ) )
+#define M_PI           3.14159265358979323846
+
 
 class Potential_Field
 {
@@ -24,6 +26,7 @@ class Potential_Field
 
         double closest_obs_pos[2];
         vector <double> dist_list;
+        vector <double> th_list;
 
         double obs_repul_force_x;
         double obs_repul_force_y;

@@ -9,9 +9,9 @@
 
 
 /*   Decide cases for feedback  */
-#define CASE1_WITHOUT_FEEDBACK
+// #define CASE1_WITHOUT_FEEDBACK //NOTHING
 // #define CASE2_FEEDBACK_TO_HUMAN 
-// #define CASE3_COMPENSATED_CONTROLLER 
+#define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
@@ -78,7 +78,7 @@ double compensated_des_x = 0.0;
 double compensated_des_th = 0.0;
 
 //Obstacles
-#define Num_obstacles 10 
+#define Num_obstacles 5 
 double obstacle_position[Num_obstacles][3];
 vector<double> sum_obstacle_pos_x;
 vector<double> sum_obstacle_pos_y;
@@ -221,8 +221,10 @@ void scroll(GLFWwindow *window, double xoffset, double yoffset)
 
 void initalize_environment(const mjModel *m, mjData *d)
 {
-    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
-                                               ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"};
+    // const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
+    //                                            ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"};
+    const char *obstacle_name[Num_obstacles] = {"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"};
+
     for(int i=0;i<Num_obstacles;i++){
         for(int j=0;j<3;j++){
         obstacle_position[i][j] =  m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i]) * 3 + j];
@@ -242,11 +244,11 @@ void initalize_environment(const mjModel *m, mjData *d)
     printf("Obstacle 3 to Torso: (%f, %f, %f) \n", obstacle_position[2][0], obstacle_position[2][1], obstacle_position[2][2] );
     printf("Obstacle 4 to Torso: (%f, %f, %f) \n", obstacle_position[3][0], obstacle_position[3][1], obstacle_position[3][2] );
     printf("Obstacle 5 to Torso: (%f, %f, %f) \n", obstacle_position[4][0], obstacle_position[4][1], obstacle_position[4][2] );
-    printf("Obstacle 6 to Torso: (%f, %f, %f) \n", obstacle_position[5][0], obstacle_position[5][1], obstacle_position[5][2] );
-    printf("Obstacle 7 to Torso: (%f, %f, %f) \n", obstacle_position[6][0], obstacle_position[6][1], obstacle_position[6][2] );
-    printf("Obstacle 8 to Torso: (%f, %f, %f) \n", obstacle_position[7][0], obstacle_position[7][1], obstacle_position[7][2] );
-    printf("Obstacle 9 to Torso: (%f, %f, %f) \n", obstacle_position[8][0], obstacle_position[8][1], obstacle_position[8][2] );
-    printf("Obstacle 10 to Torso: (%f, %f, %f) \n", obstacle_position[9][0], obstacle_position[9][1], obstacle_position[9][2] );
+    // printf("Obstacle 6 to Torso: (%f, %f, %f) \n", obstacle_position[5][0], obstacle_position[5][1], obstacle_position[5][2] );
+    // printf("Obstacle 7 to Torso: (%f, %f, %f) \n", obstacle_position[6][0], obstacle_position[6][1], obstacle_position[6][2] );
+    // printf("Obstacle 8 to Torso: (%f, %f, %f) \n", obstacle_position[7][0], obstacle_position[7][1], obstacle_position[7][2] );
+    // printf("Obstacle 9 to Torso: (%f, %f, %f) \n", obstacle_position[8][0], obstacle_position[8][1], obstacle_position[8][2] );
+    // printf("Obstacle 10 to Torso: (%f, %f, %f) \n", obstacle_position[9][0], obstacle_position[9][1], obstacle_position[9][2] );
     printf("\n");
 
     for(int i=0; i<Num_obstacles; i++)
@@ -260,11 +262,11 @@ void initalize_environment(const mjModel *m, mjData *d)
     printf("Obstacle 3 to Torso: (%f, %f) \n", sum_obstacle_pos_x[2], sum_obstacle_pos_y[2] );
     printf("Obstacle 4 to Torso: (%f, %f) \n", sum_obstacle_pos_x[3], sum_obstacle_pos_y[3] );
     printf("Obstacle 5 to Torso: (%f, %f) \n", sum_obstacle_pos_x[4], sum_obstacle_pos_y[4]);
-    printf("Obstacle 6 to Torso: (%f, %f) \n", sum_obstacle_pos_x[5], sum_obstacle_pos_y[5] );
-    printf("Obstacle 7 to Torso: (%f, %f) \n", sum_obstacle_pos_x[6], sum_obstacle_pos_y[6]);
-    printf("Obstacle 8 to Torso: (%f, %f) \n", sum_obstacle_pos_x[7], sum_obstacle_pos_y[7]);
-    printf("Obstacle 9 to Torso: (%f, %f) \n", sum_obstacle_pos_x[8], sum_obstacle_pos_y[8]);
-    printf("Obstacle 10 to Torso: (%f, %f) \n", sum_obstacle_pos_x[9], sum_obstacle_pos_y[9] );
+    // printf("Obstacle 6 to Torso: (%f, %f) \n", sum_obstacle_pos_x[5], sum_obstacle_pos_y[5] );
+    // printf("Obstacle 7 to Torso: (%f, %f) \n", sum_obstacle_pos_x[6], sum_obstacle_pos_y[6]);
+    // printf("Obstacle 8 to Torso: (%f, %f) \n", sum_obstacle_pos_x[7], sum_obstacle_pos_y[7]);
+    // printf("Obstacle 9 to Torso: (%f, %f) \n", sum_obstacle_pos_x[8], sum_obstacle_pos_y[8]);
+    // printf("Obstacle 10 to Torso: (%f, %f) \n", sum_obstacle_pos_x[9], sum_obstacle_pos_y[9] );
     obstacle_init_flag = true;
 
 }
@@ -595,8 +597,11 @@ void mycontroller(const mjModel *m, mjData *d)
     APF.fnc_cal_distance(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
     
     //Attractive force
-    // APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
+    APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
 
+    //Repulsive force
+    APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
+        
 #ifdef KEYBOARD_INPUT
     sensitivity_x = keyboard_input_sensitivity_x;
     sensitivity_y = keyboard_input_sensitivity_y;
@@ -608,25 +613,26 @@ void mycontroller(const mjModel *m, mjData *d)
 
 
     //Find closet obstacle
-    if(obs_case == Obs_closest_one){ 
-        APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
+    // if(obs_case == Obs_closest_one){ 
+    //     APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
 
-        //Repulsive force (only the closest one)
-        APF.fnc_repulsive_force(APF.closest_obs_dist, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, APF.closest_obs_pos[0], APF.closest_obs_pos[1]);
+    //     //Repulsive force (only the closest one)
+    //     APF.fnc_repulsive_force(APF.closest_obs_dist, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, APF.closest_obs_pos[0], APF.closest_obs_pos[1]);
         
-        //Desired input with APF
-        compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.repulsive_force[0];
-        compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.repulsive_force[1];
-    }else if(obs_case == Obs_all) //Repulsive force (all)
-    {
-        APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
-        //Desired input with APF
-        compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; 
-        compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; 
-    }else{
-        compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0];
-        compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1];
-    }
+    //     //Desired input with APF
+    //     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.repulsive_force[0];
+    //     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.repulsive_force[1];
+    // }else if(obs_case == Obs_all) //Repulsive force (all)
+    // {
+        // APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
+        // //Desired input with APF
+        // compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; 
+        // compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; 
+    // }
+    // else{
+    //     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0];
+    //     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1];
+    // }
 
     
 
@@ -652,8 +658,10 @@ void mycontroller(const mjModel *m, mjData *d)
 #endif
 
 #ifdef CASE4_COMPENSATED_CONTROLLER 
-    x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
-    y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
+    // x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
+    // y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
+    x_force = APF.obs_repul_force_x; // with force to human
+    y_force = APF.obs_repul_force_y; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; // with repulsive force for controller
 #endif
@@ -668,7 +676,7 @@ void mycontroller(const mjModel *m, mjData *d)
     {
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
-        // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
+        printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
         // printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
@@ -688,7 +696,7 @@ void mycontroller(const mjModel *m, mjData *d)
     // command force to HMI
     // x_force = 0.0;
     // y_force = 0.0;
-    printf("x_force: %f, y_force: %f \n",x_force, y_force);
+    // printf("x_force: %f, y_force: %f \n",x_force, y_force);
     if(x_force > TORQUE_CUTOFF){
         x_force = TORQUE_CUTOFF;
     }else if(x_force < -TORQUE_CUTOFF){
