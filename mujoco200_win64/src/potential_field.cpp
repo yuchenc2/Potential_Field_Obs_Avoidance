@@ -18,7 +18,8 @@ Potential_Field::Potential_Field()
     index_ = 0;
 
     obs_repul_force_x = 0.0;
-    obs_repul_force_y = 0.0;
+    obs_repul_force_y_human = 0.0;
+    obs_repul_force_y_controller = 0.0;
     distance_each_obs = 0.0;
     thetaO = 0.0;
 }
@@ -195,8 +196,10 @@ bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<doubl
     const double DTR = M_PI/180.0;
 
     obs_repul_force_x = 0.0;
-    obs_repul_force_y = 0.0;
-    printf("obs reset %f %f \n",obs_repul_force_x,obs_repul_force_y);
+    obs_repul_force_y_human = 0.0;
+    obs_repul_force_y_controller = 0.0;
+    
+    // printf("obs reset %f %f \n",obs_repul_force_x,obs_repul_force_y);
 
     for (int i=0; i<size; i++){ //Number of obstacles
         distance_each_obs =  fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
@@ -236,27 +239,26 @@ bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<doubl
 
 
         obs_repul_force_x += repulsive_force[0];
-        obs_repul_force_y += repulsive_force[1];
+        obs_repul_force_y_human += repulsive_force[1];
+        obs_repul_force_y_controller += repulsive_force[1];
 
-        if(obs_repul_force_y > 360 *M_PI/180){
-             obs_repul_force_y = obs_repul_force_y - 360 *M_PI/180;
-             printf("reset\n");
+        if(obs_repul_force_y_controller > 360 *M_PI/180){
+             obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;
         }
 
-        else if(obs_repul_force_y < - 360 *M_PI/180){
-             obs_repul_force_y= obs_repul_force_y + 360 *M_PI/180;
-             printf("reset\n");
+        else if(obs_repul_force_y_controller < - 360 *M_PI/180){
+             obs_repul_force_y_controller = obs_repul_force_y_controller + 360 *M_PI/180;
         }
     }
 
-    printf("obs_repul_force= %f, %f \n",obs_repul_force_x, obs_repul_force_y);
-    printf("obs = (%f, %f, %f, %f, %f, %f, %f, %f, %f, %f) \n",dist_list[0],dist_list[1],dist_list[2],dist_list[3],
-    dist_list[4],dist_list[5],dist_list[6],dist_list[7],dist_list[8],dist_list[9]);
+    // printf("obs_repul_force= %f, %f \n",obs_repul_force_x, obs_repul_force_y);
+    // printf("obs = (%f, %f, %f, %f, %f, %f, %f, %f, %f, %f) \n",dist_list[0],dist_list[1],dist_list[2],dist_list[3],
+    // dist_list[4],dist_list[5],dist_list[6],dist_list[7],dist_list[8],dist_list[9]);
 
-    printf("obs th = (%f, %f, %f, %f, %f) \n",th_list[0],th_list[1],th_list[2],th_list[3],
-    th_list[4]);
+    // printf("obs th = (%f, %f, %f, %f, %f) \n",th_list[0],th_list[1],th_list[2],th_list[3],
+    // th_list[4]);
 
-    printf("\n");
+    // printf("\n");
     dist_list.clear();
     th_list.clear();
 
