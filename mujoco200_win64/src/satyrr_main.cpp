@@ -9,8 +9,8 @@
 
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK //NOTHING
-#define CASE2_FEEDBACK_TO_HUMAN 
+#define CASE1_WITHOUT_FEEDBACK //NOTHING
+// #define CASE2_FEEDBACK_TO_HUMAN 
 // #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
@@ -619,7 +619,7 @@ void mycontroller(const mjModel *m, mjData *d)
     // APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
 
     //Repulsive force
-    APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
+    APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 0);
         
 #ifdef KEYBOARD_INPUT
     sensitivity_x = keyboard_input_sensitivity_x;
@@ -665,7 +665,7 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE2_FEEDBACK_TO_HUMAN
     x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
     y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
-    compensated_des_dx = obs_repul_force_x*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1]; //without repulsive force for controller
 #endif
 
@@ -738,8 +738,8 @@ void mycontroller(const mjModel *m, mjData *d)
         Robot_Data[0] = x_force; 
         Robot_Data[10] = y_force;
     }else{
-        Robot_Data[0] = 0; 
-        Robot_Data[10] = 0;
+        // Robot_Data[0] = 0; 
+        // Robot_Data[10] = 0;
     }
     printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
 

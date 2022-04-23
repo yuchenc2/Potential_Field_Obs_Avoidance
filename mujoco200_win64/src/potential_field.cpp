@@ -8,6 +8,7 @@ Potential_Field::Potential_Field()
     for(int i=0;i<2;i++){
         attractive_force[i] = 0.0; //x, y
         repulsive_force[i] = 0.0;
+        repulsive_force_human[i] = 0.0;
         closest_obs_pos[i] = 0.0;
 
         repulsive_force_all[i] = 0.0;
@@ -18,8 +19,8 @@ Potential_Field::Potential_Field()
     index_ = 0;
 
     obs_repul_force_x = 0.0;
-    obs_repul_force_y_human = 0.0;
-    obs_repul_force_y_controller = 0.0;
+    obs_repul_force_y_human = 0.0; //y axis
+    obs_repul_force_y_controller = 0.0; // yaw controller
     distance_each_obs = 0.0;
     thetaO = 0.0;
 }
@@ -163,31 +164,8 @@ bool Potential_Field::fnc_repulsive_force(double p_star, double rx, double ry, d
     return true;
 }
 
-bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<double> ox, vector<double> oy, int size)
+bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<double> ox, vector<double> oy, int size, int case_)
 {
-    // const double neta = 0.000001;
-    // const int MAX_RP_FORCE = 1;
-    // const double MAX_RP_FORCE_Y = 0.5;
-    // const int p_thres = 2;
-    // const double sense = 0.001;
-
-    // for (int i=0; i<size; i++){ //Number of obstacles
-    //     distance_each_obs =  fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
-
-    //     if (distance_each_obs < p_thres){
-    //         repulsive_force_raw = (neta*(1.0/distance_each_obs - 1.0/p_thres)) / (distance_each_obs*distance_each_obs);
-    //         repulsive_force[0] = repulsive_force_raw * (ox[i]-rx) / distance_each_obs;
-    //         repulsive_force[1] = repulsive_force_raw * (oy[i]-ry) /distance_each_obs;
-    //     }
-    //     else{
-    //         repulsive_force[0] = 0.0;
-    //         repulsive_force[1] = 0.0;    
-    //     }
-
-    //     obs_repul_force_x += repulsive_force[0];
-    //     obs_repul_force_y += repulsive_force[1];
-    // }
-
     //from others
     const double obsRad = 0.3;
     const double obsS = 19.0/5.0;
@@ -207,6 +185,45 @@ bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<doubl
     
         dist_list.push_back(distance_each_obs); 
         th_list.push_back(thetaO);
+
+
+        //controller
+        if(case_ == 0){
+            if((distance_each_obs < (obsS + obsRad)) && (distance_each_obs>=obsRad)){
+                repulsive_force[0] = -beta*(obsS + obsRad - distance_each_obs);
+                repulsive_force[1] = -beta*(obsS + obsRad - distance_each_obs)*thetaO;
+            }
+            else{
+                repulsive_force[0] = 0.0;
+                repulsive_force[1] = 0.0;
+            }
+
+            if(repulsive_force[1] > 360.0 * DTR)
+                repulsive_force[1] = repulsive_force[1] - 360.0 * DTR;
+
+            else if(repulsive_force[1] < - 360.0 * DTR)
+                repulsive_force[1] = repulsive_force[1] + 360.0 * DTR;
+
+
+            obs_repul_force_x += repulsive_force[0];
+            obs_repul_force_y_controller += repulsive_force[1];
+
+            if(obs_repul_force_y_controller > 360 *M_PI/180){
+                obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;
+            }
+
+            else if(obs_repul_force_y_controller < - 360 *M_PI/180){
+                obs_repul_force_y_controller = obs_repul_force_y_controller + 360 *M_PI/180;
+            }
+        }
+        //human feedback
+        else if(case_ == 1){
+                    obs_repul_force_y_human += repulsive_force[1];
+        }
+        //both
+        else if(case_ == 2){
+        
+        }
         // if(distance_each_obs < obsRad)
         // {
         //     repulsive_force[0] = -(sgn(cos(thetaO))) * inf;
@@ -222,33 +239,7 @@ bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<doubl
         //     repulsive_force[0] = - inf;
         //     repulsive_force[1] = inf*thetaO;
         // }
-        if((distance_each_obs < (obsS + obsRad)) && (distance_each_obs>=obsRad)){
-            repulsive_force[0] = -beta*(obsS + obsRad - distance_each_obs);
-            repulsive_force[1] = -beta*(obsS + obsRad - distance_each_obs)*thetaO;
-        }
-        else{
-            repulsive_force[0] = 0.0;
-            repulsive_force[1] = 0.0;
-        }
-
-        if(repulsive_force[1] > 360.0 * DTR)
-             repulsive_force[1] = repulsive_force[1] - 360.0 * DTR;
-
-        else if(repulsive_force[1] < - 360.0 * DTR)
-             repulsive_force[1] = repulsive_force[1] + 360.0 * DTR;
-
-
-        obs_repul_force_x += repulsive_force[0];
-        obs_repul_force_y_human += repulsive_force[1];
-        obs_repul_force_y_controller += repulsive_force[1];
-
-        if(obs_repul_force_y_controller > 360 *M_PI/180){
-             obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;
-        }
-
-        else if(obs_repul_force_y_controller < - 360 *M_PI/180){
-             obs_repul_force_y_controller = obs_repul_force_y_controller + 360 *M_PI/180;
-        }
+        
     }
 
     // printf("obs_repul_force= %f, %f \n",obs_repul_force_x, obs_repul_force_y);

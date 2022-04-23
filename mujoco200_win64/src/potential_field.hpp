@@ -19,6 +19,7 @@ class Potential_Field
 
         double attractive_force[2];
         double repulsive_force[2];
+        double repulsive_force_human[2];
         double repulsive_force_raw;
         double distance_;
         double closest_obs_dist;
@@ -34,13 +35,15 @@ class Potential_Field
         double distance_each_obs;
         double thetaO;
 
+        double obs_repul_force_y_human;
+        double obs_repul_force_y_controller;
+
         bool fnc_cal_distance(double rx, double ry, double goal_x, double goal_y);
         double fnc_cal_distance_obs(double rx, double ry, double goal_x, double goal_y);  
         bool fnc_attractive_force(double dist, double rx, double ry, double goal_x, double goal_y);
         bool fnc_closest_obstacle(double rx, double ry, vector<double> ox, vector<double> oy, int size); 
         bool fnc_repulsive_force(double p_star, double rx, double ry, double ox, double oy);
-
-        bool fnc_repulsive_force_all(double rx, double ry, vector<double> ox, vector<double> oy, int size); 
+        bool fnc_repulsive_force_all(double rx, double ry, vector<double> ox, vector<double> oy, int size, int case_); 
  
 };
 
