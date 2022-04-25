@@ -172,12 +172,13 @@ bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<doubl
     const double inf = 0.001;
     const double beta = 0.001;
     const double DTR = M_PI/180.0;
+    const double p_thres = 0.2;
+    const double neta = 2.0;
 
-    obs_repul_force_x = 0.0;
-    obs_repul_force_y_human = 0.0;
-    obs_repul_force_y_controller = 0.0;
-    
     // printf("obs reset %f %f \n",obs_repul_force_x,obs_repul_force_y);
+    obs_repul_force_x = 0.0;
+    obs_repul_force_y_controller = 0.0;
+    obs_repul_force_y_human = 0.0;
 
     for (int i=0; i<size; i++){ //Number of obstacles
         distance_each_obs =  fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
@@ -192,6 +193,9 @@ bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<doubl
             if((distance_each_obs < (obsS + obsRad)) && (distance_each_obs>=obsRad)){
                 repulsive_force[0] = -beta*(obsS + obsRad - distance_each_obs);
                 repulsive_force[1] = -beta*(obsS + obsRad - distance_each_obs)*thetaO;
+                // repulsive_force_raw = (neta* (1.0/distance_each_obs - 1.0/(obsS + obsRad))) / (distance_each_obs*distance_each_obs);
+                // repulsive_force[0] = -repulsive_force_raw;
+                // repulsive_force[1] = -repulsive_force_raw*thetaO;
             }
             else{
                 repulsive_force[0] = 0.0;
@@ -218,7 +222,21 @@ bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<doubl
         }
         //human feedback
         else if(case_ == 1){
-                    obs_repul_force_y_human += repulsive_force[1];
+            if((distance_each_obs < (obsS + obsRad)) && (distance_each_obs>=obsRad)){
+                repulsive_force_raw = (neta* (1.0/distance_each_obs - 1.0/(obsS + obsRad))) / (distance_each_obs*distance_each_obs);
+                repulsive_force_human[0] = -repulsive_force_raw*cos(thetaO);
+                repulsive_force_human[1] = -repulsive_force_raw*sin(thetaO);
+            }
+            else{
+                repulsive_force_human[0] = 0.0;
+                repulsive_force_human[1] = 0.0;
+            }
+
+            obs_repul_force_x += repulsive_force_human[0];
+            obs_repul_force_y_human += repulsive_force_human[1];
+
+            // printf("rep_x: %f, rep_y: %f \n",obs_repul_force_x, obs_repul_force_y_human);
+
         }
         //both
         else if(case_ == 2){

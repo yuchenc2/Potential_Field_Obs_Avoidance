@@ -9,8 +9,8 @@
 
 
 /*   Decide cases for feedback  */
-#define CASE1_WITHOUT_FEEDBACK //NOTHING
-// #define CASE2_FEEDBACK_TO_HUMAN 
+// #define CASE1_WITHOUT_FEEDBACK //NOTHING
+#define CASE2_FEEDBACK_TO_HUMAN 
 // #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
@@ -123,13 +123,13 @@ float y_COM_HMI = 0.0;
 auto begin_main_receive = std::chrono::high_resolution_clock::now();
 
 // Feedback between human and HMI
-double HMI_input_sensitivity_x = 1.0;
-double HMI_input_sensitivity_y = 1.0;
+double HMI_input_sensitivity_x = 0.1;
+double HMI_input_sensitivity_y = 0.2;
 //Gains to tune
-double human_repulse_x_gain = 2000.0;
-double human_repulse_y_gain = -10000.0;
+double human_repulse_x_gain = 10.0;
+double human_repulse_y_gain = 10.0;
 #define HMI_COM_ACTIVATION 0.008
-#define TORQUE_CUTOFF 30
+#define TORQUE_CUTOFF 20
 int robot_failed = 0;
 
 void SATYRR_Init(const mjModel* m, mjData* d);
@@ -619,7 +619,7 @@ void mycontroller(const mjModel *m, mjData *d)
     // APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
 
     //Repulsive force
-    APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 0);
+    APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 1);
         
 #ifdef KEYBOARD_INPUT
     sensitivity_x = keyboard_input_sensitivity_x;
@@ -664,7 +664,7 @@ void mycontroller(const mjModel *m, mjData *d)
 
 #ifdef CASE2_FEEDBACK_TO_HUMAN
     x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
-    y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
+    y_force = human_repulse_y_gain*APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1]; //without repulsive force for controller
 #endif
@@ -673,16 +673,16 @@ void mycontroller(const mjModel *m, mjData *d)
     x_force = 0; // without force to human
     y_force = 0; // without force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
     // x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
     // y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
     x_force = APF.obs_repul_force_x; // with force to human
-    y_force = APF.obs_repul_force_y; // with force to human
+    y_force = APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 
     compensated_des_x += compensated_des_dx*update_rate;
@@ -693,6 +693,7 @@ void mycontroller(const mjModel *m, mjData *d)
 
     if(cnt % 500 == 0)
     {
+        printf("x_force: %f, y_force: %f \n",x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
@@ -715,7 +716,7 @@ void mycontroller(const mjModel *m, mjData *d)
     // command force to HMI
     // x_force = 0.0;
     // y_force = 0.0;
-    // printf("x_force: %f, y_force: %f \n",x_force, y_force);
+    // 
 
     // Torque cutoff
     if(x_force > TORQUE_CUTOFF){
@@ -738,8 +739,8 @@ void mycontroller(const mjModel *m, mjData *d)
         Robot_Data[0] = x_force; 
         Robot_Data[10] = y_force;
     }else{
-        // Robot_Data[0] = 0; 
-        // Robot_Data[10] = 0;
+        Robot_Data[0] = 0; 
+        Robot_Data[10] = 0;
     }
     printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
 

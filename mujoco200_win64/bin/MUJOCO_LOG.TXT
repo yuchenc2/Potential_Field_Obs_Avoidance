@@ -173740,3 +173740,24 @@ WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Ti
 Sat Apr 23 11:49:49 2022
 WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0660.
 
+Mon Apr 25 12:08:28 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 32.7160.
+
+Mon Apr 25 12:08:29 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 6.9250.
+
+Mon Apr 25 12:08:30 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 1.8180.
+
+Mon Apr 25 12:08:30 2022
+WARNING: Unknown warning type Time = 1.8180.
+
+Mon Apr 25 12:08:30 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 2. The simulation is unstable. Time = 1.8180.
+
+Mon Apr 25 12:08:30 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 1.1750.
+
+Mon Apr 25 12:08:31 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.9010.
+
