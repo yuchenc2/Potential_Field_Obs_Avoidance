@@ -1,0 +1,185 @@
+<mujoco>
+    <!--  Copyright © 2018, Roboti LLC
+
+          This file is licensed under the MuJoCo Resource License (the "License").
+          You may not use this file except in compliance with the License.
+          You may obtain a copy of the License at
+
+            https://www.roboti.us/resourcelicense.txt
+    -->
+    <compiler eulerseq = "zyx" angle="radian" inertiafromgeom = "false" meshdir="satyrr_wholebody/"/>
+    
+    <size njmax = "500" nconmax = "100" />
+    <option integrator="RK4" timestep="0.001"/>
+	
+	<default>
+		<geom contype = '0' conaffinity = '0'/>
+		<default class = 'collision-default'>
+			<geom contype = '1' user = '2'/>
+			<default class = 'collision-group-a'>
+				<geom contype = '2' conaffinity = '4'/>
+			</default>
+			<default class = 'collision-group-b'>
+				<geom contype = '4' conaffinity = '2'/>
+			</default>
+		</default>
+    </default>
+
+    <asset>
+        <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" 
+            width="512" height="512" mark="cross" markrgb=".8 .8 .8"/>  
+        <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
+        <!-- For Satyrr -->
+        <mesh name="Torso" file="Torso.STL" />
+        <mesh name="Thigh_R" file="Thigh_R.STL" />
+        <mesh name="Shin_R" file="Shin_R.STL" />
+        <mesh name="Wheel_R" file="Wheel_R.STL" />
+        <mesh name="Thigh_L" file="Thigh_L.STL" />
+        <mesh name="Shin_L" file="Shin_L.STL" />
+        <mesh name="Wheel_L" file="Wheel_L.STL" />
+        <mesh name="Shoulder_U_L" file="Shoulder_U_L.STL" />
+        <mesh name="Shoulder_L" file="Shoulder_L.STL" />
+        <mesh name="Arm_L" file="Arm_L.STL" />
+        <mesh name="Shank_L" file="Shank_L.STL" />
+        <mesh name="Shoulder_U_R" file="Shoulder_U_R.STL" />
+        <mesh name="Shoulder_R" file="Shoulder_R.STL" />
+        <mesh name="Arm_R" file="Arm_R.STL" />
+        <mesh name="Shank_R" file="Shank_R.STL" />
+        <!-- <texture builtin="checker" height="512" name="texplane" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" type="2d" width="512"/> -->
+        <!-- <material name="floorplane" reflectance="0.5" texrepeat="1 1" texture="texplane" texuniform="true"/> -->
+        <!-- <material name="table_mat" specular="0" shininess="0.5" reflectance="0" rgba="0.93 0.93 0.93 1"></material> -->
+    </asset>
+
+    <worldbody>
+        <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false"/>
+        <light directional="true" diffuse=".6 .6 .6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1"/>
+
+        <geom name="ground" type="plane" size="0 0 1" pos="0 0 0" quat="1 0 0 0" material="matplane" condim="1"/>
+        
+        <body name="wall1_body" pos="20 0 1">
+            <geom name="wall1_geom" type="plane" size="10 1 1" pos="0 0 0" quat="0.5 0.5 0.5 0.5" material="matplane" condim="1"/>
+        </body>
+        <body name="wall2_body" pos="0 10 1">
+            <geom name="wall2_geom" type="plane" size="20 1 1" pos="0 0 0" quat="0.7071 0.7071 0 0 " material="matplane" condim="1"/>
+        </body>
+        <body name="wall3_body" pos="-20 0 1">
+            <geom name="wall3_geom" type="plane" size="10 1 1" pos="0 0 0" quat="0.5 0.5 0.5 0.5" material="matplane" condim="1"/>
+        </body>
+        <body name="wall4_body" pos="0 -10 1">
+            <geom name="wall4_geom" type="plane" size="20 1 1" pos="0 0 0" quat="0.7071 0.7071 0 0 " material="matplane" condim="1"/>
+        </body>
+
+        <body name="start_location_body" pos="19 0 0">
+            <geom name="start_location_geom" size="1 1 0.01" type="box" rgba="0 1 0 1" />
+        </body>
+        <body name="end_location_body" pos="-19 0 0">
+            <geom name="end_location_geom" size="1 1 0.01" type="box" rgba="1 0 0 1" />
+        </body>
+
+        <body name="obstacle_1_body" pos="-4 0 0.5">
+            <geom name="obstacle_1_geom" fromto="0 0 0 0 0 2" size="3.0" type="capsule" rgba="0.45 0.2 0.2 1" />
+        </body>
+        <body name="obstacle_2_body" pos="11 4 0.5">
+            <geom name="obstacle_2_geom" fromto="0 0 0 0 0 2" size="3.0" type="capsule" rgba="0.45 0.2 0.2 1" />
+        </body>
+        <body name="obstacle_3_body" pos="5 -5 0.5">
+            <geom name="obstacle_3_geom" fromto="0 0 0 0 0 2" size="3.5" type="capsule" rgba="0.45 0.2 0.2 1" />
+        </body>
+        <body name="obstacle_4_body" pos="-13 -5 0.5">
+            <geom name="obstacle_4_geom" fromto="0 0 0 0 0 2" size="4.0" type="capsule" rgba="0.45 0.2 0.2 1" />
+        </body>
+        <body name="obstacle_5_body" pos="-5 6 0.5">
+            <geom name="obstacle_5_geom" fromto="0 0 0 0 0 4" size="3.0" type="capsule" rgba="0.45 0.2 0.2 1" />
+        </body>
+
+        <!-- Satyrr -->
+        <body name="torso" pos="0 0.0 0.4869">
+            <joint armature="0" damping="0" limited="false" name="robot" pos="0 0 0.0" stiffness="0" type="free"/>
+            <geom friction="0.9" type="mesh" rgba="0.79216 0.81961 0.93333 1" mesh="Torso" mass="4.05" />
+
+            <body name="Thigh_R" pos="-0.06625 0 0.36">
+                <inertial pos="0 -0.080175 -0.0380315" quat="0.707107 0 0 0.707107" mass="0.904864" diaginertia="0.00325713 0.00280128 0.000871858" />
+                <joint name="Hip_R" pos="0 0 0" axis="0 -1 0" />
+                <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Thigh_R" />
+                <body name="Shin_R" pos="0 -0.080175 -0.15">
+                    <inertial pos="0 0 -0.0789246" quat="0.707107 0 0 0.707107" mass="0.394882" diaginertia="0.00112813 0.00112607 0.000173116" />
+                    <joint name="Knee_R" pos="0 0 0" axis="0 -1 0" />
+                    <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shin_R" />
+                    <body name="Wheel_R" pos="0 0 -0.15" quat="0.707107 0 0 -0.707107">
+                        <inertial pos="0.0356257 0 0" mass="0.52599" diaginertia="0.000948894 0.000489944 0.000489944" />
+                        <joint name="Ankle_R" pos="0 0 0" axis="1 0 0" />
+                        <geom type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="Wheel_R" />
+                    </body>
+                </body>
+            </body>
+            <body name="Thigh_L" pos="-0.06625 0 0.36">
+                <inertial pos="0 0.080175 -0.0380315" quat="0.707107 0 0 0.707107" mass="0.904864" diaginertia="0.00325713 0.00280128 0.000871858" />
+                <joint name="Hip_L" pos="0 0 0" axis="0 -1 0" />
+                <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Thigh_L" />
+                <body name="Shin_L" pos="0 0.080175 -0.15">
+                    <inertial pos="0 0 -0.0789246" quat="0.707107 0 0 0.707107" mass="0.394882" diaginertia="0.00112813 0.00112607 0.000173116" />
+                    <joint name="Knee_L" pos="0 0 0" axis="0 -1 0" />
+                    <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shin_L" />
+                    <body name="Wheel_L" pos="0 0 -0.15">
+                        <inertial pos="0 0.0363743 0" quat="0.707107 0 0 0.707107" mass="0.52599" diaginertia="0.000948894 0.000489944 0.000489944" />
+                        <joint name="Ankle_L" pos="0 0 0" axis="0 -1 0" />
+                        <geom type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="Wheel_L" />
+                    </body>
+                </body>
+            </body>
+            <body name="Shoulder_U_L" pos="-0.06625 0.13274 0.48068">
+                <inertial pos="5.98242e-08 -3.82379e-09 0.0467603" quat="0.5 0.5 0.5 0.5" mass="0.246892" diaginertia="0.0012863 0.00103844 0.00030284" />
+                <!-- <joint name="Shoulder_yaw_L" pos="0 0 0" axis="0 0 1" /> -->
+                <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shoulder_U_L" />
+                <body name="Shoulder_L" pos="0 0 0.114214">
+                    <inertial pos="-7.6505e-09 4.57848e-09 2.98572e-10" quat="0.500001 0.499999 0.499999 0.500001" mass="0.225611" diaginertia="0.000280653 0.000166998 0.000150663" />
+                    <!-- <joint name="Shoulder_roll_L" pos="0 0 0" axis="1 0 0" /> -->
+                    <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shoulder_L" />
+                    <body name="Arm_L" pos="0 0 0">
+                        <inertial pos="0 0.0494924 -0.061196" quat="0.707074 0.00680441 -0.00680441 0.707074" mass="0.584971" diaginertia="0.00283895 0.00259254 0.000369078" />
+                        <!-- <joint name="Shoulder_pitch_L" pos="0 0 0" axis="0 1 0" /> -->
+                        <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Arm_L" />
+                        <body name="Shank_L" pos="0 0.05082 -0.204">
+                            <inertial pos="9.76797e-09 0 -0.0687371" quat="0.707107 0 0 0.707107" mass="0.111225" diaginertia="0.000216628 0.00021518 1.39816e-05" />
+                            <!-- <joint name="Elbow_L" pos="0 0 0" axis="0 1 0" /> -->
+                            <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shank_L" />
+                        </body>
+                    </body>
+                </body>
+            </body>
+            <body name="Shoulder_U_R" pos="-0.06625 -0.13274 0.48068">
+                <inertial pos="5.98242e-08 -3.82379e-09 0.0467603" quat="0.5 0.5 0.5 0.5" mass="0.246892" diaginertia="0.0012863 0.00103844 0.00030284" />
+                <!-- <joint name="Shoulder_yaw" pos="0 0 0" axis="0 0 1" /> -->
+                <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shoulder_U_R" />
+                <body name="Shoulder_R" pos="0 0 0.114214">
+                    <inertial pos="-7.6505e-09 4.57848e-09 2.98572e-10" quat="0.500001 0.499999 0.499999 0.500001" mass="0.225611" diaginertia="0.000280653 0.000166998 0.000150663" />
+                    <!-- <joint name="Shoulder_roll" pos="0 0 0" axis="1 0 0" /> -->
+                    <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shoulder_R" />
+                    <body name="Arm_R" pos="0 0 0">
+                        <inertial pos="0 -0.0494924 -0.061196" quat="0.707074 -0.00680441 0.00680441 0.707074" mass="0.584971" diaginertia="0.00283895 0.00259254 0.000369078" />
+                        <!-- <joint name="Shoulder_pitch_R" pos="0 0 0" axis="0 -1 0" /> -->
+                        <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Arm_R" />
+                        <body name="Shank_R" pos="0 -0.05082 -0.204">
+                            <inertial pos="-9.76797e-09 0 -0.0687371" quat="0.707107 0 0 0.707107" mass="0.111225" diaginertia="0.000216628 0.00021518 1.39816e-05" />
+                            <!-- <joint name="Elbow_R" pos="0 0 0" axis="0 -1 0" /> -->
+                            <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shank_R" />
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+    
+    <actuator> 
+        <!-- <position ctrllimited="true" ctrlrange="-10.0 10.0" gear="100" kp="0.01" joint="x"/>
+        <position ctrllimited="true" ctrlrange="-2.8 2.8" gear="100" kp="0.01" joint="theta"/>
+        <velocity ctrllimited="true" ctrlrange="-1.0 1.0" gear="100" kv="0.001" joint="x"/>
+        <velocity ctrllimited="true" ctrlrange="-2.8 2.8" gear="100" kv="0.001" joint="theta"/> -->
+        <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Hip_L"/>
+        <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Knee_L"/>
+        <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Ankle_L"/>
+        <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Hip_R"/>
+        <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Knee_R"/>
+        <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Ankle_R"/>
+    </actuator>
+</mujoco>

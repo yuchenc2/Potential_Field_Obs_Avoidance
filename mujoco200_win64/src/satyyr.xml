@@ -42,6 +42,10 @@
         <geom class = "collision-default" name="floor0" pos="0. 0. 0" size="0 0 1" type="plane" condim="3" material="floorplane"></geom>
 		<light directional="true" ambient="0.2 0.2 0.2" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" castshadow="false" pos="0 0 4" dir="0 0 -1" name="light0"></light>
 
+        <body name="eye_ray_location" pos="1 1 2.0">
+            <geom name="box" type="sphere" size=".05" contype = '0' conaffinity = '0' rgba="1 0 0 1.0"/>
+        </body>
+
 		<!-- camera: front view -->
         <camera name="camera1" mode="targetbody" target="torso"/>
         <body name="wall1_body" pos="20 0 1">
@@ -114,6 +118,8 @@
         <!-- <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Torso" /> -->
         
         <body name="torso" pos="-19 1.0 0.4869">
+        
+            <site name="camera_vr" pos="0 0 1.0"/>
             <!--<joint armature="0" damping="0" limited="false" name="robot" pos="0 0 0.0" stiffness="0" type="free"/> -->
             <joint axis = "1 0 0" pos = "0 0 0" name = "move_x" type = "slide" limited = "false"/>
 			<joint axis = "0 1 0" pos = "0 0 0" name = "move_y" type = "slide" limited = "false"/>

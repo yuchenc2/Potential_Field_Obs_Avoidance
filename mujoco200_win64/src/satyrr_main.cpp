@@ -49,7 +49,7 @@ using namespace std;
 mjModel *m = NULL; // MuJoCo model
 mjData *d = NULL;  // MuJoCo data
 mjvCamera cam;     // abstract camera
-mjvOption opt;     // visualization options
+mjvOption vopt;     // visualization options
 mjvScene scn;      // abstract scene
 mjrContext con;    // custom GPU context
 
@@ -420,7 +420,7 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
 
 }
 
-void robot_torque_calculation(void){
+void hmi_input(void){
     x_COM_HMI = HMI_Data[1];
     y_COM_HMI = HMI_Data[2];
     // printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_COM_HMI, y_COM_HMI);
@@ -469,34 +469,6 @@ void robot_torque_calculation(void){
         left_right = y_COM_HMI_sign*yawMax;
         // printf("Commanding nothing for Foward/backward! \n");
     }
-
-
-    // double sensitivity_gain = 3;
-    // if (x_COM_HMI > HMI_COM_ACTIVATION){
-    //     forward_backward = min(x_COM_HMI*sensitivity_gain, 0.5);
-    //     // printf("Commanding Left! \n");
-    // }else if (x_COM_HMI < -HMI_COM_ACTIVATION){
-    //     forward_backward = max(x_COM_HMI*sensitivity_gain, -0.5);
-    //     // printf("Commanding Right! \n");
-    // }else{
-    //     forward_backward = 0;
-    //     // printf("Commanding nothing for Left/Right! \n");
-    // }
-
-
-    // if (y_COM_HMI > HMI_COP_ACTIVATION){
-    //     // left_right += 0.001;
-    //     left_right = min(y_COM_HMI, 0.5);
-    //     // printf("Commanding Left! \n");
-    // }else if (y_COM_HMI < -HMI_COP_ACTIVATION){
-    //     // left_right -= 0.001;
-    //     left_right = max(y_COM_HMI, -0.5);
-    //     // printf("Commanding Right! \n");
-    // }else{
-    //     left_right = 0;
-    //     // printf("Commanding nothing for Left/Right! \n");
-    // }
-    // printf("FB: %f, LR: %f \n", forward_backward, left_right);
 #endif
 
 }
@@ -579,7 +551,7 @@ void udp_receive()
             count++;
 		}
         // printf("\n");
-        robot_torque_calculation();
+        hmi_input();
         
         // count_itr_receive++;
         // auto end_main_receive = std::chrono::high_resolution_clock::now();
@@ -630,31 +602,7 @@ void mycontroller(const mjModel *m, mjData *d)
     sensitivity_y = HMI_input_sensitivity_y;
 #endif
 
-
-    //Find closet obstacle
-    // if(obs_case == Obs_closest_one){ 
-    //     APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
-
-    //     //Repulsive force (only the closest one)
-    //     APF.fnc_repulsive_force(APF.closest_obs_dist, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, APF.closest_obs_pos[0], APF.closest_obs_pos[1]);
-        
-    //     //Desired input with APF
-    //     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.repulsive_force[0];
-    //     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.repulsive_force[1];
-    // }else if(obs_case == Obs_all) //Repulsive force (all)
-    // {
-        // APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
-        // //Desired input with APF
-        // compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; 
-        // compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y; 
-    // }
-    // else{
-    //     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0];
-    //     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1];
-    // }
-
     
-
 #ifdef CASE1_WITHOUT_FEEDBACK
     x_force = 0; // without force to human
     y_force = 0; // without force to human
@@ -775,7 +723,7 @@ int main(int argc, const char **argv)
     // SATYRR Init
     SATYRR_Init(m, d);
 
-    //file open
+    // Data logging
     if (data_save_flag)
         myfile.open("../src/data_save.txt",ios::out);
 
@@ -795,7 +743,7 @@ int main(int argc, const char **argv)
 
     // initialize visualization data structures
     // mjv_defaultCamera(&cam);
-    mjv_defaultOption(&opt);
+    mjv_defaultOption(&vopt);
     mjv_defaultScene(&scn);
     mjr_defaultContext(&con);
 
@@ -873,7 +821,7 @@ int main(int argc, const char **argv)
         glfwGetFramebufferSize(window, &viewport.width, &viewport.height);
 
         // update scene and render
-        mjv_updateScene(m, d, &opt, NULL, &cam, mjCAT_ALL, &scn);
+        mjv_updateScene(m, d, &vopt, NULL, &cam, mjCAT_ALL, &scn);
         mjr_render(viewport, &scn, &con);
 
         // swap OpenGL buffers (blocking call due to v-sync)
