@@ -438,8 +438,8 @@ void mycontroller(const mjModel *m, mjData *d)
     }
     if (data_save_flag){
         if(cnt % 100 == 0){
-            myfile << d->time << ", " << SATYRR_S.x << ", " << SATYRR_S.y ;
-            myfile << "\n";
+            myfile << d->time << ", " << SATYRR_S.x << ", " << SATYRR_S.y << ", " << APF.attractive_force[0] << ", " << APF.attractive_force[1]
+                << ", " << APF.obs_repul_force_x << ", " << APF.obs_repul_force_y << "\n";
         } 
     }
     cnt = cnt+1;
