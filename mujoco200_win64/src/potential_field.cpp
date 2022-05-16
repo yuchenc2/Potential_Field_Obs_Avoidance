@@ -44,7 +44,7 @@ bool Potential_Field::fnc_attractive_force(double dist, double rx, double ry, do
 
     //from others
     int goalR = 0.01;
-    double goalS = 38/5;
+    double goalS = 38/5; // The spread of attraction of the goal
     
     if (dist < goalR){
         attractive_force[0] = 0;
