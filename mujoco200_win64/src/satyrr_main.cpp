@@ -9,14 +9,14 @@
 
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK //NOTHING
-#define CASE2_FEEDBACK_TO_HUMAN 
+#define CASE1_WITHOUT_FEEDBACK //NOTHING
+//#define CASE2_FEEDBACK_TO_HUMAN 
 // #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
-// #define KEYBOARD_INPUT 
-#define HMI_INPUT
+#define KEYBOARD_INPUT 
+//#define HMI_INPUT
 
 
 #include "mujoco.h"
@@ -292,8 +292,9 @@ void SATYRR_Init(const mjModel* m, mjData* d)
     d->qpos[m->jnt_qposadr[torso_Z]] = -0.5;  //Initial Height Position of the Robot
     d->qpos[m->jnt_qposadr[torso_X]] = 0.0; 
     d->qpos[m->jnt_qposadr[torso_Y]] = 0.0; 
-    d->qpos[m->jnt_qposadr[torso_Pitch]] = 0;
-    d->qpos[m->jnt_qposadr[torso_Roll]] = 0;  
+    d->qpos[m->jnt_qposadr[torso_Pitch]] = 0.0;
+    d->qpos[m->jnt_qposadr[torso_Roll]] = 0.0; 
+    d->qpos[m->jnt_qposadr[torso_Yaw]] = 0.0; 
     d->qpos[m->jnt_qposadr[j_hip_l]] = SATYRR_S.desHip; 
     d->qpos[m->jnt_qposadr[j_hip_r]] = SATYRR_S.desHip; 
     d->qpos[m->jnt_qposadr[j_knee_l]] = -SATYRR_S.desHip*2; 
@@ -318,28 +319,35 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
     SATYRR_S.q[6] = d->qpos[m->jnt_qposadr[j_knee_l]];
     SATYRR_S.q[7] = d->qpos[m->jnt_qposadr[j_knee_r]];
 
-    //q_vel_wheel_left & right
+    //q_wheel_left & right
     SATYRR_S.q[8] = d->qvel[m->jnt_dofadr[j_wheel_l]];
     SATYRR_S.q[9] = d->qvel[m->jnt_dofadr[j_wheel_r]];
 
-    //q_hip_wheel & right
+    //q_wheel & right
     SATYRR_S.q[10] = d->qpos[m->jnt_qposadr[j_wheel_l]];
     SATYRR_S.q[11] = d->qpos[m->jnt_qposadr[j_wheel_r]];
 
     //body state
-    SATYRR_S.x = d->qpos[m->jnt_qposadr[torso_X]]; //-SATYRR_r*0.5*(SATYRR_S.q[10] + SATYRR_S.q[11]);//
+    SATYRR_S.roll = d->qpos[m->jnt_qposadr[torso_Roll]];
+    SATYRR_S.droll = (SATYRR_S.roll - SATYRR_S.roll_old) / (1/ctrl_update_freq);
+    SATYRR_S.roll_old = SATYRR_S.roll;
+
+    SATYRR_S.psi = d->qpos[m->jnt_qposadr[torso_Yaw]]; //-0.06*0.5*(SATYRR_S.q[11] - SATYRR_S.q[10])/SATYRR_S.width_wheel; //
+    SATYRR_S.dpsi = (SATYRR_S.psi - SATYRR_S.psi_old) / (1/ctrl_update_freq);
+    SATYRR_S.psi_old = SATYRR_S.psi;
+
+    SATYRR_S.x =  cos(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_X]] - sin(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_Y]]; //-0.06*0.5*(SATYRR_S.q[10] + SATYRR_S.q[11]); //
     SATYRR_S.dx = (SATYRR_S.x - SATYRR_S.x_old) / (1/ctrl_update_freq);
     SATYRR_S.x_old = SATYRR_S.x;
 
-    SATYRR_S.y = d->qpos[m->jnt_qposadr[torso_Y]];
+    SATYRR_S.y = cos(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_X]] + sin(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_Y]]; //d->qpos[m->jnt_qposadr[torso_Y]];
 
-    SATYRR_S.pitch = d->qpos[m->jnt_qposadr[torso_Pitch]];
+    //SATYRR_S.pitch = d->qpos[m->jnt_qposadr[torso_Pitch]];
+    SATYRR_S.pitch = cos(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_Pitch]] + sin(-SATYRR_S.psi)*SATYRR_S.roll;
     SATYRR_S.dpitch = (SATYRR_S.pitch - SATYRR_S.pitch_old) / (1/ctrl_update_freq);
     SATYRR_S.pitch_old = SATYRR_S.pitch;
 
-    SATYRR_S.psi = d->qpos[m->jnt_qposadr[torso_Yaw]];
-    SATYRR_S.dpsi = (SATYRR_S.psi - SATYRR_S.psi_old) / (1/ctrl_update_freq);
-    SATYRR_S.psi_old = SATYRR_S.psi;
+    //printf("state: %f, %f, %f, %f \n",SATYRR_S.x , SATYRR_S.y, SATYRR_S.pitch, SATYRR_S.psi);
 }
 
 
@@ -397,7 +405,8 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
     vector<double> des_state = {des_x, 0.0, des_dx, 0.0};
 
     vector<double> state_ = {SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch};
-    wheel_torque = SATYRR_Cont.f_stabilizationControl(des_state, state_);
+    SATYRR_S.getCOM(SATYRR_S.q[2],SATYRR_S.q[3], SATYRR_S.pitch);
+    wheel_torque = SATYRR_Cont.f_stabilizationControl(des_state, state_,SATYRR_S.pitch_actual);
        
     vector<double> des_yaw = {d_yaw, 0.0};
     vector<double> curr_yaw = {SATYRR_S.psi, SATYRR_S.dpsi};
@@ -655,8 +664,22 @@ void mycontroller(const mjModel *m, mjData *d)
         cnt = 0;
     }
     if (data_save_flag){
-        if(cnt % 100 == 0){
-            myfile << d->time << ", " << SATYRR_S.x << ", " << SATYRR_S.y ;
+        if(cnt % 10 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
+            myfile << d->time 
+            << ", " << compensated_des_x 
+            << ", " << compensated_des_th 
+            << ", " << SATYRR_S.x 
+            << ", " << SATYRR_S.pitch
+            << ", " << SATYRR_S.pitch_actual
+            << ", " << SATYRR_S.dx 
+            << ", " << SATYRR_S.dpitch 
+            << ", " << SATYRR_S.psi
+            << ", " << SATYRR_S.dpsi
+            << ", " << SATYRR_S.q[10]
+            << ", " << SATYRR_S.q[11]
+            << ", " << wheel_torque
+            << ", " << yaw_damp
+            ;
             myfile << "\n";
         } 
     }

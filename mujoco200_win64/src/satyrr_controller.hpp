@@ -80,7 +80,7 @@ class SATYRR_controller
         SATYRR_controller();
         // double CoM[2]; 
         // bool f_getCOM(double q_hip[], double pitch);
-        double f_stabilizationControl(vector<double> tgt, vector<double> state); 
+        double f_stabilizationControl(vector<double> tgt, vector<double> state, double pitch_act); 
         double f_yawControl(vector<double> tgt, vector<double> state);
         bool f_jointContrl(double q1, double q2, double q_vel1, double q_vel2, double tgt, int K1, int K2, int K3, int K4, int case_);
         // bool f_jointContrl();
