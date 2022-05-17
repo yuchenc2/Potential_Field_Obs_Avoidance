@@ -36,7 +36,7 @@ double Potential_Field::fnc_cal_distance_obs(double rx, double ry, double goal_x
 
 bool Potential_Field::fnc_attractive_force(double dist, double rx, double ry, double goal_x, double goal_y) 
 {
-    const double Kp = 0.01;
+    const double Kp = 0.007;
     const double d_star = 2.0;
     const int MAX_FORCE = 1;
 

@@ -79,6 +79,9 @@ float_t ctrl_update_freq = 1000;
 mjtNum last_update = 0.0;
 int torso_Pitch, torso_Roll, torso_Yaw, torso_X, torso_Y, torso_Z, j_hip_l, j_hip_r, j_knee_l, j_knee_r, j_wheel_l, j_wheel_r;
 
+int shoulder_l, elbow_l, shoulder_r, elbow_r;
+
+
 SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
 Potential_Field APF;
@@ -241,6 +244,13 @@ void SATYRR_Init(const mjModel* m, mjData* d)
     j_wheel_l = mj_name2id(m, mjOBJ_JOINT, "Ankle_L");
     j_wheel_r = mj_name2id(m, mjOBJ_JOINT, "Ankle_R");
 
+    
+    shoulder_l = mj_name2id(m, mjOBJ_JOINT, "Shoulder_pitch_L");
+    elbow_l = mj_name2id(m, mjOBJ_JOINT, "Elbow_L");
+    shoulder_r = mj_name2id(m, mjOBJ_JOINT, "Shoulder_pitch_R");
+    elbow_r = mj_name2id(m, mjOBJ_JOINT, "Elbow_R");
+
+
     //Init position
     d->qpos[m->jnt_qposadr[torso_Z]] = -0.5;  //Initial Height Position of the Robot
     d->qpos[m->jnt_qposadr[torso_X]] = 0.0; 
@@ -367,6 +377,13 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
         d->ctrl[3] = -SATYRR_Cont.applied_torq[3];
         d->ctrl[4] = -SATYRR_Cont.applied_torq[4];
         d->ctrl[5] = -SATYRR_Cont.applied_torq[5];
+
+        
+        
+        d->ctrl[6] = -20*(d->qpos[m->jnt_qposadr[shoulder_l]]+1.1)-0.4*d->qvel[m->jnt_dofadr[shoulder_l]];
+        d->ctrl[7] = -20*(d->qpos[m->jnt_qposadr[elbow_l]]+1.1)-0.4*d->qvel[m->jnt_dofadr[elbow_l]];
+        d->ctrl[8] = -20*(d->qpos[m->jnt_qposadr[shoulder_r]]-1.1)-0.4*d->qvel[m->jnt_dofadr[shoulder_r]];
+        d->ctrl[9] = -20*(d->qpos[m->jnt_qposadr[elbow_r]]-1.1)-0.4*d->qvel[m->jnt_dofadr[elbow_r]];
     }
 
 }
@@ -391,10 +408,10 @@ void mycontroller(const mjModel *m, mjData *d)
 
     //Find closet obstacle
     if(obs_case == Obs_closest_one){
-        APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
+        // APF.fnc_closest_obstacle(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
 
         //Repulsive force (only the closest one)
-        APF.fnc_repulsive_force(APF.closest_obs_dist, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, APF.closest_obs_pos[0], APF.closest_obs_pos[1]);
+        // APF.fnc_repulsive_force(APF.closest_obs_dist, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, APF.closest_obs_pos[0], APF.closest_obs_pos[1]);
         
         //Desired input with APF
         compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.repulsive_force[0];
@@ -404,7 +421,7 @@ void mycontroller(const mjModel *m, mjData *d)
     //Repulsive force (all)
     else if(obs_case == Obs_all)
     {
-        APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
+        // APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles);
         //Desired input with APF
         compensated_des_dx = sensitivity*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x;
         compensated_des_dth = sensitivity*left_right + APF.attractive_force[1] + APF.obs_repul_force_y;
@@ -425,12 +442,12 @@ void mycontroller(const mjModel *m, mjData *d)
     if(cnt % 500 == 0)
     {
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
-        printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
-        printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
-        // printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
-        printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
-        printf("distance = %f \n",APF.distance_);
-        printf("\n");
+        // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
+        // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
+        // // printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
+        // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
+        // printf("distance = %f \n",APF.distance_);
+        // printf("\n");
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
         
         // printf("des yaw %f, yaw %f \n",compensated_des_dy, SATYRR_S.y);
@@ -487,9 +504,9 @@ int main(int argc, const char **argv)
     cam.type = mjCAMERA_TRACKING;
     cam.fixedcamid = mj_name2id(m, mjOBJ_CAMERA, "camera1");
     cam.trackbodyid = mj_name2id(m, mjOBJ_BODY, "torso");
-    cam.azimuth = 180;
+    cam.azimuth = 90;
     cam.elevation = -18;
-    cam.distance = 1.2;
+    cam.distance = 2.5;
 
     // initialize visualization data structures
     // mjv_defaultCamera(&cam);

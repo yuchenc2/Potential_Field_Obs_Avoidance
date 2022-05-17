@@ -6,7 +6,7 @@
 	<default>
 		<geom contype = '0' conaffinity = '0'/>
 		<default class = 'collision-default'>
-			<geom contype = '6' conaffinity = '0'/>
+			<geom contype = '6' conaffinity = '6'/>
 		</default>
         <default class = 'collision-group-a'>
             <geom contype = '2' conaffinity = '4'/>
@@ -44,75 +44,18 @@
 
 		<!-- camera: front view -->
         <camera name="camera1" mode="targetbody" target="torso"/>
-        <body name="wall1_body" pos="20 0 1">
-            <geom name="wall1_geom" class = "collision-default" type="plane" size="2 1 1" pos="0 0 0" quat="0.5 -0.5 -0.5 0.5" material="matplane" condim="1"/>
-        </body>
-        <body name="wall2_body" pos="0 2 1">
-            <geom name="wall2_geom" class = "collision-default" type="plane" size="20 1 1" pos="0 0 0" quat="0.7071 0.7071 0 0 " material="matplane" condim="1"/>
-        </body>
-        <body name="wall3_body" pos="-20 0 1">
-            <geom name="wall3_geom" class = "collision-default" type="plane" size="2 1 1" pos="0 0 0" quat="0.5 0.5 0.5 0.5" material="matplane" condim="1"/>
-        </body>
-        <body name="wall4_body" pos="0 -2 1">
-            <geom name="wall4_geom" class = "collision-default" type="plane" size="20 1 1" pos="0 0 0" quat=" 0 0 0.7071 0.7071 " material="matplane" condim="1"/>
-        </body>
 
         <body name="start_location_body" pos="-19 1 0">
             <geom name="start_location_geom" size="1 1 0.001" type="box" rgba="0 1 0 1" />
         </body>
-        <body name="end_location_body" pos="0 -1 0">
+        <body name="end_location_body" pos="0 1 0">
             <geom name="end_location_geom" size="1 1 0.001" type="box" rgba="1 1 1 1" />
         </body>
          
-        <!-- <body name="obstacle_1_body" pos="17 0 0">
-            <geom name="obstacle_1_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.6" type="capsule" rgba="0.45 0.2 0.2 1" />
+        <body name="obstacle_1_body" pos="-17 1 0.15">
+            <freejoint/>
+            <geom name="obstacle_1_geom" mass="50.0" class = "collision-default" size="0.3 0.3 0.3" type="box" rgba="0.45 0.2 0.2 1" />
         </body>
-        <body name="obstacle_2_body" pos="15 -1 0.0">
-            <geom name="obstacle_2_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
-        <body name="obstacle_3_body" pos="10 1 0.0">
-            <geom name="obstacle_3_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.35" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
-        <body name="obstacle_4_body" pos="5 -1 0.0">
-            <geom name="obstacle_4_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.4" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
-        <body name="obstacle_5_body" pos="1 1 0.0">
-            <geom name="obstacle_5_geom" class = "collision-default" fromto="0 0 0 0 0 0.4" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body> -->
-        <!-- <body name="obstacle_1_body" pos="-3 0.2 0">
-            <geom name="obstacle_1_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.6" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
-        <body name="obstacle_2_body" pos="-7 -0.4 0.0">
-            <geom name="obstacle_2_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
-        <body name="obstacle_3_body" pos="-11 0.4 0.0">
-            <geom name="obstacle_3_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.35" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body> -->
-        <!-- <body name="obstacle_4_body" pos="-12 -0.2 0.0">
-            <geom name="obstacle_4_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.4" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
-        <body name="obstacle_5_body" pos="-13 0.2 0.0">
-            <geom name="obstacle_5_geom" class = "collision-default" fromto="0 0 0 0 0 0.4" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body> -->
-
-        <body name="obstacle_6_body" pos="-2 1 0.0">
-            <geom name="obstacle_6_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
-        <body name="obstacle_7_body" pos="-5 -1 0.0">
-            <geom name="obstacle_7_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
-        <body name="obstacle_8_body" pos="-10 0 0.0">
-            <geom name="obstacle_8_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
-        <body name="obstacle_9_body" pos="-15 0 0.0">
-            <geom name="obstacle_9_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body>
-        <body name="obstacle_10_body" pos="-16 0 0.0">
-            <geom name="obstacle_10_geom" class = "collision-default" fromto="0 0 0 0 0 0.2" size="0.3" type="capsule" rgba="0.45 0.2 0.2 1" />
-        </body> 
-
-        <!-- <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Torso" /> -->
-        
         <body name="torso" pos="-19 1.0 0.4869">
             <!--<joint armature="0" damping="0" limited="false" name="robot" pos="0 0 0.0" stiffness="0" type="free"/> -->
             <joint axis = "1 0 0" pos = "0 0 0" name = "move_x" type = "slide" limited = "false"/>
@@ -164,11 +107,11 @@
                     <geom class = 'collision-group-b' type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shoulder_L" />
                     <body name="Arm_L" pos="0 0 0">
                         <inertial pos="0 0.0494924 -0.061196" quat="0.707074 0.00680441 -0.00680441 0.707074" mass="0.584971" diaginertia="0.00283895 0.00259254 0.000369078" />
-                        <!-- <joint name="Shoulder_pitch_L" pos="0 0 0" axis="0 1 0" /> -->
+                        <joint name="Shoulder_pitch_L" pos="0 0 0" axis="0 1 0" />
                         <geom class = 'collision-group-b' type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Arm_L" />
                         <body name="Shank_L" pos="0 0.05082 -0.204">
                             <inertial pos="9.76797e-09 0 -0.0687371" quat="0.707107 0 0 0.707107" mass="0.111225" diaginertia="0.000216628 0.00021518 1.39816e-05" />
-                            <!-- <joint name="Elbow_L" pos="0 0 0" axis="0 1 0" /> -->
+                            <joint name="Elbow_L" pos="0 0 0" axis="0 1 0" />
                             <geom class = 'collision-group-b' type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shank_L" />
                         </body>
                     </body>
@@ -176,19 +119,19 @@
             </body>
             <body name="Shoulder_U_R" pos="-0.06625 -0.13274 0.48068">
                 <inertial pos="5.98242e-08 -3.82379e-09 0.0467603" quat="0.5 0.5 0.5 0.5" mass="0.246892" diaginertia="0.0012863 0.00103844 0.00030284" />
-                <!-- <joint name="Shoulder_yaw" pos="0 0 0" axis="0 0 1" /> -->
+                <!-- <joint name="Shoulder_yaw_R" pos="0 0 0" axis="0 0 1" /> -->
                 <geom class = 'collision-group-a' type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shoulder_U_R" />
                 <body name="Shoulder_R" pos="0 0 0.114214">
                     <inertial pos="-7.6505e-09 4.57848e-09 2.98572e-10" quat="0.500001 0.499999 0.499999 0.500001" mass="0.225611" diaginertia="0.000280653 0.000166998 0.000150663" />
-                    <!-- <joint name="Shoulder_roll" pos="0 0 0" axis="1 0 0" /> -->
+                    <!-- <joint name="Shoulder_roll_R" pos="0 0 0" axis="1 0 0" /> -->
                     <geom class = 'collision-group-a' type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shoulder_R" />
                     <body name="Arm_R" pos="0 0 0">
                         <inertial pos="0 -0.0494924 -0.061196" quat="0.707074 -0.00680441 0.00680441 0.707074" mass="0.584971" diaginertia="0.00283895 0.00259254 0.000369078" />
-                        <!-- <joint name="Shoulder_pitch_R" pos="0 0 0" axis="0 -1 0" /> -->
+                        <joint name="Shoulder_pitch_R" pos="0 0 0" axis="0 -1 0" />
                         <geom class = 'collision-group-a' type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Arm_R" />
                         <body name="Shank_R" pos="0 -0.05082 -0.204">
                             <inertial pos="-9.76797e-09 0 -0.0687371" quat="0.707107 0 0 0.707107" mass="0.111225" diaginertia="0.000216628 0.00021518 1.39816e-05" />
-                            <!-- <joint name="Elbow_R" pos="0 0 0" axis="0 -1 0" /> -->
+                            <joint name="Elbow_R" pos="0 0 0" axis="0 -1 0" />
                             <geom class = 'collision-group-a' type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="Shank_R" />
                         </body>
                     </body>
@@ -198,16 +141,32 @@
         
     </worldbody>
 
+    
+    <contact>
+    <pair geom1="obstacle_1_geom" geom2="floor0" friction="1.5 0.1 25 50 50"/>
+    </contact>
+
     <actuator> 
         <!-- <position ctrllimited="true" ctrlrange="-10.0 10.0" gear="100" kp="0.01" joint="x"/>
         <position ctrllimited="true" ctrlrange="-2.8 2.8" gear="100" kp="0.01" joint="theta"/>
         <velocity ctrllimited="true" ctrlrange="-1.0 1.0" gear="100" kv="0.001" joint="x"/>
         <velocity ctrllimited="true" ctrlrange="-2.8 2.8" gear="100" kv="0.001" joint="theta"/> -->
+
         <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Hip_L"/>
         <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Knee_L"/>
         <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Ankle_L"/>
         <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Hip_R"/>
         <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Knee_R"/>
         <motor ctrllimited="true" ctrlrange="-100.0 100.0" gear="1" joint="Ankle_R"/>
+
+        
+        <!-- <position ctrllimited="false" ctrlrange="0 6.283185308" gear="1" joint="Shoulder_yaw_L"/> -->
+        <!-- <position ctrllimited="false" ctrlrange="0 6.283185308" gear="1" joint="Shoulder_roll_L"/> -->
+        <position ctrllimited="false" ctrlrange="0 6.283185308" gear="1" joint="Shoulder_pitch_L"/>
+        <position ctrllimited="false" ctrlrange="0 6.283185308" gear="1" joint="Elbow_L"/>
+        <!-- <position ctrllimited="false" ctrlrange="0 6.283185308" gear="1" joint="Shoulder_yaw_R"/> -->
+        <!-- <position ctrllimited="false" ctrlrange="0 6.283185308" gear="1" joint="Shoulder_roll_R"/> -->
+        <position ctrllimited="false" ctrlrange="0 6.283185308" gear="1" joint="Shoulder_pitch_R"/>
+        <position ctrllimited="false" ctrlrange="0 6.283185308" gear="1" joint="Elbow_R"/>
     </actuator>
 </mujoco>
