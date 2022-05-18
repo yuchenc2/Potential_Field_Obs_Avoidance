@@ -35,6 +35,7 @@
         <texture builtin="checker" height="512" name="texplane" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" type="2d" width="512"/>
         <material name="floorplane" reflectance="0.5" texrepeat="1 1" texture="texplane" texuniform="true"/>
         <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
+        <material name="wall" rgba="0.5372 0.7686 0.9568 1"/>
     </asset>
 
     <worldbody>
@@ -43,28 +44,28 @@
 
 		<!-- camera: front view -->
         <camera name="camera1" mode="targetbody" target="torso"/>
-        <body name="corridor_1_right" pos="-10.2464 -2.4384 1">
-            <geom name="wall1_geom" class = "collision-default" type="plane" size="3.6576 1 1" pos="0 0 0" quat="0.5 -0.5 -0.5 0.5" material="matplane" condim="1"/>
-        </body>
-        <body name="corridor_1_top" pos="-15.1232 1.2192 1">
-            <geom name="wall2_geom" class = "collision-default" type="plane" size="4.8768 1 1" pos="0 0 0" quat="0.7071 0.7071 0 0 " material="matplane" condim="1"/>
-        </body>
-        <body name="corridor_1_left" pos="-20 0 1">
-            <geom name="wall3_geom" class = "collision-default" type="plane" size="1.2192 1 1" pos="0 0 0" quat="0.5 0.5 0.5 0.5" material="matplane" condim="1"/>
-        </body>
-        <body name="corridor_1_down" pos="-16.3424 -1.2192 1">
-            <geom name="wall4_geom" class = "collision-default" type="plane" size="3.6576 1 1" pos="0 0 0" quat=" 0 0 0.7071 0.7071 " material="matplane" condim="1"/>
-        </body>
-
-        <body name="corridor_2_left" pos="-12.6848 -4.572 1">
-            <geom name="wall5_geom" class = "collision-default" type="plane" size="3.3528 1 1" pos="0 0 0" quat="0.5 -0.5 -0.5 0.5" material="matplane" condim="1"/>
-        </body>
+        
+        <geom name="corridor_1_right" class = "collision-default" pos="-10.2464 -2.4384 1" size="0.001 3.6576 1" type="box" material="wall"  />
+        <geom name="corridor_1_top" class = "collision-default" pos="-15.1232 1.2192 1" size="4.8768 0.001 1" type="box" material="wall" />
+        <geom name="corridor_1_left" class = "collision-default" pos="-20 0 1" size="0.001 1.2192 1" type="box" material="wall" />
+        <geom name="corridor_1_down" class = "collision-default" pos="-16.3424 -1.2192 1" size="3.6576 0.001 1" type="box" material="wall" />
+        <geom name="corridor_2_left" class = "collision-default" pos="-12.6848 -4.572 1" size="0.001 3.3528 1" type="box" material="wall" />
+        <geom name="corridor_3_down" class = "collision-default" pos="-8.1128 -7.9248 1" size="4.572 0.001 1" type="box" material="wall" />
+        <geom name="corridor_3_top" class = "collision-default" pos="-7.808 -6.096 1" size="2.4384 0.001 1" type="box" material="wall" />
+        <geom name="corridor_4_left" class = "collision-default" pos="-5.3696 -2.7813 1" size="0.001 3.3147 1" type="box" material="wall" />
+        <geom name="corridor_4_right" class = "collision-default" pos="-3.5408 -4.2672 1" size="0.001 3.6576 1" type="box" material="wall" />
+        <geom name="corridor_5_down" class = "collision-default" pos="-0.7976 -0.6096 1" size="2.7432 0.001 1" type="box" material="wall" />
+        <geom name="corridor_5_top" class = "collision-default" pos="-1.1405 0.5334 1" size="4.2291 0.001 1" type="box" material="wall" />
+        <geom name="corridor_6_left" class = "collision-default" pos="1.9456 -3.6957 1" size="0.001 3.0861 1" type="box" material="wall" />
+        <geom name="corridor_6_right" class = "collision-default" pos="3.0886 -3.1242 1" size="0.001 3.6576 1" type="box" material="wall" />
+        <geom name="corridor_6_down" class = "collision-default" pos="2.5171 -6.7818 1" size="0.5715 0.001 1" type="box" material="wall" />
+   
 
         <body name="start_location_body" pos="-19 0 0">
             <geom name="start_location_geom" size="1 1.2192 0.001" type="box" rgba="0 1 0 1" />
         </body>
-        <body name="end_location_body" pos="0 -1 0">
-            <geom name="end_location_geom" size="1 1 0.001" type="box" rgba="1 1 1 1" />
+        <body name="end_location_body" pos="2.5171 -6.2103 0">
+            <geom name="end_location_geom" size="0.5715 0.5715 0.001" type="box" rgba="1 1 1 1" />
         </body>
 
         <body name="torso" pos="-19 0.0 0.4869">

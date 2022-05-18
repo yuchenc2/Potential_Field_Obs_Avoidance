@@ -166466,3 +166466,11 @@ Tue May 17 15:47:58 2022
 ERROR: Load model error: Error: plane size(3) must be positive in object 'wall5_geom' (id = 5)
 Object name = wall5_geom, id = 5, line = 61, column = 13
 
+Tue May 17 16:21:09 2022
+ERROR: Load model error: Error: repeated name in geom array, position 5
+Object name = corridor_1_left, id = 5, line = 52, column = 9
+
+Wed May 18 10:39:23 2022
+ERROR: Load model error: Error: repeated name in geom array, position 13
+Object name = corridor_4_right, id = 13, line = 59, column = 9
+

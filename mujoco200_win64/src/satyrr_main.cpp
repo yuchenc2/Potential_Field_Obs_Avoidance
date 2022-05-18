@@ -387,7 +387,7 @@ void mycontroller(const mjModel *m, mjData *d)
     APF.fnc_cal_distance(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
     
     //Attractive force
-    APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
+    // APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
 
     //Find closet obstacle
     if(obs_case == Obs_closest_one){
@@ -487,7 +487,7 @@ int main(int argc, const char **argv)
     cam.type = mjCAMERA_TRACKING;
     cam.fixedcamid = mj_name2id(m, mjOBJ_CAMERA, "camera1");
     cam.trackbodyid = mj_name2id(m, mjOBJ_BODY, "torso");
-    cam.azimuth = 180;
+    cam.azimuth = -180;
     cam.elevation = -18;
     cam.distance = 1.2;
 
