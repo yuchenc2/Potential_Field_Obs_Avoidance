@@ -41,10 +41,14 @@ class SATYRR_STATE
         double pitch = 0.0;
         double pitch_old = 0.0;
         double dpitch = 0.0;
+        double pitch_actual = 0.0;
         double psi = 0.0; //yaw
         double psi_old = 0.0;
         double dpsi = 0.0;
- 
+        double roll = 0.0; 
+        double roll_old = 0.0;
+        double droll = 0.0;
+
         //des
         const double desHip = 0.45588;
 
