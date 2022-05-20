@@ -10,13 +10,18 @@
 
 /*   Decide cases for feedback  */
 #define CASE1_WITHOUT_FEEDBACK //NOTHING
-//#define CASE2_FEEDBACK_TO_HUMAN 
+// #define CASE2_FEEDBACK_TO_HUMAN 
 // #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
 #define KEYBOARD_INPUT 
 //#define HMI_INPUT
+
+/* Map Cases */
+// #define STATIC_MAP
+#define DYNAMIC_MAP
+// #define PATH_WIDTH_MAP
 
 
 #include "mujoco.h"
@@ -31,13 +36,23 @@
 #include "potential_field.hpp"
 #include <fstream>
 #include <thread>
+#include <cstdio>
+#include <ctime>
 
 
 #define Hip 1
 #define Knee 2
+clock_t completion_time_clock;
+
+// Definitions for obstacles
 #define Obs_all 1
 #define Obs_closest_one 2
+#define OBS_VEL 0.0093 //0.001 = 1m/s, obstacle moving speed
 int obs_case = 1; // change obs case
+int delay = 0.01*CLOCKS_PER_SEC;
+double shift_y = OBS_VEL;
+clock_t now = clock();
+int seconds_passed = 0;
 
 #define M_PI           3.14159265358979323846
 using namespace std::chrono;
@@ -78,7 +93,15 @@ double compensated_des_x = 0.0;
 double compensated_des_th = 0.0;
 
 //Obstacles
-#define Num_obstacles 5 
+#ifdef STATIC_MAP
+    #define Num_obstacles 13 // TODO: add wall repulsive forces
+#endif
+#ifdef DYNAMIC_MAP
+    #define Num_obstacles 6 // TODO: add wall repulsive forces
+#endif
+#ifdef PATH_WIDTH_MAP
+    #define Num_obstacles 6 // TODO: add wall repulsive forces 
+#endif
 double obstacle_position[Num_obstacles][3];
 vector<double> sum_obstacle_pos_x;
 vector<double> sum_obstacle_pos_y;
@@ -222,9 +245,20 @@ void scroll(GLFWwindow *window, double xoffset, double yoffset)
 
 void initalize_environment(const mjModel *m, mjData *d)
 {
-    // const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
-    //                                            ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"};
-    const char *obstacle_name[Num_obstacles] = {"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"};
+    
+#ifdef STATIC_MAP
+    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
+                                               ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
+                                               ,"obstacle_11_body","obstacle_12_body","obstacle_13_body"};
+#endif
+#ifdef DYNAMIC_MAP
+    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body"};
+#endif
+#ifdef PATH_WIDTH_MAP
+    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body"};
+    // TODO: add wall repulsive forces 
+#endif
+    // const char *obstacle_name[Num_obstacles] = {"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"};
 
     for(int i=0;i<Num_obstacles;i++){
         for(int j=0;j<3;j++){
@@ -464,7 +498,6 @@ void hmi_input(void){
         // printf("Commanding nothing for Foward/backward! \n");
     }
 
-    
     // Piece-wise velocity mapping
     if (y_COM_HMI > 0) y_COM_HMI_sign = 1;
     else if (y_COM_HMI < 0) y_COM_HMI_sign = -1;
@@ -576,8 +609,54 @@ void udp_receive()
 	WSACleanup();
 }
 
+void obstacle_control(const mjModel *m, mjData *d){
+    if(clock() - now > delay){
+        // m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+0];
+        //For the first moving obstacle
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] > 1.0){
+            shift_y = -OBS_VEL;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] < -1.0){
+            shift_y = OBS_VEL;
+        }
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1]+shift_y;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1]-shift_y;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1]+shift_y;
+        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+0]-shift_y;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1]+shift_y;
+        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0]+shift_y;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1]+shift_y;
+        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0]+shift_y;
+        
+        
+        now = clock();
+        // seconds_passed++;
+        // printf("seconds_passed: %d \n", seconds_passed);
+    }
+}
+
+int completed = 0;
+
 void mycontroller(const mjModel *m, mjData *d)
 {
+#if defined DYNAMIC_MAP || defined STATIC_MAP 
+    if(d->qpos[m->jnt_qposadr[torso_X]] > 27.0 && completed == 0){
+        completion_time_clock = clock() - completion_time_clock;
+        printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
+        completed = 1;
+    }
+#endif
+
+#ifdef PATH_WIDTH_MAP
+    if(d->qpos[m->jnt_qposadr[torso_X]] > 20.9456 && d->qpos[m->jnt_qposadr[torso_Y]] < -6.2103 && completed == 0){
+        completion_time_clock = clock() - completion_time_clock;
+        printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
+        completed = 1;
+    }
+#endif
+
     float x_force = 0.0; // sagital plane
     float y_force = 0.0; // frontal plane
     double sensitivity_x = 0.1;
@@ -592,6 +671,12 @@ void mycontroller(const mjModel *m, mjData *d)
 
     //Update robot position
     SATYRR_state_update(m,d);
+
+    //Update obstacle location
+    
+#ifdef DYNAMIC_MAP
+    obstacle_control(m,d);
+#endif
 
     //Calculate Distance
     APF.fnc_cal_distance(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
@@ -650,12 +735,12 @@ void mycontroller(const mjModel *m, mjData *d)
 
     if(cnt % 500 == 0)
     {
-        printf("x_force: %f, y_force: %f \n",x_force, y_force);
+        // printf("x_force: %f, y_force: %f \n",x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
         // printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
-        printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
+        // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
@@ -713,10 +798,11 @@ void mycontroller(const mjModel *m, mjData *d)
         Robot_Data[0] = 0; 
         Robot_Data[10] = 0;
     }
-    printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
+    // printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
 
     cnt = cnt+1;
 }
+
 
 // main function
 int main(int argc, const char **argv)
@@ -726,7 +812,17 @@ int main(int argc, const char **argv)
 
     // load and compile model
     char error[1000] = "Could not load binary model";
-    m = mj_loadXML("../src/satyyr.xml", 0, error, 1000);
+    
+#ifdef STATIC_MAP
+    m = mj_loadXML("../src/satyyr_static.xml", 0, error, 1000);
+#endif
+#ifdef DYNAMIC_MAP
+    m = mj_loadXML("../src/satyyr_dynamic.xml", 0, error, 1000);
+#endif
+#ifdef PATH_WIDTH_MAP
+    m = mj_loadXML("../src/satyyr_path_width.xml", 0, error, 1000);
+#endif
+    
 
     if (!m)
         mju_error_s("Load model error: %s", error);
@@ -810,6 +906,9 @@ int main(int argc, const char **argv)
     s_other_send.sin_family = AF_INET;
     s_other_send.sin_port = htons(PORT_SEND);
 	s_other_send.sin_addr.S_un.S_addr = inet_addr(SERVER);
+
+    // Timer for path starts
+    completion_time_clock = clock();
 
     // run main loop, target real-time simulation and 60 fps rendering
     while (!glfwWindowShouldClose(window))

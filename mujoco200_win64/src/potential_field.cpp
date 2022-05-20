@@ -167,7 +167,7 @@ bool Potential_Field::fnc_repulsive_force(double p_star, double rx, double ry, d
 bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<double> ox, vector<double> oy, int size, int case_)
 {
     //from others
-    const double obsRad = 0.3;
+    const double obsRad = 0.2;
     const double obsS = 19.0/5.0;
     const double inf = 0.001;
     const double beta = 0.001;
