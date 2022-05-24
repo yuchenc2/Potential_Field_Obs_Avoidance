@@ -440,7 +440,7 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
     // else if (des_x < -5)
     //     des_x = -5;
 
-    vector<double> des_state = {des_x, 0.0, 0.0, 0.0};
+    vector<double> des_state = {des_x, 0.0, des_dx, 0.0};
 
     vector<double> state_ = {SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch};
     SATYRR_S.getCOM(SATYRR_S.q[2],SATYRR_S.q[3], SATYRR_S.pitch);
