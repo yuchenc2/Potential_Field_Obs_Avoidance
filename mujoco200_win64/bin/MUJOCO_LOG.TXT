@@ -174445,3 +174445,1193 @@ WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Ti
 Fri May 20 12:06:48 2022
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0660.
 
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 24.0320.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.1130.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1120.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.1115.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1120.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1110.
+
+Mon May 23 15:39:35 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.1110.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.1110.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1110.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1100.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.1090.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1090.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1080.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.1075.
+
+Mon May 23 15:39:35 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.1080.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1080.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1070.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.1060.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1050.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.1050.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1050.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.1045.
+
+Mon May 23 15:39:35 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.1050.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.1050.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1040.
+
+Mon May 23 15:39:35 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.1040.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.1040.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.1040.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1030.
+
+Mon May 23 15:39:35 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.1030.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.1030.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1030.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1020.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.1015.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1020.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1010.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1010.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.0995.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.1000.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0990.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0990.
+
+Mon May 23 15:39:35 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0980.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.0980.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0980.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.0975.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0980.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0970.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.0965.
+
+Mon May 23 15:39:35 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0970.
+
+Mon May 23 15:39:35 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0970.
+
+Mon May 23 15:39:35 2022
+WARNING: Unknown warning type Time = 0.0970.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 2. The simulation is unstable. Time = 0.0960.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0960.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0955.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0960.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0955.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0950.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0950.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0950.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0950.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0940.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 2. The simulation is unstable. Time = 0.0940.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0940.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0935.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0940.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0930.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0930.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0930.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0930.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0930.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0920.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0920.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0920.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0915.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0920.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0915.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0910.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0910.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0910.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0905.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0910.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0910.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0905.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0900.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0900.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0900.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0900.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0900.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0900.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0900.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0890.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0895.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0900.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0890.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0890.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0885.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0890.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0880.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.0880.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0870.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0880.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0880.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0870.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0870.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0870.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0870.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.0870.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0860.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0865.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0870.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0860.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0860.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0860.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0855.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0860.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0860.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0845.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0850.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0845.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0850.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0840.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0830.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0835.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0840.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0835.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0830.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0830.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0830.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0830.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 2. The simulation is unstable. Time = 0.0830.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0820.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0820.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0820.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0820.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0810.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0815.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0820.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0820.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0820.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0810.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0810.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0810.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 1. The simulation is unstable. Time = 0.0810.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0800.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0810.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 2. The simulation is unstable. Time = 0.0810.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0800.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0800.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0800.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0800.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0800.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 6. The simulation is unstable. Time = 0.0800.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0795.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0800.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0795.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0800.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0785.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0785.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0790.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0780.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Mon May 23 15:39:36 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0780.
+
+Mon May 23 15:39:36 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Mon May 23 15:39:36 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0770.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0780.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0775.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0780.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0770.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0770.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0770.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0760.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0770.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 4. The simulation is unstable. Time = 0.0770.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0765.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0770.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0750.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0755.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0760.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0760.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0760.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0750.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0750.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0750.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0750.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0750.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0745.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0750.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0750.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 1. The simulation is unstable. Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0740.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0725.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0725.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0730.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 3. The simulation is unstable. Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0715.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0720.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0715.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0705.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0705.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0705.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0710.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0690.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0695.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0700.
+
+Mon May 23 15:39:37 2022
+WARNING: Unknown warning type Time = 0.0695.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0690.
+
+Mon May 23 15:39:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0685.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0685.
+
+Mon May 23 15:39:38 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0685.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0685.
+
+Mon May 23 15:39:38 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0690.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 4. The simulation is unstable. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 5. The simulation is unstable. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0675.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0670.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0675.
+
+Mon May 23 15:39:38 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0680.
+
+Mon May 23 15:39:38 2022
+WARNING: Unknown warning type Time = 0.0675.
+
+Mon May 23 15:39:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0680.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0675.
+
+Mon May 23 15:39:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0675.
+
+Mon May 23 15:39:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0675.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0675.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0675.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0675.
+
+Mon May 23 15:39:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0675.
+
+Mon May 23 15:39:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0680.
+
+Mon May 23 15:39:39 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0670.
+
+Mon May 23 15:39:39 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 7. The simulation is unstable. Time = 0.0670.
+
+Mon May 23 15:39:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0670.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0670.
+
+Mon May 23 15:39:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0670.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0670.
+
+Mon May 23 15:39:39 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 3. The simulation is unstable. Time = 0.0670.
+
+Mon May 23 15:39:39 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0660.
+
+Mon May 23 15:39:39 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.0670.
+
+Mon May 23 15:39:39 2022
+WARNING: Unknown warning type Time = 0.0670.
+
+Mon May 23 15:39:39 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0670.
+
+Mon May 23 15:40:10 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 27.1540.
+
+Mon May 23 15:40:11 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 2.0700.
+
+Mon May 23 15:48:37 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 23.1290.
+
+Mon May 23 15:48:37 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1500.
+
+Mon May 23 16:22:42 2022
+WARNING: Unknown warning type Time = 0.0920.
+
+Mon May 23 16:22:42 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0920.
+
+Mon May 23 16:22:42 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 0.0910.
+
+Mon May 23 16:24:54 2022
+WARNING: Unknown warning type Time = 56.1760.
+
+Mon May 23 16:24:54 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 56.1760.
+
+Mon May 23 16:41:52 2022
+ERROR: Load model error: XML Error: invalid keyword: 'euler'
+Element 'option', line 4, column 5
+
+
+Mon May 23 16:45:52 2022
+WARNING: Unknown warning type Time = 71.7090.
+
+Mon May 23 16:45:52 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 4. The simulation is unstable. Time = 71.7090.
+
+Mon May 23 16:45:52 2022
+WARNING: Unknown warning type Time = 0.5690.
+
+Mon May 23 16:45:52 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.5690.
+
+Mon May 23 16:45:52 2022
+WARNING: Unknown warning type Time = 0.5690.
+
+Mon May 23 16:45:52 2022
+WARNING: Unknown warning type Time = 0.5690.
+
+Mon May 23 16:45:53 2022
+WARNING: Unknown warning type Time = 0.5690.
+
+Mon May 23 16:45:53 2022
+WARNING: Unknown warning type Time = 0.5690.
+
+Mon May 23 16:45:53 2022
+WARNING: Unknown warning type Time = 0.5690.
+
+Mon May 23 16:45:53 2022
+WARNING: Unknown warning type Time = 0.5690.
+
+Mon May 23 16:45:53 2022
+WARNING: Unknown warning type Time = 0.5690.
+
+Mon May 23 17:03:26 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 83.3360.
+
+Mon May 23 17:03:27 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 6. The simulation is unstable. Time = 2.3420.
+
+Mon May 23 22:00:17 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 1.6180.
+
+Mon May 23 22:00:53 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 3. The simulation is unstable. Time = 3.1270.
+
+Mon May 23 22:04:25 2022
+WARNING: Unknown warning type Time = 93.2700.
+
+Mon May 23 22:04:25 2022
+WARNING: Nan, Inf or huge value in QPOS at DOF 10. The simulation is unstable. Time = 93.2700.
+

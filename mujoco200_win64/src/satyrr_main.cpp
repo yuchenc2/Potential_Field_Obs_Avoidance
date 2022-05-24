@@ -20,8 +20,9 @@
 
 /* Map Cases */
 // #define STATIC_MAP
-#define DYNAMIC_MAP
-// #define PATH_WIDTH_MAP
+// #define DYNAMIC_MAP
+#define PATH_WIDTH_MAP
+
 
 
 #include "mujoco.h"
@@ -363,25 +364,28 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
 
     //body state
     SATYRR_S.roll = d->qpos[m->jnt_qposadr[torso_Roll]];
-    SATYRR_S.droll = (SATYRR_S.roll - SATYRR_S.roll_old) / (1/ctrl_update_freq);
+    SATYRR_S.droll = (SATYRR_S.roll - SATYRR_S.roll_old) / 0.001;
     SATYRR_S.roll_old = SATYRR_S.roll;
 
     SATYRR_S.psi = d->qpos[m->jnt_qposadr[torso_Yaw]]; //-0.06*0.5*(SATYRR_S.q[11] - SATYRR_S.q[10])/SATYRR_S.width_wheel; //
-    SATYRR_S.dpsi = (SATYRR_S.psi - SATYRR_S.psi_old) / (1/ctrl_update_freq);
+    SATYRR_S.dpsi = (SATYRR_S.psi - SATYRR_S.psi_old) / 0.001;
     SATYRR_S.psi_old = SATYRR_S.psi;
 
-    SATYRR_S.x =  cos(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_X]] - sin(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_Y]]; //-0.06*0.5*(SATYRR_S.q[10] + SATYRR_S.q[11]); //
-    SATYRR_S.dx = (SATYRR_S.x - SATYRR_S.x_old) / (1/ctrl_update_freq);
+    SATYRR_S.x =  -0.06*0.5*(SATYRR_S.q[10] + SATYRR_S.q[11]); //cos(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_X]] - sin(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_Y]]; //-0.06*0.5*(SATYRR_S.q[10] + SATYRR_S.q[11]); //
+    SATYRR_S.dx = (SATYRR_S.x - SATYRR_S.x_old) / 0.001;
     SATYRR_S.x_old = SATYRR_S.x;
 
     SATYRR_S.y = cos(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_X]] + sin(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_Y]]; //d->qpos[m->jnt_qposadr[torso_Y]];
 
     //SATYRR_S.pitch = d->qpos[m->jnt_qposadr[torso_Pitch]];
     SATYRR_S.pitch = cos(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_Pitch]] + sin(-SATYRR_S.psi)*SATYRR_S.roll;
-    SATYRR_S.dpitch = (SATYRR_S.pitch - SATYRR_S.pitch_old) / (1/ctrl_update_freq);
+    SATYRR_S.dpitch = (SATYRR_S.pitch - SATYRR_S.pitch_old) / 0.001;
     SATYRR_S.pitch_old = SATYRR_S.pitch;
 
-    //printf("state: %f, %f, %f, %f \n",SATYRR_S.x , SATYRR_S.y, SATYRR_S.pitch, SATYRR_S.psi);
+    // printf("torso x and y = %f, %f \n",d->qpos[m->jnt_qposadr[torso_X]],d->qpos[m->jnt_qposadr[torso_Y]]);
+    printf("des: %f, %f \n",compensated_des_x , compensated_des_th);
+    printf("state: %f, %f, %f, %f \n",SATYRR_S.x , SATYRR_S.y, SATYRR_S.pitch, SATYRR_S.psi);
+    printf("\n");
 }
 
 
@@ -400,20 +404,20 @@ void keyboard_input(mjData *d)
         forward_backward = max(forward_backward, -1);
         }
     else
-        forward_backward = 0;
+        forward_backward = 0.0;
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
         left_right += 0.001;
-        left_right = min(left_right, 0.5);
+        left_right = min(left_right, 1);
         }
     else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
         left_right -= 0.001;
-        left_right = max(left_right, -0.5);
+        left_right = max(left_right, -1);
         }
     else
-        left_right =0;
+        left_right = 0.0;
 
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
+    if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS){
         if (data_save_flag){
             myfile.close();
             printf("close file!! \n");
@@ -436,7 +440,7 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
     // else if (des_x < -5)
     //     des_x = -5;
 
-    vector<double> des_state = {des_x, 0.0, des_dx, 0.0};
+    vector<double> des_state = {des_x, 0.0, 0.0, 0.0};
 
     vector<double> state_ = {SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch};
     SATYRR_S.getCOM(SATYRR_S.q[2],SATYRR_S.q[3], SATYRR_S.pitch);
@@ -447,6 +451,7 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
 
     yaw_damp = SATYRR_Cont.f_yawControl(des_yaw, curr_yaw);
 
+    // printf("torq =%f, %f \n",wheel_torque,yaw_damp);
     SATYRR_Cont.applied_torq[2] =  wheel_torque - yaw_damp; // wheel_torque;
     SATYRR_Cont.applied_torq[5] =  wheel_torque + yaw_damp; //wheel_torque;
 
@@ -749,15 +754,17 @@ void mycontroller(const mjModel *m, mjData *d)
         cnt = 0;
     }
     if (data_save_flag){
-        if(cnt % 10 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
+        if(cnt % 1 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
             myfile << d->time 
             << ", " << compensated_des_x 
             << ", " << compensated_des_th 
             << ", " << SATYRR_S.x 
             << ", " << SATYRR_S.pitch
             << ", " << SATYRR_S.pitch_actual
+            << ", " << compensated_des_dx
             << ", " << SATYRR_S.dx 
-            << ", " << SATYRR_S.dpitch 
+            << ", " << SATYRR_S.dpitch
+            << ", " << compensated_des_th 
             << ", " << SATYRR_S.psi
             << ", " << SATYRR_S.dpsi
             << ", " << SATYRR_S.q[10]
@@ -962,7 +969,7 @@ int main(int argc, const char **argv)
     mj_deleteModel(m);
     mj_deactivate();
 
-        
+    myfile.close();
 
 // terminate GLFW (crashes with Linux NVidia drivers)
 #if defined(__APPLE__) || defined(_WIN32)

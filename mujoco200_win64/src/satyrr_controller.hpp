@@ -73,10 +73,10 @@ class SATYRR_controller
         double applied_torq[actuator_NUM];
         double wheel_torque;
         double yaw_torq;
-        const double K_xW = -200; //-100.0;//
-        const double K_pitch = -1400;//-315.0;//
-        const double K_dxW = -120; //-40.0;//
-        const double K_dpitch = -70; //-40.0; //
+        const double K_xW = -100.0;//-200; //
+        const double K_pitch = -315.0; //-315.0;// -1400;//
+        const double K_dxW = -40.0;// -120; //
+        const double K_dpitch = -40.0; // -70; 
 
         const double Kp_yaw = 1.9;
         const double Kd_yaw = 0.4;
