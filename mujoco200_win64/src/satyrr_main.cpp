@@ -9,9 +9,9 @@
 
 
 /*   Decide cases for feedback  */
-#define CASE1_WITHOUT_FEEDBACK //NOTHING
+// #define CASE1_WITHOUT_FEEDBACK //NOTHING
 // #define CASE2_FEEDBACK_TO_HUMAN 
-// #define CASE3_COMPENSATED_CONTROLLER 
+#define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
@@ -382,9 +382,9 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
     SATYRR_S.pitch_old = SATYRR_S.pitch;
 
     // printf("torso x and y = %f, %f \n",d->qpos[m->jnt_qposadr[torso_X]],d->qpos[m->jnt_qposadr[torso_Y]]);
-    printf("des: %f, %f \n",compensated_des_x , compensated_des_th);
-    printf("state: %f, %f, %f, %f \n",SATYRR_S.x , SATYRR_S.y, SATYRR_S.pitch, SATYRR_S.psi);
-    printf("\n");
+    // printf("des: %f, %f \n",compensated_des_x , compensated_des_th);
+    // printf("state: %f, %f, %f, %f \n",SATYRR_S.x , SATYRR_S.y, SATYRR_S.pitch, SATYRR_S.psi);
+    // printf("\n");
 }
 
 
@@ -464,7 +464,6 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
         d->ctrl[4] = -SATYRR_Cont.applied_torq[4];
         d->ctrl[5] = -SATYRR_Cont.applied_torq[5];
     }
-
 }
 
 void hmi_input(void){
@@ -688,9 +687,6 @@ void mycontroller(const mjModel *m, mjData *d)
     //Attractive force
     // APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
 
-    //Repulsive force
-    APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 1);
-        
 #ifdef KEYBOARD_INPUT
     sensitivity_x = keyboard_input_sensitivity_x;
     sensitivity_y = keyboard_input_sensitivity_y;
@@ -709,6 +705,8 @@ void mycontroller(const mjModel *m, mjData *d)
 #endif
 
 #ifdef CASE2_FEEDBACK_TO_HUMAN
+    //Repulsive force
+    APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 1);
     x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
     y_force = human_repulse_y_gain*APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
@@ -718,6 +716,7 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE3_COMPENSATED_CONTROLLER 
     x_force = 0; // without force to human
     y_force = 0; // without force to human
+    APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 0);
     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
@@ -725,6 +724,8 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
     // x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
     // y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
+    
+    APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 2);
     x_force = APF.obs_repul_force_x; // with force to human
     y_force = APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
@@ -742,7 +743,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("x_force: %f, y_force: %f \n",x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
-        // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
+        printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
         // printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);

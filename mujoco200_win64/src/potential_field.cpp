@@ -201,6 +201,12 @@ bool Potential_Field::fnc_repulsive_force_all(double rx, double ry, vector<doubl
                 repulsive_force[0] = 0.0;
                 repulsive_force[1] = 0.0;
             }
+            // printf("robot_x = %f, robot_y = %f \n", rx, ry);
+            //Add wall repulsive force
+            // if(fnc_cal_distance_obs(rx, 0, )){ //left wall
+
+            // }
+
 
             if(repulsive_force[1] > 360.0 * DTR)
                 repulsive_force[1] = repulsive_force[1] - 360.0 * DTR;
