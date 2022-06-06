@@ -75,11 +75,11 @@
             <geom name="obstacle_4_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
         <body name="obstacle_5_body" pos="0 0.0 0">
-            <geom name="obstacle_11_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
+            <geom name="obstacle_5_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
 
         <body name="obstacle_6_body" pos="6 0 0">
-            <geom name="obstacle_13_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
+            <geom name="obstacle_6_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
         
 
