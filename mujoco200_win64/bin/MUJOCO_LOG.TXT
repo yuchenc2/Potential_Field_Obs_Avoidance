@@ -173761,3 +173761,57 @@ WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Ti
 Mon Apr 25 12:08:31 2022
 WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.9010.
 
+Wed Apr 27 16:44:24 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 46.9800.
+
+Wed Apr 27 16:44:24 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 4.3620.
+
+Wed Apr 27 16:44:24 2022
+WARNING: Unknown warning type Time = 4.3620.
+
+Wed Apr 27 16:44:24 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 4.3620.
+
+Wed Apr 27 16:44:25 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 4.3620.
+
+Wed Apr 27 16:44:25 2022
+WARNING: Unknown warning type Time = 4.3620.
+
+Wed Apr 27 16:44:25 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 4.3620.
+
+Wed Apr 27 16:44:25 2022
+WARNING: Unknown warning type Time = 4.3620.
+
+Wed Apr 27 16:44:25 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 4.3620.
+
+Wed Apr 27 16:44:25 2022
+WARNING: Unknown warning type Time = 4.3620.
+
+Wed Apr 27 16:44:26 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 4.3620.
+
+Wed Apr 27 16:44:26 2022
+WARNING: Unknown warning type Time = 4.3620.
+
+Wed Apr 27 16:44:26 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 4.3620.
+
+Wed Apr 27 16:44:26 2022
+WARNING: Unknown warning type Time = 4.3620.
+
+Wed Apr 27 16:44:26 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 4.3620.
+
+Wed Apr 27 16:44:26 2022
+WARNING: Unknown warning type Time = 4.3620.
+
+Wed Apr 27 16:44:26 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 4.3620.
+
+Wed Apr 27 16:44:26 2022
+WARNING: Unknown warning type Time = 4.3620.
+

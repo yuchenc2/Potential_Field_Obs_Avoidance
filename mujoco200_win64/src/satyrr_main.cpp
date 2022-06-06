@@ -9,14 +9,14 @@
 
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK //NOTHING
-#define CASE2_FEEDBACK_TO_HUMAN 
+#define CASE1_WITHOUT_FEEDBACK //NOTHING
+// #define CASE2_FEEDBACK_TO_HUMAN 
 // #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
-// #define KEYBOARD_INPUT 
-#define HMI_INPUT
+#define KEYBOARD_INPUT 
+// #define HMI_INPUT
 
 
 #include "mujoco.h"
@@ -606,8 +606,8 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE1_WITHOUT_FEEDBACK
     x_force = 0; // without force to human
     y_force = 0; // without force to human
-    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1]; //without repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right; //without repulsive force for controller
 #endif
 
 #ifdef CASE2_FEEDBACK_TO_HUMAN
@@ -641,8 +641,8 @@ void mycontroller(const mjModel *m, mjData *d)
 
     if(cnt % 500 == 0)
     {
-        printf("x_force: %f, y_force: %f \n",x_force, y_force);
-        // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
+        // printf("x_force: %f, y_force: %f \n",x_force, y_force);
+        printf("SATYRR_S.x: %f, SATYRR_S.pitch: %f, SATYRR_S.dx: %f, SATYRR_S.dpitch: %f \n",SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
         // printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
@@ -690,7 +690,7 @@ void mycontroller(const mjModel *m, mjData *d)
         Robot_Data[0] = 0; 
         Robot_Data[10] = 0;
     }
-    printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
+    // printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
 
     cnt = cnt+1;
 }
