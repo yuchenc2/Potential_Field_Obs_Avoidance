@@ -41,10 +41,14 @@ class SATYRR_STATE
         double pitch = 0.0;
         double pitch_old = 0.0;
         double dpitch = 0.0;
+        double pitch_actual = 0.0;
         double psi = 0.0; //yaw
         double psi_old = 0.0;
         double dpsi = 0.0;
- 
+        double roll = 0.0; 
+        double roll_old = 0.0;
+        double droll = 0.0;
+
         //des
         const double desHip = 0.45588;
 
@@ -69,10 +73,10 @@ class SATYRR_controller
         double applied_torq[actuator_NUM];
         double wheel_torque;
         double yaw_torq;
-        const double K_xW = -200.0; //-100.0;//
-        const double K_pitch = -1400.0;//-315.0;//
-        const double K_dxW = -120.0; //-40.0;//
-        const double K_dpitch = -70.0; //-40.0; //
+        const double K_xW = -100.0;//-200; //
+        const double K_pitch = -315.0; //-315.0;// -1400;//
+        const double K_dxW = -40.0;// -120; //
+        const double K_dpitch = -40.0; // -70; 
 
         const double Kp_yaw = 1.9;
         const double Kd_yaw = 0.4;
@@ -80,7 +84,7 @@ class SATYRR_controller
         SATYRR_controller();
         // double CoM[2]; 
         // bool f_getCOM(double q_hip[], double pitch);
-        double f_stabilizationControl(vector<double> tgt, vector<double> state); 
+        double f_stabilizationControl(vector<double> tgt, vector<double> state, double pitch_act); 
         double f_yawControl(vector<double> tgt, vector<double> state);
         bool f_jointContrl(double q1, double q2, double q_vel1, double q_vel2, double tgt, int K1, int K2, int K3, int K4, int case_);
         // bool f_jointContrl();

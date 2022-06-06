@@ -9,14 +9,29 @@
 
 
 /*   Decide cases for feedback  */
+<<<<<<< HEAD
 #define CASE1_WITHOUT_FEEDBACK //NOTHING
 // #define CASE2_FEEDBACK_TO_HUMAN 
 // #define CASE3_COMPENSATED_CONTROLLER 
+=======
+// #define CASE1_WITHOUT_FEEDBACK //NOTHING
+// #define CASE2_FEEDBACK_TO_HUMAN 
+#define CASE3_COMPENSATED_CONTROLLER 
+>>>>>>> 86487068d26d5a11e780a8cdeac2d6aa1efb1e8f
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
 #define KEYBOARD_INPUT 
+<<<<<<< HEAD
 // #define HMI_INPUT
+=======
+//#define HMI_INPUT
+
+/* Map Cases */
+// #define STATIC_MAP
+// #define DYNAMIC_MAP
+#define PATH_WIDTH_MAP
+>>>>>>> 86487068d26d5a11e780a8cdeac2d6aa1efb1e8f
 
 
 #include "mujoco.h"
@@ -31,13 +46,23 @@
 #include "potential_field.hpp"
 #include <fstream>
 #include <thread>
+#include <cstdio>
+#include <ctime>
 
 
 #define Hip 1
 #define Knee 2
+clock_t completion_time_clock;
+
+// Definitions for obstacles
 #define Obs_all 1
 #define Obs_closest_one 2
+#define OBS_VEL 0.0093 //0.001 = 1m/s, obstacle moving speed
 int obs_case = 1; // change obs case
+int delay = 0.01*CLOCKS_PER_SEC;
+double shift_y = OBS_VEL;
+clock_t now = clock();
+int seconds_passed = 0;
 
 #define M_PI           3.14159265358979323846
 using namespace std::chrono;
@@ -78,7 +103,15 @@ double compensated_des_x = 0.0;
 double compensated_des_th = 0.0;
 
 //Obstacles
-#define Num_obstacles 5 
+#ifdef STATIC_MAP
+    #define Num_obstacles 13 // TODO: add wall repulsive forces
+#endif
+#ifdef DYNAMIC_MAP
+    #define Num_obstacles 6 // TODO: add wall repulsive forces
+#endif
+#ifdef PATH_WIDTH_MAP
+    #define Num_obstacles 6 // TODO: add wall repulsive forces 
+#endif
 double obstacle_position[Num_obstacles][3];
 vector<double> sum_obstacle_pos_x;
 vector<double> sum_obstacle_pos_y;
@@ -87,6 +120,8 @@ double goal_location[3];
 bool obstacle_init_flag = false;
 double SATYRR_X_offset = 0.0;
 double SATYRR_Y_offset = 0.0;
+int completed = 0;
+int map_choice = 0;
 
 
 //Class
@@ -222,52 +257,35 @@ void scroll(GLFWwindow *window, double xoffset, double yoffset)
 
 void initalize_environment(const mjModel *m, mjData *d)
 {
-    // const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
-    //                                            ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"};
-    const char *obstacle_name[Num_obstacles] = {"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"};
+    
+#ifdef STATIC_MAP
+    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
+                                               ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
+                                               ,"obstacle_11_body","obstacle_12_body","obstacle_13_body"};
+#endif
+#ifdef DYNAMIC_MAP
+    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body"};
+#endif
 
+#if defined DYNAMIC_MAP || defined STATIC_MAP 
     for(int i=0;i<Num_obstacles;i++){
         for(int j=0;j<3;j++){
-        obstacle_position[i][j] =  m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i]) * 3 + j];
+            obstacle_position[i][j] =  m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i]) * 3 + j];
         }
     }
-    for(int j=0;j<3;j++)
-        goal_location[j] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + j];
-
-    SATYRR_X_offset =  m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3];
-    SATYRR_Y_offset =   m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1];
-
-    // printf("SATYRR START : (%f, %f) \n",SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset); // POS(X,Y)
-    // printf("Goal Position : (%f, %f) \n",goal_location[0], goal_location[1]);
-
-    // printf("Obstacle 1 to Torso: (%f, %f, %f) \n", obstacle_position[0][0], obstacle_position[0][1], obstacle_position[0][2] );
-    // printf("Obstacle 2 to Torso: (%f, %f, %f) \n", obstacle_position[1][0], obstacle_position[1][1], obstacle_position[1][2] );
-    // printf("Obstacle 3 to Torso: (%f, %f, %f) \n", obstacle_position[2][0], obstacle_position[2][1], obstacle_position[2][2] );
-    // printf("Obstacle 4 to Torso: (%f, %f, %f) \n", obstacle_position[3][0], obstacle_position[3][1], obstacle_position[3][2] );
-    // printf("Obstacle 5 to Torso: (%f, %f, %f) \n", obstacle_position[4][0], obstacle_position[4][1], obstacle_position[4][2] );
-    // printf("Obstacle 6 to Torso: (%f, %f, %f) \n", obstacle_position[5][0], obstacle_position[5][1], obstacle_position[5][2] );
-    // printf("Obstacle 7 to Torso: (%f, %f, %f) \n", obstacle_position[6][0], obstacle_position[6][1], obstacle_position[6][2] );
-    // printf("Obstacle 8 to Torso: (%f, %f, %f) \n", obstacle_position[7][0], obstacle_position[7][1], obstacle_position[7][2] );
-    // printf("Obstacle 9 to Torso: (%f, %f, %f) \n", obstacle_position[8][0], obstacle_position[8][1], obstacle_position[8][2] );
-    // printf("Obstacle 10 to Torso: (%f, %f, %f) \n", obstacle_position[9][0], obstacle_position[9][1], obstacle_position[9][2] );
-    // printf("\n");
-
     for(int i=0; i<Num_obstacles; i++)
     {
         sum_obstacle_pos_x.push_back(obstacle_position[i][0]);
         sum_obstacle_pos_y.push_back(obstacle_position[i][1]);
     }
+#endif
 
-    // printf("Obstacle 1 to Torso: (%f, %f) \n", sum_obstacle_pos_x[0], sum_obstacle_pos_y[0]);
-    // printf("Obstacle 2 to Torso: (%f, %f) \n", sum_obstacle_pos_x[1], sum_obstacle_pos_y[1]);
-    // printf("Obstacle 3 to Torso: (%f, %f) \n", sum_obstacle_pos_x[2], sum_obstacle_pos_y[2] );
-    // printf("Obstacle 4 to Torso: (%f, %f) \n", sum_obstacle_pos_x[3], sum_obstacle_pos_y[3] );
-    // printf("Obstacle 5 to Torso: (%f, %f) \n", sum_obstacle_pos_x[4], sum_obstacle_pos_y[4]);
-    // printf("Obstacle 6 to Torso: (%f, %f) \n", sum_obstacle_pos_x[5], sum_obstacle_pos_y[5] );
-    // printf("Obstacle 7 to Torso: (%f, %f) \n", sum_obstacle_pos_x[6], sum_obstacle_pos_y[6]);
-    // printf("Obstacle 8 to Torso: (%f, %f) \n", sum_obstacle_pos_x[7], sum_obstacle_pos_y[7]);
-    // printf("Obstacle 9 to Torso: (%f, %f) \n", sum_obstacle_pos_x[8], sum_obstacle_pos_y[8]);
-    // printf("Obstacle 10 to Torso: (%f, %f) \n", sum_obstacle_pos_x[9], sum_obstacle_pos_y[9] );
+    for(int j=0;j<3;j++){
+        goal_location[j] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + j];
+    }
+
+    SATYRR_X_offset =  m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3];
+    SATYRR_Y_offset =   m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1];
     obstacle_init_flag = true;
 
 }
@@ -292,8 +310,9 @@ void SATYRR_Init(const mjModel* m, mjData* d)
     d->qpos[m->jnt_qposadr[torso_Z]] = -0.5;  //Initial Height Position of the Robot
     d->qpos[m->jnt_qposadr[torso_X]] = 0.0; 
     d->qpos[m->jnt_qposadr[torso_Y]] = 0.0; 
-    d->qpos[m->jnt_qposadr[torso_Pitch]] = 0;
-    d->qpos[m->jnt_qposadr[torso_Roll]] = 0;  
+    d->qpos[m->jnt_qposadr[torso_Pitch]] = 0.0;
+    d->qpos[m->jnt_qposadr[torso_Roll]] = 0.0; 
+    d->qpos[m->jnt_qposadr[torso_Yaw]] = 0.0; 
     d->qpos[m->jnt_qposadr[j_hip_l]] = SATYRR_S.desHip; 
     d->qpos[m->jnt_qposadr[j_hip_r]] = SATYRR_S.desHip; 
     d->qpos[m->jnt_qposadr[j_knee_l]] = -SATYRR_S.desHip*2; 
@@ -318,28 +337,38 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
     SATYRR_S.q[6] = d->qpos[m->jnt_qposadr[j_knee_l]];
     SATYRR_S.q[7] = d->qpos[m->jnt_qposadr[j_knee_r]];
 
-    //q_vel_wheel_left & right
+    //q_wheel_left & right
     SATYRR_S.q[8] = d->qvel[m->jnt_dofadr[j_wheel_l]];
     SATYRR_S.q[9] = d->qvel[m->jnt_dofadr[j_wheel_r]];
 
-    //q_hip_wheel & right
+    //q_wheel & right
     SATYRR_S.q[10] = d->qpos[m->jnt_qposadr[j_wheel_l]];
     SATYRR_S.q[11] = d->qpos[m->jnt_qposadr[j_wheel_r]];
 
     //body state
-    SATYRR_S.x = d->qpos[m->jnt_qposadr[torso_X]]; //-SATYRR_r*0.5*(SATYRR_S.q[10] + SATYRR_S.q[11]);//
-    SATYRR_S.dx = (SATYRR_S.x - SATYRR_S.x_old) / (1/ctrl_update_freq);
+    SATYRR_S.roll = d->qpos[m->jnt_qposadr[torso_Roll]];
+    SATYRR_S.droll = (SATYRR_S.roll - SATYRR_S.roll_old) / 0.001;
+    SATYRR_S.roll_old = SATYRR_S.roll;
+
+    SATYRR_S.psi = d->qpos[m->jnt_qposadr[torso_Yaw]]; //-0.06*0.5*(SATYRR_S.q[11] - SATYRR_S.q[10])/SATYRR_S.width_wheel; //
+    SATYRR_S.dpsi = (SATYRR_S.psi - SATYRR_S.psi_old) / 0.001;
+    SATYRR_S.psi_old = SATYRR_S.psi;
+
+    SATYRR_S.x =  -0.06*0.5*(SATYRR_S.q[10] + SATYRR_S.q[11]); //cos(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_X]] - sin(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_Y]]; //-0.06*0.5*(SATYRR_S.q[10] + SATYRR_S.q[11]); //
+    SATYRR_S.dx = (SATYRR_S.x - SATYRR_S.x_old) / 0.001;
     SATYRR_S.x_old = SATYRR_S.x;
 
-    SATYRR_S.y = d->qpos[m->jnt_qposadr[torso_Y]];
+    SATYRR_S.y = cos(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_X]] + sin(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_Y]]; //d->qpos[m->jnt_qposadr[torso_Y]];
 
-    SATYRR_S.pitch = d->qpos[m->jnt_qposadr[torso_Pitch]];
-    SATYRR_S.dpitch = (SATYRR_S.pitch - SATYRR_S.pitch_old) / (1/ctrl_update_freq);
+    //SATYRR_S.pitch = d->qpos[m->jnt_qposadr[torso_Pitch]];
+    SATYRR_S.pitch = cos(-SATYRR_S.psi)*d->qpos[m->jnt_qposadr[torso_Pitch]] + sin(-SATYRR_S.psi)*SATYRR_S.roll;
+    SATYRR_S.dpitch = (SATYRR_S.pitch - SATYRR_S.pitch_old) / 0.001;
     SATYRR_S.pitch_old = SATYRR_S.pitch;
 
-    SATYRR_S.psi = d->qpos[m->jnt_qposadr[torso_Yaw]];
-    SATYRR_S.dpsi = (SATYRR_S.psi - SATYRR_S.psi_old) / (1/ctrl_update_freq);
-    SATYRR_S.psi_old = SATYRR_S.psi;
+    // printf("torso x and y = %f, %f \n",d->qpos[m->jnt_qposadr[torso_X]],d->qpos[m->jnt_qposadr[torso_Y]]);
+    // printf("des: %f, %f \n",compensated_des_x , compensated_des_th);
+    // printf("state: %f, %f, %f, %f \n",SATYRR_S.x , SATYRR_S.y, SATYRR_S.pitch, SATYRR_S.psi);
+    // printf("\n");
 }
 
 
@@ -358,20 +387,20 @@ void keyboard_input(mjData *d)
         forward_backward = max(forward_backward, -1);
         }
     else
-        forward_backward = 0;
+        forward_backward = 0.0;
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
         left_right += 0.001;
-        left_right = min(left_right, 0.5);
+        left_right = min(left_right, 1);
         }
     else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
         left_right -= 0.001;
-        left_right = max(left_right, -0.5);
+        left_right = max(left_right, -1);
         }
     else
-        left_right =0;
+        left_right = 0.0;
 
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
+    if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS){
         if (data_save_flag){
             myfile.close();
             printf("close file!! \n");
@@ -397,13 +426,15 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
     vector<double> des_state = {des_x, 0.0, des_dx, 0.0};
 
     vector<double> state_ = {SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch};
-    wheel_torque = SATYRR_Cont.f_stabilizationControl(des_state, state_);
+    SATYRR_S.getCOM(SATYRR_S.q[2],SATYRR_S.q[3], SATYRR_S.pitch);
+    wheel_torque = SATYRR_Cont.f_stabilizationControl(des_state, state_,SATYRR_S.pitch_actual);
        
     vector<double> des_yaw = {d_yaw, 0.0};
     vector<double> curr_yaw = {SATYRR_S.psi, SATYRR_S.dpsi};
 
     yaw_damp = SATYRR_Cont.f_yawControl(des_yaw, curr_yaw);
 
+    // printf("torq =%f, %f \n",wheel_torque,yaw_damp);
     SATYRR_Cont.applied_torq[2] =  wheel_torque - yaw_damp; // wheel_torque;
     SATYRR_Cont.applied_torq[5] =  wheel_torque + yaw_damp; //wheel_torque;
 
@@ -417,7 +448,6 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
         d->ctrl[4] = -SATYRR_Cont.applied_torq[4];
         d->ctrl[5] = -SATYRR_Cont.applied_torq[5];
     }
-
 }
 
 void hmi_input(void){
@@ -455,7 +485,6 @@ void hmi_input(void){
         // printf("Commanding nothing for Foward/backward! \n");
     }
 
-    
     // Piece-wise velocity mapping
     if (y_COM_HMI > 0) y_COM_HMI_sign = 1;
     else if (y_COM_HMI < 0) y_COM_HMI_sign = -1;
@@ -567,12 +596,66 @@ void udp_receive()
 	WSACleanup();
 }
 
+void obstacle_control(const mjModel *m, mjData *d){
+    if(clock() - now > delay){
+        // m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+0];
+        //For the first moving obstacle
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] > 1.0){
+            shift_y = -OBS_VEL;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] < -1.0){
+            shift_y = OBS_VEL;
+        }
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1]+shift_y;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1]-shift_y;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1]+shift_y;
+        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+0]-shift_y;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1]+shift_y;
+        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0]+shift_y;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1]+shift_y;
+        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0]+shift_y;
+        
+        
+        now = clock();
+        // seconds_passed++;
+        // printf("seconds_passed: %d \n", seconds_passed);
+    }
+}
+
+
 void mycontroller(const mjModel *m, mjData *d)
 {
+
+
     float x_force = 0.0; // sagital plane
     float y_force = 0.0; // frontal plane
     double sensitivity_x = 0.1;
     double sensitivity_y = 0.1;
+    double robot_x = 0.0;
+    double robot_y = 0.0;
+
+    robot_x = d->qpos[m->jnt_qposadr[torso_X]] - 19; // Robot's starting position relative to the world frame
+    robot_y = d->qpos[m->jnt_qposadr[torso_Y]];
+
+
+    // Timer for completion time
+#if defined DYNAMIC_MAP || defined STATIC_MAP 
+    if(robot_x > 7.7808 && completed == 0){
+        completion_time_clock = clock() - completion_time_clock;
+        printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
+        completed = 1;
+    }
+#endif
+#ifdef PATH_WIDTH_MAP
+    if(robot_x > 1.9456 && robot_y < -5.6388 && completed == 0){
+        completion_time_clock = clock() - completion_time_clock;
+        printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
+        completed = 1;
+    }
+#endif
+
 
     //init position of obstacles
     if (obstacle_init_flag != true)
@@ -584,15 +667,28 @@ void mycontroller(const mjModel *m, mjData *d)
     //Update robot position
     SATYRR_state_update(m,d);
 
+    //Update obstacle location
+#ifdef DYNAMIC_MAP
+    obstacle_control(m,d);
+#endif
+
+    // Choose which map to use (affects the obstacle repulsive force)
+#ifdef STATIC_MAP
+    map_choice = 0;
+#endif
+#ifdef DYNAMIC_MAP
+    map_choice = 1;
+#endif
+#ifdef PATH_WIDTH_MAP
+    map_choice = 2;
+#endif
+
     //Calculate Distance
     APF.fnc_cal_distance(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
     
     //Attractive force
     // APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
 
-    //Repulsive force
-    APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 1);
-        
 #ifdef KEYBOARD_INPUT
     sensitivity_x = keyboard_input_sensitivity_x;
     sensitivity_y = keyboard_input_sensitivity_y;
@@ -611,7 +707,10 @@ void mycontroller(const mjModel *m, mjData *d)
 #endif
 
 #ifdef CASE2_FEEDBACK_TO_HUMAN
-    x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
+    //Repulsive force
+    // APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 1);
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 0, map_choice);
+    x_force = human_repulse_x_gain*APF.obs_repul_force_x_human; // with force to human
     y_force = human_repulse_y_gain*APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1]; //without repulsive force for controller
@@ -620,16 +719,19 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE3_COMPENSATED_CONTROLLER 
     x_force = 0; // without force to human
     y_force = 0; // without force to human
-    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 1, map_choice);
+    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x_controller; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
     // x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
     // y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
-    x_force = APF.obs_repul_force_x; // with force to human
+    
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 2, map_choice);
+    x_force = APF.obs_repul_force_x_human; // with force to human
     y_force = APF.obs_repul_force_y_human; // with force to human
-    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x; // with repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x_controller; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 
@@ -641,11 +743,19 @@ void mycontroller(const mjModel *m, mjData *d)
 
     if(cnt % 500 == 0)
     {
+<<<<<<< HEAD
         // printf("x_force: %f, y_force: %f \n",x_force, y_force);
         printf("SATYRR_S.x: %f, SATYRR_S.pitch: %f, SATYRR_S.dx: %f, SATYRR_S.dpitch: %f \n",SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch);
+=======
+        // printf("X: %f, Y: %f \n", robot_x, robot_y);
+        // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
+        // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
+        // printf("x_force: %f, y_force: %f \n",x_force, y_force);
+        // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
+>>>>>>> 86487068d26d5a11e780a8cdeac2d6aa1efb1e8f
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
-        // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y);
-        // printf("repulsive force %f, %f \n",APF.repulsive_force[0], APF.repulsive_force[1]);
+        // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
+        printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");
@@ -655,8 +765,24 @@ void mycontroller(const mjModel *m, mjData *d)
         cnt = 0;
     }
     if (data_save_flag){
-        if(cnt % 100 == 0){
-            myfile << d->time << ", " << SATYRR_S.x << ", " << SATYRR_S.y ;
+        if(cnt % 1 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
+            myfile << d->time 
+            << ", " << compensated_des_x 
+            << ", " << compensated_des_th 
+            << ", " << SATYRR_S.x 
+            << ", " << SATYRR_S.pitch
+            << ", " << SATYRR_S.pitch_actual
+            << ", " << compensated_des_dx
+            << ", " << SATYRR_S.dx 
+            << ", " << SATYRR_S.dpitch
+            << ", " << compensated_des_th 
+            << ", " << SATYRR_S.psi
+            << ", " << SATYRR_S.dpsi
+            << ", " << SATYRR_S.q[10]
+            << ", " << SATYRR_S.q[11]
+            << ", " << wheel_torque
+            << ", " << yaw_damp
+            ;
             myfile << "\n";
         } 
     }
@@ -695,6 +821,7 @@ void mycontroller(const mjModel *m, mjData *d)
     cnt = cnt+1;
 }
 
+
 // main function
 int main(int argc, const char **argv)
 {
@@ -703,7 +830,17 @@ int main(int argc, const char **argv)
 
     // load and compile model
     char error[1000] = "Could not load binary model";
-    m = mj_loadXML("../src/satyyr.xml", 0, error, 1000);
+    
+#ifdef STATIC_MAP
+    m = mj_loadXML("../src/satyyr_static.xml", 0, error, 1000);
+#endif
+#ifdef DYNAMIC_MAP
+    m = mj_loadXML("../src/satyyr_dynamic.xml", 0, error, 1000);
+#endif
+#ifdef PATH_WIDTH_MAP
+    m = mj_loadXML("../src/satyyr_path_width.xml", 0, error, 1000);
+#endif
+    
 
     if (!m)
         mju_error_s("Load model error: %s", error);
@@ -788,6 +925,9 @@ int main(int argc, const char **argv)
     s_other_send.sin_port = htons(PORT_SEND);
 	s_other_send.sin_addr.S_un.S_addr = inet_addr(SERVER);
 
+    // Timer for path starts
+    completion_time_clock = clock();
+
     // run main loop, target real-time simulation and 60 fps rendering
     while (!glfwWindowShouldClose(window))
     {
@@ -840,7 +980,7 @@ int main(int argc, const char **argv)
     mj_deleteModel(m);
     mj_deactivate();
 
-        
+    myfile.close();
 
 // terminate GLFW (crashes with Linux NVidia drivers)
 #if defined(__APPLE__) || defined(_WIN32)

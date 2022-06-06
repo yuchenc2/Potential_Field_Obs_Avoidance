@@ -1,2 +1,4 @@
 .vscode/
 MUJOCO_LOG.TXT
+src/data_save.txt
+*.exe
