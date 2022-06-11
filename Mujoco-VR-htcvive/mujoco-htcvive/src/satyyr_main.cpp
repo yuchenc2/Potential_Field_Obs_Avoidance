@@ -4,7 +4,6 @@
 //-----------------------------------//
 
 #include "mujoco.h"
-#include "glfw3.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include <string>
@@ -18,6 +17,11 @@
 #include <cstdio>
 #include <ctime>
 #include <winsock2.h>
+#include "string.h"
+#include "GL/glew.h"
+#include "glfw3.h"
+#include <openvr.h>
+#include <../../mujoco200/eigen/Eigen/Dense>
 
 using namespace vr;
 using namespace Eigen;
@@ -32,7 +36,6 @@ using namespace Eigen;
 #include "./include/SRanipal_Lip.h"
 #include "./include/SRanipal_Enums.h"
 #include "./include/SRanipal_NotRelease.h"
-#include <string>
 #include <iostream>
 #pragma comment (lib, "./lib/SRanipal.lib")
 using namespace ViveSR;
@@ -55,19 +58,19 @@ float *gaze;
 //-------------------------- Controller/Input Cases and Gains ---------------------------
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK //NOTHING
-#define CASE2_FEEDBACK_TO_HUMAN 
+#define CASE1_WITHOUT_FEEDBACK //NOTHING
+// #define CASE2_FEEDBACK_TO_HUMAN 
 // #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
-// #define KEYBOARD_INPUT 
-#define HMI_INPUT
+#define KEYBOARD_INPUT 
+// #define HMI_INPUT
 
 /* Map Cases */
 // #define STATIC_MAP
-#define DYNAMIC_MAP
-// #define PATH_WIDTH_MAP
+// #define DYNAMIC_MAP
+#define PATH_WIDTH_MAP
 
 
 /* Gains to tune */
@@ -92,8 +95,8 @@ using namespace std;
 #define Obs_closest_one 2
 #define OBS_VEL 0.0093 //0.001 = 1m/s, obstacle moving speed
 #define M_PI           3.14159265358979323846
-#define min(a,b) a<b?a:b
-#define max(a,b) a>b?a:b
+// #define min(a,b) a<b?a:b
+// #define max(a,b) a>b?a:b
 int delay = 0.01*CLOCKS_PER_SEC;
 double shift_y = OBS_VEL;
 int obs_case = 1; // change obs case
@@ -105,7 +108,7 @@ SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
 Potential_Field APF;
 ofstream myfile;
-bool data_save_flag = true;
+bool data_save_flag = false;
 
 //----------------------------------- Input Setup ---------------------------------------
 
@@ -404,7 +407,7 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
 void keyboard_input(mjData *d)
 {
     const double max_speed = 2.0;
-    const double max_speed_yaw = 2.0;
+    const double max_speed_yaw = 1.0;
 
 #ifdef KEYBOARD_INPUT
     delta += update_rate;
@@ -422,11 +425,11 @@ void keyboard_input(mjData *d)
         forward_backward = 0.0;
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
-        left_right += 0.001;
+        left_right += 0.0005;
         left_right = min(left_right, max_speed_yaw);
         }
     else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
-        left_right -= 0.001;
+        left_right -= 0.0005;
         left_right = max(left_right, -max_speed_yaw);
         }
     else
@@ -483,13 +486,13 @@ void hmi_input(void){
     // piece-wise linear function 
     // For velocity 
     double x_COM_HMI_sign = 0.0;
-    double velMax = 1.25; //0.60; // in m/s
+    double velMax = 0.8; //0.60; // in m/s
     double x_COM_HMI_db = 0.01;
     double x_COM_HMI_max = 0.08;
     double vel_slope = velMax/(x_COM_HMI_max-x_COM_HMI_db); // around 11.5
     // For yaw
     double y_COM_HMI_sign = 0.0;
-    double yawMax = 0.8; //0.70; // in m/s
+    double yawMax = 0.6; //0.70; // in m/s
     double y_COM_HMI_db = 0.01;
     double y_COM_HMI_max = 0.125;
     double yaw_slope = yawMax/(y_COM_HMI_max-y_COM_HMI_db); // around 12.4
@@ -523,7 +526,6 @@ void hmi_input(void){
 //----------------------------------- UDP Receive ---------------------------------------
 void udp_receive()
 {
-    
 	struct sockaddr_in si_me, si_other;
 	
 	SOCKET s;
@@ -557,13 +559,12 @@ void udp_receive()
 	si_me.sin_addr.s_addr = htonl(INADDR_ANY);
 	
 	// bind socket to port
-	if( bind(s , (struct sockaddr*)&si_me, sizeof(si_me) ) == -1)
+	if( ::bind(s , (struct sockaddr*)&si_me, sizeof(si_me) ) == -1)
 	{
 		printf("Bind failed with error code : %d" , WSAGetLastError());
 		exit(EXIT_FAILURE);
 	}
 	puts("Bind done");
-
     
     // Measuring loop time
     int count_itr_receive = 0;
@@ -571,7 +572,6 @@ void udp_receive()
 
 	while(1)
 	{
-        		
 		// receive a reply and print it
 		// clear the buffer by filling null, it might have previously received data
 		memset(buf,'\0', BUFLEN);
@@ -581,7 +581,6 @@ void udp_receive()
 			exit(EXIT_FAILURE);
 		}
         
-        // printf("RECEIVED DATA: \n");
         int count = 0;
         
 		char *token = strtok(buf, ",");
@@ -590,28 +589,18 @@ void udp_receive()
 		while (count < HMI_DATA_COUNT)
 		{
 		    float received_float = strtof(token, NULL);
-		    // printf("%f ", received_float);
             HMI_Data[count] = received_float;
 
 		    token = strtok(NULL, ",");
             count++;
 		}
-        // printf("\n");
         hmi_input();
-        
-        // count_itr_receive++;
-        // auto end_main_receive = std::chrono::high_resolution_clock::now();
-        // auto elapsed_main_receive = std::chrono::duration_cast<std::chrono::nanoseconds>(end_main_receive - begin_main_receive);
-        // printf("Elapsed time: %d\n", elapsed_main_receive.count() * 1e-9);
-        // if(elapsed_main_receive.count() * 1e-9 >= 10.0000000 && fflag_receive == false){
-        //     printf("Receive Count: %d\n", count_itr_receive);
-        //     fflag_receive = true;
-        // }      
 	}
 
 	closesocket(s);
 	WSACleanup();
 }
+
 
 //-------------------------------- MuJoCo functions -------------------------------------
 
@@ -790,6 +779,8 @@ void v_initPost(void)
 }
 
 
+float SmoothData;
+float LPF_Beta = 0.005; // 0<ß<1, smaller is slower response
 // copy one pose from vr to our format
 void v_copyPose(const TrackedDevicePose_t* pose, float* roompos, float* roommat)
 {
@@ -807,7 +798,7 @@ void v_copyPose(const TrackedDevicePose_t* pose, float* roompos, float* roommat)
     //Location of the camera site attached on the car
     double r1 = d->site_xpos[3 * siteID + 0];
     double r2 = d->site_xpos[3 * siteID + 1];
-    double r3 = d->site_xpos[3 * siteID + 2];
+    double r3 = 0.65;
 
     //Orientation of the camera site on car relative to the world
     robot_to_world(0,0) = d->site_xmat[9 * siteID + 0];
@@ -819,17 +810,46 @@ void v_copyPose(const TrackedDevicePose_t* pose, float* roompos, float* roommat)
     robot_to_world(2,0) = d->site_xmat[9 * siteID + 6];
     robot_to_world(2,1) = d->site_xmat[9 * siteID + 7];
     robot_to_world(2,2) = d->site_xmat[9 * siteID + 8];
-    robot_to_world = robot_to_world.inverse().eval();
+    // robot_to_world(0,0) = d->site_xmat[9 * siteID + 3];
+    // robot_to_world(0,1) = d->site_xmat[9 * siteID + 4];
+    // robot_to_world(0,2) = d->site_xmat[9 * siteID + 5];
+    // robot_to_world(1,0) = d->site_xmat[9 * siteID + 0];
+    // robot_to_world(1,1) = d->site_xmat[9 * siteID + 1];
+    // robot_to_world(1,2) = d->site_xmat[9 * siteID + 2];
+    // robot_to_world(2,0) = d->site_xmat[9 * siteID + 6];
+    // robot_to_world(2,1) = d->site_xmat[9 * siteID + 7];
+    // robot_to_world(2,2) = d->site_xmat[9 * siteID + 8];
+    robot_to_world = robot_to_world.eval();
 
     //Orientation matrix to transform camera site to the world frame and VR headset to the world frame
-    Matrix3f around_x_axis;
-    around_x_axis << 1, 0, 0,
-                    0, 0, -1,
-                    0, 1, 0;
-    Matrix3f around_y_axis;
-    around_y_axis << 0, 0, 1,
-                    0, 1, 0,
-                    -1, 0, 0;
+
+    SmoothData = SmoothData - (LPF_Beta * (SmoothData - SATYRR_S.psi));
+
+    Matrix3f around_x_axis_neg_90, around_x_axis_pos_90;
+    around_x_axis_neg_90 << 1, 0, 0, //-90
+                            0, 0, 1,
+                            0, -1, 0;
+    around_x_axis_pos_90 << 1, 0, 0, //90
+                            0, 0, -1,
+                            0, 1, 0;
+    Matrix3f around_y_axis_neg_90, around_y_axis_pos_90, around_y_axis_input;
+    around_y_axis_neg_90 << 0, 0, -1, //90
+                            0, 1, 0,
+                            1, 0, 0;
+    around_y_axis_pos_90 << 0, 0, 1, //90
+                            0, 1, 0,
+                            -1, 0, 0;
+                            
+    around_y_axis_input << cos(SmoothData), 0, sin(SmoothData), //90
+                            0, 1, 0,
+                            -sin(SmoothData), 0, cos(SmoothData);
+    Matrix3f around_z_axis_neg_90, around_z_axis_pos_90; 
+    around_z_axis_neg_90 << 0, 1, 0, //-90
+                            -1, 0, 0,
+                            0, 0, 1;
+    around_z_axis_pos_90 << 0, -1, 0, //90
+                            1, 0, 0,
+                            0, 0, 1;
  
     //Orientation of the VR headset relative to the world
     camera_to_world(0,0) = p->m[0][0];
@@ -842,10 +862,14 @@ void v_copyPose(const TrackedDevicePose_t* pose, float* roompos, float* roommat)
     camera_to_world(2,1) = p->m[2][1];
     camera_to_world(2,2) = p->m[2][2];
 
+    //
     //Get camera to robot orientation
-    camera_to_robot = around_y_axis*around_x_axis*robot_to_world*around_x_axis.inverse().eval()*camera_to_world;
+    // camera_to_robot = around_y_axis_neg_90*around_y_axis_neg_90*around_z_axis_pos_90*around_z_axis_pos_90*around_x_axis_pos_90*robot_to_world*around_x_axis_pos_90.inverse().eval();
+    // around_y_axis*camera_to_world;
+    // camera_to_robot = robot_to_world;
+    camera_to_robot = around_y_axis_input*camera_to_world;
 
-
+    //around_y_axis*around_x_axis*robot_to_world*around_x_axis.inverse().eval()*camera_to_world
 
     // Make camera XYZ positions change relative to the robot's location
     //TODO: roompos = 0 camera does not center at (0, 0, 0)! Why need to add offset -0.5?
@@ -867,8 +891,7 @@ void v_copyPose(const TrackedDevicePose_t* pose, float* roompos, float* roommat)
     // roommat[5] = p->m[1][2];
     // roommat[6] = p->m[2][0];
     // roommat[7] = p->m[2][1];
-    // roommat[8] = p->m[2][2];    
-    
+    // roommat[8] = p->m[2][2];   
 
     // Option 2: Make camera orientation change relative to the car orientation
     roommat[0] = camera_to_robot(0,0);
@@ -912,32 +935,33 @@ void v_copyPose(const TrackedDevicePose_t* pose, float* roompos, float* roommat)
         rayvector[1] = res[2];
         rayvector[2] = -res[1];        
         
-        // mj_ray function setup
-        mjtByte flg_static = 1;//if False, we exclude geoms that are children of worldbody.
-        int bodyexclude = mj_name2id(m, mjOBJ_BODY, "eye_ray_location"); //if this is a body ID, we exclude all children geoms of this body. -1 if exlude nothing
-        const mjtByte* geomgroup = NULL; // a vector of booleans of length const.NGROUP which specifies what geom groups (stored in model.geom_group) to enable or disable.  If none, all groups are used
-        int geomid; //return pointed geom id
-        mjtNum eye_position[3];
-        eye_position[0] = r1;
-        eye_position[1] = r2;
-        eye_position[2] = r3;
-        mjtNum distance = mj_ray(m, d, eye_position, rayvector, geomgroup, flg_static, bodyexclude, &geomid);
 
-        //Using the distance between the eye and the geom, move the ball that indicates where the person is looking at
-        if(distance != -1){
-            if(geomid != -1){
-                mjtNum final_res[3];
-                mju_scl3(final_res, rayvector, distance);
-                final_res[0] = eye_position[0] + final_res[0];
-                final_res[1] = eye_position[1] + final_res[1];
-                final_res[2] = eye_position[2] + final_res[2];
-                //XYZ position of where the person is looking at
-                m->body_pos[mj_name2id(m, mjOBJ_BODY, "eye_ray_location")*3+0] = final_res[0];
-                m->body_pos[mj_name2id(m, mjOBJ_BODY, "eye_ray_location")*3+1] = final_res[1];
-                m->body_pos[mj_name2id(m, mjOBJ_BODY, "eye_ray_location")*3+2] = final_res[2];
-                std::cout  << "XYZLocation = (" << final_res[0] << ","<< final_res[1] <<","<< final_res[2] <<") "<< std::endl;
-            }
-        }
+        /*Uncomment code below to show eye-gaze location*/
+        // // mj_ray function setup
+        // mjtByte flg_static = 1;//if False, we exclude geoms that are children of worldbody.
+        // int bodyexclude = mj_name2id(m, mjOBJ_BODY, "eye_ray_location"); //if this is a body ID, we exclude all children geoms of this body. -1 if exlude nothing
+        // const mjtByte* geomgroup = NULL; // a vector of booleans of length const.NGROUP which specifies what geom groups (stored in model.geom_group) to enable or disable.  If none, all groups are used
+        // int geomid; //return pointed geom id
+        // mjtNum eye_position[3];
+        // eye_position[0] = r1;
+        // eye_position[1] = r2;
+        // eye_position[2] = r3;
+        // mjtNum distance = mj_ray(m, d, eye_position, rayvector, geomgroup, flg_static, bodyexclude, &geomid);
+        // //Using the distance between the eye and the geom, move the ball that indicates where the person is looking at
+        // if(distance != -1){
+        //     if(geomid != -1){
+        //         mjtNum final_res[3];
+        //         mju_scl3(final_res, rayvector, distance);
+        //         final_res[0] = eye_position[0] + final_res[0];
+        //         final_res[1] = eye_position[1] + final_res[1];
+        //         final_res[2] = eye_position[2] + final_res[2];
+        //         //XYZ position of where the person is looking at
+        //         m->body_pos[mj_name2id(m, mjOBJ_BODY, "eye_ray_location")*3+0] = final_res[0];
+        //         m->body_pos[mj_name2id(m, mjOBJ_BODY, "eye_ray_location")*3+1] = final_res[1];
+        //         m->body_pos[mj_name2id(m, mjOBJ_BODY, "eye_ray_location")*3+2] = final_res[2];
+        //         // std::cout  << "XYZLocation = (" << final_res[0] << ","<< final_res[1] <<","<< final_res[2] <<") "<< std::endl;
+        //     }
+        // }
         
     }
 }
@@ -967,6 +991,14 @@ void v_update(void)
                 hmd.eyeoffset[n][2]*hmd.roommat[3*i+2];
 
         // assign forward and up
+        // scn.camera[n].forward[0] = hmd.roommat[0];
+        // scn.camera[n].forward[1] = hmd.roommat[3];
+        // scn.camera[n].forward[2] = hmd.roommat[6];
+        // scn.camera[n].up[0] = -hmd.roommat[1];
+        // scn.camera[n].up[1] = -hmd.roommat[4];
+        // scn.camera[n].up[2] = -hmd.roommat[7];
+
+        
         scn.camera[n].forward[0] = -hmd.roommat[2];
         scn.camera[n].forward[1] = -hmd.roommat[5];
         scn.camera[n].forward[2] = -hmd.roommat[8];
@@ -1151,7 +1183,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
-        // printf("des yaw %f, yaw %f \n",compensated_des_dy, SATYRR_S.y);
+        // printf("yaw %f, yaw %f \n", SATYRR_S.psi, SATYRR_S.y);
         cnt = 0;
     }
     if (data_save_flag){
@@ -1424,57 +1456,59 @@ int main(int argc, const char** argv)
     frametime = d->time;
     while( !glfwWindowShouldClose(window) )
     {
-        // render new frame if it is time, or if simulation was reset
-        if( (d->time-frametime)>1.0/FPS || d->time<frametime )
-        {
-            // create abstract scene
-            mjv_updateScene(m, d, &vopt, NULL, NULL, mjCAT_ALL, &scn);
+        if(robot_failed != 1){
+            // render new frame if it is time, or if simulation was reset
+            if( (d->time-frametime)>1.0/FPS || d->time<frametime )
+            {
+                // create abstract scene
+                mjv_updateScene(m, d, &vopt, NULL, NULL, mjCAT_ALL, &scn);
 
+                mj_step(m, d);
+                // Send the simulated robot's data through UDP
+                i_send = 0;     
+                while (i_send < ROBOT_DATA_COUNT - 1 ) 
+                {
+                    strg = strg + to_string(Robot_Data[i_send]) + ",";
+                    i_send = i_send + 1;
+                }
+                strg = strg + to_string(Robot_Data[i_send]);
+                begin_main_receive = std::chrono::high_resolution_clock::now();
+                if (sendto(s_send, strg.c_str(), strg.size() + 1, 0 , (struct sockaddr *) &s_other_send, slen) == SOCKET_ERROR)
+                {
+                    printf("sendto() failed with error code : %d" , WSAGetLastError());
+                    exit(EXIT_FAILURE);
+                }
+                // cout << "Data Sent: " << strg << endl;
+                strg.clear();
+
+                // update vr poses and controller states
+                v_update();
+
+                // render in offscreen buffer
+                mjrRect viewFull = {0, 0, 2*(int)hmd.width, (int)hmd.height};
+                mjr_setBuffer(mjFB_OFFSCREEN, &con);
+                mjr_render(viewFull, &scn, &con);
+
+                // show FPS (window only, hmd clips it)
+                FPS = 0.9*FPS + 0.1/(glfwGetTime() - lasttm);
+                lasttm = glfwGetTime();
+                // char fpsinfo[20];
+                // sprintf(fpsinfo, "FPS %.0f", FPS);
+                // mjr_overlay(mjFONT_BIG, mjGRID_BOTTOMLEFT, viewFull, fpsinfo, NULL, &con);
+
+                // render to vr and window
+                v_render();
+
+                // save simulation time
+                frametime = d->time;
+            }
+
+            // simulate
             mj_step(m, d);
-            // Send the simulated robot's data through UDP
-            i_send = 0;     
-            while (i_send < ROBOT_DATA_COUNT - 1 ) 
-            {
-                strg = strg + to_string(Robot_Data[i_send]) + ",";
-                i_send = i_send + 1;
-            }
-            strg = strg + to_string(Robot_Data[i_send]);
-            begin_main_receive = std::chrono::high_resolution_clock::now();
-            if (sendto(s_send, strg.c_str(), strg.size() + 1, 0 , (struct sockaddr *) &s_other_send, slen) == SOCKET_ERROR)
-            {
-                printf("sendto() failed with error code : %d" , WSAGetLastError());
-                exit(EXIT_FAILURE);
-            }
-            // cout << "Data Sent: " << strg << endl;
-            strg.clear();
 
-            // update vr poses and controller states
-            v_update();
-
-            // render in offscreen buffer
-            mjrRect viewFull = {0, 0, 2*(int)hmd.width, (int)hmd.height};
-            mjr_setBuffer(mjFB_OFFSCREEN, &con);
-            mjr_render(viewFull, &scn, &con);
-
-            // show FPS (window only, hmd clips it)
-            FPS = 0.9*FPS + 0.1/(glfwGetTime() - lasttm);
-            lasttm = glfwGetTime();
-            // char fpsinfo[20];
-            // sprintf(fpsinfo, "FPS %.0f", FPS);
-            // mjr_overlay(mjFONT_BIG, mjGRID_BOTTOMLEFT, viewFull, fpsinfo, NULL, &con);
-
-            // render to vr and window
-            v_render();
-
-            // save simulation time
-            frametime = d->time;
+            // update GUI
+            glfwPollEvents();
         }
-
-        // simulate
-        mj_step(m, d);
-
-        // update GUI
-        glfwPollEvents();
     }
 
     return 1;
