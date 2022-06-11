@@ -9,29 +9,19 @@
 
 
 /*   Decide cases for feedback  */
-<<<<<<< HEAD
-#define CASE1_WITHOUT_FEEDBACK //NOTHING
-// #define CASE2_FEEDBACK_TO_HUMAN 
-// #define CASE3_COMPENSATED_CONTROLLER 
-=======
 // #define CASE1_WITHOUT_FEEDBACK //NOTHING
-// #define CASE2_FEEDBACK_TO_HUMAN 
-#define CASE3_COMPENSATED_CONTROLLER 
->>>>>>> 86487068d26d5a11e780a8cdeac2d6aa1efb1e8f
+#define CASE2_FEEDBACK_TO_HUMAN 
+// #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
-#define KEYBOARD_INPUT 
-<<<<<<< HEAD
-// #define HMI_INPUT
-=======
-//#define HMI_INPUT
+// #define KEYBOARD_INPUT 
+#define HMI_INPUT
 
 /* Map Cases */
 // #define STATIC_MAP
-// #define DYNAMIC_MAP
-#define PATH_WIDTH_MAP
->>>>>>> 86487068d26d5a11e780a8cdeac2d6aa1efb1e8f
+#define DYNAMIC_MAP
+// #define PATH_WIDTH_MAP
 
 
 #include "mujoco.h"
@@ -138,7 +128,7 @@ bool data_save_flag = true;
 // UDP setup
 #include <winsock2.h>
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
-#define SERVER "169.254.205.99"
+#define SERVER "169.254.215.171"
 #define BUFLEN 548	// Max length of buffer
 #define PORT_SEND 54004	// The port on which to send data
 #define PORT_RECEIVE 54003	// The port on which to receive data
@@ -374,28 +364,31 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
 
 void keyboard_input(mjData *d)
 {
+    const double max_speed = 2.0;
+    const double max_speed_yaw = 2.0;
+
 #ifdef KEYBOARD_INPUT
     delta += update_rate;
     if(delta > 1)
        delta = 0;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
         forward_backward += 0.001;
-        forward_backward = min(forward_backward, 1);
+        forward_backward = min(forward_backward, max_speed);
         }
     else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
         forward_backward -= 0.001;
-        forward_backward = max(forward_backward, -1);
+        forward_backward = max(forward_backward, -max_speed);
         }
     else
         forward_backward = 0.0;
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
         left_right += 0.001;
-        left_right = min(left_right, 1);
+        left_right = min(left_right, max_speed_yaw);
         }
     else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
         left_right -= 0.001;
-        left_right = max(left_right, -1);
+        left_right = max(left_right, -max_speed_yaw);
         }
     else
         left_right = 0.0;
@@ -416,12 +409,6 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
 
     // Knee controller
     SATYRR_Cont.f_jointContrl(SATYRR_S.q[6], SATYRR_S.q[7], SATYRR_S.q[4], SATYRR_S.q[5], -SATYRR_S.desHip*2, 200 ,2, 200, 2, Knee);
-
-    // // SATURATION
-    // if (des_x > 5)
-    //     des_x = 5;
-    // else if (des_x < -5)
-    //     des_x = -5;
 
     vector<double> des_state = {des_x, 0.0, des_dx, 0.0};
 
@@ -453,24 +440,21 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
 void hmi_input(void){
     x_COM_HMI = HMI_Data[1];
     y_COM_HMI = HMI_Data[2];
-    // printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_COM_HMI, y_COM_HMI);
 #ifdef HMI_INPUT
-
     // piece-wise linear function 
     // For velocity 
     double x_COM_HMI_sign = 0.0;
-    double velMax = 0.60; // in m/s
+    double velMax = 1.25; //0.60; // in m/s
     double x_COM_HMI_db = 0.01;
     double x_COM_HMI_max = 0.08;
     double vel_slope = velMax/(x_COM_HMI_max-x_COM_HMI_db); // around 11.5
     // For yaw
     double y_COM_HMI_sign = 0.0;
-    double yawMax = 0.70; // in m/s
+    double yawMax = 0.8; //0.70; // in m/s
     double y_COM_HMI_db = 0.01;
     double y_COM_HMI_max = 0.125;
     double yaw_slope = yawMax/(y_COM_HMI_max-y_COM_HMI_db); // around 12.4
 
-    // printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_COM_HMI, y_COM_HMI);
     // Piece-wise velocity mapping
     if (x_COM_HMI > 0) x_COM_HMI_sign = 1;
     else if (x_COM_HMI < 0) x_COM_HMI_sign = -1;
@@ -479,10 +463,8 @@ void hmi_input(void){
         forward_backward = 0;
     }else if(abs(x_COM_HMI) >= x_COM_HMI_db && abs(x_COM_HMI) < x_COM_HMI_max){
         forward_backward = x_COM_HMI_sign*vel_slope*(abs(x_COM_HMI) - x_COM_HMI_db);
-        // printf("Commanding forward! \n");
     }else{
         forward_backward = x_COM_HMI_sign*velMax;
-        // printf("Commanding nothing for Foward/backward! \n");
     }
 
     // Piece-wise velocity mapping
@@ -493,13 +475,10 @@ void hmi_input(void){
         left_right = 0;
     }else if(abs(y_COM_HMI) >= y_COM_HMI_db && abs(y_COM_HMI) < y_COM_HMI_max){
         left_right = y_COM_HMI_sign*yaw_slope*(abs(y_COM_HMI) - y_COM_HMI_db);
-        // printf("Commanding forward! \n");
     }else{
         left_right = y_COM_HMI_sign*yawMax;
-        // printf("Commanding nothing for Foward/backward! \n");
     }
 #endif
-
 }
 
 
@@ -712,16 +691,16 @@ void mycontroller(const mjModel *m, mjData *d)
     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 0, map_choice);
     x_force = human_repulse_x_gain*APF.obs_repul_force_x_human; // with force to human
     y_force = human_repulse_y_gain*APF.obs_repul_force_y_human; // with force to human
-    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1]; //without repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right; //without repulsive force for controller
 #endif
 
 #ifdef CASE3_COMPENSATED_CONTROLLER 
     x_force = 0; // without force to human
     y_force = 0; // without force to human
     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 1, map_choice);
-    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x_controller; // with repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y_controller; // with repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
@@ -731,8 +710,8 @@ void mycontroller(const mjModel *m, mjData *d)
     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 2, map_choice);
     x_force = APF.obs_repul_force_x_human; // with force to human
     y_force = APF.obs_repul_force_y_human; // with force to human
-    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0] + APF.obs_repul_force_x_controller; // with repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1] + APF.obs_repul_force_y_controller; // with repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 
     compensated_des_x += compensated_des_dx*update_rate;
@@ -743,19 +722,14 @@ void mycontroller(const mjModel *m, mjData *d)
 
     if(cnt % 500 == 0)
     {
-<<<<<<< HEAD
-        // printf("x_force: %f, y_force: %f \n",x_force, y_force);
-        printf("SATYRR_S.x: %f, SATYRR_S.pitch: %f, SATYRR_S.dx: %f, SATYRR_S.dpitch: %f \n",SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch);
-=======
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
         // printf("x_force: %f, y_force: %f \n",x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
->>>>>>> 86487068d26d5a11e780a8cdeac2d6aa1efb1e8f
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
-        printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
+        // printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");

@@ -162,13 +162,13 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     //from others
     const double obsRad = 0.2;
     // const double obsS = 19.0/5.0;
-    const double obsS = 19.0/5.0;
+    const double obsS = 10.0/5.0;
     const double inf = 0.001;
     const double DTR = M_PI/180.0;
     const double p_thres = 0.2;
-    const double neta_human = 2.0;
+    const double neta_human = 0.5;
     const double neta_controller = 0.002;
-    const double wall_force_activate_distance = 1.0;
+    const double wall_force_activate_distance = 0.5;
     int size = 0;
 
     obs_repul_force_x_controller = 0.0;
@@ -217,7 +217,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
             //right wall
             distance_to_wall = fnc_cal_distance_obs(rx, 0, 10, 0);
             if(distance_to_wall < wall_force_activate_distance){ 
-                repulsive_force[0] = repulsive_force[0]-neta_controller*(wall_force_activate_distance - distance_to_wall);
+                repulsive_force[0] = repulsive_force[0]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
             }
             //bottom wall
             distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -1.2192);
@@ -262,12 +262,12 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
             //right wall
             distance_to_wall = fnc_cal_distance_obs(rx, 0, 10, 0);
             if(distance_to_wall < wall_force_activate_distance){ 
-                repulsive_force_human[0] = repulsive_force_human[0]-neta_human*(wall_force_activate_distance - distance_to_wall);
+                repulsive_force_human[0] = repulsive_force_human[0]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
             }
             //bottom wall
             distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -1.2192);
             if(distance_to_wall < wall_force_activate_distance){ 
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+                repulsive_force_human[1] = repulsive_force_human[1]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
             }
 
             obs_repul_force_x_human += repulsive_force_human[0];
