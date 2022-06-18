@@ -13,6 +13,8 @@ Potential_Field::Potential_Field()
 
         repulsive_force_all[i] = 0.0;
     }
+    repulsive_force_old = 0.0;
+    repulsive_force_new = 0.0;
     repulsive_force_raw = 0.0;
     distance_ = 0.0;
     closest_obs_dist = 38;
@@ -122,40 +124,40 @@ bool Potential_Field::fnc_closest_obstacle(double rx, double ry, vector<double> 
 }
 
 
-bool Potential_Field::fnc_repulsive_force(double p_star, double rx, double ry, double ox, double oy) //only closest one
-{
-    const double neta = 0.000001;
-    const int MAX_RP_FORCE = 1;
-    const double MAX_RP_FORCE_Y = 0.5;
-    const int p_thres = 4;
+// bool Potential_Field::fnc_repulsive_force(double p_star, double rx, double ry, double ox, double oy) //only closest one
+// {
+//     const double neta = 0.000001;
+//     const int MAX_RP_FORCE = 1;
+//     const double MAX_RP_FORCE_Y = 0.5;
+//     const int p_thres = 4;
 
-    if (p_star < p_thres){
-        repulsive_force_raw = (neta*(1.0/p_star - 1.0/p_thres)) / (p_star*p_star);
+//     if (p_star < p_thres){
+//         repulsive_force_raw = (neta*(1.0/p_star - 1.0/p_thres)) / (p_star*p_star);
 
-        repulsive_force[0] -= repulsive_force_raw*cos(atan2(oy-ry, ox-rx));
-        repulsive_force[1] -= repulsive_force_raw*sin(atan2(oy-ry, ox-rx));
-        // repulsive_force[0] += repulsive_force_raw * (ox-rx) / p_star;
-        // repulsive_force[1] += repulsive_force_raw * (oy-ry) /p_star;
+//         repulsive_force[0] -= repulsive_force_raw*cos(atan2(oy-ry, ox-rx));
+//         repulsive_force[1] -= repulsive_force_raw*sin(atan2(oy-ry, ox-rx));
+//         // repulsive_force[0] += repulsive_force_raw * (ox-rx) / p_star;
+//         // repulsive_force[1] += repulsive_force_raw * (oy-ry) /p_star;
         
-    }
-    else{
-        repulsive_force[0] -= 0.0;
-        repulsive_force[1] -= 0.0;    
-    }
+//     }
+//     else{
+//         repulsive_force[0] -= 0.0;
+//         repulsive_force[1] -= 0.0;    
+//     }
 
-    //saturation
-    if (repulsive_force[0] > MAX_RP_FORCE)
-        repulsive_force[0] = MAX_RP_FORCE;
-    else if (repulsive_force[0] < -MAX_RP_FORCE)
-        repulsive_force[0] = -MAX_RP_FORCE;
+//     //saturation
+//     if (repulsive_force[0] > MAX_RP_FORCE)
+//         repulsive_force[0] = MAX_RP_FORCE;
+//     else if (repulsive_force[0] < -MAX_RP_FORCE)
+//         repulsive_force[0] = -MAX_RP_FORCE;
 
-    if (repulsive_force[1] > MAX_RP_FORCE_Y)
-        repulsive_force[1] = MAX_RP_FORCE_Y;
-    else if (repulsive_force[1] < -MAX_RP_FORCE_Y)
-        repulsive_force[1] = -MAX_RP_FORCE_Y;
+//     if (repulsive_force[1] > MAX_RP_FORCE_Y)
+//         repulsive_force[1] = MAX_RP_FORCE_Y;
+//     else if (repulsive_force[1] < -MAX_RP_FORCE_Y)
+//         repulsive_force[1] = -MAX_RP_FORCE_Y;
 
-    return true;
-}
+//     return true;
+// }
 
 bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy, int case_, int map)
 {

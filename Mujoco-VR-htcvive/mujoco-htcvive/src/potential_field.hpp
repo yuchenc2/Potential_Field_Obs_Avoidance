@@ -21,6 +21,8 @@ class Potential_Field
         double repulsive_force[2];
         double repulsive_force_human[2];
         double repulsive_force_raw;
+        double repulsive_force_old;
+        double repulsive_force_new;
         double distance_;
         double closest_obs_dist;
         int index_ ;
@@ -45,7 +47,7 @@ class Potential_Field
         double fnc_cal_distance_obs(double rx, double ry, double goal_x, double goal_y);  
         bool fnc_attractive_force(double dist, double rx, double ry, double goal_x, double goal_y);
         bool fnc_closest_obstacle(double rx, double ry, vector<double> ox, vector<double> oy, int size); 
-        bool fnc_repulsive_force(double p_star, double rx, double ry, double ox, double oy);
+        // bool fnc_repulsive_force(double p_star, double rx, double ry, double ox, double oy);
         bool fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy, int case_, int map); 
  
 };

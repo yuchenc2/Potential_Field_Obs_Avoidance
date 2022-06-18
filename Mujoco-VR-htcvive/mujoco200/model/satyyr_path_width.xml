@@ -82,7 +82,7 @@
 			<joint axis = "0 0 1" pos = "0 0 0" name = "rotate_yaw" type = "hinge" limited = "false"/>
             <geom class = 'collision-group-a' friction="0.9" type="mesh" rgba="0.79216 0.81961 0.93333 1" mesh="Torso" mass="4.05" />
  
-            <site name="camera_vr" pos="-0.15 0 1.0"/>
+            <site name="camera_vr" pos="-0.30 0 1.2"/>
 
             <body name="Thigh_R" pos="-0.06625 0 0.36">
                 <inertial pos="0 -0.080175 -0.0380315" quat="0.707107 0 0 0.707107" mass="0.904864" diaginertia="0.00325713 0.00280128 0.000871858" />

@@ -57,20 +57,24 @@ float *gaze;
 
 //-------------------------- Controller/Input Cases and Gains ---------------------------
 
-/*   Decide cases for feedback  */
-#define CASE1_WITHOUT_FEEDBACK //NOTHING
-// #define CASE2_FEEDBACK_TO_HUMAN 
-// #define CASE3_COMPENSATED_CONTROLLER 
-// #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
-/* Decide control input */
-#define KEYBOARD_INPUT 
-// #define HMI_INPUT
+/*   Decide cases for feedback  */
+#define CASE1_WITHOUT_FEEDBACK  // 1
+// #define CASE2_FEEDBACK_TO_HUMAN // 2
+// #define CASE3_COMPENSATED_CONTROLLER  // 3
 
 /* Map Cases */
-// #define STATIC_MAP
-// #define DYNAMIC_MAP
-#define PATH_WIDTH_MAP
+#define STATIC_MAP  // 1
+// #define DYNAMIC_MAP     // 2
+// #define PATH_WIDTH_MAP  //3
+
+int trial = 1; // 1 2 3 4 5
+
+//------------------------------Trial var to change ------------------------------------------
+
+/* Decide control input */
+// #define KEYBOARD_INPUT 
+#define HMI_INPUT
 
 
 /* Gains to tune */
@@ -84,6 +88,8 @@ double human_repulse_x_gain = 10.0;
 double human_repulse_y_gain = 10.0;
 #define HMI_COM_ACTIVATION 0.008
 #define TORQUE_CUTOFF 20
+#define OBS_VEL 0.01 //0.01 = 1m/s, obstacle moving speed
+
 
 //-------------------------------- Controller Setup -------------------------------------
 
@@ -91,9 +97,6 @@ using namespace std::chrono;
 using namespace std;
 #define Hip 1
 #define Knee 2
-#define Obs_all 1
-#define Obs_closest_one 2
-#define OBS_VEL 0.0093 //0.001 = 1m/s, obstacle moving speed
 #define M_PI           3.14159265358979323846
 // #define min(a,b) a<b?a:b
 // #define max(a,b) a>b?a:b
@@ -108,7 +111,7 @@ SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
 Potential_Field APF;
 ofstream myfile;
-bool data_save_flag = false;
+bool data_save_flag = true;
 
 //----------------------------------- Input Setup ---------------------------------------
 
@@ -134,13 +137,29 @@ double compensated_des_th = 0.0;
 //------------------------------------ Obstacles ----------------------------------------
 #ifdef STATIC_MAP
     #define Num_obstacles 13 // TODO: add wall repulsive forces
+    int map = 1; // 1 2 3
 #endif
 #ifdef DYNAMIC_MAP
     #define Num_obstacles 6 // TODO: add wall repulsive forces
+    int map = 2; // 1 2 3
 #endif
 #ifdef PATH_WIDTH_MAP
     #define Num_obstacles 6 // TODO: add wall repulsive forces 
+    int map = 3; // 1 2 3
 #endif
+
+#ifdef CASE1_WITHOUT_FEEDBACK //NOTHING
+int method = 1; // 1 2 3
+#endif
+#ifdef CASE2_FEEDBACK_TO_HUMAN 
+int method = 2; // 1 2 3
+#endif
+#ifdef CASE3_COMPENSATED_CONTROLLER 
+int method = 3; // 1 2 3
+#endif
+
+#define Obs_all 1
+#define Obs_closest_one 2
 double obstacle_position[Num_obstacles][3];
 vector<double> sum_obstacle_pos_x;
 vector<double> sum_obstacle_pos_y;
@@ -156,8 +175,9 @@ int map_choice = 0;
 
 //------------------------------------ UDP Setup ----------------------------------------
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
-// #define SERVER "169.254.205.99" //Labview computer
-#define SERVER "169.254.215.171"
+#define SERVER "169.254.159.43" //New labview computer 
+// #define SERVER "169.254.205.99"
+// #define SERVER "169.254.215.171"
 #define BUFLEN 548	// Max length of buffer
 #define PORT_SEND 54004	// The port on which to send data
 #define PORT_RECEIVE 54003	// The port on which to receive data
@@ -486,13 +506,13 @@ void hmi_input(void){
     // piece-wise linear function 
     // For velocity 
     double x_COM_HMI_sign = 0.0;
-    double velMax = 0.8; //0.60; // in m/s
+    double velMax = 1.5; //1.25; //0.60; // in m/s
     double x_COM_HMI_db = 0.01;
     double x_COM_HMI_max = 0.08;
     double vel_slope = velMax/(x_COM_HMI_max-x_COM_HMI_db); // around 11.5
     // For yaw
     double y_COM_HMI_sign = 0.0;
-    double yawMax = 0.6; //0.70; // in m/s
+    double yawMax = 0.9; //0.70; // in m/s
     double y_COM_HMI_db = 0.01;
     double y_COM_HMI_max = 0.125;
     double yaw_slope = yawMax/(y_COM_HMI_max-y_COM_HMI_db); // around 12.4
@@ -867,7 +887,7 @@ void v_copyPose(const TrackedDevicePose_t* pose, float* roompos, float* roommat)
     // camera_to_robot = around_y_axis_neg_90*around_y_axis_neg_90*around_z_axis_pos_90*around_z_axis_pos_90*around_x_axis_pos_90*robot_to_world*around_x_axis_pos_90.inverse().eval();
     // around_y_axis*camera_to_world;
     // camera_to_robot = robot_to_world;
-    camera_to_robot = around_y_axis_input*camera_to_world;
+    camera_to_robot = around_y_axis_pos_90*around_y_axis_input*camera_to_world;
 
     //around_y_axis*around_x_axis*robot_to_world*around_x_axis.inverse().eval()*camera_to_world
 
@@ -1169,25 +1189,8 @@ void mycontroller(const mjModel *m, mjData *d)
     //robot controller
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dth, compensated_des_x, compensated_des_th);
 
-    if(cnt % 500 == 0)
-    {
-        // printf("X: %f, Y: %f \n", robot_x, robot_y);
-        // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
-        // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        // printf("x_force: %f, y_force: %f \n",x_force, y_force);
-        // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
-        // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
-        // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
-        // printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
-        // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
-        // printf("distance = %f \n",APF.distance_);
-        // printf("\n");
-        // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
-        // printf("yaw %f, yaw %f \n", SATYRR_S.psi, SATYRR_S.y);
-        cnt = 0;
-    }
     if (data_save_flag){
-        if(cnt % 1 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
+        if(cnt % 10 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
             myfile << d->time 
             << ", " << compensated_des_x 
             << ", " << compensated_des_th 
@@ -1205,6 +1208,13 @@ void mycontroller(const mjModel *m, mjData *d)
             << ", " << wheel_torque
             << ", " << yaw_damp
             ;
+#ifdef DYNAMIC_MAP
+            const char *obstacle_name[6] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body"};
+            for(int i = 0; i<6; i++){
+            myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0];
+            myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1];
+            }
+#endif
             myfile << "\n";
         } 
     }
@@ -1232,6 +1242,24 @@ void mycontroller(const mjModel *m, mjData *d)
     }else{
         Robot_Data[0] = 0; 
         Robot_Data[10] = 0;
+    }
+    
+    if(cnt % 500 == 0)
+    {
+        // printf("X: %f, Y: %f \n", robot_x, robot_y);
+        // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
+        // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
+        //printf("x_force: %f, y_force: %f \n", x_force, y_force);
+        // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
+        // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
+        // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
+        // printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
+        // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
+        // printf("distance = %f \n",APF.distance_);
+        // printf("\n");
+        // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
+        // printf("yaw %f, yaw %f \n", SATYRR_S.psi, SATYRR_S.y);
+        cnt = 0;
     }
 
     cnt = cnt+1;
@@ -1370,7 +1398,6 @@ int main(int argc, const char** argv)
 {
     char filename[100];
 
-
     // get filename from command line or iteractively
     
 #ifdef STATIC_MAP
@@ -1399,9 +1426,11 @@ int main(int argc, const char** argv)
     // SATYRR Init
     SATYRR_Init(m, d);
 
+
+
     // Data logging
     if (data_save_flag)
-        myfile.open("../src/data_save.txt",ios::out);
+        myfile.open("../../mujoco-htcvive/src/data/" + to_string(method) + "_" + to_string(map) + "_" + to_string(trial) + ".txt",ios::out);
 
     // Robot car controller setup: install control callback
     mjcb_control = mycontroller;
