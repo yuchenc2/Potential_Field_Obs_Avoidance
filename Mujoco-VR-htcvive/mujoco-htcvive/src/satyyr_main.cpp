@@ -59,8 +59,8 @@ float *gaze;
 
 
 /*   Decide cases for feedback  */
-#define CASE1_WITHOUT_FEEDBACK  // 1
-// #define CASE2_FEEDBACK_TO_HUMAN // 2
+// #define CASE1_WITHOUT_FEEDBACK  // 1
+#define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
 
 /* Map Cases */
@@ -73,8 +73,8 @@ int trial = 1; // 1 2 3 4 5
 //------------------------------Trial var to change ------------------------------------------
 
 /* Decide control input */
-#define KEYBOARD_INPUT 
-// #define HMI_INPUT
+// #define KEYBOARD_INPUT 
+#define HMI_INPUT
 
 
 /* Gains to tune */
@@ -87,7 +87,7 @@ double keyboard_input_sensitivity_y = 0.1;
 double human_repulse_x_gain = 10.0;
 double human_repulse_y_gain = 10.0;
 #define HMI_COM_ACTIVATION 0.008
-#define TORQUE_CUTOFF 20
+#define TORQUE_CUTOFF 35
 #define OBS_VEL 0.01 //0.01 = 1m/s, obstacle moving speed
 
 
@@ -111,7 +111,7 @@ SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
 Potential_Field APF;
 ofstream myfile;
-bool data_save_flag = true;
+bool data_save_flag = false;
 
 //----------------------------------- Input Setup ---------------------------------------
 
@@ -140,7 +140,7 @@ double compensated_des_th = 0.0;
     int map = 1; // 1 2 3
 #endif
 #ifdef DYNAMIC_MAP
-    #define Num_obstacles 9 // TODO: add wall repulsive forces
+    #define Num_obstacles 11 // TODO: add wall repulsive forces
     int map = 2; // 1 2 3
 #endif
 #ifdef PATH_WIDTH_MAP
@@ -323,7 +323,7 @@ void initalize_environment(const mjModel *m, mjData *d)
                                                ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
 #endif
 #ifdef DYNAMIC_MAP
-    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body"};
+    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
 #endif
 
 #if defined DYNAMIC_MAP || defined STATIC_MAP 
@@ -372,6 +372,9 @@ void obstacle_control(const mjModel *m, mjData *d){
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1]+shift_y*0.6;
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1]-shift_y*0.6;
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1]+shift_y*0.6;
+        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0]-shift_y*0.6;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0]+shift_y*0.8;
 
         now = clock();
         // seconds_passed++;
@@ -511,7 +514,7 @@ void hmi_input(void){
     // piece-wise linear function 
     // For velocity 
     double x_COM_HMI_sign = 0.0;
-    double velMax = 1.5; //1.25; //0.60; // in m/s
+    double velMax = 1.25; //1.25; //0.60; // in m/s
     double x_COM_HMI_db = 0.01;
     double x_COM_HMI_max = 0.08;
     double vel_slope = velMax/(x_COM_HMI_max-x_COM_HMI_db); // around 11.5
@@ -1214,7 +1217,7 @@ void mycontroller(const mjModel *m, mjData *d)
             << ", " << yaw_damp
             ;
 #ifdef DYNAMIC_MAP
-            const char *obstacle_name[6] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body"};
+            const char *obstacle_name[11] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
             for(int i = 0; i<6; i++){
             myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0];
             myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1];
@@ -1254,7 +1257,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        //printf("x_force: %f, y_force: %f \n", x_force, y_force);
+        printf("x_force: %f, y_force: %f \n", x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
@@ -1416,17 +1419,17 @@ int main(int argc, const char** argv)
 #endif
 
     // pre-initialize vr
-    //v_initPre();
+    v_initPre();
     
     //Initialize the Pro Eye system
-    //EyeActivate();
+    EyeActivate();
 
     // initialize MuJoCo, with image size from vr
-    //if( !initMuJoCo(filename, (int)(2*hmd.width), (int)hmd.height) )
-    //    return 0;
+    if( !initMuJoCo(filename, (int)(2*hmd.width), (int)hmd.height) )
+        return 0;
 
     // post-initialize vr
-    //v_initPost();
+    v_initPost();
     
     // SATYRR Init
     SATYRR_Init(m, d);

@@ -94,13 +94,13 @@ double compensated_des_th = 0.0;
 
 //Obstacles
 #ifdef STATIC_MAP
-    #define Num_obstacles 26// TODO: add wall repulsive forces
+    #define Num_obstacles 26
 #endif
 #ifdef DYNAMIC_MAP
-    #define Num_obstacles 9 // TODO: add wall repulsive forces
+    #define Num_obstacles 11 
 #endif
 #ifdef PATH_WIDTH_MAP
-    #define Num_obstacles 6 // TODO: add wall repulsive forces 
+    #define Num_obstacles 6 
 #endif
 double obstacle_position[Num_obstacles][3];
 vector<double> sum_obstacle_pos_x;
@@ -256,7 +256,7 @@ void initalize_environment(const mjModel *m, mjData *d)
                                                ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
 #endif
 #ifdef DYNAMIC_MAP
-    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body"};
+    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
 #endif
 
 #if defined DYNAMIC_MAP || defined STATIC_MAP 
@@ -601,6 +601,9 @@ void obstacle_control(const mjModel *m, mjData *d){
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1]+shift_y*0.6;
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1]-shift_y*0.6;
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1]+shift_y*0.6;
+        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0]-shift_y*0.6;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0]+shift_y*0.8;
         
         
         now = clock();
