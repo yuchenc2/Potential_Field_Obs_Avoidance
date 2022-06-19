@@ -13,9 +13,10 @@ Potential_Field::Potential_Field()
 
         repulsive_force_all[i] = 0.0;
     }
-    repulsive_force_old = 0.0;
-    repulsive_force_new = 0.0;
-    repulsive_force_raw = 0.0;
+    repulsive_force_controller_new = 0.0;
+    repulsive_force_controller_old = 0.0;
+    repulsive_force_human_new = 0.0;
+    repulsive_force_human_old = 0.0;
     distance_ = 0.0;
     closest_obs_dist = 38;
     index_ = 0;
@@ -24,6 +25,10 @@ Potential_Field::Potential_Field()
     obs_repul_force_x_controller = 0.0;
     obs_repul_force_y_human = 0.0; //y axis
     obs_repul_force_y_controller = 0.0; // yaw controller
+    repulsive_force_controller_slope_force = 0.0;
+    repulsive_force_human_slope_force = 0.0;
+
+
     distance_each_obs = 0.0;
     thetaO = 0.0;
 }
@@ -172,11 +177,15 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     const double neta_controller = 0.002;
     const double wall_force_activate_distance = 0.5;
     int size = 0;
+    const double beta_velocity_controller = 1.0;
+    const double beta_velocity_human = 1.0;
 
     obs_repul_force_x_controller = 0.0;
     obs_repul_force_x_human = 0.0;
     obs_repul_force_y_controller = 0.0;
     obs_repul_force_y_human = 0.0;
+    repulsive_force_controller_slope_force = 0.0;
+    repulsive_force_human_slope_force = 0.0;
 
     if(map == 0){ // get obstacle names
         size = 13;
@@ -185,6 +194,8 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     }else{ // path width map
         size = 0;
     }
+
+    // size = 2;
 
     for (int i=0; i<size; i++){ // Generate repulsive force for the one line maps with obstacles
         if(map == 1){ // if map is dynamic, update obstacle location locally
@@ -198,9 +209,21 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         //controller
         if(case_ == 1){
             if((distance_each_obs < (obsS + obsRad)) && (distance_each_obs>=obsRad)){
-                repulsive_force_raw = (neta_controller* (1.0/distance_each_obs - 1.0/(obsS + obsRad))) / (distance_each_obs*distance_each_obs);
-                repulsive_force[0] = -repulsive_force_raw;
-                repulsive_force[1] = -repulsive_force_raw*thetaO*3.0;
+                repulsive_force_controller_new = (neta_controller* (1.0/distance_each_obs - 1.0/(obsS + obsRad))) / (distance_each_obs*distance_each_obs);
+                //Modified potential field force
+                repulsive_force_controller_slope_force = beta_velocity_controller*(repulsive_force_controller_new-repulsive_force_controller_old)/0.001;
+                repulsive_force_controller_old = repulsive_force_controller_new;
+                if(repulsive_force_controller_slope_force >= 0.0){ // If approaching the obstacle
+                    // printf("slope_force: %f \n", repulsive_force_controller_slope_force);
+                    if(repulsive_force_controller_slope_force > 0.01){ //max cutoff for force added
+                        repulsive_force_controller_slope_force = 0.01;
+                    }
+                }else{ // If getting further away, zero out the force
+                    repulsive_force_controller_slope_force = 0.0; 
+                }   
+                repulsive_force_controller_new = repulsive_force_controller_new + repulsive_force_controller_slope_force;
+                repulsive_force[0] = -repulsive_force_controller_new;
+                repulsive_force[1] = -repulsive_force_controller_new*thetaO*3.0;
             }
             else{
                 repulsive_force[0] = 0.0;
@@ -244,278 +267,287 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         //human feedback
         else if(case_ == 0){
             if((distance_each_obs < (obsS + obsRad)) && (distance_each_obs>=obsRad)){
-                repulsive_force_raw = (neta_human* (1.0/distance_each_obs - 1.0/(obsS + obsRad))) / (distance_each_obs*distance_each_obs);
-                repulsive_force_human[0] = -repulsive_force_raw*cos(thetaO);
-                repulsive_force_human[1] = -repulsive_force_raw*sin(thetaO);
+                repulsive_force_human_new = (neta_human* (1.0/distance_each_obs - 1.0/(obsS + obsRad))) / (distance_each_obs*distance_each_obs);
+                //Modified potential field force
+                repulsive_force_human_slope_force = beta_velocity_human*(repulsive_force_human_new-repulsive_force_human_old)/0.001;
+                repulsive_force_human_old = repulsive_force_human_new;
+                if(repulsive_force_human_slope_force >= 0.0){ // If approaching the obstacle
+                    // printf("slope_force: %f \n", repulsive_force_human_slope_force);
+                    if(repulsive_force_human_slope_force > 2.0){ //max cutoff for force added
+                        repulsive_force_human_slope_force = 2.0;
+                    }
+                }else{ // If getting further away, zero out the force
+                    repulsive_force_human_slope_force = 0.0; 
+                }   
+                repulsive_force_human_new = repulsive_force_human_new + repulsive_force_human_slope_force;       
+                repulsive_force_human[0] = -repulsive_force_human_new*cos(thetaO);
+                repulsive_force_human[1] = -repulsive_force_human_new*sin(thetaO);
             }
             else{
                 repulsive_force_human[0] = 0.0;
                 repulsive_force_human[1] = 0.0;
             }
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -20, 0);
-            if(distance_to_wall < wall_force_activate_distance){ 
-                repulsive_force_human[0] = repulsive_force_human[0]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
-            }
-            //top wall
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 1.2192);
-            if(distance_to_wall < wall_force_activate_distance){ 
-                repulsive_force_human[1] = repulsive_force_human[1]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //right wall
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, 10, 0);
-            if(distance_to_wall < wall_force_activate_distance){ 
-                repulsive_force_human[0] = repulsive_force_human[0]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
-            }
-            //bottom wall
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -1.2192);
-            if(distance_to_wall < wall_force_activate_distance){ 
-                repulsive_force_human[1] = repulsive_force_human[1]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-
-            obs_repul_force_x_human += repulsive_force_human[0];
-            obs_repul_force_y_human += repulsive_force_human[1];
-        }
-        //both
-        else if(case_ == 2){
-        }
-    }
-
-    if(map == 2){ //Path width map, only has wall repulsive force
-        if(case_ == 1){ // feedback to controller
-            repulsive_force[0] = 0.0;
-            repulsive_force[1] = 0.0;
-
-            //wall 1
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -20, 0);
-            if(distance_to_wall < wall_force_activate_distance){ 
-                repulsive_force[0] = repulsive_force[0]+(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
-            }
-            //wall 2
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 1.2192);
-            if(distance_to_wall < wall_force_activate_distance && rx < -10.2464){ 
-                thetaO = atan2(1.2192-ry, 0);
-                repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 3
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -10.2464, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry > -6.096){ 
-                thetaO = atan2(-10.2464-rx, 0);
-                repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 4
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -1.2192);
-            if(distance_to_wall < wall_force_activate_distance && rx < -12.6848){ 
-                thetaO = atan2(-1.2192-ry, 0);
-                repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 5
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -12.6848, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry < -1.2192){ 
-                thetaO = atan2(-12.6848-rx, 0);
-                repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
-            }
-            //wall 6
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -6.096);
-            if(distance_to_wall < wall_force_activate_distance && rx > -10.2464 && rx < -5.3696 ){ 
-                thetaO = atan2(-6.096-ry, 0);
-                repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 7
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -7.9248);
-            if(distance_to_wall < wall_force_activate_distance && rx > -12.6848 && rx < -3.5408 ){ 
-                thetaO = atan2(-7.9248-ry, 0);
-                repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 8
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -5.3696, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry > -6.096 && ry < 0.5334){ 
-                thetaO = atan2(-5.3696-rx, 0);
-                repulsive_force[1] = repulsive_force[1]+(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
-            }
-            //wall 9
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -3.5408, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry > -7.9248 && ry < -0.6096){ 
-                thetaO = atan2(-3.5408-rx, 0);
-                repulsive_force[1] = repulsive_force[1]+(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 10
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -0.6096);
-            if(distance_to_wall < wall_force_activate_distance && rx > -3.5408 && rx < 1.9456){ 
-                thetaO = atan2(-0.6096-ry, 0);
-                repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 11
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 0.5334);
-            if(distance_to_wall < wall_force_activate_distance && rx > -5.3696 && rx < 3.0886){ 
-                thetaO = atan2(0.5334-ry, 0);
-                repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 12
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, 3.0886, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry > -6.7818 && ry < 0.5334){ 
-                thetaO = atan2(3.0886-rx, 0);
-                repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 13
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, 1.9456, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry > -6.7818 && ry < -0.6096){ 
-                thetaO = atan2(1.9456-rx, 0);
-                repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
-            }
-            //wall 14
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -6.7818);
-            if(distance_to_wall < wall_force_activate_distance && rx > 1.9456 && rx < 3.0886){ 
-                repulsive_force[0] = repulsive_force[0]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
-            }
-
-
-            //edge 1
-            distance_to_wall = fnc_cal_distance_obs(rx, ry, -12.6848, -1.2192);
-            if(distance_to_wall < wall_force_activate_distance){
-                repulsive_force_raw = (neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance))/(distance_to_wall*distance_to_wall));
-                thetaO = atan2(-1.2192-ry, -12.6848-rx);
-                repulsive_force[1] = repulsive_force[1]-repulsive_force_raw*thetaO;
-            }
-
-            //edge 2
-            distance_to_wall = fnc_cal_distance_obs(rx, ry, -10.2464, -6.096);
-            if(distance_to_wall < wall_force_activate_distance){
-                repulsive_force_raw = (neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance))/(distance_to_wall*distance_to_wall));
-                thetaO = atan2(-6.096-ry, -10.2464-rx);
-                repulsive_force[1] = repulsive_force[1]-repulsive_force_raw*thetaO;
-            }
-
-            //edge 3
-            distance_to_wall = fnc_cal_distance_obs(rx, ry, -5.3696, -6.096);
-            if(distance_to_wall < wall_force_activate_distance){
-                repulsive_force_raw = (neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance))/(distance_to_wall*distance_to_wall));
-                thetaO = atan2(-6.096-ry, -5.3696-rx);
-                repulsive_force[1] = repulsive_force[1]-repulsive_force_raw*thetaO;
-            }
-
-            //edge 4
-            distance_to_wall = fnc_cal_distance_obs(rx, ry, -3.5408, -0.6096);
-            if(distance_to_wall < wall_force_activate_distance){
-                repulsive_force_raw = (neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance))/(distance_to_wall*distance_to_wall));
-                thetaO = atan2(-0.6096-ry, -3.5408-rx);
-                repulsive_force[1] = repulsive_force[1]-repulsive_force_raw*thetaO;
-            }
-
-            //edge 5
-            distance_to_wall = fnc_cal_distance_obs(rx, ry, 1.9456, -0.6096);
-            if(distance_to_wall < wall_force_activate_distance){
-                repulsive_force_raw = (neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance))/(distance_to_wall*distance_to_wall));
-                thetaO = atan2(-0.6096-ry, 1.9456-rx);
-                repulsive_force[1] = repulsive_force[1]-repulsive_force_raw*thetaO;
-            }
-            
-            
-            // Cutoff for repulsive force
-            if(repulsive_force[1] > 360.0 * DTR)
-                repulsive_force[1] = repulsive_force[1] - 360.0 * DTR;
-            else if(repulsive_force[1] < - 360.0 * DTR)
-                repulsive_force[1] = repulsive_force[1] + 360.0 * DTR;
-            obs_repul_force_x_controller += repulsive_force[0];
-            obs_repul_force_y_controller += repulsive_force[1];
-            if(obs_repul_force_y_controller > 360 *M_PI/180){
-                obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;
-            }
-            else if(obs_repul_force_y_controller < - 360 *M_PI/180){
-                obs_repul_force_y_controller = obs_repul_force_y_controller + 360 *M_PI/180;
-            }
-        } 
-        //human feedback
-        else if(case_ == 0){
-            repulsive_force_human[0] = 0.0;
-            repulsive_force_human[1] = 0.0;
-
-            //wall 1
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -20, 0);
-            if(distance_to_wall < wall_force_activate_distance){ 
-                repulsive_force_human[0] = repulsive_force_human[0]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
-            }
-            //wall 2
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 1.2192);
-            if(distance_to_wall < wall_force_activate_distance && rx < -10.2464){ 
-                thetaO = atan2(1.2192-ry, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 3
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -10.2464, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry > -6.096){ 
-                thetaO = atan2(-10.2464-rx, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 4
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -1.2192);
-            if(distance_to_wall < wall_force_activate_distance && rx < -12.6848){ 
-                thetaO = atan2(-1.2192-ry, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 5
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -12.6848, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry < -1.2192){ 
-                thetaO = atan2(-12.6848-rx, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
-            }
-            //wall 6
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -6.096);
-            if(distance_to_wall < wall_force_activate_distance && rx > -10.2464 && rx < -5.3696 ){ 
-                thetaO = atan2(-6.096-ry, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 7
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -7.9248);
-            if(distance_to_wall < wall_force_activate_distance && rx > -12.6848 && rx < -3.5408 ){ 
-                thetaO = atan2(-7.9248-ry, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 8
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -5.3696, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry > -6.096 && ry < 0.5334){ 
-                thetaO = atan2(-5.3696-rx, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
-            }
-            //wall 9
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, -3.5408, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry > -7.9248 && ry < -0.6096){ 
-                thetaO = atan2(-3.5408-rx, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 10
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -0.6096);
-            if(distance_to_wall < wall_force_activate_distance && rx > -3.5408 && rx < 1.9456){ 
-                thetaO = atan2(-0.6096-ry, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 11
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 0.5334);
-            if(distance_to_wall < wall_force_activate_distance && rx > -5.3696 && rx < 3.0886){ 
-                thetaO = atan2(0.5334-ry, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 12
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, 3.0886, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry > -6.7818 && ry < 0.5334){ 
-                thetaO = atan2(3.0886-rx, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
-            }
-            //wall 13
-            distance_to_wall = fnc_cal_distance_obs(rx, 0, 1.9456, 0);
-            if(distance_to_wall < wall_force_activate_distance && ry > -6.7818 && ry < -0.6096){ 
-                thetaO = atan2(1.9456-rx, 0);
-                repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
-            }
-            //wall 14
-            distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -6.7818);
-            if(distance_to_wall < wall_force_activate_distance && rx > 1.9456 && rx < 3.0886){ 
-                repulsive_force_human[0] = repulsive_force_human[0]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
-            }
+            // distance_to_wall = fnc_cal_distance_obs(rx, 0, -20, 0);
+            // if(distance_to_wall < wall_force_activate_distance){ 
+            //     repulsive_force_human[0] = repulsive_force_human[0]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
+            // }
+            // //top wall
+            // distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 1.2192);
+            // if(distance_to_wall < wall_force_activate_distance){ 
+            //     repulsive_force_human[1] = repulsive_force_human[1]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+            // }
+            // //right wall
+            // distance_to_wall = fnc_cal_distance_obs(rx, 0, 10, 0);
+            // if(distance_to_wall < wall_force_activate_distance){ 
+            //     repulsive_force_human[0] = repulsive_force_human[0]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
+            // }
+            // //bottom wall
+            // distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -1.2192);
+            // if(distance_to_wall < wall_force_activate_distance){ 
+            //     repulsive_force_human[1] = repulsive_force_human[1]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+            // }
 
             obs_repul_force_x_human += repulsive_force_human[0];
             obs_repul_force_y_human += repulsive_force_human[1];
         }
     }
+
+    // if(map == 2){ //Path width map, only has wall repulsive force
+    //     if(case_ == 1){ // feedback to controller
+    //         repulsive_force[0] = 0.0;
+    //         repulsive_force[1] = 0.0;
+
+    //         //wall 1
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, -20, 0);
+    //         if(distance_to_wall < wall_force_activate_distance){ 
+    //             repulsive_force[0] = repulsive_force[0]+(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
+    //         }
+    //         //wall 2
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 1.2192);
+    //         if(distance_to_wall < wall_force_activate_distance && rx < -10.2464){ 
+    //             thetaO = atan2(1.2192-ry, 0);
+    //             repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 3
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, -10.2464, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry > -6.096){ 
+    //             thetaO = atan2(-10.2464-rx, 0);
+    //             repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 4
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -1.2192);
+    //         if(distance_to_wall < wall_force_activate_distance && rx < -12.6848){ 
+    //             thetaO = atan2(-1.2192-ry, 0);
+    //             repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 5
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, -12.6848, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry < -1.2192){ 
+    //             thetaO = atan2(-12.6848-rx, 0);
+    //             repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
+    //         }
+    //         //wall 6
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -6.096);
+    //         if(distance_to_wall < wall_force_activate_distance && rx > -10.2464 && rx < -5.3696 ){ 
+    //             thetaO = atan2(-6.096-ry, 0);
+    //             repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 7
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -7.9248);
+    //         if(distance_to_wall < wall_force_activate_distance && rx > -12.6848 && rx < -3.5408 ){ 
+    //             thetaO = atan2(-7.9248-ry, 0);
+    //             repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 8
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, -5.3696, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry > -6.096 && ry < 0.5334){ 
+    //             thetaO = atan2(-5.3696-rx, 0);
+    //             repulsive_force[1] = repulsive_force[1]+(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
+    //         }
+    //         //wall 9
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, -3.5408, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry > -7.9248 && ry < -0.6096){ 
+    //             thetaO = atan2(-3.5408-rx, 0);
+    //             repulsive_force[1] = repulsive_force[1]+(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 10
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -0.6096);
+    //         if(distance_to_wall < wall_force_activate_distance && rx > -3.5408 && rx < 1.9456){ 
+    //             thetaO = atan2(-0.6096-ry, 0);
+    //             repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 11
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 0.5334);
+    //         if(distance_to_wall < wall_force_activate_distance && rx > -5.3696 && rx < 3.0886){ 
+    //             thetaO = atan2(0.5334-ry, 0);
+    //             repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 12
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, 3.0886, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry > -6.7818 && ry < 0.5334){ 
+    //             thetaO = atan2(3.0886-rx, 0);
+    //             repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 13
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, 1.9456, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry > -6.7818 && ry < -0.6096){ 
+    //             thetaO = atan2(1.9456-rx, 0);
+    //             repulsive_force[1] = repulsive_force[1]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
+    //         }
+    //         //wall 14
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -6.7818);
+    //         if(distance_to_wall < wall_force_activate_distance && rx > 1.9456 && rx < 3.0886){ 
+    //             repulsive_force[0] = repulsive_force[0]-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
+    //         }
+
+
+    //         //edge 1
+    //         distance_to_wall = fnc_cal_distance_obs(rx, ry, -12.6848, -1.2192);
+    //         if(distance_to_wall < wall_force_activate_distance){
+    //             repulsive_force_raw = (neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance))/(distance_to_wall*distance_to_wall));
+    //             thetaO = atan2(-1.2192-ry, -12.6848-rx);
+    //             repulsive_force[1] = repulsive_force[1]-repulsive_force_raw*thetaO;
+    //         }
+
+    //         //edge 2
+    //         distance_to_wall = fnc_cal_distance_obs(rx, ry, -10.2464, -6.096);
+    //         if(distance_to_wall < wall_force_activate_distance){
+    //             repulsive_force_raw = (neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance))/(distance_to_wall*distance_to_wall));
+    //             thetaO = atan2(-6.096-ry, -10.2464-rx);
+    //             repulsive_force[1] = repulsive_force[1]-repulsive_force_raw*thetaO;
+    //         }
+
+    //         //edge 3
+    //         distance_to_wall = fnc_cal_distance_obs(rx, ry, -5.3696, -6.096);
+    //         if(distance_to_wall < wall_force_activate_distance){
+    //             repulsive_force_raw = (neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance))/(distance_to_wall*distance_to_wall));
+    //             thetaO = atan2(-6.096-ry, -5.3696-rx);
+    //             repulsive_force[1] = repulsive_force[1]-repulsive_force_raw*thetaO;
+    //         }
+
+    //         //edge 4
+    //         distance_to_wall = fnc_cal_distance_obs(rx, ry, -3.5408, -0.6096);
+    //         if(distance_to_wall < wall_force_activate_distance){
+    //             repulsive_force_raw = (neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance))/(distance_to_wall*distance_to_wall));
+    //             thetaO = atan2(-0.6096-ry, -3.5408-rx);
+    //             repulsive_force[1] = repulsive_force[1]-repulsive_force_raw*thetaO;
+    //         }
+
+    //         //edge 5
+    //         distance_to_wall = fnc_cal_distance_obs(rx, ry, 1.9456, -0.6096);
+    //         if(distance_to_wall < wall_force_activate_distance){
+    //             repulsive_force_raw = (neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance))/(distance_to_wall*distance_to_wall));
+    //             thetaO = atan2(-0.6096-ry, 1.9456-rx);
+    //             repulsive_force[1] = repulsive_force[1]-repulsive_force_raw*thetaO;
+    //         }
+            
+            
+    //         // Cutoff for repulsive force
+    //         if(repulsive_force[1] > 360.0 * DTR)
+    //             repulsive_force[1] = repulsive_force[1] - 360.0 * DTR;
+    //         else if(repulsive_force[1] < - 360.0 * DTR)
+    //             repulsive_force[1] = repulsive_force[1] + 360.0 * DTR;
+    //         obs_repul_force_x_controller += repulsive_force[0];
+    //         obs_repul_force_y_controller += repulsive_force[1];
+    //         if(obs_repul_force_y_controller > 360 *M_PI/180){
+    //             obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;
+    //         }
+    //         else if(obs_repul_force_y_controller < - 360 *M_PI/180){
+    //             obs_repul_force_y_controller = obs_repul_force_y_controller + 360 *M_PI/180;
+    //         }
+    //     } 
+    //     //human feedback
+    //     else if(case_ == 0){
+    //         repulsive_force_human[0] = 0.0;
+    //         repulsive_force_human[1] = 0.0;
+
+    //         //wall 1
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, -20, 0);
+    //         if(distance_to_wall < wall_force_activate_distance){ 
+    //             repulsive_force_human[0] = repulsive_force_human[0]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
+    //         }
+    //         //wall 2
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 1.2192);
+    //         if(distance_to_wall < wall_force_activate_distance && rx < -10.2464){ 
+    //             thetaO = atan2(1.2192-ry, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 3
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, -10.2464, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry > -6.096){ 
+    //             thetaO = atan2(-10.2464-rx, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 4
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -1.2192);
+    //         if(distance_to_wall < wall_force_activate_distance && rx < -12.6848){ 
+    //             thetaO = atan2(-1.2192-ry, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 5
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, -12.6848, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry < -1.2192){ 
+    //             thetaO = atan2(-12.6848-rx, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
+    //         }
+    //         //wall 6
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -6.096);
+    //         if(distance_to_wall < wall_force_activate_distance && rx > -10.2464 && rx < -5.3696 ){ 
+    //             thetaO = atan2(-6.096-ry, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 7
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -7.9248);
+    //         if(distance_to_wall < wall_force_activate_distance && rx > -12.6848 && rx < -3.5408 ){ 
+    //             thetaO = atan2(-7.9248-ry, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 8
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, -5.3696, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry > -6.096 && ry < 0.5334){ 
+    //             thetaO = atan2(-5.3696-rx, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
+    //         }
+    //         //wall 9
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, -3.5408, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry > -7.9248 && ry < -0.6096){ 
+    //             thetaO = atan2(-3.5408-rx, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 10
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -0.6096);
+    //         if(distance_to_wall < wall_force_activate_distance && rx > -3.5408 && rx < 1.9456){ 
+    //             thetaO = atan2(-0.6096-ry, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 11
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 0.5334);
+    //         if(distance_to_wall < wall_force_activate_distance && rx > -5.3696 && rx < 3.0886){ 
+    //             thetaO = atan2(0.5334-ry, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 12
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, 3.0886, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry > -6.7818 && ry < 0.5334){ 
+    //             thetaO = atan2(3.0886-rx, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+    //         }
+    //         //wall 13
+    //         distance_to_wall = fnc_cal_distance_obs(rx, 0, 1.9456, 0);
+    //         if(distance_to_wall < wall_force_activate_distance && ry > -6.7818 && ry < -0.6096){ 
+    //             thetaO = atan2(1.9456-rx, 0);
+    //             repulsive_force_human[1] = repulsive_force_human[1]-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;             
+    //         }
+    //         //wall 14
+    //         distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -6.7818);
+    //         if(distance_to_wall < wall_force_activate_distance && rx > 1.9456 && rx < 3.0886){ 
+    //             repulsive_force_human[0] = repulsive_force_human[0]+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
+    //         }
+
+    //         obs_repul_force_x_human += repulsive_force_human[0];
+    //         obs_repul_force_y_human += repulsive_force_human[1];
+    //     }
+    // }
 
 
     // dist_list.clear();

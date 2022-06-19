@@ -15,12 +15,12 @@
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
-// #define KEYBOARD_INPUT 
-#define HMI_INPUT
+#define KEYBOARD_INPUT 
+// #define HMI_INPUT
 
 /* Map Cases */
-// #define STATIC_MAP
-#define DYNAMIC_MAP
+#define STATIC_MAP
+// #define DYNAMIC_MAP
 // #define PATH_WIDTH_MAP
 
 
@@ -123,7 +123,7 @@ SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
 Potential_Field APF;
 ofstream myfile;
-bool data_save_flag = true;
+bool data_save_flag = false;
 
 // UDP setup
 #include <winsock2.h>
@@ -720,19 +720,22 @@ void mycontroller(const mjModel *m, mjData *d)
     //robot controller
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dth, compensated_des_x, compensated_des_th);
 
-    if(cnt % 500 == 0)
+    if(cnt % 100 == 0)
     {
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        // printf("x_force: %f, y_force: %f \n",x_force, y_force);
+        printf("x_force: %f, y_force: %f \n",x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
         // printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
-        // printf("\n");
+        // printf("repulsive_force_controller_slope_force: %f\n", APF.repulsive_force_controller_slope_force);
+        // printf("force_to_human: %f\n", APF.repulsive_force_human_new);
+        
+        
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
         
         // printf("des yaw %f, yaw %f \n",compensated_des_dy, SATYRR_S.y);
