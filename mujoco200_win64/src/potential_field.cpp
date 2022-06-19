@@ -13,8 +13,7 @@ Potential_Field::Potential_Field()
 
         repulsive_force_all[i] = 0.0;
     }
-    repulsive_force_old = 0.0;
-    repulsive_force_new = 0.0;
+    repulsive_force_raw = 0.0;
     distance_ = 0.0;
     closest_obs_dist = 38;
     index_ = 0;
@@ -178,16 +177,16 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     obs_repul_force_y_human = 0.0;
 
     if(map == 0){ // get obstacle names
-        size = 13;
+        size = 26;
     }else if(map == 1){
-        size = 6;
+        size = 9;
     }else{ // path width map
         size = 0;
     }
 
     for (int i=0; i<size; i++){ // Generate repulsive force for the one line maps with obstacles
         if(map == 1){ // if map is dynamic, update obstacle location locally
-            const char *obstacle_name[6] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body"};
+            const char *obstacle_name[9] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body"};
             ox[i] = m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0];
             oy[i] = m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1];
         }
