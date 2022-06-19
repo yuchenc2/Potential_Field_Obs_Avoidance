@@ -73,8 +73,8 @@ int trial = 1; // 1 2 3 4 5
 //------------------------------Trial var to change ------------------------------------------
 
 /* Decide control input */
-// #define KEYBOARD_INPUT 
-#define HMI_INPUT
+#define KEYBOARD_INPUT 
+// #define HMI_INPUT
 
 
 /* Gains to tune */
@@ -136,11 +136,11 @@ double compensated_des_th = 0.0;
 
 //------------------------------------ Obstacles ----------------------------------------
 #ifdef STATIC_MAP
-    #define Num_obstacles 13 // TODO: add wall repulsive forces
+    #define Num_obstacles 26 // TODO: add wall repulsive forces
     int map = 1; // 1 2 3
 #endif
 #ifdef DYNAMIC_MAP
-    #define Num_obstacles 6 // TODO: add wall repulsive forces
+    #define Num_obstacles 9 // TODO: add wall repulsive forces
     int map = 2; // 1 2 3
 #endif
 #ifdef PATH_WIDTH_MAP
@@ -318,10 +318,12 @@ void initalize_environment(const mjModel *m, mjData *d)
 #ifdef STATIC_MAP
     const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
                                                ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
-                                               ,"obstacle_11_body","obstacle_12_body","obstacle_13_body"};
+                                               ,"obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body", "obstacle_16_body"
+                                               ,"obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body","obstacle_21_body","obstacle_22_body"
+                                               ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
 #endif
 #ifdef DYNAMIC_MAP
-    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body"};
+    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body"};
 #endif
 
 #if defined DYNAMIC_MAP || defined STATIC_MAP 
@@ -367,7 +369,10 @@ void obstacle_control(const mjModel *m, mjData *d){
         
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0]+shift_y;
         
-        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1]+shift_y*0.6;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1]-shift_y*0.6;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1]+shift_y*0.6;
+
         now = clock();
         // seconds_passed++;
         // printf("seconds_passed: %d \n", seconds_passed);
