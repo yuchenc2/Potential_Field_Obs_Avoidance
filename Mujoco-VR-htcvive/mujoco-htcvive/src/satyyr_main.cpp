@@ -1411,17 +1411,17 @@ int main(int argc, const char** argv)
 #endif
 
     // pre-initialize vr
-    v_initPre();
+    //v_initPre();
     
     //Initialize the Pro Eye system
-    EyeActivate();
+    //EyeActivate();
 
     // initialize MuJoCo, with image size from vr
-    if( !initMuJoCo(filename, (int)(2*hmd.width), (int)hmd.height) )
-        return 0;
+    //if( !initMuJoCo(filename, (int)(2*hmd.width), (int)hmd.height) )
+    //    return 0;
 
     // post-initialize vr
-    v_initPost();
+    //v_initPost();
     
     // SATYRR Init
     SATYRR_Init(m, d);
