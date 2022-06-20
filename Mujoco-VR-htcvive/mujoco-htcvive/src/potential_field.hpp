@@ -20,10 +20,11 @@ class Potential_Field
         double attractive_force[2];
         double repulsive_force[2];
         double repulsive_force_human_new;
-        double repulsive_force_human_old;
+        double repulsive_force_human_old[26];
         double repulsive_force_human[2];
         double repulsive_force_controller_new;
-        double repulsive_force_controller_old;
+        double repulsive_force_controller_old[26];
+        double repulsive_force_raw;
         
         double distance_;
         double closest_obs_dist;
