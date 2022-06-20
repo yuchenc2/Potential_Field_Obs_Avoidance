@@ -123,7 +123,7 @@ SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
 Potential_Field APF;
 ofstream myfile;
-bool data_save_flag = false;
+bool data_save_flag = true;
 
 // UDP setup
 #include <winsock2.h>
@@ -753,21 +753,23 @@ void mycontroller(const mjModel *m, mjData *d)
     if (data_save_flag){
         if(cnt % 1 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
             myfile << d->time 
-            << ", " << compensated_des_x 
-            << ", " << compensated_des_th 
-            << ", " << SATYRR_S.x 
-            << ", " << SATYRR_S.pitch
-            << ", " << SATYRR_S.pitch_actual
-            << ", " << compensated_des_dx
-            << ", " << SATYRR_S.dx 
-            << ", " << SATYRR_S.dpitch
-            << ", " << compensated_des_th 
-            << ", " << SATYRR_S.psi
-            << ", " << SATYRR_S.dpsi
-            << ", " << SATYRR_S.q[10]
-            << ", " << SATYRR_S.q[11]
-            << ", " << wheel_torque
-            << ", " << yaw_damp
+            << "\n" << APF.obs_repul_force_x_human 
+            << "\n" << APF.obs_repul_force_y_human 
+            // << ", " << compensated_des_x 
+            // << ", " << compensated_des_th 
+            // << ", " << SATYRR_S.x 
+            // << ", " << SATYRR_S.pitch
+            // << ", " << SATYRR_S.pitch_actual
+            // << ", " << compensated_des_dx
+            // << ", " << SATYRR_S.dx 
+            // << ", " << SATYRR_S.dpitch
+            // << ", " << compensated_des_th 
+            // << ", " << SATYRR_S.psi
+            // << ", " << SATYRR_S.dpsi
+            // << ", " << SATYRR_S.q[10]
+            // << ", " << SATYRR_S.q[11]
+            // << ", " << wheel_torque
+            // << ", " << yaw_damp
             ;
             myfile << "\n";
         } 

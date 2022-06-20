@@ -1197,36 +1197,6 @@ void mycontroller(const mjModel *m, mjData *d)
     //robot controller
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dth, compensated_des_x, compensated_des_th);
 
-    if (data_save_flag){
-        if(cnt % 10 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
-            myfile << d->time 
-            << ", " << compensated_des_x 
-            << ", " << compensated_des_th 
-            << ", " << SATYRR_S.x 
-            << ", " << SATYRR_S.pitch
-            << ", " << SATYRR_S.pitch_actual
-            << ", " << compensated_des_dx
-            << ", " << SATYRR_S.dx 
-            << ", " << SATYRR_S.dpitch
-            << ", " << compensated_des_th 
-            << ", " << SATYRR_S.psi
-            << ", " << SATYRR_S.dpsi
-            << ", " << SATYRR_S.q[10]
-            << ", " << SATYRR_S.q[11]
-            << ", " << wheel_torque
-            << ", " << yaw_damp
-            ;
-#ifdef DYNAMIC_MAP
-            const char *obstacle_name[11] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
-            for(int i = 0; i<6; i++){
-            myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0];
-            myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1];
-            }
-#endif
-            myfile << "\n";
-        } 
-    }
-
     // Torque cutoff
     if(x_force > TORQUE_CUTOFF){
         x_force = TORQUE_CUTOFF;
@@ -1250,6 +1220,40 @@ void mycontroller(const mjModel *m, mjData *d)
     }else{
         Robot_Data[0] = 0; 
         Robot_Data[10] = 0;
+    }
+    
+    if (data_save_flag){
+        if(cnt % 10 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
+            myfile << d->time 
+            << ", " << compensated_des_x 
+            << ", " << compensated_des_th 
+            << ", " << SATYRR_S.x 
+            << ", " << SATYRR_S.pitch
+            << ", " << SATYRR_S.pitch_actual
+            << ", " << compensated_des_dx
+            << ", " << SATYRR_S.dx 
+            << ", " << SATYRR_S.dpitch
+            << ", " << compensated_des_th 
+            << ", " << SATYRR_S.psi
+            << ", " << SATYRR_S.dpsi
+            << ", " << SATYRR_S.q[10]
+            << ", " << SATYRR_S.q[11]
+            << ", " << wheel_torque
+            << ", " << yaw_damp
+            << ", " << APF.obs_repul_force_x_controller
+            << ", " << APF.obs_repul_force_y_controller
+            << ", " << human_repulse_x_gain*APF.obs_repul_force_x_human
+            << ", " << human_repulse_y_gain*APF.obs_repul_force_y_human
+            ;
+#ifdef DYNAMIC_MAP
+            const char *obstacle_name[11] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
+            for(int i = 0; i<6; i++){
+            myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0];
+            myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1];
+            }
+#endif
+            myfile << "\n";
+        } 
     }
     
     if(cnt % 500 == 0)
