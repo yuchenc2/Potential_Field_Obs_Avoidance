@@ -81,7 +81,7 @@ double SATYRR_controller::f_stabilizationControl(vector<double> tgt, vector<doub
 {
     // printf("stablization error = %f, %f, %f, %f \n",tgt[0] - state[0],tgt[2] - state[2],0 - state[1],0 - state[3]);
     FxR = K_xW *(tgt[0] - state[0]) + K_dxW*(tgt[2] - state[2]) + K_pitch*(0 - state[1]) + K_dpitch*(0 - state[3]);
-    wheel_torque = FxR *  SATYRR_r/2;
+    wheel_torque = FxR *  SATYRR_r/2.0;
     // printf("wheel torq = %f \n", wheel_torque);
     return wheel_torque;
 }

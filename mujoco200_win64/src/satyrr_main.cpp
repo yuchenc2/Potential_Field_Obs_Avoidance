@@ -692,8 +692,8 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE1_WITHOUT_FEEDBACK
     x_force = 0; // without force to human
     y_force = 0; // without force to human
-    compensated_des_dx = sensitivity_x*forward_backward + APF.attractive_force[0]; // without repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.attractive_force[1]; //without repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right; //without repulsive force for controller
 #endif
 
 #ifdef CASE2_FEEDBACK_TO_HUMAN

@@ -57,8 +57,8 @@ float *gaze;
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
-#define KEYBOARD_INPUT 
-// #define HMI_INPUT
+// #define KEYBOARD_INPUT 
+#define HMI_INPUT
 
 /* Gains to tune */
 // HMI input sensitivity for controller
@@ -128,7 +128,8 @@ double SATYRR_Y_offset = 0.0;
 //------------------------------------ UDP Setup ----------------------------------------
 #include <winsock2.h>
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
-#define SERVER "169.254.205.99"
+// #define SERVER "169.254.205.99" //Labview computer
+#define SERVER "127.0.0.1"
 #define BUFLEN 548	// Max length of buffer
 #define PORT_SEND 54004	// The port on which to send data
 #define PORT_RECEIVE 54003	// The port on which to receive data
@@ -438,7 +439,7 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
 void hmi_input(void){
     x_COM_HMI = HMI_Data[1];
     y_COM_HMI = HMI_Data[2];
-    // printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_COM_HMI, y_COM_HMI);
+    printf("x_COM_HMI: %f, y_COM_HMI: %f \n", x_COM_HMI, y_COM_HMI);
 #ifdef HMI_INPUT
 
     // piece-wise linear function 
@@ -794,6 +795,10 @@ void v_copyPose(const TrackedDevicePose_t* pose, float* roompos, float* roommat)
     around_x_axis << 1, 0, 0,
                     0, 0, -1,
                     0, 1, 0;
+    Matrix3f around_y_axis;
+    around_y_axis << 0, 0, 1,
+                    0, 1, 0,
+                    -1, 0, 0;
  
     //Orientation of the VR headset relative to the world
     camera_to_world(0,0) = p->m[0][0];
@@ -807,7 +812,7 @@ void v_copyPose(const TrackedDevicePose_t* pose, float* roompos, float* roommat)
     camera_to_world(2,2) = p->m[2][2];
 
     //Get camera to robot orientation
-    camera_to_robot = around_x_axis*robot_to_world*around_x_axis.inverse().eval()*camera_to_world;
+    camera_to_robot = around_y_axis*around_x_axis*robot_to_world*around_x_axis.inverse().eval()*camera_to_world;
 
 
 
@@ -1112,7 +1117,7 @@ void mycontroller(const mjModel *m, mjData *d)
         Robot_Data[0] = 0; 
         Robot_Data[10] = 0;
     }
-    printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
+    // printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
 
     cnt = cnt+1;
 }
