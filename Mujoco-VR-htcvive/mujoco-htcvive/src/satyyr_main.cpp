@@ -73,8 +73,10 @@ int trial = 1; // 1 2 3 4 5
 //------------------------------Trial var to change ------------------------------------------
 
 /* Decide control input */
-// #define KEYBOARD_INPUT 
-#define HMI_INPUT
+#define KEYBOARD_INPUT 
+// #define HMI_INPUT
+
+// #define VR_WORKING
 
 
 /* Gains to tune */
@@ -1409,8 +1411,7 @@ std::string CovertErrorCode(int error) {
 int main(int argc, const char** argv)
 {
     char filename[100];
-
-    // get filename from command line or iteractively
+    // load and compile model
     
 #ifdef STATIC_MAP
     strcpy(filename, "../model/satyyr_static.xml");
@@ -1422,6 +1423,7 @@ int main(int argc, const char** argv)
     strcpy(filename, "../model/satyyr_path_width.xml");
 #endif
 
+    
     // pre-initialize vr
     v_initPre();
     
