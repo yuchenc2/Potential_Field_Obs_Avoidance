@@ -180974,3 +180974,15 @@ WARNING: Unknown warning type Time = 0.4330.
 Mon Jun 20 21:22:43 2022
 WARNING: Unknown warning type Time = 0.4330.
 
+Tue Jun 21 15:29:32 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 43.3425.
+
+Tue Jun 21 15:29:32 2022
+WARNING: Unknown warning type Time = 43.3425.
+
+Tue Jun 21 15:29:32 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 43.3430.
+
+Tue Jun 21 15:29:32 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1970.
+

@@ -59,8 +59,8 @@ float *gaze;
 
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK  // 1
-#define CASE2_FEEDBACK_TO_HUMAN // 2
+#define CASE1_WITHOUT_FEEDBACK  // 1
+// #define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
 
 /* Map Cases */
@@ -73,8 +73,8 @@ int trial = 1; // 1 2 3 4 5
 //------------------------------Trial var to change ------------------------------------------
 
 /* Decide control input */
-#define KEYBOARD_INPUT 
-// #define HMI_INPUT
+// #define KEYBOARD_INPUT 
+#define HMI_INPUT
 
 // #define VR_WORKING
 
@@ -89,7 +89,7 @@ double keyboard_input_sensitivity_y = 0.1;
 double human_repulse_x_gain = 10.0;
 double human_repulse_y_gain = 10.0;
 #define HMI_COM_ACTIVATION 0.008
-#define TORQUE_CUTOFF 35
+#define TORQUE_CUTOFF 25
 #define OBS_VEL 0.01 //0.01 = 1m/s, obstacle moving speed
 
 
@@ -113,7 +113,7 @@ SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
 Potential_Field APF;
 ofstream myfile;
-bool data_save_flag = false;
+bool data_save_flag = true;
 
 //----------------------------------- Input Setup ---------------------------------------
 
@@ -516,7 +516,7 @@ void hmi_input(void){
     // piece-wise linear function 
     // For velocity 
     double x_COM_HMI_sign = 0.0;
-    double velMax = 1.25; //1.25; //0.60; // in m/s
+    double velMax = 1.25; //0.60; // in m/s
     double x_COM_HMI_db = 0.01;
     double x_COM_HMI_max = 0.08;
     double vel_slope = velMax/(x_COM_HMI_max-x_COM_HMI_db); // around 11.5
@@ -897,6 +897,7 @@ void v_copyPose(const TrackedDevicePose_t* pose, float* roompos, float* roommat)
     // camera_to_robot = around_y_axis_neg_90*around_y_axis_neg_90*around_z_axis_pos_90*around_z_axis_pos_90*around_x_axis_pos_90*robot_to_world*around_x_axis_pos_90.inverse().eval();
     // around_y_axis*camera_to_world;
     // camera_to_robot = robot_to_world;
+    // camera_to_robot = around_y_axis_pos_90*around_y_axis_input*camera_to_world;
     camera_to_robot = around_y_axis_pos_90*around_y_axis_input*camera_to_world;
 
     //around_y_axis*around_x_axis*robot_to_world*around_x_axis.inverse().eval()*camera_to_world
@@ -1227,6 +1228,8 @@ void mycontroller(const mjModel *m, mjData *d)
     if (data_save_flag){
         if(cnt % 10 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
             myfile << d->time 
+            << ", " << robot_x 
+            << ", " << robot_y 
             << ", " << compensated_des_x 
             << ", " << compensated_des_th 
             << ", " << SATYRR_S.x 
@@ -1263,7 +1266,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        printf("x_force: %f, y_force: %f \n", x_force, y_force);
+        //printf("x_force: %f, y_force: %f \n", x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);

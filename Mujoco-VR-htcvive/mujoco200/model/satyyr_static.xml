@@ -86,60 +86,60 @@
         <body name="obstacle_7_body" pos="2 0.6 0">
             <geom name="obstacle_7_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_8_body" pos="3 -0.2 0">
+        <body name="obstacle_8_body" pos="3.2 -0.2 0">
             <geom name="obstacle_8_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_9_body" pos="3 -0.6 0">
+        <body name="obstacle_9_body" pos="3.2 -0.6 0">
             <geom name="obstacle_9_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_10_body" pos="4 0.2 0">
+        <body name="obstacle_10_body" pos="4.4 0.2 0">
             <geom name="obstacle_10_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_11_body" pos="4 0.6 0">
+        <body name="obstacle_11_body" pos="4.4 0.6 0">
             <geom name="obstacle_11_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_12_body" pos="5 -0.2 0">
+        <body name="obstacle_12_body" pos="5.6 -0.2 0">
             <geom name="obstacle_12_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_13_body" pos="5 -0.6 0">
+        <body name="obstacle_13_body" pos="5.6 -0.6 0">
             <geom name="obstacle_13_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>      
 
         <body name="obstacle_15_body" pos="2 0.9 0">
             <geom name="obstacle_15_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_16_body" pos="3 -0.9 0">
+        <body name="obstacle_16_body" pos="3.2 -0.9 0">
             <geom name="obstacle_16_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_17_body" pos="4 0.9 0">
+        <body name="obstacle_17_body" pos="4.4 0.9 0">
             <geom name="obstacle_17_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_18_body" pos="5 -0.9 0">
+        <body name="obstacle_18_body" pos="5.6 -0.9 0">
             <geom name="obstacle_18_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
 
-        <body name="obstacle_19_body" pos="-5 -0.1 0">
+        <body name="obstacle_19_body" pos="-4.8 -0.1 0">
             <geom name="obstacle_19_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
-        <body name="obstacle_20_body" pos="-5 -1 0">
+        <body name="obstacle_20_body" pos="-4.8 -1.1 0">
             <geom name="obstacle_20_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
-        <body name="obstacle_21_body" pos="-5 0.8 0">
+        <body name="obstacle_21_body" pos="-4.8 0.9 0">
             <geom name="obstacle_21_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
-        <body name="obstacle_22_body" pos="-4 -0.5 0">
+        <body name="obstacle_22_body" pos="-3.6 -0.5 0">
             <geom name="obstacle_22_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
-        <body name="obstacle_23_body" pos="-4 0.5 0">
+        <body name="obstacle_23_body" pos="-3.6 0.5 0">
             <geom name="obstacle_23_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
-        <body name="obstacle_24_body" pos="-3 0.1 0">
+        <body name="obstacle_24_body" pos="-2.4 0.1 0">
             <geom name="obstacle_24_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
-        <body name="obstacle_25_body" pos="-3 1 0">
+        <body name="obstacle_25_body" pos="-2.4 1.1 0">
             <geom name="obstacle_25_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
-        <body name="obstacle_26_body" pos="-3 -0.8 0">
+        <body name="obstacle_26_body" pos="-2.4 -0.9 0">
             <geom name="obstacle_26_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
 
