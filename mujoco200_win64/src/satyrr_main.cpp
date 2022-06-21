@@ -10,8 +10,8 @@
 
 /*   Decide cases for feedback  */
 // #define CASE1_WITHOUT_FEEDBACK //NOTHING
-// #define CASE2_FEEDBACK_TO_HUMAN 
-#define CASE3_COMPENSATED_CONTROLLER 
+#define CASE2_FEEDBACK_TO_HUMAN 
+// #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
@@ -123,7 +123,7 @@ SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
 Potential_Field APF;
 ofstream myfile;
-bool data_save_flag = false;
+bool data_save_flag = true;
 
 // UDP setup
 #include <winsock2.h>
@@ -708,10 +708,10 @@ void mycontroller(const mjModel *m, mjData *d)
     x_force = 0; // without force to human
     y_force = 0; // without force to human
     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 1, map_choice);
-    // compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
-    // compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
-    compensated_des_dx = sensitivity_x*forward_backward; // with repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right; // with repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
+    // compensated_des_dx = sensitivity_x*forward_backward; // with repulsive force for controller
+    // compensated_des_dth = sensitivity_y*left_right; // with repulsive force for controller
 #endif
 
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
@@ -731,52 +731,6 @@ void mycontroller(const mjModel *m, mjData *d)
     //robot controller
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dth, compensated_des_x, compensated_des_th);
 
-    if(cnt % 100 == 0)
-    {
-        // printf("X: %f, Y: %f \n", robot_x, robot_y);
-        // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
-        // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        printf("x_force: %f, y_force: %f \n",x_force, y_force);
-        // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
-        // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
-        // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
-        // printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
-        // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
-        // printf("distance = %f \n",APF.distance_);
-        // printf("repulsive_force_controller_slope_force: %f\n", APF.repulsive_force_controller_slope_force);
-        // printf("force_to_human: %f\n", APF.repulsive_force_human_new);
-        
-        
-        // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
-        
-        // printf("des yaw %f, yaw %f \n",compensated_des_dy, SATYRR_S.y);
-        cnt = 0;
-    }
-    if (data_save_flag){
-        if(cnt % 1 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
-            myfile << d->time 
-            << "\n" << APF.obs_repul_force_x_controller 
-            << "\n" << APF.obs_repul_force_y_controller 
-            // << ", " << compensated_des_x 
-            // << ", " << compensated_des_th 
-            // << ", " << SATYRR_S.x 
-            // << ", " << SATYRR_S.pitch
-            // << ", " << SATYRR_S.pitch_actual
-            // << ", " << compensated_des_dx
-            // << ", " << SATYRR_S.dx 
-            // << ", " << SATYRR_S.dpitch
-            // << ", " << compensated_des_th 
-            // << ", " << SATYRR_S.psi
-            // << ", " << SATYRR_S.dpsi
-            // << ", " << SATYRR_S.q[10]
-            // << ", " << SATYRR_S.q[11]
-            // << ", " << wheel_torque
-            // << ", " << yaw_damp
-            ;
-            myfile << "\n";
-        } 
-    }
-    
     // command force to HMI
     // x_force = 0.0;
     // y_force = 0.0;
@@ -807,6 +761,57 @@ void mycontroller(const mjModel *m, mjData *d)
         Robot_Data[10] = 0;
     }
     // printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
+
+    if(cnt % 100 == 0)
+    {
+        // printf("X: %f, Y: %f \n", robot_x, robot_y);
+        // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
+        // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
+        // printf("x_force: %f, y_force: %f \n",x_force, y_force);
+        // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
+        // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
+        // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
+        // printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
+        // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
+        // printf("distance = %f \n",APF.distance_);
+        // printf("repulsive_force_controller_slope_force: %f\n", APF.repulsive_force_controller_slope_force);
+        // printf("force_to_human: %f\n", APF.repulsive_force_human_new);
+        
+        
+        // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
+        
+        // printf("des yaw %f, yaw %f \n",compensated_des_dy, SATYRR_S.y);
+        cnt = 0;
+    }
+    if (data_save_flag){
+        if(cnt % 1 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
+            myfile << d->time 
+            // << "\n" << APF.obs_repul_force_x_controller 
+            // << "\n" << APF.obs_repul_force_y_controller 
+            << ", " << APF.obs_repul_force_x_human 
+            << ", " << APF.obs_repul_force_y_human 
+            << ", " << APF.repulsive_force_human_new[0]
+            << ", " << APF.repulsive_force_human_old[0]
+            << ", " << APF.repulsive_force_human_final[0]
+            << ", " << APF.repulsive_force_human_slope_force[0]
+            << ", " << APF.repulsive_force_human_slope_lpf[0]
+            // << ", " << SATYRR_S.x 
+            // << ", " << SATYRR_S.pitch
+            // << ", " << SATYRR_S.pitch_actual
+            // << ", " << compensated_des_dx
+            // << ", " << SATYRR_S.dx 
+            // << ", " << SATYRR_S.dpitch
+            // << ", " << compensated_des_th 
+            // << ", " << SATYRR_S.psi
+            // << ", " << SATYRR_S.dpsi
+            // << ", " << SATYRR_S.q[10]
+            // << ", " << SATYRR_S.q[11]
+            // << ", " << wheel_torque
+            // << ", " << yaw_damp
+            ;
+            myfile << "\n";
+        } 
+    }
 
     cnt = cnt+1;
 }

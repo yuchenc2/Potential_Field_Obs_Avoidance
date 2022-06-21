@@ -19,16 +19,33 @@ class Potential_Field
 
         double attractive_force[2];
         double repulsive_force[2];
-        double repulsive_force_human_new;
-        double repulsive_force_human_old[26];
         double repulsive_force_human[2];
-        double repulsive_force_controller_new;
+
+        double repulsive_force_controller_new[26];
         double repulsive_force_controller_old[26];
+        double repulsive_force_controller_final[26]; 
+        double repulsive_force_controller_slope_force[26];
+        double repulsive_force_controller_temp[26];
+        double repulsive_force_controller_slope_lpf[26];
+        double repulsive_force_controller_slope_lpf_old[26];
+        double repulsive_force_controller_slope_lpf_temp[26];
+
+        double repulsive_force_human_new[26];
+        double repulsive_force_human_old[26];
+        double repulsive_force_human_final[26]; 
+        double repulsive_force_human_slope_force[26];
+        double repulsive_force_human_temp[26];
+        double repulsive_force_human_slope_lpf[26];
+        double repulsive_force_human_slope_lpf_old[26];
+
         double repulsive_force_raw;
         
         double distance_;
         double closest_obs_dist;
         int index_ ;
+
+        int cnt_for_slope;
+        double alpha;
 
         double closest_obs_pos[2];
         vector <double> dist_list;
@@ -43,8 +60,7 @@ class Potential_Field
 
         double obs_repul_force_y_human;
         double obs_repul_force_y_controller;
-        double repulsive_force_controller_slope_force;
-        double repulsive_force_human_slope_force;
+       
 
         double distance_to_wall;  
 

@@ -180632,3 +180632,345 @@ Mon Jun 20 11:15:31 2022
 WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.1220.
 >>>>>>> e7f2bc85c3723b9ecf456810fea57b09dc8c82fb
 
+Mon Jun 20 19:19:01 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 10. The simulation is unstable. Time = 13.4500.
+
+Mon Jun 20 19:19:01 2022
+WARNING: Unknown warning type Time = 0.4010.
+
+Mon Jun 20 19:19:01 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.4010.
+
+Mon Jun 20 19:19:01 2022
+WARNING: Unknown warning type Time = 0.4010.
+
+Mon Jun 20 20:28:44 2022
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 11.3050.
+
+Mon Jun 20 20:28:44 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:44 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.7040.
+
+Mon Jun 20 20:28:44 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:44 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:44 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:44 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:44 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:44 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:44 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:45 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:46 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:47 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:48 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:49 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:50 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:51 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:52 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:52 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:52 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:52 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:52 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:52 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 20:28:52 2022
+WARNING: Pre-allocated contact buffer is full. Increase nconmax above 100. Time = 0.7040.
+
+Mon Jun 20 21:22:42 2022
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 8.6240.
+
+Mon Jun 20 21:22:42 2022
+WARNING: Unknown warning type Time = 0.4330.
+
+Mon Jun 20 21:22:42 2022
+WARNING: Unknown warning type Time = 0.4330.
+
+Mon Jun 20 21:22:42 2022
+WARNING: Unknown warning type Time = 0.4330.
+
+Mon Jun 20 21:22:43 2022
+WARNING: Unknown warning type Time = 0.4330.
+
+Mon Jun 20 21:22:43 2022
+WARNING: Unknown warning type Time = 0.4330.
+
+Mon Jun 20 21:22:43 2022
+WARNING: Unknown warning type Time = 0.4330.
+
+Mon Jun 20 21:22:43 2022
+WARNING: Unknown warning type Time = 0.4330.
+
