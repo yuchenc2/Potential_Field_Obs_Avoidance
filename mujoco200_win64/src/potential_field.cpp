@@ -235,7 +235,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
                 }else{ // If getting further away, zero out the force
                     repulsive_force_controller_slope_force = 0.0; 
                 }   
-                repulsive_force_controller_new = repulsive_force_controller_new - repulsive_force_controller_slope_force;
+                repulsive_force_controller_new = repulsive_force_controller_new + repulsive_force_controller_slope_force;
                 repulsive_force[0] = -repulsive_force_controller_new;
                 repulsive_force[1] = -repulsive_force_controller_new*thetaO*3.0;
             }
@@ -262,7 +262,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
                 }else{ // If getting further away, zero out the force
                     repulsive_force_human_slope_force = 0.0; 
                 }   
-                // printf("New: %f, slope_force: %f \n", repulsive_force_human_new, repulsive_force_human_slope_force);
+                // printf("Potential: %f, vel_force: %f, ", repulsive_force_human_new, repulsive_force_human_slope_force);
                 repulsive_force_human_new = repulsive_force_human_new + repulsive_force_human_slope_force;  
                 // printf("final: %f \n", repulsive_force_human_new);     
                 repulsive_force_human[0] = -repulsive_force_human_new*cos(thetaO);
@@ -283,6 +283,8 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     // printf("obs_force: %f %f \n", obs_force_x_human, obs_force_y_human);
     
     //Controller
+    wall_force_x_controller = 0.0;
+    wall_force_y_controller = 0.0;
     //left wall
     distance_to_wall = fnc_cal_distance_obs(rx, 0, -20, 0);
     if(distance_to_wall < wall_force_activate_distance){ 
@@ -305,7 +307,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         thetaO = atan2(-1.2192-ry, 0); // Not the right way to calculate this because x = 0 but it works. Should use robot's yaw instead
         wall_force_y_controller = wall_force_y_controller-(neta_controller*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
     }
-    obs_repul_force_x_controller = wall_force_y_controller + obs_force_x_controller;
+    obs_repul_force_x_controller = wall_force_x_controller + obs_force_x_controller;
     obs_repul_force_y_controller = wall_force_y_controller + obs_force_y_controller;
 
     // printf("obs_force: %f %f, wall_force %f %f, total_force %f %f\n", obs_force_x_controller, obs_force_y_controller, wall_force_x_controller, wall_force_y_controller, obs_repul_force_x_controller, obs_repul_force_y_controller);
@@ -319,9 +321,9 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
 
 
     
+    //Human
     wall_force_x_human = 0.0;
     wall_force_y_human = 0.0;
-    //Human
     //left wall
     distance_to_wall = fnc_cal_distance_obs(rx, 0, -20, 0);
     if(distance_to_wall < wall_force_activate_distance){ 

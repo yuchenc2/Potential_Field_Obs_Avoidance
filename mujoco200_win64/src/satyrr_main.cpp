@@ -10,8 +10,8 @@
 
 /*   Decide cases for feedback  */
 // #define CASE1_WITHOUT_FEEDBACK //NOTHING
-#define CASE2_FEEDBACK_TO_HUMAN 
-// #define CASE3_COMPENSATED_CONTROLLER 
+// #define CASE2_FEEDBACK_TO_HUMAN 
+#define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
@@ -123,7 +123,7 @@ SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
 Potential_Field APF;
 ofstream myfile;
-bool data_save_flag = true;
+bool data_save_flag = false;
 
 // UDP setup
 #include <winsock2.h>
@@ -708,8 +708,10 @@ void mycontroller(const mjModel *m, mjData *d)
     x_force = 0; // without force to human
     y_force = 0; // without force to human
     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 1, map_choice);
-    compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
+    // compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
+    // compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right; // with repulsive force for controller
 #endif
 
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
@@ -753,8 +755,8 @@ void mycontroller(const mjModel *m, mjData *d)
     if (data_save_flag){
         if(cnt % 1 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
             myfile << d->time 
-            << "\n" << APF.obs_repul_force_x_human 
-            << "\n" << APF.obs_repul_force_y_human 
+            << "\n" << APF.obs_repul_force_x_controller 
+            << "\n" << APF.obs_repul_force_y_controller 
             // << ", " << compensated_des_x 
             // << ", " << compensated_des_th 
             // << ", " << SATYRR_S.x 
