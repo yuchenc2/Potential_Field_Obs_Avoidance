@@ -174,6 +174,7 @@ clock_t now = clock();
 int seconds_passed = 0;
 int completed = 0;
 int map_choice = 0;
+int collision_count = 0;
 
 //------------------------------------ UDP Setup ----------------------------------------
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
@@ -382,6 +383,30 @@ void obstacle_control(const mjModel *m, mjData *d){
         // seconds_passed++;
         // printf("seconds_passed: %d \n", seconds_passed);
     }
+}
+
+void contactforce(const mjModel* m, mjData* d)
+{
+    mjMARKSTACK
+        // std::cout << "# contact points: " << d->ncon << std::endl;
+    for (int i = 0; i < d->ncon; i++)
+    {
+        mjContact* cur_contact = &((d->contact)[i]);
+
+        std::string geom1 = mj_id2name(m, mjOBJ_GEOM, cur_contact->geom1);
+        std::string geom2 = mj_id2name(m, mjOBJ_GEOM, cur_contact->geom2);
+        // std::cout << mj_id2name(m, mjOBJ_GEOM, cur_contact->geom1) << "   contact with     " << mj_id2name(m, mjOBJ_GEOM, cur_contact->geom2) << '\n'; // normal
+        // int foot_location = 4; // left foot toe 0, left foot heel 1, right foot toe 2, right foot heel 3
+
+        if (geom1.compare("floor0") != 0 && geom2.compare("floor0") != 0)
+        {
+            collision_count++;
+            printf("collision! Count: %d \n", collision_count);
+        } 
+
+    } // for i = 1:ncon
+    mjFREESTACK
+
 }
 
 //------------------------------ Input and Controller -------------------------------------
@@ -1119,6 +1144,9 @@ void mycontroller(const mjModel *m, mjData *d)
     //init position of obstacles
     if (obstacle_init_flag != true)
         initalize_environment(m, d);
+
+    // Collision detection
+    contactforce(m, d);
 
     //keyboard input always
     keyboard_input(d);
