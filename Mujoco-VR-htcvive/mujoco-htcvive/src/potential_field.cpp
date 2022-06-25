@@ -398,10 +398,10 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         wall_force_y_human = wall_force_y_human-wall_force_multiplier*(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
     }
 
-    // obs_repul_force_x_human = wall_force_x_human + obs_force_x_human;
-    // obs_repul_force_y_human = wall_force_y_human + obs_force_y_human;
-    obs_repul_force_x_human = obs_force_x_human;
-    obs_repul_force_y_human = obs_force_y_human;
+    obs_repul_force_x_human = wall_force_x_human + obs_force_x_human;
+    obs_repul_force_y_human = wall_force_y_human + obs_force_y_human;
+    // obs_repul_force_x_human = obs_force_x_human;
+    // obs_repul_force_y_human = obs_force_y_human;
     
     // printf("obs_force: %f %f, wall_force %f %f, total_force %f %f\n", obs_force_x_human, obs_force_y_human, wall_force_x_human, wall_force_y_human, obs_repul_force_x_human, obs_repul_force_y_human);
     
