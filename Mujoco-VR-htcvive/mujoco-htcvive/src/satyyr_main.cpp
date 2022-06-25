@@ -100,7 +100,7 @@ double human_repulse_y_gain = 10.0;
     #define TORQUE_CUTOFF_Y 15 //25
 #endif
 
-#define OBS_VEL 0.008 //0.01 = 1m/s, obstacle moving speed
+// #define OBS_VEL 0.008 //0.01 = 1m/s, obstacle moving speed
 
 
 //-------------------------------- Controller Setup -------------------------------------
@@ -113,7 +113,7 @@ using namespace std;
 // #define min(a,b) a<b?a:b
 // #define max(a,b) a>b?a:b
 int delay = 0.01*CLOCKS_PER_SEC;
-double shift_y = OBS_VEL;
+double shift_y[11] = {0.0};
 int obs_case = 1; // change obs case
 //Class
 float_t ctrl_update_freq = 1000;
@@ -361,34 +361,128 @@ void initalize_environment(const mjModel *m, mjData *d)
     obstacle_init_flag = true;
 }
 
+int first_time_obs = 1;
+double randomVel1, randomVel2, randomVel3, randomVel4, randomVel5, randomVel6, randomVel7, randomVel8, randomVel9, randomVel10, randomVel11;
 void obstacle_control(const mjModel *m, mjData *d){
-    if(clock() - now > delay){
-        // m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+0];
-        //For the first moving obstacle
+    if(first_time_obs == 1){
+        // Initialize random number generator.
+        srand(time(0)); 
+        randomVel1 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0.006 and 0.009
+        shift_y[0] = -randomVel1;
+        printf("random_vel1: %f ", randomVel1);
+        randomVel2 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        shift_y[1] = +randomVel2;
+        printf("random_vel2: %f ", randomVel2);
+        randomVel3 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        shift_y[2] = -randomVel3;
+        printf("random_vel3: %f ", randomVel3);
+        randomVel4 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        shift_y[3] = +randomVel4;
+        printf("random_vel4: %f ", randomVel4);
+        randomVel5 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        shift_y[4] = -randomVel5;
+        printf("random_vel5: %f ", randomVel5);
+        randomVel6 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        shift_y[5] = +randomVel6;
+        printf("random_vel6: %f ", randomVel6);
+        randomVel7 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        shift_y[6] = -randomVel7;
+        printf("random_vel7: %f ", randomVel7);
+        randomVel8 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        shift_y[7] = +randomVel8;
+        printf("random_vel8: %f ", randomVel8);
+        randomVel9 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        shift_y[8] = -randomVel9;
+        printf("random_vel9: %f ", randomVel9);
+        randomVel10 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        shift_y[9] = +randomVel10;
+        printf("random_vel10: %f ", randomVel10);
+        randomVel11 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        shift_y[10] = -randomVel11;
+        printf("random_vel11: %f \n", randomVel11);
+        first_time_obs = 0;
+    }else if(clock() - now > delay){
+        
         if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] > 1.0){
-            shift_y = -OBS_VEL;
+            shift_y[0] = -randomVel1;
         }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] < -1.0){
-            shift_y = OBS_VEL;
+            shift_y[0] = randomVel1;
         }
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1]+shift_y;
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1]-shift_y;
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1]+shift_y;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1]+shift_y[0];
         
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+0]-shift_y;
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1]+shift_y;
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1] > 1.0){
+            shift_y[1] = -randomVel2;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1] < -1.0){
+            shift_y[1] = randomVel2;
+        }        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1]+shift_y[1];
         
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0]+shift_y;
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1]+shift_y;
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1] > 1.0){
+            shift_y[2] = -randomVel3;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1] < -1.0){
+            shift_y[2] = randomVel3;
+        }        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1]+shift_y[2];
         
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0]+shift_y;
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1] > 1.0){
+            shift_y[3] = -randomVel4;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1] < -1.0){
+            shift_y[3] = randomVel4;
+        }        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+0]-shift_y[3];
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1]+shift_y[3];
         
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1]+shift_y*0.6;
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1]-shift_y*0.6;
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1]+shift_y*0.6;
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1] > 1.0){
+            shift_y[4] = -randomVel5;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1] < -1.0){
+            shift_y[4] = randomVel5;
+        }        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0]+shift_y[4];
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1]+shift_y[4];
         
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0]-shift_y*0.6;
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0]+shift_y*0.8;
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] > 7.0){
+            shift_y[5] = -randomVel6;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] < 3.0){
+            shift_y[5] = randomVel6;
+        }        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0]+shift_y[5];
 
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1] > 1.0){
+            shift_y[6] = -randomVel7;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1] < -1.0){
+            shift_y[6] = randomVel7;
+        }        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1]+shift_y[6];
+        
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1] > 1.0){
+            shift_y[7] = -randomVel8;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1] < -1.0){
+            shift_y[7] = randomVel8;
+        }        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1]+shift_y[7];
+        
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1] > 1.0){
+            shift_y[8] = -randomVel9;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1] < -1.0){
+            shift_y[8] = randomVel9;
+        }        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1]+shift_y[8];
+        
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] > 7.0){
+            shift_y[9] = -randomVel10;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] < 3.0){
+            shift_y[9] = randomVel10;
+        }        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0]+shift_y[9];
+        
+        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] > 7.0){
+            shift_y[10] = -randomVel11;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] < 3.0){
+            shift_y[10] = randomVel11;
+        }        
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0]+shift_y[10];
+        
+        
         now = clock();
         // seconds_passed++;
         // printf("seconds_passed: %d \n", seconds_passed);

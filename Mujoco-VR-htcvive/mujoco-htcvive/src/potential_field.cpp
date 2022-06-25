@@ -192,7 +192,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     const double neta_human = 500.0; //10.0; //5.0; //2.0; //0.5
     const double neta_controller = 0.002;
     const double wall_force_activate_distance = obsS + obsRad;
-    const double max_force_vel_cutoff = 4.0;
+    const double max_force_vel_cutoff = 6.0;
     int size = 0;
     const double beta_velocity_controller = 1.0;
     const double beta_velocity_human = 0.1;
@@ -305,21 +305,17 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
                     if(repulsive_force_human_slope_lpf[i] > max_force_vel_cutoff ){ //max cutoff for force added
                         repulsive_force_human_slope_lpf[i] = max_force_vel_cutoff ;
                     }
-
-                    
                 }else{ // If getting further away, zero out the force   
                     repulsive_force_human_slope_lpf[i] = 0.0; //-repulsive_force_human_slope_lpf[i];
                 }
-
                 
-                repulsive_force_human_final[i] = repulsive_force_human_new[i] + repulsive_force_human_slope_lpf[i];
-     
-                repulsive_force_human[0] = -repulsive_force_human_new[i]*cos(thetaO);
-                repulsive_force_human[1] = -repulsive_force_human_new[i]*sin(thetaO);
-            }
+                // repulsive_force_human_final[i] = repulsive_force_human_new[i] + repulsive_force_human_slope_lpf[i];
+                repulsive_force_human_final[i] = repulsive_force_human_slope_lpf[i];
+                // repulsive_force_human_final[i] = repulsive_force_human_new[i];
 
-
-            else{ 
+                repulsive_force_human[0] = -repulsive_force_human_final[i]*cos(thetaO);
+                repulsive_force_human[1] = -repulsive_force_human_final[i]*sin(thetaO);
+            }else{ 
             //     // printf("out\n");   
                 repulsive_force_human[0] = 0.0;
                 repulsive_force_human[1] = 0.0;
@@ -378,32 +374,32 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     //left wall
     distance_to_wall = fnc_cal_distance_obs(rx, 0, -20, 0);
     if(distance_to_wall < wall_force_activate_distance){ 
-        wall_force_x_human = wall_force_x_human+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
+        wall_force_x_human = wall_force_x_human+(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall + 50.0);
     }
     //top wall
     distance_to_wall = fnc_cal_distance_obs(0, ry, 0, 1.2192);
     if(distance_to_wall < wall_force_activate_distance){ 
         thetaO = atan2(1.2192-ry, 0); // Not the right way to calculate this because x = 0 but it works. Should use robot's yaw instead
-        wall_force_y_human = wall_force_y_human-wall_force_multiplier*(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+        wall_force_y_human = wall_force_y_human-wall_force_multiplier*(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall + 50.0)*thetaO;
     }
     //right wall
     distance_to_wall = fnc_cal_distance_obs(rx, 0, 10, 0);
     if(distance_to_wall < wall_force_activate_distance){ 
-        wall_force_x_human = wall_force_x_human-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall);
+        wall_force_x_human = wall_force_x_human-(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall + 50.0);
     }
     //bottom wall
     distance_to_wall = fnc_cal_distance_obs(0, ry, 0, -1.2192);
     if(distance_to_wall < wall_force_activate_distance){ 
         thetaO = atan2(-1.2192-ry, 0); // Not the right way to calculate this because x = 0 but it works. Should use robot's yaw instead
-        wall_force_y_human = wall_force_y_human-wall_force_multiplier*(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall)*thetaO;
+        wall_force_y_human = wall_force_y_human-wall_force_multiplier*(neta_human*(1.0/distance_to_wall - 1.0/(wall_force_activate_distance)))/(distance_to_wall*distance_to_wall + 50.0)*thetaO;
     }
 
     // obs_repul_force_x_human = wall_force_x_human + obs_force_x_human;
     // obs_repul_force_y_human = wall_force_y_human + obs_force_y_human;
-    obs_repul_force_x_human = obs_force_x_human;
-    obs_repul_force_y_human = obs_force_y_human;
+    obs_repul_force_x_human = obs_force_x_human*30.0;
+    obs_repul_force_y_human = obs_force_y_human*30.0;
     
-    // printf("obs_force: %f %f, wall_force %f %f, total_force %f %f\n", obs_force_x_human, obs_force_y_human, wall_force_x_human, wall_force_y_human, obs_repul_force_x_human, obs_repul_force_y_human);
+    // printf("obs_force: %f %f, wall_force %f %f, total_force %f %f\n", obs_force_x_human*5.0, obs_force_y_human*5.0, wall_force_x_human, wall_force_y_human, obs_repul_force_x_human, obs_repul_force_y_human);
     
 
     // if(map == 2){ //Path width map, only has wall repulsive force
