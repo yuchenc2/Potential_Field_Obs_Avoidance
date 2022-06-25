@@ -59,14 +59,13 @@ float *gaze;
 
 
 /*   Decide cases for feedback  */
-#define CASE1_WITHOUT_FEEDBACK  // 1
-// #define CASE2_FEEDBACK_TO_HUMAN // 2
+// #define CASE1_WITHOUT_FEEDBACK  /// 1
+#define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
 
 /* Map Cases */
-#define STATIC_MAP  // 1
-// #define DYNAMIC_MAP     // 2
-// #define PATH_WIDTH_MAP  //3
+// #define STATIC_MAP  // 1
+#define DYNAMIC_MAP     // 2
 
 int trial = 1; // 1 2 3 4 5
 
@@ -77,11 +76,12 @@ int trial = 1; // 1 2 3 4 5
 #define HMI_INPUT
 
 // #define VR_WORKING
+// #define PATH_WIDTH_MAP  //3
 
 
 /* Gains to tune */
 // HMI input sensitivity for controller
-double HMI_input_sensitivity_x = 0.1;
+double HMI_input_sensitivity_x = 0.1; //0.1
 double HMI_input_sensitivity_y = 0.2;
 double keyboard_input_sensitivity_x = 0.1;
 double keyboard_input_sensitivity_y = 0.1;
@@ -89,8 +89,18 @@ double keyboard_input_sensitivity_y = 0.1;
 double human_repulse_x_gain = 10.0;
 double human_repulse_y_gain = 10.0;
 #define HMI_COM_ACTIVATION 0.008
-#define TORQUE_CUTOFF 25
-#define OBS_VEL 0.01 //0.01 = 1m/s, obstacle moving speed
+
+#ifdef STATIC_MAP
+    #define TORQUE_CUTOFF_X 5 // 
+    #define TORQUE_CUTOFF_Y 10 //25
+#endif
+
+#ifdef DYNAMIC_MAP
+    #define TORQUE_CUTOFF_X 25 // 
+    #define TORQUE_CUTOFF_Y 15 //25
+#endif
+
+#define OBS_VEL 0.008 //0.01 = 1m/s, obstacle moving speed
 
 
 //-------------------------------- Controller Setup -------------------------------------
@@ -401,7 +411,8 @@ void contactforce(const mjModel* m, mjData* d)
         if (geom1.compare("floor0") != 0 && geom2.compare("floor0") != 0)
         {
             collision_count++;
-            printf("collision! Count: %d \n", collision_count);
+            if(collision_count%10==0)
+            printf("%d ", collision_count);
         } 
 
     } // for i = 1:ncon
@@ -511,7 +522,7 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
 
     vector<double> state_ = {SATYRR_S.x, SATYRR_S.pitch, SATYRR_S.dx, SATYRR_S.dpitch};
     SATYRR_S.getCOM(SATYRR_S.q[2],SATYRR_S.q[3], SATYRR_S.pitch);
-    wheel_torque = SATYRR_Cont.f_stabilizationControl(des_state, state_,SATYRR_S.pitch_actual);
+    wheel_torque = SATYRR_Cont.f_stabilizationControl(des_state, state_, SATYRR_S.pitch_actual);
        
     vector<double> des_yaw = {d_yaw, 0.0};
     vector<double> curr_yaw = {SATYRR_S.psi, SATYRR_S.dpsi};
@@ -541,7 +552,7 @@ void hmi_input(void){
     // piece-wise linear function 
     // For velocity 
     double x_COM_HMI_sign = 0.0;
-    double velMax = 1.25; //0.60; // in m/s
+    double velMax = 1.2; //0.60; // in m/s
     double x_COM_HMI_db = 0.01;
     double x_COM_HMI_max = 0.08;
     double vel_slope = velMax/(x_COM_HMI_max-x_COM_HMI_db); // around 11.5
@@ -1126,13 +1137,46 @@ void mycontroller(const mjModel *m, mjData *d)
     robot_y = d->qpos[m->jnt_qposadr[torso_Y]];
 
     // Timer for completion time
-#if defined DYNAMIC_MAP || defined STATIC_MAP 
-    if(robot_x > 7.7808 && completed == 0){
+// #if defined DYNAMIC_MAP || defined STATIC_MAP 
+    
+// #endif
+
+#if defined DYNAMIC_MAP 
+    if(robot_x > -5 && completed == 0){
+        printf ("Group 1 Done\n");
+        completed = 1;
+    }else if(robot_x > 0.0 && completed == 1){
+        printf ("Group 2 Done\n");
+        completed = 2;
+    }else if(robot_x > 4.0 && completed == 2){
+        printf ("Group 3 Done\n");
+        completed = 3;
+    }else if(robot_x > 7.7808 && completed == 3){
         completion_time_clock = clock() - completion_time_clock;
         printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
-        completed = 1;
+        completed = 4;
     }
 #endif
+
+
+#if defined STATIC_MAP 
+
+    if(robot_x > -10.5 && completed == 0){
+        printf ("Group 1 Done\n");
+        completed = 1;
+    }else if(robot_x > -2.4 && completed == 1){
+        printf ("Group 2 Done\n");
+        completed = 2;
+    }else if(robot_x >5.6 && completed == 2){
+        printf ("Group 3 Done\n");
+        completed = 3;
+    }else if(robot_x > 7.7808 && completed == 3){
+        completion_time_clock = clock() - completion_time_clock;
+        printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
+        completed = 4;
+    }
+#endif
+
 #ifdef PATH_WIDTH_MAP
     if(robot_x > 1.9456 && robot_y < -5.6388 && completed == 0){
         completion_time_clock = clock() - completion_time_clock;
@@ -1211,16 +1255,16 @@ void mycontroller(const mjModel *m, mjData *d)
     compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 
-#ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
-    // x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
-    // y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
+// #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
+//     // x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
+//     // y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
     
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 2, map_choice);
-    x_force = APF.obs_repul_force_x_human; // with force to human
-    y_force = APF.obs_repul_force_y_human; // with force to human
-    compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
-#endif
+//     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 2, map_choice);
+//     x_force = APF.obs_repul_force_x_human; // with force to human
+//     y_force = APF.obs_repul_force_y_human; // with force to human
+//     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
+//     compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
+// #endif
 
     compensated_des_x += compensated_des_dx*update_rate;
     compensated_des_th += compensated_des_dth*update_rate;
@@ -1229,15 +1273,15 @@ void mycontroller(const mjModel *m, mjData *d)
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dth, compensated_des_x, compensated_des_th);
 
     // Torque cutoff
-    if(x_force > TORQUE_CUTOFF){
-        x_force = TORQUE_CUTOFF;
-    }else if(x_force < -TORQUE_CUTOFF){
-        x_force = -TORQUE_CUTOFF;
+    if(x_force > TORQUE_CUTOFF_X){
+        x_force = TORQUE_CUTOFF_X;
+    }else if(x_force < -TORQUE_CUTOFF_X){
+        x_force = -TORQUE_CUTOFF_X;
     }
-    if(y_force > TORQUE_CUTOFF){
-        y_force = TORQUE_CUTOFF;
-    }else if(y_force < -TORQUE_CUTOFF){
-        y_force = -TORQUE_CUTOFF;
+    if(y_force > TORQUE_CUTOFF_Y){
+        y_force = TORQUE_CUTOFF_Y;
+    }else if(y_force < -TORQUE_CUTOFF_Y){
+        y_force = -TORQUE_CUTOFF_Y;
     }
 
     if(abs(SATYRR_S.pitch) > 25.0*M_PI/180.0){
@@ -1258,25 +1302,26 @@ void mycontroller(const mjModel *m, mjData *d)
             myfile << d->time 
             << ", " << robot_x 
             << ", " << robot_y 
-            << ", " << compensated_des_x 
-            << ", " << compensated_des_th 
+            << ", " << compensated_des_x
+            << ", " << compensated_des_dx 
+            << ", " << compensated_des_th //des yaw
             << ", " << SATYRR_S.x 
             << ", " << SATYRR_S.pitch
-            << ", " << SATYRR_S.pitch_actual
-            << ", " << compensated_des_dx
             << ", " << SATYRR_S.dx 
             << ", " << SATYRR_S.dpitch
-            << ", " << compensated_des_th 
+
             << ", " << SATYRR_S.psi
             << ", " << SATYRR_S.dpsi
             << ", " << SATYRR_S.q[10]
             << ", " << SATYRR_S.q[11]
-            << ", " << wheel_torque
-            << ", " << yaw_damp
+            << ", " << SATYRR_Cont.applied_torq[2]
+            << ", " << SATYRR_Cont.applied_torq[5]
             << ", " << APF.obs_repul_force_x_controller
             << ", " << APF.obs_repul_force_y_controller
             << ", " << human_repulse_x_gain*APF.obs_repul_force_x_human
             << ", " << human_repulse_y_gain*APF.obs_repul_force_y_human
+            << ", " << sensitivity_x*forward_backward
+            << ", " << sensitivity_x*left_right
             ;
 #ifdef DYNAMIC_MAP
             const char *obstacle_name[11] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
@@ -1294,7 +1339,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        //printf("x_force: %f, y_force: %f \n", x_force, y_force);
+        printf("x_force: %f, y_force: %f \n", x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);

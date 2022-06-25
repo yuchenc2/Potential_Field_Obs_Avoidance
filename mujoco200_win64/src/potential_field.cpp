@@ -289,7 +289,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
                     repulsive_force_human_slope_force[i] = beta_velocity_human*(repulsive_force_human_new[i]-repulsive_force_human_old[i])/0.001;
                     repulsive_force_human_slope_lpf[i] = alpha*repulsive_force_human_slope_force[i] + (1-alpha)*repulsive_force_human_slope_lpf_old[i];
 
-                    if (i == 1) printf("%f %f %f \n",repulsive_force_human_slope_force[1],repulsive_force_human_new[1],repulsive_force_human_old[1]);
+                    // if (i == 1) printf("%f %f %f \n",repulsive_force_human_slope_force[1],repulsive_force_human_new[1],repulsive_force_human_old[1]);
                 
                     repulsive_force_human_slope_lpf_old[i] = repulsive_force_human_slope_lpf[i];
                     // SmoothData = SmoothData - (LPF_Beta * (SmoothData - SATYRR_S.psi));
