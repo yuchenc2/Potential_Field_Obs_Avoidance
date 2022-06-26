@@ -92,10 +92,10 @@
         <body name="obstacle_6_body" pos="6 0 0">
             <geom name="obstacle_6_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_10_body" pos="5 0.8 0">
+        <body name="obstacle_10_body" pos="6 0.8 0">
             <geom name="obstacle_10_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_11_body" pos="4 -0.8 0">
+        <body name="obstacle_11_body" pos="6 -0.8 0">
             <geom name="obstacle_11_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
         
