@@ -286,22 +286,18 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
             if((distance_each_obs < (obsS + obsRad)) && (distance_each_obs>=obsRad)){
                 // repulsive_force_human_new[i] = (neta_human* (1.0/distance_each_obs - 1.0/(obsS + obsRad))) / (distance_each_obs*distance_each_obs + 100.0);
                 //printf("%d, dis=%f force= %f\n",i,distance_each_obs*distance_each_obs, repulsive_force_human_new[i]);
-                repulsive_force_human_new[i] = 5.0/(1.0+exp(distance_each_obs));
                 // printf("%f, %f \n", distance_each_obs, repulsive_force_human_new[0]);
 
                 //Modified potential field force
-                if(cnt_for_slope % 40 == 0){ //1ms
-                    repulsive_force_human_slope_force[i] = beta_velocity_human*(repulsive_force_human_new[i]-repulsive_force_human_old[i])/0.001;
+                if((cnt_for_slope % 400 == 0)){ //10ms = 0.01s
+                    repulsive_force_human_new[i] = 5.0/(1.0+exp(distance_each_obs));
+                    repulsive_force_human_slope_force[i] = beta_velocity_human*(repulsive_force_human_new[i]-repulsive_force_human_old[i])/0.01;
                     repulsive_force_human_slope_lpf[i] = alpha*repulsive_force_human_slope_force[i] + (1-alpha)*repulsive_force_human_slope_lpf_old[i];
-
-                    //if (i == 1) printf("%f %f %f \n",repulsive_force_human_slope_force[1],repulsive_force_human_new[1],repulsive_force_human_old[1]);
-                
                     repulsive_force_human_slope_lpf_old[i] = repulsive_force_human_slope_lpf[i];
-                    // SmoothData = SmoothData - (LPF_Beta * (SmoothData - SATYRR_S.psi));
+                    repulsive_force_human_old[i] = repulsive_force_human_new[i];
                     cnt_for_slope = 0;
                 }
                 
-                repulsive_force_human_old[i] = repulsive_force_human_new[i];
                 
                 if(repulsive_force_human_slope_lpf[i] >= 0.0){ // If approaching the obstacle
                     // printf("slope_force: %f \n", repulsive_force_human_slope_force);
