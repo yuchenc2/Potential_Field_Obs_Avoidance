@@ -10,8 +10,8 @@
 
 /*   Decide cases for feedback  */
 // #define CASE1_WITHOUT_FEEDBACK //NOTHING
-#define CASE2_FEEDBACK_TO_HUMAN 
-// #define CASE3_COMPENSATED_CONTROLLER 
+// #define CASE2_FEEDBACK_TO_HUMAN 
+#define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
@@ -94,7 +94,7 @@ double compensated_des_th = 0.0;
 
 //Obstacles
 #ifdef STATIC_MAP
-    #define Num_obstacles 26
+    #define Num_obstacles 35
 #endif
 #ifdef DYNAMIC_MAP
     #define Num_obstacles 11 
@@ -251,9 +251,10 @@ void initalize_environment(const mjModel *m, mjData *d)
 #ifdef STATIC_MAP
     const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
                                                ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
-                                               ,"obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body", "obstacle_16_body"
-                                               ,"obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body","obstacle_21_body","obstacle_22_body"
-                                               ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
+                                               ,"obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body"
+                                               , "obstacle_16_body","obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body"
+                                               ,"obstacle_21_body","obstacle_22_body","obstacle_23_body","obstacle_24_body","obstacle_25_body"
+                                               ,"obstacle_26_body","obstacle_27_body","obstacle_28_body","obstacle_29_body","obstacle_30_body"};
 #endif
 #ifdef DYNAMIC_MAP
     const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
