@@ -180986,3 +180986,15 @@ WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Ti
 Tue Jun 21 15:29:32 2022
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1970.
 
+Tue Jun 28 16:18:56 2022
+ERROR: Load model error: Error: material 'group4' not found in geom 20
+Object name = obstacle_16_geom, id = 20, line = 115, column = 13
+
+Tue Jun 28 16:22:37 2022
+ERROR: Load model error: Error: repeated name in material array, position 6
+Object name = group3, id = 6, line = 42, column = 9
+
+Tue Jun 28 16:23:18 2022
+ERROR: Load model error: Error: material 'group6' not found in geom 30
+Object name = obstacle_26_geom, id = 30, line = 151, column = 13
+

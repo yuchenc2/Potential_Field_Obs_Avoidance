@@ -36,9 +36,13 @@
         <material name="floorplane" reflectance="0.5" texrepeat="1 1" texture="texplane" texuniform="true"/>
         <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
         <material name="wall" rgba="0.5372 0.7686 0.9568 1"/>
-        <material name="group1" rgba="0.0313 0.9294 1.0 0.8"/>
-        <material name="group2" rgba="0.0313 0.0588 1.0 0.8"/>
-        <material name="group3" rgba="0.3647 0.0313 0.9568 1"/>
+        <material name="group1" rgba="0.25 0.25 0.25 1"/>
+        <material name="group2" rgba="0.25 0.25 0.25 1"/>
+        <material name="group3" rgba="0.25 0.25 0.25 1"/>
+        <material name="group4" rgba="0.25 0.25 0.25 1"/>
+        <material name="group5" rgba="0.25 0.25 0.25 1"/>
+        <material name="group6" rgba="0.25 0.25 0.25 1"/>
+        <material name="group7" rgba="0.25 0.25 0.25 1"/>
     </asset>
 
     <worldbody>

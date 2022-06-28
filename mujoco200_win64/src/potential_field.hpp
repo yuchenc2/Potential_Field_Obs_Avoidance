@@ -18,7 +18,7 @@ class Potential_Field
         
 
         double attractive_force[2];
-        double repulsive_force[2];
+        double repulsive_force_controller[2];
         double repulsive_force_human[2];
 
         double repulsive_force_controller_new[26];
@@ -44,7 +44,11 @@ class Potential_Field
         double closest_obs_dist;
         int index_ ;
 
-        int cnt_for_slope;
+        int cnt_for_slope_obs_controller;
+        int cnt_for_slope_wall_controller;
+        int cnt_for_slope_obs_human;
+        int cnt_for_slope_wall_human;
+
         double alpha;
 
         double closest_obs_pos[2];

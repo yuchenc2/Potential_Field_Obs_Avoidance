@@ -227,23 +227,35 @@ void scroll(GLFWwindow *window, double xoffset, double yoffset)
     mjv_moveCamera(m, mjMOUSE_ZOOM, 0, -0.05 * yoffset, &scn, &cam);
 }
 
-// geom locations
-// void obstacleLocations(const mjModel *m, mjData *d)
-// {
-//     printf("\n");
-//     printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 2]);
-//     printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 2]);
-//     printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 2]);
-//     printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 2]);
-//     printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 2]);
-//     printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 2]);
-//     printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 2]);
-//     printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 2]);
-//     printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 2]);
-//     printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 2]);
-//     printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 2]);
-// }
+void obstacle_control_static(const mjModel *m, mjData *d){
+    srand ( time(NULL) );
+    vector<int> selected_static_obs;
+    string selected_static_obs_name;
+    string init_name = "obstacle_";
+    string end_name = "_body";
+     
+    int ran_num = 0; 
+    for(int i=0;i<7;i++){
+        ran_num = (rand() %5) + (1+5*i); 
+        cout << ran_num <<" \n";
+        selected_static_obs.push_back(ran_num);  
+    }
 
+    for(int i=0;i<7;i++){
+        selected_static_obs_name = init_name + to_string(selected_static_obs[i]) + end_name;
+        // cout << selected_static_obs_name.c_str() <<" \n";
+        m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0] = 100; // only for x direction
+    }
+    for(int i=0;i<Num_obstacles;i++){
+        if(i==selected_static_obs[0] || i==selected_static_obs[1] ||
+           i==selected_static_obs[2] || i==selected_static_obs[3] ||
+           i==selected_static_obs[4] || i==selected_static_obs[5] || i==selected_static_obs[6])
+           cout << "pass" << "\n";
+        else
+           cout << i << "\n";    
+        
+    }
+}
 
 void initalize_environment(const mjModel *m, mjData *d)
 {
@@ -252,12 +264,17 @@ void initalize_environment(const mjModel *m, mjData *d)
     const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
                                                ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
                                                ,"obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body"
-                                               , "obstacle_16_body","obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body"
+                                               ,"obstacle_16_body","obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body"
                                                ,"obstacle_21_body","obstacle_22_body","obstacle_23_body","obstacle_24_body","obstacle_25_body"
-                                               ,"obstacle_26_body","obstacle_27_body","obstacle_28_body","obstacle_29_body","obstacle_30_body"};
+                                               ,"obstacle_26_body","obstacle_27_body","obstacle_28_body","obstacle_29_body","obstacle_30_body"
+                                               ,"obstacle_31_body","obstacle_32_body","obstacle_33_body","obstacle_34_body","obstacle_35_body"};
 #endif
 #ifdef DYNAMIC_MAP
     const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
+#endif
+
+#ifdef STATIC_MAP
+    obstacle_control_static(m,d);
 #endif
 
 #if defined DYNAMIC_MAP || defined STATIC_MAP 
@@ -706,6 +723,9 @@ void obstacle_control(const mjModel *m, mjData *d){
     }
 }
 
+
+
+
 int collision_count = 0;
 void contactforce(const mjModel* m, mjData* d)
 {
@@ -889,7 +909,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        printf("x_force: %f, y_force: %f \n",x_force, y_force);
+        //("x_force: %f, y_force: %f \n",x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
