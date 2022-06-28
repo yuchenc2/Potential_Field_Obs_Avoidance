@@ -91,12 +91,17 @@
         <body name="obstacle_20_body" pos="-4.8 -1.1 0"> 
             <geom name="obstacle_20_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
-        <body name="obstacle_28_body" pos="-4.8 -0.6 0"> <!-- No force activated -->
+        <!-- No force activated, obs at right side -->
+        <body name="obstacle_28_body" pos="-4.8 -0.6 0"> 
             <geom name="obstacle_28_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
         <body name="obstacle_19_body" pos="-4.8 -0.1 0">
             <geom name="obstacle_19_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
+        <!-- No force activated, obs at left side -->
+         <!-- <body name="obstacle_28_body" pos="-4.8 0.4 0"> 
+            <geom name="obstacle_28_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
+        </body> -->
         <body name="obstacle_21_body" pos="-4.8 0.9 0">
             <geom name="obstacle_21_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
@@ -117,13 +122,18 @@
         <body name="obstacle_25_body" pos="-2.4 1.1 0">
             <geom name="obstacle_25_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
+        <!-- No force activated, obs at left side -->
+        <!-- <body name="obstacle_27_body" pos="-2.4 0.6 0"> 
+            <geom name="obstacle_27_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
+        </body> -->
         <body name="obstacle_24_body" pos="-2.4 0.1 0">
             <geom name="obstacle_24_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
+        <!-- No force activated, obs at right side -->
         <body name="obstacle_27_body" pos="-2.4 -0.4 0"> 
             <geom name="obstacle_27_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
-        <body name="obstacle_26_body" pos="-2.4 -0.9 0"> <!-- No force activated -->
+        <body name="obstacle_26_body" pos="-2.4 -0.9 0"> 
             <geom name="obstacle_26_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
         </body>
 
@@ -186,6 +196,8 @@
             <geom class = 'collision-group-a' friction="0.9" type="mesh" rgba="0.79216 0.81961 0.93333 1" mesh="Torso" mass="4.05" />
  
             <site name="camera_vr" pos="-0.30 0 1.2"/>
+
+            <!-- <site name="camera_vr" pos="0.0 0 1.2"/> -->
 
             <body name="Thigh_R" pos="-0.06625 0 0.36">
                 <inertial pos="0 -0.080175 -0.0380315" quat="0.707107 0 0 0.707107" mass="0.904864" diaginertia="0.00325713 0.00280128 0.000871858" />

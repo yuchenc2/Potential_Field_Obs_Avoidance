@@ -60,13 +60,13 @@ float *gaze;
 
 /*   Decide cases for feedback  */
 // #define CASE1_WITHOUT_FEEDBACK  /// 1
-// #define CASE2_FEEDBACK_TO_HUMAN // 2
-#define CASE3_COMPENSATED_CONTROLLER  // 3
+#define CASE2_FEEDBACK_TO_HUMAN // 2
+// #define CASE3_COMPENSATED_CONTROLLER  // 3
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
 /* Map Cases */
-// #define STATIC_MAP  // 1
-#define DYNAMIC_MAP     // 2
+#define STATIC_MAP  // 1
+// #define DYNAMIC_MAP     // 2
 
 int trial = 1; // 1 2 3 4 5
 
@@ -375,39 +375,46 @@ void obstacle_control(const mjModel *m, mjData *d){
     if(first_time_obs == 1){
         // Initialize random number generator.
         srand(time(0)); 
-        randomVel1 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0.006 and 0.009
+
+        // Group 1
+        randomVel1 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0.006 and 0.009
         shift_y[0] = -randomVel1;
-        printf("random_vel1: %f ", randomVel1);
-        randomVel2 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
-        shift_y[1] = +randomVel2;
-        printf("random_vel2: %f ", randomVel2);
-        randomVel3 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        // printf("random_vel1: %f ", randomVel1);
+        randomVel2 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
+        shift_y[1] = randomVel2;
+        // printf("random_vel2: %f ", randomVel2);
+        randomVel3 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
         shift_y[2] = -randomVel3;
-        printf("random_vel3: %f ", randomVel3);
-        randomVel4 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
-        shift_y[3] = +randomVel4;
-        printf("random_vel4: %f ", randomVel4);
-        randomVel5 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
-        shift_y[4] = -randomVel5;
-        printf("random_vel5: %f ", randomVel5);
-        randomVel6 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
-        shift_y[5] = +randomVel6;
-        printf("random_vel6: %f ", randomVel6);
-        randomVel7 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        // printf("random_vel3: %f ", randomVel3);
+        randomVel7 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
         shift_y[6] = -randomVel7;
-        printf("random_vel7: %f ", randomVel7);
-        randomVel8 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
-        shift_y[7] = +randomVel8;
-        printf("random_vel8: %f ", randomVel8);
-        randomVel9 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
+        // printf("random_vel7: %f ", randomVel7);
+        randomVel8 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
+        shift_y[7] = randomVel8;
+        // printf("random_vel8: %f ", randomVel8);
+        randomVel9 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
         shift_y[8] = -randomVel9;
-        printf("random_vel9: %f ", randomVel9);
-        randomVel10 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
-        shift_y[9] = +randomVel10;
-        printf("random_vel10: %f ", randomVel10);
-        randomVel11 = (((double)(rand() % 3 + 1))/1000.0+0.006); // between 0 and 10
-        shift_y[10] = -randomVel11;
-        printf("random_vel11: %f \n", randomVel11);
+        // printf("random_vel9: %f ", randomVel9);
+
+        // Group 2
+        randomVel4 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
+        shift_y[3] = randomVel4;
+        // printf("random_vel4: %f ", randomVel4);
+        randomVel5 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
+        shift_y[4] = -randomVel5;
+        // printf("random_vel5: %f ", randomVel5);
+
+        // Group 3
+        // Make it the same as the middle one so it's possible to pass
+        // printf("random_vel5: %f ", randomVel5);
+        randomVel6 = (((double)(rand() % 3 + 1))/1000.0+0.001); // between 0 and 10
+        shift_y[5] = -randomVel6;
+        // randomVel10 = (((double)(rand() % 3 + 1))/1000.0+0.001); // between 0 and 10
+        shift_y[9] = randomVel6;
+        // printf("random_vel10: %f ", randomVel10);
+        // randomVel11 = (((double)(rand() % 3 + 1))/1000.0+0.001); // between 0 and 10
+        shift_y[10] = randomVel6;
+        // printf("random_vel11: %f \n", randomVel11);
         first_time_obs = 0;
     }else if(clock() - now > delay){
         // Group 1
@@ -470,26 +477,25 @@ void obstacle_control(const mjModel *m, mjData *d){
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0]+shift_y[4];
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1]+shift_y[4];
         
-        
         //Group 3
         if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] > 7.0){
             shift_y[5] = -randomVel6;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] < 3.0){
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] < 4.0){
             shift_y[5] = randomVel6;
         }        
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0]+shift_y[5];
 
         if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] > 7.0){
-            shift_y[9] = -randomVel10;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] < 3.0){
-            shift_y[9] = randomVel10;
+            shift_y[9] = -randomVel6;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] < 4.0){
+            shift_y[9] = randomVel6;
         }        
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0]+shift_y[9];
         
         if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] > 7.0){
-            shift_y[10] = -randomVel11;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] < 3.0){
-            shift_y[10] = randomVel11;
+            shift_y[10] = -randomVel6;
+        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] < 4.0){
+            shift_y[10] = randomVel6;
         }        
         m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0]+shift_y[10];
         
@@ -1450,7 +1456,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
-        printf("con: %f, %f, hum: %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller, x_force, y_force);
+        // printf("con: %f, %f, hum: %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller, x_force, y_force);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");

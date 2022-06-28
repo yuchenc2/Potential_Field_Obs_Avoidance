@@ -61,22 +61,22 @@
         </body>
 
         <!-- Group 1 -->
-        <body name="obstacle_1_body" pos="-14 0 0">
+        <body name="obstacle_1_body" pos="-16 0 0">
             <geom name="obstacle_1_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_2_body" pos="-12 0 0">
+        <body name="obstacle_2_body" pos="-14 0 0">
             <geom name="obstacle_2_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_3_body" pos="-10 0 0">
+        <body name="obstacle_3_body" pos="-12 0 0">
             <geom name="obstacle_3_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_7_body" pos="-8 0 0">
+        <body name="obstacle_7_body" pos="-10 0 0">
             <geom name="obstacle_7_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_8_body" pos="-6.5 0 0">
+        <body name="obstacle_8_body" pos="-8 0 0">
             <geom name="obstacle_8_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_9_body" pos="-5 0 0">
+        <body name="obstacle_9_body" pos="-6.5 0 0">
             <geom name="obstacle_9_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
 
