@@ -234,7 +234,12 @@ void obstacle_control_static(const mjModel *m, mjData *d){
     string init_name = "obstacle_";
     string end_name = "_body";
      
-    int ran_num = 0; 
+    int ran_num = 0;
+    int obs_num = 0;
+    const float FLOAT_MIN = 0.1;
+    const float FLOAT_MAX = 0.5;
+    double rand_loc[7] = {0.0,};
+
     for(int i=0;i<7;i++){
         ran_num = (rand() %5) + (1+5*i); 
         cout << ran_num <<" \n";
@@ -246,14 +251,24 @@ void obstacle_control_static(const mjModel *m, mjData *d){
         // cout << selected_static_obs_name.c_str() <<" \n";
         m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0] = 100; // only for x direction
     }
-    for(int i=0;i<Num_obstacles;i++){
-        if(i==selected_static_obs[0] || i==selected_static_obs[1] ||
-           i==selected_static_obs[2] || i==selected_static_obs[3] ||
-           i==selected_static_obs[4] || i==selected_static_obs[5] || i==selected_static_obs[6])
-           cout << "pass" << "\n";
-        else
-           cout << i << "\n";    
-        
+
+    for(int i=0;i<7;i++){
+        rand_loc[i] = FLOAT_MIN + (float)(rand()) / ((float)(RAND_MAX/(FLOAT_MAX - FLOAT_MIN)));
+        for(int j=1;j<6;j++){
+            obs_num = 5*i + j;
+            //cout << j << "__" << i << "__" << obs_num << "\n"; 
+            if(obs_num==selected_static_obs[0] || obs_num==selected_static_obs[1] ||
+               obs_num==selected_static_obs[2] || obs_num==selected_static_obs[3] ||
+               obs_num==selected_static_obs[4] || obs_num==selected_static_obs[5] || obs_num==selected_static_obs[6])
+               cout << "pass" << "\n";
+            //change the initial location
+            else{
+                selected_static_obs_name = init_name + to_string(obs_num) + end_name;
+                cout << obs_num << "__" << rand_loc[i] << "__" << selected_static_obs_name << "\n"; 
+                m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0] = rand_loc[i] + m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0];
+            }
+        }
+        cout << "\n" << endl;
     }
 }
 
