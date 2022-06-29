@@ -48,35 +48,35 @@
 		<!-- camera: front view -->
         <camera name="camera1" mode="targetbody" target="torso"/>
         <body name="wall1_body" pos="10 0 1">
-            <geom name="wall1_geom" class = "collision-default" type="plane" size="1.2192 1 1" pos="0 0 0" quat="0.5 -0.5 -0.5 0.5" material="matplane" condim="1"/>
+            <geom name="wall1_geom" class = "collision-default" type="plane" size="5 1 1" pos="0 0 0" quat="0.5 -0.5 -0.5 0.5" material="matplane" condim="1"/>
         </body>
-        <body name="wall2_body" pos="-5 1.2192 1">
+        <body name="wall2_body" pos="-5 5 1">
             <geom name="wall2_geom" class = "collision-default" type="plane" size="15 1 1" pos="0 0 0" quat="0.7071 0.7071 0 0 " material="matplane" condim="1"/>
         </body>
         <body name="wall3_body" pos="-20 0 1">
-            <geom name="wall3_geom" class = "collision-default" type="plane" size="1.2192 1 1" pos="0 0 0" quat="0.5 0.5 0.5 0.5" material="matplane" condim="1"/>
+            <geom name="wall3_geom" class = "collision-default" type="plane" size="5 1 1" pos="0 0 0" quat="0.5 0.5 0.5 0.5" material="matplane" condim="1"/>
         </body>
-        <body name="wall4_body" pos="-5 -1.2192 1">
+        <body name="wall4_body" pos="-5 -5 1">
             <geom name="wall4_geom" class = "collision-default" type="plane" size="15 1 1" pos="0 0 0" quat=" 0 0 0.7071 0.7071 " material="matplane" condim="1"/>
         </body>
 
         <!-- Group 1 -->
-        <body name="obstacle_1_body" pos="-14 0 0">
+        <body name="obstacle_1_body" pos="-16 0 0">
             <geom name="obstacle_1_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_2_body" pos="-12 0 0">
+        <body name="obstacle_2_body" pos="-14 0 0">
             <geom name="obstacle_2_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_3_body" pos="-10 0 0">
+        <body name="obstacle_3_body" pos="-12 0 0">
             <geom name="obstacle_3_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_7_body" pos="-8 0 0">
+        <body name="obstacle_7_body" pos="-10 0 0">
             <geom name="obstacle_7_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_8_body" pos="-6.5 0 0">
+        <body name="obstacle_8_body" pos="-8 0 0">
             <geom name="obstacle_8_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_9_body" pos="-5 0 0">
+        <body name="obstacle_9_body" pos="-6.5 0 0">
             <geom name="obstacle_9_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
 
@@ -92,19 +92,22 @@
         <body name="obstacle_6_body" pos="6 0 0">
             <geom name="obstacle_6_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_10_body" pos="5 0.8 0">
+        <body name="obstacle_10_body" pos="6 0.8 0">
             <geom name="obstacle_10_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
-        <body name="obstacle_11_body" pos="4 -0.8 0">
+        <body name="obstacle_11_body" pos="6 -0.8 0">
             <geom name="obstacle_11_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
         </body>
         
 
         <body name="start_location_body" pos="-19 0 0">
-            <geom name="start_location_geom" size="1 1.2192 0.001" type="box" rgba="0 1 0 1" />
+            <geom name="start_location_geom" size="1.0 1.0 0.001" type="box" rgba="0 1 0 1" />
+        </body>
+        <body name="mid_location_body" pos="-5 0 0">
+            <geom name="mid_location_geom" size="1 1.0 0.001" type="box" rgba="1 1 0 1" />
         </body>
         <body name="end_location_body" pos="9 0 0">
-            <geom name="end_location_geom" size="1 1.2192 0.001" type="box" rgba="1 1 1 1" />
+            <geom name="end_location_geom" size="1 1.0 0.001" type="box" rgba="1 1 1 1" />
         </body>
 
         <body name="torso" pos="-19 0.0 0.4869">

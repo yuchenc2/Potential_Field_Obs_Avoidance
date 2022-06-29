@@ -205,15 +205,10 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     double obs_force_y_human = 0.0;
     double obs_force_x_controller = 0.0;
     double obs_force_y_controller = 0.0;
-
-
-  
  
     obs_repul_force_x_human = 0.0;
     obs_repul_force_y_controller = 0.0;
     obs_repul_force_y_human = 0.0;
-
-
 
     if(map == 0){ // get obstacle names
         size = 26;

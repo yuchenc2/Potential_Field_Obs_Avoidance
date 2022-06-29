@@ -88,17 +88,8 @@ double keyboard_input_sensitivity_x = 0.1;
 double keyboard_input_sensitivity_y = 0.1;
 // Repulsive force back to human
 #define HMI_COM_ACTIVATION 0.008
-
-#ifdef STATIC_MAP
-    #define TORQUE_CUTOFF_X 25 //5 // 
-    #define TORQUE_CUTOFF_Y 20 //10 //25
-#endif
-
-#ifdef DYNAMIC_MAP
-    #define TORQUE_CUTOFF_X 25 // 
-    #define TORQUE_CUTOFF_Y 20 //25
-#endif
-
+#define TORQUE_CUTOFF_X 25 // 
+#define TORQUE_CUTOFF_Y 20 //25
 // #define OBS_VEL 0.008 //0.01 = 1m/s, obstacle moving speed
 
 
@@ -342,10 +333,9 @@ void initalize_environment(const mjModel *m, mjData *d)
                                                ,"obstacle_18_body","obstacle_14_body"
                                                ,"obstacle_19_body","obstacle_20_body","obstacle_21_body","obstacle_22_body"
                                                ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
-#endif
-#ifdef DYNAMIC_MAP
+
     const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
-#endif
+
 
 #if defined DYNAMIC_MAP || defined STATIC_MAP 
     for(int i=0;i<Num_obstacles;i++){
@@ -1438,7 +1428,7 @@ void mycontroller(const mjModel *m, mjData *d)
             ;
 #ifdef DYNAMIC_MAP
             const char *obstacle_name[11] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
-            for(int i = 0; i<6; i++){
+            for(int i = 0; i<11; i++){
             myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0];
             myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1];
             }
