@@ -180986,3 +180986,7 @@ WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Ti
 Tue Jun 21 15:29:32 2022
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1970.
 
+Wed Jun 29 00:19:59 2022
+ERROR: Load model error: Error: repeated name in geom array, position 45
+Object name = obstacle_21_geom, id = 45, line = 189, column = 13
+
