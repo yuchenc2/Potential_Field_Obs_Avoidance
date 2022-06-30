@@ -235,15 +235,24 @@ void obstacle_control_static(const mjModel *m, mjData *d){
     string end_name = "_body";
      
     int ran_num = 0;
+    int ran_num_old = 0;
     int obs_num = 0;
     const float FLOAT_MIN = 0.1;
     const float FLOAT_MAX = 0.5;
     double rand_loc[7] = {0.0,};
 
     for(int i=0;i<7;i++){
-        ran_num = (rand() %5) + (1+5*i); 
-        cout << ran_num <<" \n";
-        selected_static_obs.push_back(ran_num);  
+        ran_num = (rand() %5) + (1+5*i);
+        //cout <<  ran_num << "____" << ran_num_old << "\n";
+        while(ran_num - ran_num_old == 5) 
+            {
+                //cout << "while" << "\n";
+                ran_num = (rand() %5) + (1+5*i);
+                if(ran_num - ran_num_old != 0) break;
+            }
+        //cout << ran_num <<" \n";
+        selected_static_obs.push_back(ran_num);
+        ran_num_old = ran_num;  
     }
 
     for(int i=0;i<7;i++){
@@ -264,11 +273,11 @@ void obstacle_control_static(const mjModel *m, mjData *d){
             //change the initial location
             else{
                 selected_static_obs_name = init_name + to_string(obs_num) + end_name;
-                cout << obs_num << "__" << rand_loc[i] << "__" << selected_static_obs_name << "\n"; 
+                //cout << obs_num << "__" << rand_loc[i] << "__" << selected_static_obs_name << "\n"; 
                 m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0] = rand_loc[i] + m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0];
             }
         }
-        cout << "\n" << endl;
+        //cout << "\n" << endl;
     }
 }
 
