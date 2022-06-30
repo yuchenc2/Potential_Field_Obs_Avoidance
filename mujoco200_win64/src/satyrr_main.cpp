@@ -237,8 +237,8 @@ void obstacle_control_static(const mjModel *m, mjData *d){
     int ran_num = 0;
     int ran_num_old = 0;
     int obs_num = 0;
-    const float FLOAT_MIN = 0.1;
-    const float FLOAT_MAX = 0.5;
+    const float FLOAT_MIN = 0.0;
+    const float FLOAT_MAX = 1.0;
     double rand_loc[7] = {0.0,};
 
     for(int i=0;i<7;i++){
@@ -248,7 +248,7 @@ void obstacle_control_static(const mjModel *m, mjData *d){
             {
                 //cout << "while" << "\n";
                 ran_num = (rand() %5) + (1+5*i);
-                if(ran_num - ran_num_old != 0) break;
+                if(ran_num - ran_num_old != 5) break;
             }
         //cout << ran_num <<" \n";
         selected_static_obs.push_back(ran_num);
@@ -792,13 +792,20 @@ void mycontroller(const mjModel *m, mjData *d)
 
 
     // Timer for completion time
-#if defined DYNAMIC_MAP || defined STATIC_MAP 
+#if defined DYNAMIC_MAP
     if(robot_x > 7.7808 && completed == 0){
         completion_time_clock = clock() - completion_time_clock;
         printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
         completed = 1;
     }
-#endif
+#endif  
+#if defined STATIC_MAP
+    if(robot_x > -1.0 && completed == 0){
+        completion_time_clock = clock() - completion_time_clock;
+        printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
+        completed = 1;
+    }
+#endif 
 #ifdef PATH_WIDTH_MAP
     if(robot_x > 1.9456 && robot_y < -5.6388 && completed == 0){
         completion_time_clock = clock() - completion_time_clock;
