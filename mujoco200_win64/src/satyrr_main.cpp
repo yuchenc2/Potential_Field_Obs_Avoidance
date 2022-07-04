@@ -840,8 +840,8 @@ void mycontroller(const mjModel *m, mjData *d)
     // y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
     
     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 2, map_choice);
-    x_force = APF.obs_repul_force_x_human; // with force to human
-    y_force = APF.obs_repul_force_y_human; // with force to human
+    x_force = human_repulse_x_gain*APF.obs_repul_force_x_human; // with force to human
+    y_force = human_repulse_y_gain*APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
