@@ -9,8 +9,8 @@
 
 
 /*   Decide cases for feedback  */
-#define CASE1_WITHOUT_FEEDBACK //NOTHING
-// #define CASE2_FEEDBACK_TO_HUMAN 
+// #define CASE1_WITHOUT_FEEDBACK //NOTHING
+#define CASE2_FEEDBACK_TO_HUMAN 
 // #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
@@ -94,6 +94,11 @@ double compensated_des_th = 0.0;
 //Obstacles
 #ifdef STATIC_MAP
     #define Num_obstacles 26
+    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
+                                               ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
+                                               ,"obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body", "obstacle_16_body"
+                                               ,"obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body","obstacle_21_body","obstacle_22_body"
+                                               ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
 #endif
 #ifdef DYNAMIC_MAP
     #define Num_obstacles 100
@@ -258,16 +263,6 @@ void scroll(GLFWwindow *window, double xoffset, double yoffset)
 
 void initalize_environment(const mjModel *m, mjData *d)
 {
-    
-#ifdef STATIC_MAP
-    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
-                                               ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
-                                               ,"obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body", "obstacle_16_body"
-                                               ,"obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body","obstacle_21_body","obstacle_22_body"
-                                               ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
-#endif
-
-
 #if defined DYNAMIC_MAP || defined STATIC_MAP 
     for(int i=0;i<Num_obstacles;i++){
         for(int j=0;j<3;j++){
@@ -773,7 +768,7 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE2_FEEDBACK_TO_HUMAN
     //Repulsive force
     // APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 1);
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 0, map_choice);
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 0, map_choice, obstacle_name);
     x_force = human_repulse_x_gain*APF.obs_repul_force_x_human; // with force to human
     y_force = human_repulse_y_gain*APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
@@ -783,7 +778,7 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE3_COMPENSATED_CONTROLLER 
     x_force = 0; // without force to human
     y_force = 0; // without force to human
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 1, map_choice);
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 1, map_choice, obstacle_name);
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
     // compensated_des_dx = sensitivity_x*forward_backward; // with repulsive force for controller
@@ -794,7 +789,7 @@ void mycontroller(const mjModel *m, mjData *d)
     // x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
     // y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
     
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 2, map_choice);
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 2, map_choice, obstacle_name);
     x_force = APF.obs_repul_force_x_human; // with force to human
     y_force = APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
@@ -843,7 +838,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        // printf("x_force: %f, y_force: %f \n",x_force, y_force);
+        printf("x_force: %f, y_force: %f \n",x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
