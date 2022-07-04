@@ -8,22 +8,6 @@
 */
 
 
-/*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK //NOTHING
-#define CASE2_FEEDBACK_TO_HUMAN 
-// #define CASE3_COMPENSATED_CONTROLLER 
-// #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
-
-/* Decide control input */
-#define KEYBOARD_INPUT 
-// #define HMI_INPUT
-
-/* Map Cases */
-// #define STATIC_MAP
-#define DYNAMIC_MAP
-// #define PATH_WIDTH_MAP
-
-
 #include "mujoco.h"
 #include "glfw3.h"
 #include "stdio.h"
@@ -37,21 +21,11 @@
 #include <fstream>
 #include <thread>
 #include <cstdio>
-#include <ctime>
 
 
 #define Hip 1
 #define Knee 2
 clock_t completion_time_clock;
-
-// Definitions for obstacles
-#define Obs_all 1
-#define Obs_closest_one 2
-// #define OBS_VEL 0.0093 //0.001 = 1m/s, obstacle moving speed
-int obs_case = 1; // change obs case
-int delay = 0.01*CLOCKS_PER_SEC;
-clock_t now = clock();
-int seconds_passed = 0;
 
 #define M_PI           3.14159265358979323846
 using namespace std::chrono;
@@ -91,32 +65,6 @@ double compensated_des_dth = 0.0;
 double compensated_des_x = 0.0;
 double compensated_des_th = 0.0;
 
-//Obstacles
-#ifdef STATIC_MAP
-    #define Num_obstacles 26
-    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
-                                               ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
-                                               ,"obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body", "obstacle_16_body"
-                                               ,"obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body","obstacle_21_body","obstacle_22_body"
-                                               ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
-#endif
-#ifdef DYNAMIC_MAP
-    #define Num_obstacles 100
-    // ADDED
-    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
-                                                ,"obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body","obstacle_16_body","obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body"
-                                                ,"obstacle_21_body","obstacle_22_body","obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body","obstacle_27_body","obstacle_28_body","obstacle_29_body","obstacle_30_body"
-                                                ,"obstacle_31_body","obstacle_32_body","obstacle_33_body","obstacle_34_body","obstacle_35_body","obstacle_36_body","obstacle_37_body","obstacle_38_body","obstacle_39_body","obstacle_40_body"
-                                                ,"obstacle_41_body","obstacle_42_body","obstacle_43_body","obstacle_44_body","obstacle_45_body","obstacle_46_body","obstacle_47_body","obstacle_48_body","obstacle_49_body","obstacle_50_body"
-                                                ,"obstacle_51_body","obstacle_52_body","obstacle_53_body","obstacle_54_body","obstacle_55_body","obstacle_56_body","obstacle_57_body","obstacle_58_body","obstacle_59_body","obstacle_60_body"
-                                                ,"obstacle_61_body","obstacle_62_body","obstacle_63_body","obstacle_64_body","obstacle_65_body","obstacle_66_body","obstacle_67_body","obstacle_68_body","obstacle_69_body","obstacle_70_body"
-                                                ,"obstacle_71_body","obstacle_72_body","obstacle_73_body","obstacle_74_body","obstacle_75_body","obstacle_76_body","obstacle_77_body","obstacle_78_body","obstacle_79_body","obstacle_80_body"
-                                                ,"obstacle_81_body","obstacle_82_body","obstacle_83_body","obstacle_84_body","obstacle_85_body","obstacle_86_body","obstacle_87_body","obstacle_88_body","obstacle_89_body","obstacle_90_body"
-                                                ,"obstacle_91_body","obstacle_92_body","obstacle_93_body","obstacle_94_body","obstacle_95_body","obstacle_96_body","obstacle_97_body","obstacle_98_body","obstacle_99_body","obstacle_100_body"};
-#endif
-#ifdef PATH_WIDTH_MAP
-    #define Num_obstacles 6 
-#endif
 double obstacle_position[Num_obstacles][3];
 vector<double> sum_obstacle_pos_x;
 vector<double> sum_obstacle_pos_y;
@@ -581,77 +529,22 @@ void udp_receive()
 	WSACleanup();
 }
 
-int first_time_obs = 1;
-double randomVel_x[Num_obstacles] = {0.0};
-double randomVel_y[Num_obstacles] = {0.0};
-double shift_x[Num_obstacles] = {0.0};
-double shift_y[Num_obstacles] = {0.0};
 
-void obstacle_control_dynamic(const mjModel *m, mjData *d){
-    if(first_time_obs == 1){
-        // Initialize random number generator.
-        srand(time(0)); 
-        // Initial midpoint location
-        int mid_point = rand() % 2;
-        if(mid_point == 0){ // Top
-            m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_body")*3+1] = 3.0;
-        }else{ // Bottom
-            m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_body")*3+1] = -3.0;
-        }
+void obstacle_control_dynamic_init(const mjModel *m, mjData *d){
+    // Initialize random number generator.
+    srand(time(0)); 
+    // Initial midpoint location
+    int mid_point = rand() % 2;
+    if(mid_point == 0){ // Top
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_body")*3+1] = 3.0;
+    }else{ // Bottom
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_body")*3+1] = -3.0;
+    }
 
-
-        // Initial obstacle location
-        for(int i = 0; i<Num_obstacles; i++){
-            m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] = (((double)(rand() % 25))-16.0);
-            m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] = (((double)(rand() % 9))-4.0);
-        }
-
-
-        // Initial velocity
-        for(int i = 0; i<Num_obstacles; i++){
-            while(randomVel_x[i] == 0.0){
-                randomVel_x[i] = (((double)(rand() % 5 + 1))/1000.0); // between 0.001 and 0.005
-            }
-            while(randomVel_y[i] == 0.0){
-                randomVel_y[i] = (((double)(rand() % 5 + 1))/1000.0); // between 0.001 and 0.005
-            }
-            if(rand() % 2 == 0){
-                shift_x[i] = randomVel_x[i];
-            }else{
-                shift_x[i] = -randomVel_x[i];
-            }
-            if(rand() % 2 == 0){
-                shift_y[i] = randomVel_y[i];
-            }else{
-                shift_y[i] = -randomVel_y[i];
-            }
-        }
-        first_time_obs = 0;
-    }else if(clock() - now > delay){
-        for(int i = 0; i<Num_obstacles; i++){
-            if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] >= 9.8){ // X wall boundary
-                shift_x[i] = -shift_x[i];
-                shift_y[i] = shift_y[i];
-                // printf("Hit Right");
-            }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] <= -19.8){
-                shift_x[i] = -shift_x[i];
-                shift_y[i] = shift_y[i];
-                // printf("Hit Left");
-            }
-
-            if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] >= 4.8){ // Y wall boundary
-                shift_x[i] = shift_x[i];
-                shift_y[i] = -shift_y[i];
-                // printf("Hit Top");
-            }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] <= -4.8){
-                shift_x[i] = shift_x[i];
-                shift_y[i] = -shift_y[i];
-                // printf("Hit Bottom");
-            }
-            m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0]+shift_x[i];
-            m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1]+shift_y[i];
-        }
-        now = clock();
+    // Initial obstacle location
+    for(int i = 0; i<Num_obstacles; i++){
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] = (((double)(rand() % 25))-16.0);
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] = (((double)(rand() % 9))-4.0);
     }
 }
 
@@ -683,8 +576,6 @@ void contactforce(const mjModel* m, mjData* d)
 
 void mycontroller(const mjModel *m, mjData *d)
 {
-
-
     float x_force = 0.0; // sagital plane
     float y_force = 0.0; // frontal plane
     double sensitivity_x = 0.1;
@@ -712,41 +603,18 @@ void mycontroller(const mjModel *m, mjData *d)
     }
 #endif
 
-
     //init position of obstacles
     if (obstacle_init_flag != true)
         initalize_environment(m, d);
 
     //collision detection
-    contactforce(m, d);
+    // contactforce(m, d);
 
     //keyboard input always
     keyboard_input(d);
 
     //Update robot position
     SATYRR_state_update(m,d);
-
-    //Update obstacle location
-#ifdef DYNAMIC_MAP
-    obstacle_control_dynamic(m,d);
-#endif
-
-    // Choose which map to use (affects the obstacle repulsive force)
-#ifdef STATIC_MAP
-    map_choice = 0;
-#endif
-#ifdef DYNAMIC_MAP
-    map_choice = 1;
-#endif
-#ifdef PATH_WIDTH_MAP
-    map_choice = 2;
-#endif
-
-    //Calculate Distance
-    APF.fnc_cal_distance(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
-    
-    //Attractive force
-    // APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
 
 #ifdef KEYBOARD_INPUT
     sensitivity_x = keyboard_input_sensitivity_x;
@@ -767,8 +635,7 @@ void mycontroller(const mjModel *m, mjData *d)
 
 #ifdef CASE2_FEEDBACK_TO_HUMAN
     //Repulsive force
-    // APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 1);
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 0, map_choice, obstacle_name);
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
     x_force = human_repulse_x_gain*APF.obs_repul_force_x_human; // with force to human
     y_force = human_repulse_y_gain*APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
@@ -778,20 +645,15 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE3_COMPENSATED_CONTROLLER 
     x_force = 0; // without force to human
     y_force = 0; // without force to human
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 1, map_choice, obstacle_name);
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
-    // compensated_des_dx = sensitivity_x*forward_backward; // with repulsive force for controller
-    // compensated_des_dth = sensitivity_y*left_right; // with repulsive force for controller
 #endif
 
-#ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
-    // x_force = human_repulse_x_gain*APF.obs_repul_force_x; // with force to human
-    // y_force = human_repulse_y_gain*APF.obs_repul_force_y; // with force to human
-    
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 2, map_choice, obstacle_name);
-    x_force = APF.obs_repul_force_x_human; // with force to human
-    y_force = APF.obs_repul_force_y_human; // with force to human
+#ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN    
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
+    x_force = human_repulse_x_gain*APF.obs_repul_force_x_human; // with force to human
+    y_force = human_repulse_y_gain*APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
@@ -801,11 +663,6 @@ void mycontroller(const mjModel *m, mjData *d)
 
     //robot controller
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dth, compensated_des_x, compensated_des_th);
-
-    // command force to HMI
-    // x_force = 0.0;
-    // y_force = 0.0;
-    // 
 
     // Torque cutoff
     if(x_force > TORQUE_CUTOFF){
@@ -833,7 +690,7 @@ void mycontroller(const mjModel *m, mjData *d)
     }
     // printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
 
-    if(cnt % 100 == 0)
+    if(cnt % 400 == 0)
     {
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
@@ -993,6 +850,11 @@ int main(int argc, const char **argv)
 
     // Timer for path starts
     completion_time_clock = clock();
+
+    //Initialize dynamic obs vel and location
+#ifdef DYNAMIC_MAP
+    obstacle_control_dynamic_init(m,d);
+#endif
 
 
     // run main loop, target real-time simulation and 60 fps rendering
