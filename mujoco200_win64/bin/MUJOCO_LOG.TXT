@@ -180998,3 +180998,9 @@ Tue Jun 28 16:23:18 2022
 ERROR: Load model error: Error: material 'group6' not found in geom 30
 Object name = obstacle_26_geom, id = 30, line = 151, column = 13
 
+Sun Jul  3 18:53:35 2022
+ERROR: Load model error: XML Error: Schema violation: unrecognized attribute: 'kp'
+
+Element 'motor', line 290, column 9
+
+

@@ -1,7 +1,7 @@
 <mujoco model="SATYRR_NEW_V4">
     <compiler eulerseq = "zyx" angle="radian" meshdir="satyrr_wholebody/"/>
     <size njmax="-1" nconmax="-1" />
-    <option integrator="RK4" timestep="0.001"/>
+    <option integrator="RK4" timestep="0.001" solver="PGS"/>
 
 	<default>
 		<geom contype = '0' conaffinity = '0'/>
@@ -215,7 +215,7 @@
                     <body name="Wheel_R" pos="0 0 -0.15" quat="0.707107 0 0 -0.707107">
                         <inertial pos="0.0356257 0 0" mass="0.52599" diaginertia="0.000948894 0.000489944 0.000489944" />
                         <joint name="Ankle_R" pos="0 0 0" axis="1 0 0" />
-                        <geom name="Wheel_geom_R" class = 'collision-group-a' type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="Wheel_R" />
+                        <geom name="Wheel_geom_R" class = 'collision-group-a' friction = "0 0.0 0.0" type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="Wheel_R" />
                     </body>
                 </body>
             </body>
@@ -230,7 +230,7 @@
                     <body name="Wheel_L" pos="0 0 -0.15">
                         <inertial pos="0 0.0363743 0" quat="0.707107 0 0 0.707107" mass="0.52599" diaginertia="0.000948894 0.000489944 0.000489944" />
                         <joint name="Ankle_L" pos="0 0 0" axis="0 -1 0" />
-                        <geom name="Wheel_geom_L" class = 'collision-group-b' type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="Wheel_L" />
+                        <geom name="Wheel_geom_L" class = 'collision-group-b' friction = "1 0.0 0.0" type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="Wheel_L" />
                     </body>
                 </body>
             </body>

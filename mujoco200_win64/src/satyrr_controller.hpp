@@ -73,10 +73,14 @@ class SATYRR_controller
         double applied_torq[actuator_NUM];
         double wheel_torque;
         double yaw_torq;
-        const double K_xW = -100.0;//-200; //
-        const double K_pitch = -315.0; //-315.0;// -1400;//
-        const double K_dxW = -40.0;// -120; //
-        const double K_dpitch = -40.0; // -70; 
+        // const double K_xW = -100.0;
+        // const double K_pitch = -315.0; 
+        // const double K_dxW = -40.0;
+        // const double K_dpitch = -40.0;  
+        const double K_xW = -150.0;
+        const double K_pitch = -300.0; 
+        const double K_dxW = -40.0;
+        const double K_dpitch = -40.0;  
 
         const double Kp_yaw = 1.9;
         const double Kd_yaw = 0.4;
@@ -93,5 +97,36 @@ class SATYRR_controller
 
 }; 
 
+
+class Traj_Planning
+{
+     public:
+        Traj_Planning();
+
+         //Func
+        bool fifth_order_traj(double tt, double d_pos); 
+        bool Func_Trajectory();
+        bool Traj_running(double d_pos);
+
+        //Value
+        double time;
+        
+        //traj
+        double y_new;
+        bool on_traj;
+        int cnt;
+        int glo_cnt, buf_cnt;
+        double pos_curr, vel_curr, acc_curr, pos_old, vel_old, acc_old, pos_prev, vel_prev, acc_prev;
+        double pos_buff,vel_buff,acc_buff;
+        double pos_new, vel_new, acc_new;
+        double pos_new_old, vel_new_old;
+        double via_point;
+        const int delay_for_traj = 50;
+        double compesated_des_pos, compesated_des_vel, compesated_des_pos_o;
+
+    private:
+        std::vector<double> pos_buf, vel_buf, acc_buf;
+
+};
 
 #endif

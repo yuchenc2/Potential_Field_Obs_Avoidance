@@ -23,6 +23,7 @@
 // #define DYNAMIC_MAP
 // #define PATH_WIDTH_MAP
 
+// #define Trajectory_Planning_On
 
 #include "mujoco.h"
 #include "glfw3.h"
@@ -121,6 +122,8 @@ int torso_Pitch, torso_Roll, torso_Yaw, torso_X, torso_Y, torso_Z, j_hip_l, j_hi
 
 SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
+Traj_Planning Traj_planner;
+
 Potential_Field APF;
 ofstream myfile;
 bool data_save_flag = true;
@@ -411,20 +414,62 @@ void keyboard_input(mjData *d)
     const double max_speed = 1.35;
     const double max_speed_yaw = 1.5;
 
+// #ifdef KEYBOARD_INPUT
+//     delta += update_rate;
+//     if(delta > 1)
+//        delta = 0;
+//     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
+//         forward_backward += 0.001;
+//         forward_backward = min(forward_backward, max_speed);
+//         }
+//     else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
+//         forward_backward -= 0.001;
+//         forward_backward = max(forward_backward, -max_speed);
+//         }
+//     else
+//         forward_backward = 0.0;
+
+//     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
+//         left_right += 0.001;
+//         left_right = min(left_right, max_speed_yaw);
+//         }
+//     else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
+//         left_right -= 0.001;
+//         left_right = max(left_right, -max_speed_yaw);
+//         }
+//     else
+//         left_right = 0.0;
+
+//     if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS){
+//         if (data_save_flag){
+//             myfile.close();
+//             printf("close file!! \n");
+//         }
+//     }
+// #endif
 #ifdef KEYBOARD_INPUT
-    delta += update_rate;
-    if(delta > 1)
-       delta = 0;
+
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
-        forward_backward += 0.001;
+        forward_backward += 0.001*0.15;
         forward_backward = min(forward_backward, max_speed);
         }
     else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
-        forward_backward -= 0.001;
+        forward_backward -= 0.001*0.15;
         forward_backward = max(forward_backward, -max_speed);
         }
-    else
-        forward_backward = 0.0;
+    else{
+        if(forward_backward > 0){
+            forward_backward -= 0.001*0.15;
+            forward_backward = max(forward_backward, 0);
+        }
+        else if(forward_backward < 0){
+            forward_backward += 0.001*0.15;
+            forward_backward = min(forward_backward, 0);
+        }
+        else{
+           forward_backward = 0.0;
+        }
+    }
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
         left_right += 0.001;
@@ -434,8 +479,20 @@ void keyboard_input(mjData *d)
         left_right -= 0.001;
         left_right = max(left_right, -max_speed_yaw);
         }
-    else
-        left_right = 0.0;
+    else{
+        if(forward_backward > 0){
+            left_right -= 0.001*0.15;
+            left_right = max(left_right, 0);
+        }
+        else if(left_right < 0){
+            left_right += 0.001*0.15;
+            left_right = min(left_right, 0);
+        }
+        else{
+           left_right = 0.0;
+        }
+    }
+        
 
     if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS){
         if (data_save_flag){
@@ -445,6 +502,7 @@ void keyboard_input(mjData *d)
     }
 #endif
 }
+
 
 void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw, double des_x, double d_yaw)
 {
@@ -901,9 +959,25 @@ void mycontroller(const mjModel *m, mjData *d)
     compensated_des_x += compensated_des_dx*update_rate;
     compensated_des_th += compensated_des_dth*update_rate;
 
+#ifdef Trajectory_Planning_On
+    //Trajectory Planner
+    Traj_planner.Traj_running(compensated_des_dx);
+
+    Traj_planner.glo_cnt = Traj_planner.glo_cnt + 1;
+    if(Traj_planner.glo_cnt > Traj_planner.delay_for_traj) Traj_planner.buf_cnt = Traj_planner.buf_cnt + 1;
+
+    Traj_planner.compesated_des_pos += Traj_planner.pos_new*update_rate;
+    //Traj_planner.compesated_des_vel = (Traj_planner.pos_new - Traj_planner.compesated_des_pos_o) /update_rate;
+    //Traj_planner.compesated_des_pos_o = Traj_planner.pos_new;
+    
+    //robot controller
+    saytrr_controller(m, d, Traj_planner.pos_new, compensated_des_dth, Traj_planner.compesated_des_pos, compensated_des_th);
+#endif
+
+#ifndef Trajectory_Planning_On
     //robot controller
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dth, compensated_des_x, compensated_des_th);
-
+#endif
     // command force to HMI
     // x_force = 0.0;
     // y_force = 0.0;
@@ -933,10 +1007,11 @@ void mycontroller(const mjModel *m, mjData *d)
         Robot_Data[0] = 0; 
         Robot_Data[10] = 0;
     }
-    // printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
+
 
     if(cnt % 100 == 0)
     {
+        // printf("new pos = %f, old pos = %f \n",Traj_planner.pos_new,compensated_des_x);
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
@@ -944,7 +1019,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
-        // printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
+        printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
         // printf("repulsive_force_controller_slope_force: %f\n", APF.repulsive_force_controller_slope_force);
@@ -961,17 +1036,20 @@ void mycontroller(const mjModel *m, mjData *d)
             myfile << d->time 
             // << "\n" << APF.obs_repul_force_x_controller 
             // << "\n" << APF.obs_repul_force_y_controller 
-            << ", " << APF.obs_repul_force_x_human 
-            << ", " << APF.obs_repul_force_y_human 
-            << ", " << APF.repulsive_force_human_new[0]
-            << ", " << APF.repulsive_force_human_old[0]
-            << ", " << APF.repulsive_force_human_final[0]
-            << ", " << APF.repulsive_force_human_slope_force[0]
-            << ", " << APF.repulsive_force_human_slope_lpf[0]
-            // << ", " << SATYRR_S.x 
+            // << ", " << APF.obs_repul_force_x_human 
+            // << ", " << APF.obs_repul_force_y_human 
+            // << ", " << APF.repulsive_force_human_new[0]
+            // << ", " << APF.repulsive_force_human_old[0]
+            // << ", " << APF.repulsive_force_human_final[0]
+            // << ", " << APF.repulsive_force_human_slope_force[0]
+            // << ", " << APF.repulsive_force_human_slope_lpf[0]
+            << ", " << compensated_des_x
+            << ", " << Traj_planner.compesated_des_pos 
+            << ", " << SATYRR_S.x  
             // << ", " << SATYRR_S.pitch
             // << ", " << SATYRR_S.pitch_actual
-            // << ", " << compensated_des_dx
+            << ", " << compensated_des_dx
+            << ", " << Traj_planner.pos_new
             // << ", " << SATYRR_S.dx 
             // << ", " << SATYRR_S.dpitch
             // << ", " << compensated_des_th 
