@@ -277,7 +277,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
             obs_repul_force_y_controller = obs_repul_force_y_controller + 360 *M_PI/180;
         }
     
-        // printf("total_force %f %f, obs_force: %f %f, wall_force %f %f\n", obs_repul_force_x_controller, obs_repul_force_y_controller, obs_force_x_controller, obs_force_y_controller, wall_force_x_controller, wall_force_y_controller);
+        printf("total_force %f %f, obs_force: %f %f, wall_force %f %f\n", obs_repul_force_x_controller, obs_repul_force_y_controller, obs_force_x_controller, obs_force_y_controller, wall_force_x_controller, wall_force_y_controller);
     }
 
     if(case_ == 0 || case_ == 2){ //Human wall and final force
