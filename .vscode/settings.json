@@ -64,11 +64,15 @@
         "xtr1common": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
+<<<<<<< HEAD
         "random": "cpp",
         "deque": "cpp",
         "list": "cpp",
         "queue": "cpp",
         "valarray": "cpp",
         "xhash": "cpp"
+=======
+        "random": "cpp"
+>>>>>>> new_map_static
     }
 }

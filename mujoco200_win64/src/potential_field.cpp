@@ -7,7 +7,7 @@ Potential_Field::Potential_Field()
 {
     for(int i=0;i<2;i++){
         attractive_force[i] = 0.0; //x, y
-        repulsive_force[i] = 0.0;
+        repulsive_force_controller[i] = 0.0;
         repulsive_force_human[i] = 0.0;
         closest_obs_pos[i] = 0.0;
         repulsive_force_all[i] = 0.0;

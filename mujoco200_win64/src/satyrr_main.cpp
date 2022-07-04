@@ -7,6 +7,7 @@
         https://www.roboti.us/resourcelicense.txt
 */
 
+// #define Trajectory_Planning_On
 
 #include "mujoco.h"
 #include "glfw3.h"
@@ -84,6 +85,8 @@ int torso_Pitch, torso_Roll, torso_Yaw, torso_X, torso_Y, torso_Z, j_hip_l, j_hi
 
 SATYRR_controller SATYRR_Cont;
 SATYRR_STATE SATYRR_S;
+Traj_Planning Traj_planner;
+
 Potential_Field APF;
 ofstream myfile;
 bool data_save_flag = true;
@@ -191,26 +194,67 @@ void scroll(GLFWwindow *window, double xoffset, double yoffset)
     mjv_moveCamera(m, mjMOUSE_ZOOM, 0, -0.05 * yoffset, &scn, &cam);
 }
 
-// geom locations
-// void obstacleLocations(const mjModel *m, mjData *d)
-// {
-//     printf("\n");
-//     printf("Obstacle 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body") * 3 + 2]);
-//     printf("Obstacle 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body") * 3 + 2]);
-//     printf("Obstacle 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body") * 3 + 2]);
-//     printf("Obstacle 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body") * 3 + 2]);
-//     printf("Obstacle 5: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body") * 3 + 2]);
-//     printf("Start Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "start_location_body") * 3 + 2]);
-//     printf("End Location: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body") * 3 + 2]);
-//     printf("Wall 1: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall1_body") * 3 + 2]);
-//     printf("Wall 2: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall2_body") * 3 + 2]);
-//     printf("Wall 3: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall3_body") * 3 + 2]);
-//     printf("Wall 4: (%f, %f, %f) \n", m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 1], m->body_pos[mj_name2id(m, mjOBJ_BODY, "wall4_body") * 3 + 2]);
-// }
+void obstacle_control_static(const mjModel *m, mjData *d){
+    srand ( time(NULL) );
+    vector<int> selected_static_obs;
+    string selected_static_obs_name;
+    string init_name = "obstacle_";
+    string end_name = "_body";
+     
+    int ran_num = 0;
+    int ran_num_old = 0;
+    int obs_num = 0;
+    const float FLOAT_MIN = 0.0;
+    const float FLOAT_MAX = 1.0;
+    double rand_loc[7] = {0.0,};
 
+    for(int i=0;i<7;i++){
+        ran_num = (rand() %5) + (1+5*i);
+        //cout <<  ran_num << "____" << ran_num_old << "\n";
+        while(ran_num - ran_num_old == 5) 
+            {
+                //cout << "while" << "\n";
+                ran_num = (rand() %5) + (1+5*i);
+                if(ran_num - ran_num_old != 5) break;
+            }
+        //cout << ran_num <<" \n";
+        selected_static_obs.push_back(ran_num);
+        ran_num_old = ran_num;  
+    }
+
+    for(int i=0;i<7;i++){
+        selected_static_obs_name = init_name + to_string(selected_static_obs[i]) + end_name;
+        // cout << selected_static_obs_name.c_str() <<" \n";
+        m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0] = 100; // only for x direction
+    }
+
+    for(int i=0;i<7;i++){
+        rand_loc[i] = FLOAT_MIN + (float)(rand()) / ((float)(RAND_MAX/(FLOAT_MAX - FLOAT_MIN)));
+        for(int j=1;j<6;j++){
+            obs_num = 5*i + j;
+            //cout << j << "__" << i << "__" << obs_num << "\n"; 
+            if(obs_num==selected_static_obs[0] || obs_num==selected_static_obs[1] ||
+               obs_num==selected_static_obs[2] || obs_num==selected_static_obs[3] ||
+               obs_num==selected_static_obs[4] || obs_num==selected_static_obs[5] || obs_num==selected_static_obs[6])
+               cout << "pass" << "\n";
+            //change the initial location
+            else{
+                selected_static_obs_name = init_name + to_string(obs_num) + end_name;
+                //cout << obs_num << "__" << rand_loc[i] << "__" << selected_static_obs_name << "\n"; 
+                m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0] = rand_loc[i] + m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0];
+            }
+        }
+        //cout << "\n" << endl;
+    }
+}
 
 void initalize_environment(const mjModel *m, mjData *d)
 {
+
+#ifdef STATIC_MAP
+    obstacle_control_static(m,d);
+#endif
+
 #if defined DYNAMIC_MAP || defined STATIC_MAP 
     for(int i=0;i<Num_obstacles;i++){
         for(int j=0;j<3;j++){
@@ -321,20 +365,62 @@ void keyboard_input(mjData *d)
     const double max_speed = 1.35;
     const double max_speed_yaw = 1.5;
 
+// #ifdef KEYBOARD_INPUT
+//     delta += update_rate;
+//     if(delta > 1)
+//        delta = 0;
+//     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
+//         forward_backward += 0.001;
+//         forward_backward = min(forward_backward, max_speed);
+//         }
+//     else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
+//         forward_backward -= 0.001;
+//         forward_backward = max(forward_backward, -max_speed);
+//         }
+//     else
+//         forward_backward = 0.0;
+
+//     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
+//         left_right += 0.001;
+//         left_right = min(left_right, max_speed_yaw);
+//         }
+//     else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
+//         left_right -= 0.001;
+//         left_right = max(left_right, -max_speed_yaw);
+//         }
+//     else
+//         left_right = 0.0;
+
+//     if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS){
+//         if (data_save_flag){
+//             myfile.close();
+//             printf("close file!! \n");
+//         }
+//     }
+// #endif
 #ifdef KEYBOARD_INPUT
-    delta += update_rate;
-    if(delta > 1)
-       delta = 0;
+
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
-        forward_backward += 0.001;
+        forward_backward += 0.001*0.15;
         forward_backward = min(forward_backward, max_speed);
         }
     else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
-        forward_backward -= 0.001;
+        forward_backward -= 0.001*0.15;
         forward_backward = max(forward_backward, -max_speed);
         }
-    else
-        forward_backward = 0.0;
+    else{
+        if(forward_backward > 0){
+            forward_backward -= 0.001*0.15;
+            forward_backward = max(forward_backward, 0);
+        }
+        else if(forward_backward < 0){
+            forward_backward += 0.001*0.15;
+            forward_backward = min(forward_backward, 0);
+        }
+        else{
+           forward_backward = 0.0;
+        }
+    }
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
         left_right += 0.001;
@@ -344,8 +430,20 @@ void keyboard_input(mjData *d)
         left_right -= 0.001;
         left_right = max(left_right, -max_speed_yaw);
         }
-    else
-        left_right = 0.0;
+    else{
+        if(forward_backward > 0){
+            left_right -= 0.001*0.15;
+            left_right = max(left_right, 0);
+        }
+        else if(left_right < 0){
+            left_right += 0.001*0.15;
+            left_right = min(left_right, 0);
+        }
+        else{
+           left_right = 0.0;
+        }
+    }
+        
 
     if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS){
         if (data_save_flag){
@@ -355,6 +453,7 @@ void keyboard_input(mjData *d)
     }
 #endif
 }
+
 
 void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw, double des_x, double d_yaw)
 {
@@ -548,6 +647,9 @@ void obstacle_control_dynamic_init(const mjModel *m, mjData *d){
     }
 }
 
+
+
+
 int collision_count = 0;
 void contactforce(const mjModel* m, mjData* d)
 {
@@ -588,13 +690,20 @@ void mycontroller(const mjModel *m, mjData *d)
 
 
     // Timer for completion time
-#if defined DYNAMIC_MAP || defined STATIC_MAP 
+#if defined DYNAMIC_MAP
     if(robot_x > 7.7808 && completed == 0){
         completion_time_clock = clock() - completion_time_clock;
         printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
         completed = 1;
     }
-#endif
+#endif  
+#if defined STATIC_MAP
+    if(robot_x > -1.0 && completed == 0){
+        completion_time_clock = clock() - completion_time_clock;
+        printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
+        completed = 1;
+    }
+#endif 
 #ifdef PATH_WIDTH_MAP
     if(robot_x > 1.9456 && robot_y < -5.6388 && completed == 0){
         completion_time_clock = clock() - completion_time_clock;
@@ -661,8 +770,29 @@ void mycontroller(const mjModel *m, mjData *d)
     compensated_des_x += compensated_des_dx*update_rate;
     compensated_des_th += compensated_des_dth*update_rate;
 
+#ifdef Trajectory_Planning_On
+    //Trajectory Planner
+    Traj_planner.Traj_running(compensated_des_dx);
+
+    Traj_planner.glo_cnt = Traj_planner.glo_cnt + 1;
+    if(Traj_planner.glo_cnt > Traj_planner.delay_for_traj) Traj_planner.buf_cnt = Traj_planner.buf_cnt + 1;
+
+    Traj_planner.compesated_des_pos += Traj_planner.pos_new*update_rate;
+    //Traj_planner.compesated_des_vel = (Traj_planner.pos_new - Traj_planner.compesated_des_pos_o) /update_rate;
+    //Traj_planner.compesated_des_pos_o = Traj_planner.pos_new;
+    
+    //robot controller
+    saytrr_controller(m, d, Traj_planner.pos_new, compensated_des_dth, Traj_planner.compesated_des_pos, compensated_des_th);
+#endif
+
+#ifndef Trajectory_Planning_On
     //robot controller
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dth, compensated_des_x, compensated_des_th);
+#endif
+    // command force to HMI
+    // x_force = 0.0;
+    // y_force = 0.0;
+    // 
 
     // Torque cutoff
     if(x_force > TORQUE_CUTOFF){
@@ -688,18 +818,19 @@ void mycontroller(const mjModel *m, mjData *d)
         Robot_Data[0] = 0; 
         Robot_Data[10] = 0;
     }
-    // printf("X_force: %f, Y_force: %f \n", Robot_Data[0], Robot_Data[10]);
+
 
     if(cnt % 400 == 0)
     {
+        // printf("new pos = %f, old pos = %f \n",Traj_planner.pos_new,compensated_des_x);
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        printf("x_force: %f, y_force: %f \n",x_force, y_force);
+        //("x_force: %f, y_force: %f \n",x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
-        // printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
+        printf("repulsive force %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
         // printf("repulsive_force_controller_slope_force: %f\n", APF.repulsive_force_controller_slope_force);
@@ -716,17 +847,20 @@ void mycontroller(const mjModel *m, mjData *d)
             myfile << d->time 
             // << "\n" << APF.obs_repul_force_x_controller 
             // << "\n" << APF.obs_repul_force_y_controller 
-            << ", " << APF.obs_repul_force_x_human 
-            << ", " << APF.obs_repul_force_y_human 
-            << ", " << APF.repulsive_force_human_new[0]
-            << ", " << APF.repulsive_force_human_old[0]
-            << ", " << APF.repulsive_force_human_final[0]
-            << ", " << APF.repulsive_force_human_slope_force[0]
-            << ", " << APF.repulsive_force_human_slope_lpf[0]
-            // << ", " << SATYRR_S.x 
+            // << ", " << APF.obs_repul_force_x_human 
+            // << ", " << APF.obs_repul_force_y_human 
+            // << ", " << APF.repulsive_force_human_new[0]
+            // << ", " << APF.repulsive_force_human_old[0]
+            // << ", " << APF.repulsive_force_human_final[0]
+            // << ", " << APF.repulsive_force_human_slope_force[0]
+            // << ", " << APF.repulsive_force_human_slope_lpf[0]
+            << ", " << compensated_des_x
+            << ", " << Traj_planner.compesated_des_pos 
+            << ", " << SATYRR_S.x  
             // << ", " << SATYRR_S.pitch
             // << ", " << SATYRR_S.pitch_actual
-            // << ", " << compensated_des_dx
+            << ", " << compensated_des_dx
+            << ", " << Traj_planner.pos_new
             // << ", " << SATYRR_S.dx 
             // << ", " << SATYRR_S.dpitch
             // << ", " << compensated_des_th 

@@ -57,7 +57,7 @@ class Potential_Field
     public:
         Potential_Field();
         double attractive_force[2];
-        double repulsive_force[2];
+        double repulsive_force_controller[2];
         double repulsive_force_human[2];
 
         double repulsive_force_controller_new[Num_obstacles+4];

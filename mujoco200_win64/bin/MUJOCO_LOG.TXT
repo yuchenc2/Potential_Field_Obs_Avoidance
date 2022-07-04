@@ -180986,6 +180986,7 @@ WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Ti
 Tue Jun 21 15:29:32 2022
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.1970.
 
+<<<<<<< HEAD
 Wed Jun 29 00:19:59 2022
 ERROR: Load model error: Error: repeated name in geom array, position 45
 Object name = obstacle_21_geom, id = 45, line = 189, column = 13
@@ -180998,4 +180999,23 @@ WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Ti
 
 Mon Jul  4 15:19:52 2022
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 16.3200.
+=======
+Tue Jun 28 16:18:56 2022
+ERROR: Load model error: Error: material 'group4' not found in geom 20
+Object name = obstacle_16_geom, id = 20, line = 115, column = 13
+
+Tue Jun 28 16:22:37 2022
+ERROR: Load model error: Error: repeated name in material array, position 6
+Object name = group3, id = 6, line = 42, column = 9
+
+Tue Jun 28 16:23:18 2022
+ERROR: Load model error: Error: material 'group6' not found in geom 30
+Object name = obstacle_26_geom, id = 30, line = 151, column = 13
+
+Sun Jul  3 18:53:35 2022
+ERROR: Load model error: XML Error: Schema violation: unrecognized attribute: 'kp'
+
+Element 'motor', line 290, column 9
+
+>>>>>>> new_map_static
 
