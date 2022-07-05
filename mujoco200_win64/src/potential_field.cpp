@@ -76,17 +76,9 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     const double obsRad = 0.2; //0.2;
     // const double obsS = 19.0/5.0;
     const double obsS = 3.0; //10.0/5.0;
-    const double inf = 0.001;
-    const double DTR = M_PI/180.0;
-    const double p_thres = 0.2;
-    const double neta_human = 500.0; //10.0; //5.0; //2.0; //0.5
-    const double neta_controller = 500; //0.002;
-    const double wall_force_activate_distance = obsS + obsRad;
     const double max_force_vel_cutoff = 6.0;
-    int size = 0;
     const double beta_velocity_controller = 1.0;
     const double beta_velocity_human = 0.1;
-    const double wall_force_multiplier = 0.1;
     double wall_force_x_human = 0.0;
     double wall_force_y_human = 0.0;
     double wall_force_x_controller = 0.0;
@@ -155,19 +147,19 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
 #endif
         
         // Calculate distance
-        if(i < size){
+        if(i < Num_obstacles){
             thetaO = atan2(oy[i]-ry, ox[i]-rx);
             distance_each_obs =  fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
-        }else if(i == size){ //left wall
+        }else if(i == Num_obstacles){ //left wall
             thetaO = 0.0;
             distance_each_obs = fnc_cal_distance_obs(rx, 0, left_wall_x, 0);
-        }else if(i == size+1){ //top wall
+        }else if(i == Num_obstacles+1){ //top wall
             thetaO = atan2(top_wall_y-ry, 0); 
             distance_each_obs = fnc_cal_distance_obs(0, ry, 0, top_wall_y);
-        }else if(i == size+2){ //right wall
+        }else if(i == Num_obstacles+2){ //right wall
             thetaO = 0.0;
             distance_each_obs = fnc_cal_distance_obs(rx, 0, right_wall_x, 0);
-        }else if(i == size+3){ //bottom wall
+        }else if(i == Num_obstacles+3){ //bottom wall
             thetaO = atan2(bottom_wall_y-ry, 0);
             distance_each_obs = fnc_cal_distance_obs(0, ry, 0, bottom_wall_y);
         }
@@ -177,7 +169,11 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
 #if defined CASE3_COMPENSATED_CONTROLLER || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN 
         if(distance_each_obs < (obsS + obsRad)){
             if((cnt_for_slope_controller % 400 == 0)){ //10ms = 0.01s
-                repulsive_force_controller_new[i] = 1.0/(1.0+exp(8.0*distance_each_obs));
+                if(i < Num_obstacles){
+                    repulsive_force_controller_new[i] = 7.5/(1.0+exp(2.0*distance_each_obs));
+                }else{
+                    repulsive_force_controller_new[i] = 1.0/(1.0+exp(8.0*distance_each_obs));
+                }
                 repulsive_force_controller_slope_force[i] = beta_velocity_controller*(repulsive_force_controller_new[i]-repulsive_force_controller_old[i])/0.01;
                 repulsive_force_controller_slope_lpf[i] = alpha*repulsive_force_controller_slope_force[i] + (1-alpha)*repulsive_force_controller_slope_lpf_old[i];
                 repulsive_force_controller_slope_lpf_old[i] = repulsive_force_controller_slope_lpf[i];
@@ -216,8 +212,12 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         if(distance_each_obs < (obsS + obsRad)){
             //Modified potential field force
             if((cnt_for_slope_human % 400 == 0)){ //10ms = 0.01s
-                // repulsive_force_human_new[i] = 5.0/(1.0+exp(2.0*distance_each_obs));
-                repulsive_force_human_new[i] = 7.5/(1.0+exp(distance_each_obs));
+                if(i < Num_obstacles){
+                    repulsive_force_human_new[i] = 7.5/(1.0+exp(2.0*distance_each_obs));
+                }else{
+                    repulsive_force_human_new[i] = 1.0/(1.0+exp(8.0*distance_each_obs));
+                }
+                
                 repulsive_force_human_slope_force[i] = beta_velocity_human*(repulsive_force_human_new[i]-repulsive_force_human_old[i])/0.01;
                 repulsive_force_human_slope_lpf[i] = alpha*repulsive_force_human_slope_force[i] + (1-alpha)*repulsive_force_human_slope_lpf_old[i];
                 repulsive_force_human_slope_lpf_old[i] = repulsive_force_human_slope_lpf[i];
