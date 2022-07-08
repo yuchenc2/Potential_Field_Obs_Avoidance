@@ -13,8 +13,8 @@ using namespace std;
 
 /*   Decide cases for feedback  */
 // #define CASE1_WITHOUT_FEEDBACK //NOTHING
-#define CASE2_FEEDBACK_TO_HUMAN 
-// #define CASE3_COMPENSATED_CONTROLLER 
+// #define CASE2_FEEDBACK_TO_HUMAN 
+#define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
@@ -22,8 +22,8 @@ using namespace std;
 // #define HMI_INPUT
 
 /* Map Cases */
-#define STATIC_MAP
-// #define DYNAMIC_MAP
+// #define STATIC_MAP
+#define DYNAMIC_MAP
 
 
 //Obstacles
@@ -94,6 +94,9 @@ class Potential_Field
         double obs_repul_force_y_controller;
 
         double distance_to_wall;  
+
+        double dynamic_x[Num_obstacles];
+        double dynamic_y[Num_obstacles];
 
         double randomVel_x[Num_obstacles];
         double randomVel_y[Num_obstacles];

@@ -717,7 +717,7 @@ void mycontroller(const mjModel *m, mjData *d)
         initalize_environment(m, d);
 
     //collision detection
-    // contactforce(m, d);
+    contactforce(m, d);
 
     //keyboard input always
     keyboard_input(d);
