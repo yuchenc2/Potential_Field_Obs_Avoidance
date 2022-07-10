@@ -22,8 +22,8 @@ using namespace std;
 // #define HMI_INPUT
 
 /* Map Cases */
-// #define STATIC_MAP
-#define DYNAMIC_MAP
+#define STATIC_MAP
+// #define DYNAMIC_MAP
 
 
 //Obstacles

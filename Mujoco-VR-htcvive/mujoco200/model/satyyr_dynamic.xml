@@ -48,19 +48,18 @@
 		<!-- camera: front view -->
         <camera name="camera1" mode="targetbody" target="torso"/>
         <body name="wall1_body" pos="10 0 1">
-            <geom name="wall1_geom" class = "collision-default" type="plane" size="1.2192 1 1" pos="0 0 0" quat="0.5 -0.5 -0.5 0.5" material="matplane" condim="1"/>
+            <geom name="wall1_geom" class = "collision-default" type="plane" size="5 1 1" pos="0 0 0" quat="0.5 -0.5 -0.5 0.5" material="matplane" condim="1"/>
         </body>
-        <body name="wall2_body" pos="-5 1.2192 1">
+        <body name="wall2_body" pos="-5 5 1">
             <geom name="wall2_geom" class = "collision-default" type="plane" size="15 1 1" pos="0 0 0" quat="0.7071 0.7071 0 0 " material="matplane" condim="1"/>
         </body>
         <body name="wall3_body" pos="-20 0 1">
-            <geom name="wall3_geom" class = "collision-default" type="plane" size="1.2192 1 1" pos="0 0 0" quat="0.5 0.5 0.5 0.5" material="matplane" condim="1"/>
+            <geom name="wall3_geom" class = "collision-default" type="plane" size="5 1 1" pos="0 0 0" quat="0.5 0.5 0.5 0.5" material="matplane" condim="1"/>
         </body>
-        <body name="wall4_body" pos="-5 -1.2192 1">
+        <body name="wall4_body" pos="-5 -5 1">
             <geom name="wall4_geom" class = "collision-default" type="plane" size="15 1 1" pos="0 0 0" quat=" 0 0 0.7071 0.7071 " material="matplane" condim="1"/>
         </body>
 
-        <!-- Group 1 -->
         <body name="obstacle_1_body" pos="-16 0 0">
             <geom name="obstacle_1_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
@@ -70,41 +69,318 @@
         <body name="obstacle_3_body" pos="-12 0 0">
             <geom name="obstacle_3_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_7_body" pos="-10 0 0">
+        <body name="obstacle_4_body" pos="-10 0 0">
+            <geom name="obstacle_4_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_5_body" pos="-8 0 0">
+            <geom name="obstacle_5_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_6_body" pos="-6.5 0 0">
+            <geom name="obstacle_6_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_7_body" pos="-3.5 0.0 0">
             <geom name="obstacle_7_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_8_body" pos="-8 0 0">
+        <body name="obstacle_8_body" pos="0 0.0 0">
             <geom name="obstacle_8_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_9_body" pos="-6.5 0 0">
+        <body name="obstacle_9_body" pos="6 0 0">
             <geom name="obstacle_9_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-
-        <!-- Group 2 -->
-        <body name="obstacle_4_body" pos="-3.5 0.0 0">
-            <geom name="obstacle_4_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
-        </body>
-        <body name="obstacle_5_body" pos="0 0.0 0">
-            <geom name="obstacle_5_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group2" />
+        <body name="obstacle_10_body" pos="8 0.8 0">
+            <geom name="obstacle_10_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
 
-        <!-- Group 3 -->
-        <body name="obstacle_6_body" pos="6 0 0">
-            <geom name="obstacle_6_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
+        <body name="obstacle_11_body" pos="-16 -1 0">
+            <geom name="obstacle_11_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_10_body" pos="6 0.8 0">
-            <geom name="obstacle_10_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
+        <body name="obstacle_12_body" pos="-14 -2 0">
+            <geom name="obstacle_12_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-        <body name="obstacle_11_body" pos="6 -0.8 0">
-            <geom name="obstacle_11_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group3" />
+        <body name="obstacle_13_body" pos="-12 0 0">
+            <geom name="obstacle_13_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_14_body" pos="-10 -5 0">
+            <geom name="obstacle_14_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_15_body" pos="-8 0 0">
+            <geom name="obstacle_15_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_16_body" pos="-6.5 0 0">
+            <geom name="obstacle_16_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_17_body" pos="-3.5 0.0 0">
+            <geom name="obstacle_17_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_18_body" pos="0 0.0 0">
+            <geom name="obstacle_18_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_19_body" pos="6 0 0">
+            <geom name="obstacle_19_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_20_body" pos="8 0.8 0">
+            <geom name="obstacle_20_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        
+        <body name="obstacle_21_body" pos="-16 -1 0">
+            <geom name="obstacle_21_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_22_body" pos="-14 -2 0">
+            <geom name="obstacle_22_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_23_body" pos="-12 0 0">
+            <geom name="obstacle_23_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_24_body" pos="-10 -5 0">
+            <geom name="obstacle_24_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_25_body" pos="-8 0 0">
+            <geom name="obstacle_25_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_26_body" pos="-6.5 0 0">
+            <geom name="obstacle_26_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_27_body" pos="-3.5 0.0 0">
+            <geom name="obstacle_27_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_28_body" pos="0 0.0 0">
+            <geom name="obstacle_28_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_29_body" pos="6 0 0">
+            <geom name="obstacle_29_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_30_body" pos="8 0.8 0">
+            <geom name="obstacle_30_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        
+        
+        <body name="obstacle_31_body" pos="-16 -1 0">
+            <geom name="obstacle_31_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_32_body" pos="-14 -2 0">
+            <geom name="obstacle_32_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_33_body" pos="-12 0 0">
+            <geom name="obstacle_33_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_34_body" pos="-10 -5 0">
+            <geom name="obstacle_34_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_35_body" pos="-8 0 0">
+            <geom name="obstacle_35_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_36_body" pos="-6.5 0 0">
+            <geom name="obstacle_36_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_37_body" pos="-3.5 0.0 0">
+            <geom name="obstacle_37_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_38_body" pos="0 0.0 0">
+            <geom name="obstacle_38_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_39_body" pos="6 0 0">
+            <geom name="obstacle_39_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_40_body" pos="8 0.8 0">
+            <geom name="obstacle_40_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        
+        <body name="obstacle_41_body" pos="-16 -1 0">
+            <geom name="obstacle_41_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_42_body" pos="-14 -2 0">
+            <geom name="obstacle_42_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_43_body" pos="-12 0 0">
+            <geom name="obstacle_43_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_44_body" pos="-10 -5 0">
+            <geom name="obstacle_44_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_45_body" pos="-8 0 0">
+            <geom name="obstacle_45_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_46_body" pos="-6.5 0 0">
+            <geom name="obstacle_46_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_47_body" pos="-3.5 0.0 0">
+            <geom name="obstacle_47_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_48_body" pos="0 0.0 0">
+            <geom name="obstacle_48_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_49_body" pos="6 0 0">
+            <geom name="obstacle_49_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_50_body" pos="8 0.8 0">
+            <geom name="obstacle_50_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        
+
+        <body name="obstacle_51_body" pos="-16 0 0">
+            <geom name="obstacle_51_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_52_body" pos="-14 0 0">
+            <geom name="obstacle_52_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_53_body" pos="-12 0 0">
+            <geom name="obstacle_53_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_54_body" pos="-10 0 0">
+            <geom name="obstacle_54_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_55_body" pos="-8 0 0">
+            <geom name="obstacle_55_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_56_body" pos="-6.5 0 0">
+            <geom name="obstacle_56_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_57_body" pos="-3.5 0.0 0">
+            <geom name="obstacle_57_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_58_body" pos="0 0.0 0">
+            <geom name="obstacle_58_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_59_body" pos="6 0 0">
+            <geom name="obstacle_59_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_60_body" pos="8 0.8 0">
+            <geom name="obstacle_60_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+
+        <body name="obstacle_61_body" pos="-16 -1 0">
+            <geom name="obstacle_61_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_62_body" pos="-14 -2 0">
+            <geom name="obstacle_62_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_63_body" pos="-12 0 0">
+            <geom name="obstacle_63_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_64_body" pos="-10 -5 0">
+            <geom name="obstacle_64_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_65_body" pos="-8 0 0">
+            <geom name="obstacle_65_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_66_body" pos="-6.5 0 0">
+            <geom name="obstacle_66_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_67_body" pos="-3.5 0.0 0">
+            <geom name="obstacle_67_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_68_body" pos="0 0.0 0">
+            <geom name="obstacle_68_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_69_body" pos="6 0 0">
+            <geom name="obstacle_69_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_70_body" pos="8 0.8 0">
+            <geom name="obstacle_70_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        
+        <body name="obstacle_71_body" pos="-16 -1 0">
+            <geom name="obstacle_71_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_72_body" pos="-14 -2 0">
+            <geom name="obstacle_72_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_73_body" pos="-12 0 0">
+            <geom name="obstacle_73_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_74_body" pos="-10 -5 0">
+            <geom name="obstacle_74_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_75_body" pos="-8 0 0">
+            <geom name="obstacle_75_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_76_body" pos="-6.5 0 0">
+            <geom name="obstacle_76_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_77_body" pos="-3.5 0.0 0">
+            <geom name="obstacle_77_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_78_body" pos="0 0.0 0">
+            <geom name="obstacle_78_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_79_body" pos="6 0 0">
+            <geom name="obstacle_79_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_80_body" pos="8 0.8 0">
+            <geom name="obstacle_80_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+
+        <body name="obstacle_81_body" pos="-16 -1 0">
+            <geom name="obstacle_81_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_82_body" pos="-14 -2 0">
+            <geom name="obstacle_82_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_83_body" pos="-12 0 0">
+            <geom name="obstacle_83_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_84_body" pos="-10 -5 0">
+            <geom name="obstacle_84_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_85_body" pos="-8 0 0">
+            <geom name="obstacle_85_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_86_body" pos="-6.5 0 0">
+            <geom name="obstacle_86_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_87_body" pos="-3.5 0.0 0">
+            <geom name="obstacle_87_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_88_body" pos="0 0.0 0">
+            <geom name="obstacle_88_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_89_body" pos="6 0 0">
+            <geom name="obstacle_89_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_90_body" pos="8 0.8 0">
+            <geom name="obstacle_90_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        
+        <body name="obstacle_91_body" pos="-16 -1 0">
+            <geom name="obstacle_91_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_92_body" pos="-14 -2 0">
+            <geom name="obstacle_92_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_93_body" pos="-12 0 0">
+            <geom name="obstacle_93_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_94_body" pos="-10 -5 0">
+            <geom name="obstacle_94_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_95_body" pos="-8 0 0">
+            <geom name="obstacle_95_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_96_body" pos="-6.5 0 0">
+            <geom name="obstacle_96_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_97_body" pos="-3.5 0.0 0">
+            <geom name="obstacle_97_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_98_body" pos="0 0.0 0">
+            <geom name="obstacle_98_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_99_body" pos="6 0 0">
+            <geom name="obstacle_99_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
+        </body>
+        <body name="obstacle_100_body" pos="8 0.8 0">
+            <geom name="obstacle_100_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
         
 
         <body name="start_location_body" pos="-19 0 0">
-            <geom name="start_location_geom" size="1 1.2192 0.001" type="box" rgba="0 1 0 1" />
+            <geom name="start_location_geom" size="1.0 1.0 0.001" type="box" rgba="0 1 0 1" />
+        </body>
+        <body name="mid_location_body" pos="-5 0 0">
+            <geom name="mid_location_geom" size="1 1.0 0.001" type="box" rgba="1 1 0 1" />
         </body>
         <body name="end_location_body" pos="9 0 0">
-            <geom name="end_location_geom" size="1 1.2192 0.001" type="box" rgba="1 1 1 1" />
+            <geom name="end_location_geom" size="1 1.0 0.001" type="box" rgba="1 1 1 1" />
         </body>
 
         <body name="torso" pos="-19 0.0 0.4869">

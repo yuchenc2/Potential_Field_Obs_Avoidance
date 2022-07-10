@@ -55,31 +55,6 @@ bool EnableLip = false, EnableLipV2 = false;
 bool looping = false;
 float *gaze;
 
-//-------------------------- Controller/Input Cases and Gains ---------------------------
-
-
-/*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK  /// 1
-// #define CASE2_FEEDBACK_TO_HUMAN // 2
-#define CASE3_COMPENSATED_CONTROLLER  // 3
-// #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
-
-/* Map Cases */
-#define STATIC_MAP  // 1
-// #define DYNAMIC_MAP     // 2
-
-int trial = 1; // 1 2 3 4 5
-
-//------------------------------Trial var to change ------------------------------------------
-
-/* Decide control input */
-// #define KEYBOARD_INPUT 
-#define HMI_INPUT
-
-// #define VR_WORKING
-// #define PATH_WIDTH_MAP  //3
-
-
 /* Gains to tune */
 // HMI input sensitivity for controller
 double HMI_input_sensitivity_x = 0.1; //0.1
@@ -102,7 +77,6 @@ using namespace std;
 #define M_PI           3.14159265358979323846
 // #define min(a,b) a<b?a:b
 // #define max(a,b) a>b?a:b
-int delay = 0.01*CLOCKS_PER_SEC;
 double shift_y[11] = {0.0};
 int obs_case = 1; // change obs case
 //Class
@@ -137,32 +111,6 @@ double compensated_des_x = 0.0;
 double compensated_des_th = 0.0;
 
 //------------------------------------ Obstacles ----------------------------------------
-#ifdef STATIC_MAP
-    // #define Num_obstacles 26 // TODO: add wall repulsive forces
-    #define Num_obstacles 18 // TODO: add wall repulsive forces
-    int map = 1;  
-#endif
-#ifdef DYNAMIC_MAP
-    #define Num_obstacles 11 // TODO: add wall repulsive forces
-    int map = 2;  
-#endif
-#ifdef PATH_WIDTH_MAP
-    #define Num_obstacles 6 // TODO: add wall repulsive forces 
-    int map = 3;  
-#endif
-
-#ifdef CASE1_WITHOUT_FEEDBACK //NOTHING
-int method = 1; 
-#endif
-#ifdef CASE2_FEEDBACK_TO_HUMAN 
-int method = 2;
-#endif
-#ifdef CASE3_COMPENSATED_CONTROLLER 
-int method = 3; 
-#endif
-#ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
-int method = 4;
-#endif
 
 #define Obs_all 1
 #define Obs_closest_one 2
@@ -174,7 +122,6 @@ bool obstacle_init_flag = false;
 double SATYRR_X_offset = 0.0;
 double SATYRR_Y_offset = 0.0;
 clock_t completion_time_clock;
-clock_t now = clock();
 int seconds_passed = 0;
 int completed = 0;
 int map_choice = 0;
@@ -319,23 +266,66 @@ void SATYRR_Init(const mjModel* m, mjData* d)
     d->qpos[m->jnt_qposadr[j_knee_r]] = -SATYRR_S.desHip*2; 
 }
 
+void obstacle_control_static(const mjModel *m, mjData *d){
+    srand ( time(NULL) );
+    vector<int> selected_static_obs;
+    string selected_static_obs_name;
+    string init_name = "obstacle_";
+    string end_name = "_body";
+     
+    int ran_num = 0;
+    int ran_num_old = 0;
+    int obs_num = 0;
+    const float FLOAT_MIN = 0.0;
+    const float FLOAT_MAX = 1.0;
+    double rand_loc[7] = {0.0,};
+
+    for(int i=0;i<7;i++){
+        ran_num = (rand() %5) + (1+5*i);
+        //cout <<  ran_num << "____" << ran_num_old << "\n";
+        while(ran_num - ran_num_old == 5) 
+            {
+                //cout << "while" << "\n";
+                ran_num = (rand() %5) + (1+5*i);
+                if(ran_num - ran_num_old != 5) break;
+            }
+        //cout << ran_num <<" \n";
+        selected_static_obs.push_back(ran_num);
+        ran_num_old = ran_num;  
+    }
+
+    for(int i=0;i<7;i++){
+        selected_static_obs_name = init_name + to_string(selected_static_obs[i]) + end_name;
+        // cout << selected_static_obs_name.c_str() <<" \n";
+        m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0] = 100; // only for x direction
+    }
+
+    for(int i=0;i<7;i++){
+        rand_loc[i] = FLOAT_MIN + (float)(rand()) / ((float)(RAND_MAX/(FLOAT_MAX - FLOAT_MIN)));
+        for(int j=1;j<6;j++){
+            obs_num = 5*i + j;
+            //cout << j << "__" << i << "__" << obs_num << "\n"; 
+            if(obs_num==selected_static_obs[0] || obs_num==selected_static_obs[1] ||
+               obs_num==selected_static_obs[2] || obs_num==selected_static_obs[3] ||
+               obs_num==selected_static_obs[4] || obs_num==selected_static_obs[5] || obs_num==selected_static_obs[6])
+               cout << "pass" << "\n";
+            //change the initial location
+            else{
+                selected_static_obs_name = init_name + to_string(obs_num) + end_name;
+                //cout << obs_num << "__" << rand_loc[i] << "__" << selected_static_obs_name << "\n"; 
+                m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0] = rand_loc[i] + m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0];
+            }
+        }
+        //cout << "\n" << endl;
+    }
+}
+
 void initalize_environment(const mjModel *m, mjData *d)
 {
-    
+
 #ifdef STATIC_MAP
-    // const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
-    //                                            ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
-    //                                            ,"obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body", "obstacle_16_body"
-    //                                            ,"obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body","obstacle_21_body","obstacle_22_body"
-    //                                            ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
-    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
-                                               ,"obstacle_15_body","obstacle_16_body","obstacle_17_body"
-                                               ,"obstacle_18_body","obstacle_14_body"
-                                               ,"obstacle_19_body","obstacle_20_body","obstacle_21_body","obstacle_22_body"
-                                               ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
-
-    const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
-
+    obstacle_control_static(m,d);
+#endif
 
 #if defined DYNAMIC_MAP || defined STATIC_MAP 
     for(int i=0;i<Num_obstacles;i++){
@@ -357,142 +347,24 @@ void initalize_environment(const mjModel *m, mjData *d)
     SATYRR_X_offset =  m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3];
     SATYRR_Y_offset =   m->body_pos[mj_name2id(m, mjOBJ_BODY, "torso") * 3 + 1];
     obstacle_init_flag = true;
+
 }
 
-int first_time_obs = 1;
-double randomVel1, randomVel2, randomVel3, randomVel4, randomVel5, randomVel6, randomVel7, randomVel8, randomVel9, randomVel10, randomVel11;
-void obstacle_control(const mjModel *m, mjData *d){
-    if(first_time_obs == 1){
-        // Initialize random number generator.
-        srand(time(0)); 
+void obstacle_control_dynamic_init(const mjModel *m, mjData *d){
+    // Initialize random number generator.
+    srand(time(0)); 
+    // Initial midpoint location
+    int mid_point = rand() % 2;
+    if(mid_point == 0){ // Top
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_body")*3+1] = 3.0;
+    }else{ // Bottom
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_body")*3+1] = -3.0;
+    }
 
-        // Group 1
-        randomVel1 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0.006 and 0.009
-        shift_y[0] = -randomVel1;
-        // printf("random_vel1: %f ", randomVel1);
-        randomVel2 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
-        shift_y[1] = randomVel2;
-        // printf("random_vel2: %f ", randomVel2);
-        randomVel3 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
-        shift_y[2] = -randomVel3;
-        // printf("random_vel3: %f ", randomVel3);
-        randomVel7 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
-        shift_y[6] = -randomVel7;
-        // printf("random_vel7: %f ", randomVel7);
-        randomVel8 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
-        shift_y[7] = randomVel8;
-        // printf("random_vel8: %f ", randomVel8);
-        randomVel9 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
-        shift_y[8] = -randomVel9;
-        // printf("random_vel9: %f ", randomVel9);
-
-        // Group 2
-        randomVel4 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
-        shift_y[3] = randomVel4;
-        // printf("random_vel4: %f ", randomVel4);
-        randomVel5 = (((double)(rand() % 3 + 1))/1000.0+0.005); // between 0 and 10
-        shift_y[4] = -randomVel5;
-        // printf("random_vel5: %f ", randomVel5);
-
-        // Group 3
-        // Make it the same as the middle one so it's possible to pass
-        // printf("random_vel5: %f ", randomVel5);
-        randomVel6 = (((double)(rand() % 3 + 1))/1000.0+0.001); // between 0 and 10
-        shift_y[5] = -randomVel6;
-        // randomVel10 = (((double)(rand() % 3 + 1))/1000.0+0.001); // between 0 and 10
-        shift_y[9] = randomVel6;
-        // printf("random_vel10: %f ", randomVel10);
-        // randomVel11 = (((double)(rand() % 3 + 1))/1000.0+0.001); // between 0 and 10
-        shift_y[10] = randomVel6;
-        // printf("random_vel11: %f \n", randomVel11);
-        first_time_obs = 0;
-    }else if(clock() - now > delay){
-        // Group 1
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] > 1.0){
-            shift_y[0] = -randomVel1;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] < -1.0){
-            shift_y[0] = randomVel1;
-        }
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_1_body")*3+1]+shift_y[0];
-        
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1] > 1.0){
-            shift_y[1] = -randomVel2;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1] < -1.0){
-            shift_y[1] = randomVel2;
-        }        
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_2_body")*3+1]+shift_y[1];
-        
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1] > 1.0){
-            shift_y[2] = -randomVel3;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1] < -1.0){
-            shift_y[2] = randomVel3;
-        }        
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_3_body")*3+1]+shift_y[2];
-        
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1] > 1.0){
-            shift_y[6] = -randomVel7;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1] < -1.0){
-            shift_y[6] = randomVel7;
-        }        
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_7_body")*3+1]+shift_y[6];
-        
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1] > 1.0){
-            shift_y[7] = -randomVel8;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1] < -1.0){
-            shift_y[7] = randomVel8;
-        }        
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_8_body")*3+1]+shift_y[7];
-        
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1] > 1.0){
-            shift_y[8] = -randomVel9;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1] < -1.0){
-            shift_y[8] = randomVel9;
-        }        
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_9_body")*3+1]+shift_y[8];
-        
-        //Group 2
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1] > 1.0){
-            shift_y[3] = -randomVel4;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1] < -1.0){
-            shift_y[3] = randomVel4;
-        }        
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+0]-shift_y[3];
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_4_body")*3+1]+shift_y[3];
-        
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1] > 1.0){
-            shift_y[4] = -randomVel5;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1] < -1.0){
-            shift_y[4] = randomVel5;
-        }        
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+0]+shift_y[4];
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_5_body")*3+1]+shift_y[4];
-        
-        //Group 3
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] > 7.0){
-            shift_y[5] = -randomVel6;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] < 4.0){
-            shift_y[5] = randomVel6;
-        }        
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_6_body")*3+0]+shift_y[5];
-
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] > 7.0){
-            shift_y[9] = -randomVel6;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] < 4.0){
-            shift_y[9] = randomVel6;
-        }        
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_10_body")*3+0]+shift_y[9];
-        
-        if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] > 7.0){
-            shift_y[10] = -randomVel6;
-        }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] < 4.0){
-            shift_y[10] = randomVel6;
-        }        
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0] = m->body_pos[mj_name2id(m, mjOBJ_BODY, "obstacle_11_body")*3+0]+shift_y[10];
-        
-        
-        now = clock();
-        // seconds_passed++;
-        // printf("seconds_passed: %d \n", seconds_passed);
+    // Initial obstacle location
+    for(int i = 0; i<Num_obstacles; i++){
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] = (((double)(rand() % 25))-16.0);
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] = (((double)(rand() % 9))-4.0);
     }
 }
 
@@ -573,35 +445,51 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
 
 void keyboard_input(mjData *d)
 {
-    const double max_speed = 2.0;
-    const double max_speed_yaw = 1.0;
-
+    const double max_speed = 1.35;
+    const double max_speed_yaw = 1.5;
 #ifdef KEYBOARD_INPUT
-    delta += update_rate;
-    if(delta > 1)
-       delta = 0;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
-        forward_backward += 0.001;
+        forward_backward += 0.001*0.15;
         forward_backward = min(forward_backward, max_speed);
         }
     else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
-        forward_backward -= 0.001;
+        forward_backward -= 0.001*0.15;
         forward_backward = max(forward_backward, -max_speed);
         }
-    else
-        forward_backward = 0.0;
-
+    else{
+        if(forward_backward > 0){
+            forward_backward -= 0.001*0.15;
+            forward_backward = max(forward_backward, 0);
+        }
+        else if(forward_backward < 0){
+            forward_backward += 0.001*0.15;
+            forward_backward = min(forward_backward, 0);
+        }
+        else{
+           forward_backward = 0.0;
+        }
+    }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
-        left_right += 0.0005;
+        left_right += 0.001;
         left_right = min(left_right, max_speed_yaw);
         }
     else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
-        left_right -= 0.0005;
+        left_right -= 0.001;
         left_right = max(left_right, -max_speed_yaw);
         }
-    else
-        left_right = 0.0;
-
+    else{
+        if(forward_backward > 0){
+            left_right -= 0.001*0.15;
+            left_right = max(left_right, 0);
+        }
+        else if(left_right < 0){
+            left_right += 0.001*0.15;
+            left_right = min(left_right, 0);
+        }
+        else{
+           left_right = 0.0;
+        }
+    }
     if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS){
         if (data_save_flag){
             myfile.close();
@@ -1238,53 +1126,20 @@ void mycontroller(const mjModel *m, mjData *d)
     robot_y = d->qpos[m->jnt_qposadr[torso_Y]];
 
     // Timer for completion time
-// #if defined DYNAMIC_MAP || defined STATIC_MAP 
-    
-// #endif
-
-#if defined DYNAMIC_MAP 
-    if(robot_x > -5 && completed == 0){
-        printf ("Group 1 Done\n");
-        completed = 1;
-    }else if(robot_x > 0.0 && completed == 1){
-        printf ("Group 2 Done\n");
-        completed = 2;
-    }else if(robot_x > 4.0 && completed == 2){
-        printf ("Group 3 Done\n");
-        completed = 3;
-    }else if(robot_x > 7.7808 && completed == 3){
-        completion_time_clock = clock() - completion_time_clock;
-        printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
-        completed = 4;
-    }
-#endif
-
-
-#if defined STATIC_MAP 
-
-    if(robot_x > -10.5 && completed == 0){
-        printf ("Group 1 Done\n");
-        completed = 1;
-    }else if(robot_x > -2.4 && completed == 1){
-        printf ("Group 2 Done\n");
-        completed = 2;
-    }else if(robot_x >5.6 && completed == 2){
-        printf ("Group 3 Done\n");
-        completed = 3;
-    }else if(robot_x > 7.7808 && completed == 3){
-        completion_time_clock = clock() - completion_time_clock;
-        printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
-        completed = 4;
-    }
-#endif
-
-#ifdef PATH_WIDTH_MAP
-    if(robot_x > 1.9456 && robot_y < -5.6388 && completed == 0){
+#if defined DYNAMIC_MAP
+    if(robot_x > 7.7808 && completed == 0){
         completion_time_clock = clock() - completion_time_clock;
         printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
         completed = 1;
     }
-#endif
+#endif  
+#if defined STATIC_MAP
+    if(robot_x > -1.0 && completed == 0){
+        completion_time_clock = clock() - completion_time_clock;
+        printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
+        completed = 1;
+    }
+#endif 
 
     //init position of obstacles
     if (obstacle_init_flag != true)
@@ -1299,28 +1154,6 @@ void mycontroller(const mjModel *m, mjData *d)
     //Update robot position
     SATYRR_state_update(m,d);
 
-    //Update obstacle location
-#ifdef DYNAMIC_MAP
-    obstacle_control(m,d);
-#endif
-
-    // Choose which map to use (affects the obstacle repulsive force)
-#ifdef STATIC_MAP
-    map_choice = 0;
-#endif
-#ifdef DYNAMIC_MAP
-    map_choice = 1;
-#endif
-#ifdef PATH_WIDTH_MAP
-    map_choice = 2;
-#endif
-
-    //Calculate Distance
-    APF.fnc_cal_distance(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
-    
-    //Attractive force
-    // APF.fnc_attractive_force(APF.distance_, SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, goal_location[0], goal_location[1]);
-
 #ifdef KEYBOARD_INPUT
     sensitivity_x = keyboard_input_sensitivity_x;
     sensitivity_y = keyboard_input_sensitivity_y;
@@ -1330,34 +1163,29 @@ void mycontroller(const mjModel *m, mjData *d)
     sensitivity_y = HMI_input_sensitivity_y;
 #endif
 
-    
 #ifdef CASE1_WITHOUT_FEEDBACK
     x_force = 0; // without force to human
     y_force = 0; // without force to human
     compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right; //without repulsive force for controller
 #endif
-
 #ifdef CASE2_FEEDBACK_TO_HUMAN
     //Repulsive force
-    // APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 1);
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 0, map_choice);
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
     x_force = APF.obs_repul_force_x_human; // with force to human
     y_force = APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right; //without repulsive force for controller
 #endif
-
 #ifdef CASE3_COMPENSATED_CONTROLLER 
     x_force = 0; // without force to human
     y_force = 0; // without force to human
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 1, map_choice);
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
-
-#ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 2, map_choice);
+#ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN    
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
     x_force = APF.obs_repul_force_x_human; // with force to human
     y_force = APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
@@ -1371,11 +1199,6 @@ void mycontroller(const mjModel *m, mjData *d)
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dth, compensated_des_x, compensated_des_th);
 
     // Torque cutoff
-    // if(x_force > 0.0){
-    //     x_force = 0.0;
-    // }else if(x_force < -TORQUE_CUTOFF_X){
-    //     x_force = -TORQUE_CUTOFF_X;
-    // }
     if(x_force > 0.0){
         x_force = 0.0;
     }else if(x_force < -TORQUE_CUTOFF_X){
@@ -1412,7 +1235,6 @@ void mycontroller(const mjModel *m, mjData *d)
             << ", " << SATYRR_S.pitch
             << ", " << SATYRR_S.dx 
             << ", " << SATYRR_S.dpitch
-
             << ", " << SATYRR_S.psi
             << ", " << SATYRR_S.dpsi
             << ", " << SATYRR_S.q[10]
@@ -1598,10 +1420,6 @@ int main(int argc, const char** argv)
 #ifdef DYNAMIC_MAP
     strcpy(filename, "../model/satyyr_dynamic.xml");
 #endif
-#ifdef PATH_WIDTH_MAP
-    strcpy(filename, "../model/satyyr_path_width.xml");
-#endif
-
     
     // pre-initialize vr
     v_initPre();
@@ -1672,6 +1490,15 @@ int main(int argc, const char** argv)
     s_other_send.sin_family = AF_INET;
     s_other_send.sin_port = htons(PORT_SEND);
 	s_other_send.sin_addr.S_un.S_addr = inet_addr(SERVER);
+
+
+    // Timer for path starts
+    completion_time_clock = clock();
+
+    //Initialize dynamic obs vel and location
+#ifdef DYNAMIC_MAP
+    obstacle_control_dynamic_init(m,d);
+#endif
 
     // main loop
     double lasttm = glfwGetTime(), FPS = 60;

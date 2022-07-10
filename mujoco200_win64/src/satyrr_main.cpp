@@ -795,16 +795,16 @@ void mycontroller(const mjModel *m, mjData *d)
     // 
 
     // Torque cutoff
-    // if(x_force > TORQUE_CUTOFF){
-    //     x_force = TORQUE_CUTOFF;
-    // }else if(x_force < -TORQUE_CUTOFF){
-    //     x_force = -TORQUE_CUTOFF;
-    // }
-    // if(y_force > TORQUE_CUTOFF){
-    //     y_force = TORQUE_CUTOFF;
-    // }else if(y_force < -TORQUE_CUTOFF){
-    //     y_force = -TORQUE_CUTOFF;
-    // }
+    if(x_force > TORQUE_CUTOFF){
+        x_force = TORQUE_CUTOFF;
+    }else if(x_force < -TORQUE_CUTOFF){
+        x_force = -TORQUE_CUTOFF;
+    }
+    if(y_force > TORQUE_CUTOFF){
+        y_force = TORQUE_CUTOFF;
+    }else if(y_force < -TORQUE_CUTOFF){
+        y_force = -TORQUE_CUTOFF;
+    }
 
     if(abs(SATYRR_S.pitch) > 25.0*M_PI/180.0){
         robot_failed = 1;

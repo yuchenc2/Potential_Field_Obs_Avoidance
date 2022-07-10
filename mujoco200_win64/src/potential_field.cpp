@@ -38,10 +38,10 @@ Potential_Field::Potential_Field()
             dynamic_y[i] = 0.0;
 
             while(randomVel_x[i] == 0.0){
-            randomVel_x[i] = (((double)(rand() % 5 + 1))/1000.0); // between 0.001 and 0.005
+            randomVel_x[i] = (((double)(rand() % 4 + 1))/1000.0); // between 0.001 and 0.005
             }
             while(randomVel_y[i] == 0.0){
-                randomVel_y[i] = (((double)(rand() % 5 + 1))/1000.0); // between 0.001 and 0.005
+                randomVel_y[i] = (((double)(rand() % 4 + 1))/1000.0); // between 0.001 and 0.005
             }
             if(rand() % 2 == 0){
                 shift_x[i] = randomVel_x[i];
