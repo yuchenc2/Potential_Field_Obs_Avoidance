@@ -59,16 +59,16 @@ float *gaze;
 
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK  /// 1
+#define CASE1_WITHOUT_FEEDBACK  /// 1
 // #define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
-#define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
+// #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
 /* Map Cases */
-#define STATIC_MAP  // 1
-// #define DYNAMIC_MAP     // 2
+// #define STATIC_MAP  // 1
+#define DYNAMIC_MAP     // 2
 
-int trial = 3; // 1 2 3 4 5
+int trial = 5; // 1 2 3 4 5
 
 //------------------------------Trial var to change ------------------------------------------
 
