@@ -635,15 +635,17 @@ void obstacle_control_dynamic_init(const mjModel *m, mjData *d){
     // Initial midpoint location
     int mid_point = rand() % 2;
     if(mid_point == 0){ // Top
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_body")*3+1] = 3.0;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_1_body")*3+1] = 3.0;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_2_body")*3+1] = -3.0;
     }else{ // Bottom
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_body")*3+1] = -3.0;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_1_body")*3+1] = -3.0;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_2_body")*3+1] = 3.0;
     }
 
     // Initial obstacle location
     for(int i = 0; i<Num_obstacles; i++){
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] = (((double)(rand() % 25))-16.0);
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] = (((double)(rand() % 9))-4.0);
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] = (((double)(rand() % 12))-17.0);
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] = (((double)(rand() % 7))-3.0);
     }
 }
 
@@ -736,6 +738,7 @@ void mycontroller(const mjModel *m, mjData *d)
 
     
 #ifdef CASE1_WITHOUT_FEEDBACK
+    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
     x_force = 0; // without force to human
     y_force = 0; // without force to human
     compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller

@@ -277,7 +277,7 @@ void obstacle_control_static(const mjModel *m, mjData *d){
     int ran_num_old = 0;
     int obs_num = 0;
     const float FLOAT_MIN = 0.0;
-    const float FLOAT_MAX = 1.0;
+    const float FLOAT_MAX = 0.1;
     double rand_loc[7] = {0.0,};
 
     for(int i=0;i<7;i++){
@@ -356,15 +356,17 @@ void obstacle_control_dynamic_init(const mjModel *m, mjData *d){
     // Initial midpoint location
     int mid_point = rand() % 2;
     if(mid_point == 0){ // Top
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_body")*3+1] = 3.0;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_1_body")*3+1] = 3.0;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_2_body")*3+1] = -3.0;
     }else{ // Bottom
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_body")*3+1] = -3.0;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_1_body")*3+1] = -3.0;
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_2_body")*3+1] = 3.0;
     }
 
     // Initial obstacle location
     for(int i = 0; i<Num_obstacles; i++){
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] = (((double)(rand() % 25))-16.0);
-        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] = (((double)(rand() % 9))-4.0);
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] = (((double)(rand() % 12))-17.0);
+        m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] = (((double)(rand() % 7))-3.0);
     }
 }
 
@@ -384,7 +386,7 @@ void contactforce(const mjModel* m, mjData* d)
         if (geom1.compare("floor0") != 0 && geom2.compare("floor0") != 0)
         {
             collision_count++;
-            if(collision_count%10==0)
+            if(collision_count%1==0)
             printf("%d ", collision_count);
         } 
 
@@ -443,62 +445,6 @@ void SATYRR_state_update(const mjModel* m, mjData* d)
 
 }
 
-void keyboard_input(mjData *d)
-{
-    const double max_speed = 1.35;
-    const double max_speed_yaw = 1.5;
-#ifdef KEYBOARD_INPUT
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
-        forward_backward += 0.001*0.15;
-        forward_backward = min(forward_backward, max_speed);
-        }
-    else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
-        forward_backward -= 0.001*0.15;
-        forward_backward = max(forward_backward, -max_speed);
-        }
-    else{
-        if(forward_backward > 0){
-            forward_backward -= 0.001*0.15;
-            forward_backward = max(forward_backward, 0);
-        }
-        else if(forward_backward < 0){
-            forward_backward += 0.001*0.15;
-            forward_backward = min(forward_backward, 0);
-        }
-        else{
-           forward_backward = 0.0;
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
-        left_right += 0.001;
-        left_right = min(left_right, max_speed_yaw);
-        }
-    else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
-        left_right -= 0.001;
-        left_right = max(left_right, -max_speed_yaw);
-        }
-    else{
-        if(forward_backward > 0){
-            left_right -= 0.001*0.15;
-            left_right = max(left_right, 0);
-        }
-        else if(left_right < 0){
-            left_right += 0.001*0.15;
-            left_right = min(left_right, 0);
-        }
-        else{
-           left_right = 0.0;
-        }
-    }
-    if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS){
-        if (data_save_flag){
-            myfile.close();
-            printf("close file!! \n");
-        }
-    }
-#endif
-}
-
 void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw, double des_x, double d_yaw)
 {
     // Hip controller
@@ -534,6 +480,62 @@ void saytrr_controller(const mjModel *m, mjData *d, double des_dx, double d_dyaw
     }
 }
 
+void keyboard_input(mjData *d)
+{
+    const double max_speed = 1.35;
+    const double max_speed_yaw = 1.5;
+#ifdef KEYBOARD_INPUT
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
+        forward_backward += 0.001*0.15;
+        forward_backward = min(forward_backward, max_speed);
+        }
+    else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
+        forward_backward -= 0.001*0.15;
+        forward_backward = max(forward_backward, -max_speed);
+        }
+    else{
+        if(forward_backward > 0){
+            forward_backward -= 0.001*0.15;
+            forward_backward = max(forward_backward, 0);
+        }
+        else if(forward_backward < 0){
+            forward_backward += 0.001*0.15;
+            forward_backward = min(forward_backward, 0);
+        }
+        else{
+           forward_backward = 0.0;
+        }
+    }
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
+        left_right += 0.001*0.15;
+        left_right = min(left_right, max_speed_yaw);
+        }
+    else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
+        left_right -= 0.001*0.15;
+        left_right = max(left_right, -max_speed_yaw);
+        }
+    else{
+        if(forward_backward > 0){
+            left_right -= 0.001*0.15;
+            left_right = max(left_right, 0);
+        }
+        else if(left_right < 0){
+            left_right += 0.001*0.15;
+            left_right = min(left_right, 0);
+        }
+        else{
+           left_right = 0.0;
+        }
+    }
+    if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS){
+        if (data_save_flag){
+            myfile.close();
+            printf("close file!! \n");
+        }
+    }
+#endif
+}
+
 void hmi_input(void){
     x_COM_HMI = HMI_Data[1];
     y_COM_HMI = HMI_Data[2];
@@ -551,12 +553,13 @@ void hmi_input(void){
     double y_COM_HMI_db = 0.01;
     double y_COM_HMI_max = 0.125;
     double yaw_slope = yawMax/(y_COM_HMI_max-y_COM_HMI_db); // around 12.4
-
+    const double x_sensitivity = 0.5;
     // Piece-wise velocity mapping
     if (x_COM_HMI > 0) x_COM_HMI_sign = 1;
     else if (x_COM_HMI < 0) x_COM_HMI_sign = -1;
 
     if (abs(x_COM_HMI) < x_COM_HMI_db) {
+        //printf("stop or deadzone\n");
         forward_backward = 0;
     }else if(abs(x_COM_HMI) >= x_COM_HMI_db && abs(x_COM_HMI) < x_COM_HMI_max){
         forward_backward = x_COM_HMI_sign*vel_slope*(abs(x_COM_HMI) - x_COM_HMI_db);
@@ -576,6 +579,73 @@ void hmi_input(void){
         left_right = y_COM_HMI_sign*yawMax;
     }
 #endif
+// #ifdef HMI_INPUT
+//     // piece-wise linear function 
+//     // For velocity 
+//     double x_COM_HMI_sign = 0.0;
+//     double velMax = 1.5; //0.60; // in m/s
+//     double x_COM_HMI_db = 0.01;
+//     double x_COM_HMI_max = 0.08;
+//     double vel_slope = velMax/(x_COM_HMI_max-x_COM_HMI_db); // around 11.5
+//     // For yaw
+//     double y_COM_HMI_sign = 0.0;
+//     double yawMax = 0.9; //0.70; // in m/s
+//     double y_COM_HMI_db = 0.01;
+//     double y_COM_HMI_max = 0.125;
+//     double yaw_slope = yawMax/(y_COM_HMI_max-y_COM_HMI_db); // around 12.4
+//     const double x_sensitivity = 0.5; //0.15;
+//     const double y_sensitivity = 0.5; //0.25;
+
+
+//     // Piece-wise velocity mapping
+//     if (x_COM_HMI > 0) x_COM_HMI_sign = 1;
+//     else if (x_COM_HMI < 0) x_COM_HMI_sign = -1;
+
+//     if (abs(x_COM_HMI) < x_COM_HMI_db) {
+//         forward_backward = 0;
+//     }
+//     else if(abs(x_COM_HMI) >= x_COM_HMI_db && abs(x_COM_HMI) < x_COM_HMI_max){  
+//         forward_backward = x_COM_HMI_sign*vel_slope*(abs(x_COM_HMI) - x_COM_HMI_db);
+//     }
+//     else{
+//         if(forward_backward > 0){
+//             forward_backward -= 0.001*x_sensitivity; //x_sensitivity*0.001*vel_slope*(abs(x_COM_HMI) - x_COM_HMI_db);
+//             forward_backward = max(forward_backward, 0);
+//         }
+//         else if(forward_backward < 0){
+//             forward_backward += 0.001*x_sensitivity;// x_sensitivity*0.001*vel_slope*(abs(x_COM_HMI) - x_COM_HMI_db);
+//             forward_backward = min(forward_backward, 0);
+//         }
+//         else{
+//         forward_backward = 0.0;
+//         }
+//     }
+    
+//     // Piece-wise velocity mapping
+//     if (y_COM_HMI > 0) y_COM_HMI_sign = 1;
+//     else if (y_COM_HMI < 0) y_COM_HMI_sign = -1;
+
+//     if (abs(y_COM_HMI) < y_COM_HMI_db) {
+//         left_right = 0;
+//     }
+//     else if(abs(y_COM_HMI) >= y_COM_HMI_db && abs(y_COM_HMI) < y_COM_HMI_max){   
+//         left_right = y_COM_HMI_sign*yaw_slope*(abs(y_COM_HMI) - y_COM_HMI_db);
+//     }
+//     else{
+//         if(left_right > 0){
+//             left_right -= 0.001*y_sensitivity; //y_sensitivity*0.001*yaw_slope*(abs(y_COM_HMI) - y_COM_HMI_db);
+//             left_right = max(left_right, 0);
+//         }
+//         else if(left_right < 0){
+//             left_right += 0.001*y_sensitivity; //y_sensitivity*0.001*yaw_slope*(abs(y_COM_HMI) - y_COM_HMI_db);
+//             left_right = min(left_right, 0);
+//         }
+//         else{
+//         left_right = 0.0;
+//         }
+//     }
+    
+// #endif
 }
 
 //----------------------------------- UDP Receive ---------------------------------------
@@ -1163,6 +1233,8 @@ void mycontroller(const mjModel *m, mjData *d)
     sensitivity_y = HMI_input_sensitivity_y;
 #endif
 
+APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
+
 #ifdef CASE1_WITHOUT_FEEDBACK
     x_force = 0; // without force to human
     y_force = 0; // without force to human
@@ -1171,7 +1243,6 @@ void mycontroller(const mjModel *m, mjData *d)
 #endif
 #ifdef CASE2_FEEDBACK_TO_HUMAN
     //Repulsive force
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
     x_force = APF.obs_repul_force_x_human; // with force to human
     y_force = APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
@@ -1180,12 +1251,10 @@ void mycontroller(const mjModel *m, mjData *d)
 #ifdef CASE3_COMPENSATED_CONTROLLER 
     x_force = 0; // without force to human
     y_force = 0; // without force to human
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN    
-    APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
     x_force = APF.obs_repul_force_x_human; // with force to human
     y_force = APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
@@ -1261,6 +1330,7 @@ void mycontroller(const mjModel *m, mjData *d)
     
     if(cnt % 500 == 0)
     {
+        //printf("X: %f, Y: %f \n", forward_backward, compensated_des_x);
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
@@ -1501,7 +1571,7 @@ int main(int argc, const char** argv)
 #endif
 
     // main loop
-    double lasttm = glfwGetTime(), FPS = 60;
+    double lasttm = glfwGetTime(), FPS = 10;
     frametime = d->time;
     while( !glfwWindowShouldClose(window) )
     {
