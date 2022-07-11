@@ -20,8 +20,8 @@ using namespace std;
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
 /* Map Cases */
-// #define STATIC_MAP  // 1
-#define DYNAMIC_MAP     // 2
+#define STATIC_MAP  // 1
+// #define DYNAMIC_MAP     // 2
 
 static int trial = 1; // 1 2 3 4 5
 
