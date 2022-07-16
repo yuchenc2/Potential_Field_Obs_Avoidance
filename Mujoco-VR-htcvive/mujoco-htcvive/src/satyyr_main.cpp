@@ -277,7 +277,7 @@ void obstacle_control_static(const mjModel *m, mjData *d){
     int ran_num_old = 0;
     int obs_num = 0;
     const float FLOAT_MIN = 0.0;
-    const float FLOAT_MAX = 0.1;
+    const float FLOAT_MAX = 0.7;
     double rand_loc[7] = {0.0,};
 
     for(int i=0;i<7;i++){
@@ -1519,8 +1519,11 @@ int main(int argc, const char** argv)
     char filename[100];
     // load and compile model
     
-#ifdef STATIC_MAP
-    strcpy(filename, "../model/satyyr_static.xml");
+#if defined STATIC_MAP && defined BRIGHT
+    strcpy(filename, "../model/satyyr_static_bright.xml");
+#endif
+#if defined STATIC_MAP && defined DARK
+    strcpy(filename, "../model/satyyr_static_dark.xml");
 #endif
 #ifdef DYNAMIC_MAP
     strcpy(filename, "../model/satyyr_dynamic.xml");

@@ -262,8 +262,8 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     obs_repul_force_y_controller = (wall_force_y_controller*70.0 + obs_force_y_controller*200.0)*0.001;
 #endif
 #ifdef STATIC_MAP
-    obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
-    obs_repul_force_y_controller = (wall_force_y_controller*70.0 + obs_force_y_controller*30.0)*0.001;
+    // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
+    obs_repul_force_y_controller = (wall_force_y_controller*70.0 + obs_force_y_controller*200.0)*0.001;
 #endif
     if(obs_repul_force_y_controller > 360 *M_PI/180){
         obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;

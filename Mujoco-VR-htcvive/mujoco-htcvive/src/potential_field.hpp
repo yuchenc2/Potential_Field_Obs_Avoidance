@@ -14,22 +14,25 @@ using namespace std;
 
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FxEEDBACK  /// 1
+// #define CASE1_WITHOUT_FEEDBACK  /// 1
 // #define CASE2_FEEDBACK_TO_HUMAN // 2
-// #define CASE3_COMPENSATED_CONTROLLER  // 3
-#define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
+#define CASE3_COMPENSATED_CONTROLLER  // 3
+// #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
 /* Map Cases */
-// #define STATIC_MAP  // 1
-#define DYNAMIC_MAP     // 2
+#define STATIC_MAP  // 1
+// #define DYNAMIC_MAP     // 2
+
+#define BRIGHT
+// #define DARK
 
 static int trial = 1; // 1 2 3 4 5
 
 //--------------------------------------------------------------------------------------
 
 /* Decide control input */
-// #define KEYBOARD_INPUT 
-#define HMI_INPUT
+#define KEYBOARD_INPUT 
+// #define HMI_INPUT
 
 #ifdef CASE1_WITHOUT_FEEDBACK //NOTHING
 static int method = 1; 
