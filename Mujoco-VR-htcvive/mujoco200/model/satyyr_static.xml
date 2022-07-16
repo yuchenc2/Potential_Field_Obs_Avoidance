@@ -36,14 +36,14 @@
         <material name="floorplane" reflectance="0.5" texrepeat="1 1" texture="texplane" texuniform="true"/>
         <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
         <material name="wall" rgba="0.5372 0.7686 0.9568 1"/>
-        <material name="group1" rgba="0.0313 0.9294 1.0 0.8"/>
-        <material name="group2" rgba="0.0313 0.0588 1.0 0.8"/>
-        <material name="group3" rgba="0.3647 0.0313 0.9568 1"/>
+        <material name="group1" reflectance="0.0" rgba="0.007825 0.23235 0.25 1.0"/>
+        <material name="group2" reflectance="0.0" rgba="0.007825 0.0147 0.25 1.0"/>
+        <material name="group3" reflectance="0.0" rgba="0.022793 0.001956 0.0598 1.0"/>
     </asset>
 
     <worldbody>
         <geom class = "collision-default" name="floor0" pos="0. 0. 0" size="0 0 1" type="plane" condim="3" material="floorplane"></geom>
-		<light directional="true" ambient="0.2 0.2 0.2" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" castshadow="false" pos="0 0 4" dir="0 0 -1" name="light0"></light>
+		<light directional="true" ambient="0.0 0.0 0.0" diffuse="0.0 0.0 0.0" specular="0.0 0.0 0.0" castshadow="true" pos="0 0 30" dir="0 0 -1" name="light0"></light>
 
 		<!-- camera: front view -->
         <camera name="camera1" mode="targetbody" target="torso"/>
@@ -182,7 +182,7 @@
             <geom name="start_location_geom" size="1 1.2192 0.001" type="box" rgba="0 1 0 1" />
         </body>
         <body name="end_location_body" pos="9 0 0">
-            <geom name="end_location_geom" size="1 1.2192 0.001" type="box" rgba="1 1 1 1" />
+            <geom name="end_location_geom" size="1 1.2192 0.001" type="box" rgba="1 1 1.0 1" />
         </body>
 
         <body name="torso" pos="-19 0.0 0.4869">
