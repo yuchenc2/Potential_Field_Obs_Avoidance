@@ -216,7 +216,7 @@
             <geom name="obstacle_50_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
         
-        <!--
+        
         <body name="obstacle_51_body" pos="-16 0 0">
             <geom name="obstacle_51_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
@@ -248,7 +248,7 @@
             <geom name="obstacle_60_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
         
-        <body name="obstacle_61_body" pos="-16 -1 0">
+        <!-- <body name="obstacle_61_body" pos="-16 -1 0">
             <geom name="obstacle_61_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
         <body name="obstacle_62_body" pos="-14 -2 0">
@@ -277,9 +277,9 @@
         </body>
         <body name="obstacle_70_body" pos="8 0.8 0">
             <geom name="obstacle_70_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
-        </body>
+        </body> -->
         
-        <body name="obstacle_71_body" pos="-16 -1 0">
+        <!-- <body name="obstacle_71_body" pos="-16 -1 0">
             <geom name="obstacle_71_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
         <body name="obstacle_72_body" pos="-14 -2 0">
@@ -371,8 +371,8 @@
         </body>
         <body name="obstacle_100_body" pos="8 0.8 0">
             <geom name="obstacle_100_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
-        </body> 
-        -->
+        </body>  -->
+       
 
         <body name="start_location_body" pos="-19 0 0">
             <geom name="start_location_geom" size="1.0 1.0 0.001" type="box" rgba="0 1 0 1" />

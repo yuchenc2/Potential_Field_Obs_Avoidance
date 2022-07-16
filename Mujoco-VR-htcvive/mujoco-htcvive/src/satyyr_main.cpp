@@ -1195,19 +1195,52 @@ void mycontroller(const mjModel *m, mjData *d)
     robot_x = d->qpos[m->jnt_qposadr[torso_X]] - 19; // Robot's starting position relative to the world frame
     robot_y = d->qpos[m->jnt_qposadr[torso_Y]];
 
+
+
+
+        
+        
+
     // Timer for completion time
 #if defined DYNAMIC_MAP
-    if(robot_x > 7.7808 && completed == 0){
+    double mid_location_1_x = m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_1_body")*3+0];
+    double mid_location_1_y = m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_1_body")*3+1];
+    double mid_location_2_x = m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_2_body")*3+0];
+    double mid_location_2_y = m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_2_body")*3+1];
+    double end_location_x = m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+0];
+    double end_location_y = m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+1];
+
+    if(robot_x > mid_location_1_x - 1 && robot_x < mid_location_1_x + 1 && robot_y > mid_location_1_y - 1 && robot_y < mid_location_1_y + 1 && completed == 0){
+        printf("Reached checkpoint 1 \n");
+        completed = 1;
+    }else if(robot_x > mid_location_2_x - 1 && robot_x < mid_location_2_x + 1 && robot_y > mid_location_2_y - 1 && robot_y < mid_location_2_y + 1 && completed == 1){
+        printf("Reached checkpoint 2 \n");
+        completed = 2;
+    }else if(robot_x > end_location_x - 1 && robot_x < end_location_x + 1 && robot_y > end_location_y - 1 && robot_y < end_location_y + 1 && completed == 2){
         completion_time_clock = clock() - completion_time_clock;
         printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
-        completed = 1;
+        completed = 3;
     }
+
 #endif  
 #if defined STATIC_MAP
-    if(robot_x > -1.0 && completed == 0){
+    double mid_location_1_x = m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_1_body")*3+0];
+    double mid_location_1_y = m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_1_body")*3+1];
+    double mid_location_2_x = m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_2_body")*3+0];
+    double mid_location_2_y = m->body_pos[mj_name2id(m, mjOBJ_BODY, "mid_location_2_body")*3+1];
+    double end_location_x = m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+0];
+    double end_location_y = m->body_pos[mj_name2id(m, mjOBJ_BODY, "end_location_body")*3+1];
+
+    if(robot_x > mid_location_1_x - 1 && robot_x < mid_location_1_x + 1 && robot_y > mid_location_1_y - 1 && robot_y < mid_location_1_y + 1 && completed == 0){
+        printf("Reached checkpoint 1 \n");
+        completed = 1;
+    }else if(robot_x > mid_location_2_x - 1 && robot_x < mid_location_2_x + 1 && robot_y > mid_location_2_y - 1 && robot_y < mid_location_2_y + 1 && completed == 1){
+        printf("Reached checkpoint 2 \n");
+        completed = 2;
+    }else if(robot_x > end_location_x - 1 && robot_x < end_location_x + 1 && robot_y > end_location_y - 1 && robot_y < end_location_y + 1 && completed == 2){
         completion_time_clock = clock() - completion_time_clock;
         printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
-        completed = 1;
+        completed = 3;
     }
 #endif 
 
@@ -1270,8 +1303,10 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
     // Torque cutoff
     if(x_force > 0.0){
         x_force = 0.0;
+        // x_force = TORQUE_CUTOFF_X;
     }else if(x_force < -TORQUE_CUTOFF_X){
-        x_force = -TORQUE_CUTOFF_X;
+        // x_force = -TORQUE_CUTOFF_X;
+        x_force = 0.0;
     }
     if(y_force > TORQUE_CUTOFF_Y){
         y_force = TORQUE_CUTOFF_Y;
