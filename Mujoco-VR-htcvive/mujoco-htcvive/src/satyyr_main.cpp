@@ -277,7 +277,7 @@ void obstacle_control_static(const mjModel *m, mjData *d){
     int ran_num_old = 0;
     int obs_num = 0;
     const float FLOAT_MIN = 0.0;
-    const float FLOAT_MAX = 0.7;
+    const float FLOAT_MAX = 0.6;
     double rand_loc[7] = {0.0,};
 
     for(int i=0;i<7;i++){
@@ -1276,8 +1276,8 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
 #endif
 #ifdef CASE2_FEEDBACK_TO_HUMAN
     //Repulsive force
-    x_force = APF.obs_repul_force_x_human; // with force to human
-    y_force = APF.obs_repul_force_y_human; // with force to human
+    x_force = human_x_force_gain*APF.obs_repul_force_x_human; // with force to human
+    y_force = human_y_force_gain*APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right; //without repulsive force for controller
 #endif
@@ -1288,8 +1288,8 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
     compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN    
-    x_force = APF.obs_repul_force_x_human; // with force to human
-    y_force = APF.obs_repul_force_y_human; // with force to human
+    x_force = human_x_force_gain*APF.obs_repul_force_x_human; // with force to human
+    y_force = human_y_force_gain*APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
@@ -1549,7 +1549,7 @@ int main(int argc, const char** argv)
 
     // Data logging
     if (data_save_flag)
-        myfile.open("../../mujoco-htcvive/src/data/" + to_string(method) + "_" + to_string(map) + "_" + to_string(trial) + ".txt",ios::out);
+        myfile.open("../../mujoco-htcvive/src/data/" + to_string(method) + "_" + to_string(map) + "_" + to_string(trial) + "_" + to_string(brightness) + ".txt",ios::out);
 
     // Robot car controller setup: install control callback
     mjcb_control = mycontroller;
