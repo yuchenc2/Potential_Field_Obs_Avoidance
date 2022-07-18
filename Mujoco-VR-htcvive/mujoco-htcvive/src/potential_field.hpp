@@ -14,8 +14,8 @@ using namespace std;
 
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK  /// 1
-#define CASE2_FEEDBACK_TO_HUMAN // 2
+#define CASE1_WITHOUT_FEEDBACK  /// 1
+// #define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
@@ -138,7 +138,7 @@ class Potential_Field
         double shift_y[Num_obstacles];
 
         double fnc_cal_distance_obs(double rx, double ry, double goal_x, double goal_y);  
-        bool fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy); 
+        bool fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy, double torso_Yaw); 
 };
 
 

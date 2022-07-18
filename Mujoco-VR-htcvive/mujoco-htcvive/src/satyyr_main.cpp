@@ -1266,7 +1266,7 @@ void mycontroller(const mjModel *m, mjData *d)
     sensitivity_y = HMI_input_sensitivity_y;
 #endif
 
-APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
+APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, SATYRR_S.psi);
 
 #ifdef CASE1_WITHOUT_FEEDBACK
     x_force = 0; // without force to human
