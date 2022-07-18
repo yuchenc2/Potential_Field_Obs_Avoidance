@@ -33,10 +33,10 @@
         <mesh name="Arm_R" file="Arm_R.STL" />
         <mesh name="Shank_R" file="Shank_R.STL" />
         <texture builtin="checker" height="512" name="texplane" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" type="2d" width="512"/>
-        <material name="floorplane" reflectance="0.5" texrepeat="1 1" texture="texplane" texuniform="true"/>
-        <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
+        <material name="floorplane" reflectance="0.0" texrepeat="1 1" texture="texplane" texuniform="true"/>
+        <material name="matplane" reflectance="0.0" texture="texplane" texrepeat="1 1" texuniform="true"/>
         <material name="wall" rgba="0.5372 0.7686 0.9568 1"/>
-        <material name="group1" rgba="0.0313 0.9294 1.0 0.8"/>
+        <material name="group1" rgba="0.0313 0.0588 1.0 1"/>
         <material name="group2" rgba="0.0313 0.0588 1.0 0.8"/>
         <material name="group3" rgba="0.3647 0.0313 0.9568 1"/>
     </asset>
@@ -47,17 +47,17 @@
 
 		<!-- camera: front view -->
         <camera name="camera1" mode="targetbody" target="torso"/>
-        <body name="wall1_body" pos="10 0 1">
-            <geom name="wall1_geom" class = "collision-default" type="plane" size="5 1 1" pos="0 0 0" quat="0.5 -0.5 -0.5 0.5" material="matplane" condim="1"/>
+        <body name="wall1_body" pos="-5 0 1">
+            <geom name="wall1_geom" class = "collision-default" type="plane" size="4 1 1" pos="0 0 0" quat="0.5 -0.5 -0.5 0.5" material="matplane" condim="1"/>
         </body>
-        <body name="wall2_body" pos="-5 5 1">
-            <geom name="wall2_geom" class = "collision-default" type="plane" size="15 1 1" pos="0 0 0" quat="0.7071 0.7071 0 0 " material="matplane" condim="1"/>
+        <body name="wall2_body" pos="-12.5 4 1">
+            <geom name="wall2_geom" class = "collision-default" type="plane" size="7.5 1 1" pos="0 0 0" quat="0.7071 0.7071 0 0 " material="matplane" condim="1"/>
         </body>
         <body name="wall3_body" pos="-20 0 1">
-            <geom name="wall3_geom" class = "collision-default" type="plane" size="5 1 1" pos="0 0 0" quat="0.5 0.5 0.5 0.5" material="matplane" condim="1"/>
+            <geom name="wall3_geom" class = "collision-default" type="plane" size="4 1 1" pos="0 0 0" quat="0.5 0.5 0.5 0.5" material="matplane" condim="1"/>
         </body>
-        <body name="wall4_body" pos="-5 -5 1">
-            <geom name="wall4_geom" class = "collision-default" type="plane" size="15 1 1" pos="0 0 0" quat=" 0 0 0.7071 0.7071 " material="matplane" condim="1"/>
+        <body name="wall4_body" pos="-12.5 -4 1">
+            <geom name="wall4_geom" class = "collision-default" type="plane" size="7.5 1 1" pos="0 0 0" quat=" 0 0 0.7071 0.7071 " material="matplane" condim="1"/>
         </body>
 
         <body name="obstacle_1_body" pos="-16 0 0">
@@ -216,7 +216,7 @@
             <geom name="obstacle_50_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
         
-
+        <!--
         <body name="obstacle_51_body" pos="-16 0 0">
             <geom name="obstacle_51_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
@@ -247,7 +247,7 @@
         <body name="obstacle_60_body" pos="8 0.8 0">
             <geom name="obstacle_60_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
-
+        
         <body name="obstacle_61_body" pos="-16 -1 0">
             <geom name="obstacle_61_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
@@ -294,6 +294,7 @@
         <body name="obstacle_75_body" pos="-8 0 0">
             <geom name="obstacle_75_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
+        
         <body name="obstacle_76_body" pos="-6.5 0 0">
             <geom name="obstacle_76_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
@@ -370,16 +371,19 @@
         </body>
         <body name="obstacle_100_body" pos="8 0.8 0">
             <geom name="obstacle_100_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
-        </body>
-        
+        </body> 
+        -->
 
         <body name="start_location_body" pos="-19 0 0">
             <geom name="start_location_geom" size="1.0 1.0 0.001" type="box" rgba="0 1 0 1" />
         </body>
-        <body name="mid_location_body" pos="-5 0 0">
-            <geom name="mid_location_geom" size="1 1.0 0.001" type="box" rgba="1 1 0 1" />
+        <body name="mid_location_1_body" pos="-14 0 0">
+            <geom name="mid_location_1_geom" size="1 1.0 0.001" type="box" rgba="1 1 0 1" />
         </body>
-        <body name="end_location_body" pos="9 0 0">
+        <body name="mid_location_2_body" pos="-9 0 0">
+            <geom name="mid_location_2_geom" size="1 1.0 0.001" type="box" rgba="1 1 0 1" />
+        </body>
+        <body name="end_location_body" pos="-6 0 0">
             <geom name="end_location_geom" size="1 1.0 0.001" type="box" rgba="1 1 1 1" />
         </body>
 

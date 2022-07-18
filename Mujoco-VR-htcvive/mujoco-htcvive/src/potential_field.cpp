@@ -54,6 +54,7 @@ Potential_Field::Potential_Field()
                 shift_y[i] = -randomVel_y[i];
             }
         }
+        //printf("shift x, y = %f, %f \n",shift_x[0],shift_y[0]);
 #endif
     }
 
@@ -113,18 +114,18 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     for (int i=0; i<Num_obstacles+4; i++){ // Generate repulsive force for obstacles and four walls
         // if map is dynamic, update obstacle location
 #ifdef DYNAMIC_MAP 
-        if(clock() - now > delay){
-            if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] >= 9.8){ // X wall boundary
+        if(clock() - now > delay && i < Num_obstacles){
+            if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] >= -5.2){ // X wall boundary
                 shift_x[i] = -shift_x[i];
                 shift_y[i] = shift_y[i];
             }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0] <= -19.8){
                 shift_x[i] = -shift_x[i];
                 shift_y[i] = shift_y[i];
             }
-            if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] >= 4.8){ // Y wall boundary
+            if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] >= 3.8){ // Y wall boundary
                 shift_x[i] = shift_x[i];
                 shift_y[i] = -shift_y[i];
-            }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] <= -4.8){
+            }else if(m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1] <= -3.8){
                 shift_x[i] = shift_x[i];
                 shift_y[i] = -shift_y[i];
             }
@@ -178,11 +179,13 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
 #if defined CASE3_COMPENSATED_CONTROLLER || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN 
         if(distance_each_obs < (obsS + obsRad)){
             if((cnt_for_slope_controller % 400 == 0)){ //10ms = 0.01s
-                if(i < Num_obstacles){
-                    repulsive_force_controller_new[i] = 4.0/(1.0+exp(3.5*distance_each_obs));
-                }else{
-                    repulsive_force_controller_new[i] = 1.8/(1.0+exp(8.0*distance_each_obs));
-                }
+#ifdef DYNAMIC_MAP
+                // repulsive_force_controller_new[i] = 4.0/(1.0+exp(3.5*distance_each_obs));
+                repulsive_force_controller_new[i] = 2.3/(1.0+exp(6.0*distance_each_obs));
+#endif
+#ifdef STATIC_MAP
+                repulsive_force_controller_new[i] = 1.8/(1.0+exp(8.0*distance_each_obs));
+#endif
                 repulsive_force_controller_slope_force[i] = beta_velocity_controller*(repulsive_force_controller_new[i]-repulsive_force_controller_old[i])/0.01;
                 repulsive_force_controller_slope_lpf[i] = alpha*repulsive_force_controller_slope_force[i] + (1-alpha)*repulsive_force_controller_slope_lpf_old[i];
                 repulsive_force_controller_slope_lpf_old[i] = repulsive_force_controller_slope_lpf[i];
@@ -217,13 +220,13 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         if(distance_each_obs < (obsS + obsRad)){
             //Modified potential field force
             if((cnt_for_slope_human % 400 == 0)){ //10ms = 0.01s
-                // if(i < Num_obstacles){
-                    // repulsive_force_human_new[i] = 7.5/(1.0+exp(2.0*distance_each_obs));
-                    repulsive_force_human_new[i] = 4.0/(1.0+exp(3.5*distance_each_obs));
-                // }else{
-                //     repulsive_force_human_new[i] = 1.0/(1.0+exp(8.0*distance_each_obs));
-                // }
-                
+#ifdef DYNAMIC_MAP
+                repulsive_force_human_new[i] = 4.0/(1.0+exp(3.5*distance_each_obs));
+#endif
+#ifdef STATIC_MAP
+                // repulsive_force_human_new[i] = 1.8/(1.0+exp(8.0*distance_each_obs));
+                repulsive_force_human_new[i] = 2.3/(1.0+exp(6.0*distance_each_obs));
+#endif
                 repulsive_force_human_slope_force[i] = beta_velocity_human*(repulsive_force_human_new[i]-repulsive_force_human_old[i])/0.01;
                 repulsive_force_human_slope_lpf[i] = alpha*repulsive_force_human_slope_force[i] + (1-alpha)*repulsive_force_human_slope_lpf_old[i];
                 repulsive_force_human_slope_lpf_old[i] = repulsive_force_human_slope_lpf[i];
@@ -254,8 +257,19 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
 
     // Sum wall and obs force + cutoffs
 #if defined CASE3_COMPENSATED_CONTROLLER || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN 
-    obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
-    obs_repul_force_y_controller = (wall_force_y_controller*70.0 + obs_force_y_controller*30.0)*0.001;
+    #ifdef DYNAMIC_MAP
+        // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
+        obs_repul_force_y_controller = (wall_force_y_controller*70.0 + obs_force_y_controller*200.0)*0.001;
+    #endif
+    #if defined STATIC_MAP && defined CASE3_COMPENSATED_CONTROLLER 
+        // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
+        obs_repul_force_y_controller = (wall_force_y_controller*60.0 + obs_force_y_controller*270.0)*0.001;
+    #endif
+    #if defined STATIC_MAP && defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN 
+        // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
+        obs_repul_force_y_controller = (wall_force_y_controller*70.0 + obs_force_y_controller*200.0)*0.001;
+    #endif
+
     if(obs_repul_force_y_controller > 360 *M_PI/180){
         obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;
     }
@@ -264,11 +278,13 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     }
 #endif
 #if defined CASE2_FEEDBACK_TO_HUMAN || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
-    obs_repul_force_x_human = (wall_force_x_human*6.0 + obs_force_x_human*1.5)*10.0;
-    obs_repul_force_y_human = (wall_force_y_human*16.0 + obs_force_y_human*4.0)*10.0;
+    // obs_repul_force_x_human = (wall_force_x_human*6.0 + obs_force_x_human*1.5)*8.0;
+    // obs_repul_force_y_human = (wall_force_y_human*16.0 + obs_force_y_human*4.0)*25.0;
+    // obs_repul_force_x_human = (wall_force_x_human*6.0 + obs_force_x_human*6.0)*12.0;
+    obs_repul_force_y_human = (wall_force_y_human*7 + obs_force_y_human*16.0)*35.0;
 #endif
-    printf("obs_force: %f %f, wall_force %f %f, total_force %f %f\n", obs_force_x_controller, obs_force_y_controller, wall_force_x_controller, wall_force_y_controller, obs_repul_force_x_controller, obs_repul_force_y_controller);
+    //printf("obs_force: %f %f, wall_force %f %f, total_force %f %f\n", obs_force_x_controller, obs_force_y_controller, wall_force_x_controller, wall_force_y_controller, obs_repul_force_x_controller, obs_repul_force_y_controller);
     // printf("obs_force: %f %f, wall_force %f %f, total_force %f %f\n", obs_force_x_human, obs_force_y_human, wall_force_x_human, wall_force_y_human, obs_repul_force_x_human, obs_repul_force_y_human);
-
+    //printf("shift x, y = %f, %f \n",shift_x[0],shift_y[0]);
     return true;
 }
