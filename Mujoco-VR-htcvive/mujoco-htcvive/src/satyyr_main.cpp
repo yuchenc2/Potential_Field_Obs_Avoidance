@@ -63,8 +63,6 @@ double keyboard_input_sensitivity_x = 0.1;
 double keyboard_input_sensitivity_y = 0.1;
 // Repulsive force back to human
 #define HMI_COM_ACTIVATION 0.008
-#define TORQUE_CUTOFF_X 25 // 
-#define TORQUE_CUTOFF_Y 20 //25
 // #define OBS_VEL 0.008 //0.01 = 1m/s, obstacle moving speed
 
 
@@ -277,7 +275,7 @@ void obstacle_control_static(const mjModel *m, mjData *d){
     int ran_num_old = 0;
     int obs_num = 0;
     const float FLOAT_MIN = 0.0;
-    const float FLOAT_MAX = 0.6;
+    const float FLOAT_MAX = 0.5;
     double rand_loc[7] = {0.0,};
 
     for(int i=0;i<7;i++){
@@ -579,73 +577,7 @@ void hmi_input(void){
         left_right = y_COM_HMI_sign*yawMax;
     }
 #endif
-// #ifdef HMI_INPUT
-//     // piece-wise linear function 
-//     // For velocity 
-//     double x_COM_HMI_sign = 0.0;
-//     double velMax = 1.5; //0.60; // in m/s
-//     double x_COM_HMI_db = 0.01;
-//     double x_COM_HMI_max = 0.08;
-//     double vel_slope = velMax/(x_COM_HMI_max-x_COM_HMI_db); // around 11.5
-//     // For yaw
-//     double y_COM_HMI_sign = 0.0;
-//     double yawMax = 0.9; //0.70; // in m/s
-//     double y_COM_HMI_db = 0.01;
-//     double y_COM_HMI_max = 0.125;
-//     double yaw_slope = yawMax/(y_COM_HMI_max-y_COM_HMI_db); // around 12.4
-//     const double x_sensitivity = 0.5; //0.15;
-//     const double y_sensitivity = 0.5; //0.25;
 
-
-//     // Piece-wise velocity mapping
-//     if (x_COM_HMI > 0) x_COM_HMI_sign = 1;
-//     else if (x_COM_HMI < 0) x_COM_HMI_sign = -1;
-
-//     if (abs(x_COM_HMI) < x_COM_HMI_db) {
-//         forward_backward = 0;
-//     }
-//     else if(abs(x_COM_HMI) >= x_COM_HMI_db && abs(x_COM_HMI) < x_COM_HMI_max){  
-//         forward_backward = x_COM_HMI_sign*vel_slope*(abs(x_COM_HMI) - x_COM_HMI_db);
-//     }
-//     else{
-//         if(forward_backward > 0){
-//             forward_backward -= 0.001*x_sensitivity; //x_sensitivity*0.001*vel_slope*(abs(x_COM_HMI) - x_COM_HMI_db);
-//             forward_backward = max(forward_backward, 0);
-//         }
-//         else if(forward_backward < 0){
-//             forward_backward += 0.001*x_sensitivity;// x_sensitivity*0.001*vel_slope*(abs(x_COM_HMI) - x_COM_HMI_db);
-//             forward_backward = min(forward_backward, 0);
-//         }
-//         else{
-//         forward_backward = 0.0;
-//         }
-//     }
-    
-//     // Piece-wise velocity mapping
-//     if (y_COM_HMI > 0) y_COM_HMI_sign = 1;
-//     else if (y_COM_HMI < 0) y_COM_HMI_sign = -1;
-
-//     if (abs(y_COM_HMI) < y_COM_HMI_db) {
-//         left_right = 0;
-//     }
-//     else if(abs(y_COM_HMI) >= y_COM_HMI_db && abs(y_COM_HMI) < y_COM_HMI_max){   
-//         left_right = y_COM_HMI_sign*yaw_slope*(abs(y_COM_HMI) - y_COM_HMI_db);
-//     }
-//     else{
-//         if(left_right > 0){
-//             left_right -= 0.001*y_sensitivity; //y_sensitivity*0.001*yaw_slope*(abs(y_COM_HMI) - y_COM_HMI_db);
-//             left_right = max(left_right, 0);
-//         }
-//         else if(left_right < 0){
-//             left_right += 0.001*y_sensitivity; //y_sensitivity*0.001*yaw_slope*(abs(y_COM_HMI) - y_COM_HMI_db);
-//             left_right = min(left_right, 0);
-//         }
-//         else{
-//         left_right = 0.0;
-//         }
-//     }
-    
-// #endif
 }
 
 //----------------------------------- UDP Receive ---------------------------------------
@@ -1365,11 +1297,13 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
     
     if(cnt % 500 == 0)
     {
+        // printf("time = %f, success = %f \n",d->time,robot_x);
         //printf("X: %f, Y: %f \n", forward_backward, compensated_des_x);
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
         // printf("x_force: %f, y_force: %f \n", x_force, y_force);
+        // printf("y_force: %f \n", y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
