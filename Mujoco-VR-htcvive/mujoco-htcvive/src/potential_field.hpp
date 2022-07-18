@@ -20,8 +20,8 @@ using namespace std;
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
 /* Map Cases */
-// #define STATIC_MAP  // 1
-#define DYNAMIC_MAP     // 2
+#define STATIC_MAP  // 1
+// #define DYNAMIC_MAP     // 2
 
 #define BRIGHT
 // #define DARK
@@ -35,6 +35,10 @@ static double human_y_force_gain = 0.5; //Just need to tune the y gain
 
 static double human_x_force_gain = 0.8;
 #define TORQUE_CUTOFF_X 25 // 
+
+
+#define KEYBOARD_INPUT
+// #define HMI_INPUT
 
 #ifdef CASE1_WITHOUT_FEEDBACK //NOTHING
 static int method = 1; 
@@ -84,6 +88,7 @@ static int brightness = 0;
 
 static clock_t now = clock();
 static int delay = 0.01*CLOCKS_PER_SEC;
+static int yaw_count = 0;
 
 class Potential_Field
 {
@@ -137,7 +142,7 @@ class Potential_Field
         double shift_y[Num_obstacles];
 
         double fnc_cal_distance_obs(double rx, double ry, double goal_x, double goal_y);  
-        bool fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy); 
+        bool fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy, double torso_yaw); 
 };
 
 

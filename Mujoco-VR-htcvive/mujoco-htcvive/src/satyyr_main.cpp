@@ -1198,7 +1198,7 @@ void mycontroller(const mjModel *m, mjData *d)
     sensitivity_y = HMI_input_sensitivity_y;
 #endif
 
-APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y);
+APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, SATYRR_S.psi);
 
 #ifdef CASE1_WITHOUT_FEEDBACK
     x_force = 0; // without force to human
@@ -1313,6 +1313,7 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
         // printf("\n");
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
         // printf("yaw %f, yaw %f \n", SATYRR_S.psi, SATYRR_S.y);
+        printf("torso yaw: %f \n", SATYRR_S.psi);
         cnt = 0;
     }
 

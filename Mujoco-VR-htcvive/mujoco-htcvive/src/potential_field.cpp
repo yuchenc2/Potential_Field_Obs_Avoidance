@@ -74,7 +74,7 @@ double Potential_Field::fnc_cal_distance_obs(double rx, double ry, double goal_x
     return sqrt((goal_x-rx)*(goal_x-rx) + (goal_y-ry)*(goal_y-ry));
 }
 
-bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy)
+bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy, double torso_Yaw)
 {
     //from others
     const double obsRad = 0.2; //0.2;
@@ -152,25 +152,63 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         
 
         // Calculate distance
+    
+        double theta_body = torso_Yaw;
+        double v_body_x = 0.0;
+        double v_body_y = 0.0;
+        // //only consider first spin
+        // if(theta_body > 2*M_PI && yaw_count == 0){
+        //     theta_body = theta_body - 2*M_PI;
+        //     yaw_count++; //0 -> 1
+        // }
+        // else if(theta_body < -2*M_PI && yaw_count == 0){
+        //     theta_body = theta_body + 2*M_PI;
+        //     yaw_count--; // 0 -> -1
+        // }
+        
+        // //yaw_count != 0 
+        // else if(theta_body > (yaw_count+1)*2*M_PI && yaw_count != 0){ // theta_body > 0
+        //     theta_body = theta_body - (yaw_count+1)*2*M_PI;
+        //     yaw_count++;
+        // }
+        // else if(theta_body < -(yaw_count+1)*2*M_PI && yaw_count != 0){
+        //     theta_body = theta_body + (yaw_count+1)*2*M_PI;
+        //     yaw_count--;
+        // }
+        // else theta_body = theta_body;
+
         if(i < Num_obstacles){
 #ifdef STATIC_MAP
-            thetaO = atan2(oy[i]-ry, ox[i]-rx);
+            // v_body_x = (ox[i]-rx)*cos(theta_body) - (oy[i]-ry)*sin(theta_body);
+            // v_body_y = (oy[i]-ry)*cos(theta_body) + (ox[i]-rx)*sin(theta_body);
+
+            v_body_x = (ox[i]-rx)*cos(theta_body) - (oy[i]-ry)*sin(theta_body);
+            v_body_y = (oy[i]-ry)*cos(theta_body) + (ox[i]-rx)*sin(theta_body);
+            thetaO = atan2(v_body_y, v_body_x);
             distance_each_obs = fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
 #endif
 #ifdef DYNAMIC_MAP
-            thetaO = atan2(dynamic_y[i]-ry, dynamic_x[i]-rx);
+            v_body_x = (dynamic_x[i]-rx)*cos(theta_body) - (dynamic_y[i]-ry)*sin(theta_body);
+            v_body_y = (dynamic_y[i]-ry)*cos(theta_body) + (dynamic_x[i]-rx)*sin(theta_body);
+            thetaO = atan2(v_body_y, v_body_x);
             distance_each_obs = fnc_cal_distance_obs(rx, ry, dynamic_x[i], dynamic_y[i]);
 #endif
         }else if(i == Num_obstacles){ //left wall
             thetaO = 0.0;
             distance_each_obs = fnc_cal_distance_obs(rx, 0, left_wall_x, 0);
         }else if(i == Num_obstacles+1){ //top wall
+            // v_body_x = (0)*cos(theta_body) - (top_wall_y-ry)*sin(theta_body);
+            // v_body_y = (top_wall_y-ry)*cos(theta_body) + (0)*sin(theta_body);
+            // thetaO = atan2(v_body_y, v_body_x);
             thetaO = atan2(top_wall_y-ry, 0); 
             distance_each_obs = fnc_cal_distance_obs(0, ry, 0, top_wall_y);
         }else if(i == Num_obstacles+2){ //right wall
             thetaO = 0.0;
             distance_each_obs = fnc_cal_distance_obs(rx, 0, right_wall_x, 0);
         }else if(i == Num_obstacles+3){ //bottom wall
+            // v_body_x = (0)*cos(theta_body) - (bottom_wall_y-ry)*sin(theta_body);
+            // v_body_y = (bottom_wall_y-ry)*cos(theta_body) + (0)*sin(theta_body);
+            // thetaO = atan2(v_body_y, v_body_x);
             thetaO = atan2(bottom_wall_y-ry, 0);
             distance_each_obs = fnc_cal_distance_obs(0, ry, 0, bottom_wall_y);
         }
@@ -266,6 +304,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     #if defined STATIC_MAP 
         // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
         obs_repul_force_y_controller = (wall_force_y_controller*60.0 + obs_force_y_controller*270.0)*0.001;
+        obs_repul_force_y_controller = (obs_force_y_controller*270.0)*0.001;
     #endif
     if(obs_repul_force_y_controller > 360 *M_PI/180){
         obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;
