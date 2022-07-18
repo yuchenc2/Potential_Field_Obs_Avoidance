@@ -13,8 +13,8 @@ using namespace std;
 
 /*   Decide cases for feedback  */
 // #define CASE1_WITHOUT_FEEDBACK //NOTHING
-// #define CASE2_FEEDBACK_TO_HUMAN 
-#define CASE3_COMPENSATED_CONTROLLER 
+#define CASE2_FEEDBACK_TO_HUMAN 
+// #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
 
 /* Decide control input */
