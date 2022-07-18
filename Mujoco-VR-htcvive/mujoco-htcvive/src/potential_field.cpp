@@ -182,9 +182,10 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
             // v_body_x = (ox[i]-rx)*cos(theta_body) - (oy[i]-ry)*sin(theta_body);
             // v_body_y = (oy[i]-ry)*cos(theta_body) + (ox[i]-rx)*sin(theta_body);
 
-            v_body_x = (ox[i]-rx)*cos(theta_body) - (oy[i]-ry)*sin(theta_body);
-            v_body_y = (oy[i]-ry)*cos(theta_body) + (ox[i]-rx)*sin(theta_body);
+            v_body_x = (ox[i]-rx)*cos(theta_body) + (oy[i]-ry)*sin(theta_body);
+            v_body_y = (oy[i]-ry)*cos(theta_body) - (ox[i]-rx)*sin(theta_body);
             thetaO = atan2(v_body_y, v_body_x);
+            // thetaO = atan2(oy[i]-ry, ox[i]-rx); 
             distance_each_obs = fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
 
 #endif
@@ -219,7 +220,13 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
 #if defined CASE3_COMPENSATED_CONTROLLER || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN 
         if(distance_each_obs < (obsS + obsRad)){
             if((cnt_for_slope_controller % 400 == 0)){ //10ms = 0.01s
-                // printf("atan2: %f \n", thetaO);
+                if(i < 5){
+                    printf("theta0[%d]: %f", i, thetaO);
+                    if(i == 4){
+                        printf("\n");
+                    }
+                }
+                
 #ifdef DYNAMIC_MAP
                 // repulsive_force_controller_new[i] = 4.0/(1.0+exp(3.5*distance_each_obs));
                 repulsive_force_controller_new[i] = 2.3/(1.0+exp(6.0*distance_each_obs));
@@ -304,10 +311,9 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     #endif
     #if defined STATIC_MAP 
         // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
-        obs_repul_force_y_controller = (wall_force_y_controller*60.0 + obs_force_y_controller*270.0)*0.001;
-        // obs_repul_force_y_controller = (obs_force_y_controller*270.0)*0.001;
+        // obs_repul_force_y_controller = (wall_force_y_controller*60.0 + obs_force_y_controller*270.0)*0.001;
+        obs_repul_force_y_controller = (obs_force_y_controller*270.0)*0.001;
     #endif
-    printf("obs_repul_force_y_controller = %f\n",obs_repul_force_y_controller);
 
     if(obs_repul_force_y_controller > 360 *M_PI/180){
         obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;

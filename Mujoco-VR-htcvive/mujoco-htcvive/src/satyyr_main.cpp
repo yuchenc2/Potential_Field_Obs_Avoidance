@@ -1307,13 +1307,13 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
-        printf("con: %f, hum: %f, %f \n", APF.obs_repul_force_y_controller, x_force, y_force);
+        // printf("con: %f, hum: %f, %f \n", APF.obs_repul_force_y_controller, x_force, y_force);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
         // printf("yaw %f, yaw %f \n", SATYRR_S.psi, SATYRR_S.y);
-        printf("torso yaw: %f \n", SATYRR_S.psi);
+        // printf("torso yaw: %f \n", SATYRR_S.psi);
         cnt = 0;
     }
 
