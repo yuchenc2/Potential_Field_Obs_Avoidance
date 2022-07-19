@@ -63,8 +63,6 @@ double keyboard_input_sensitivity_x = 0.1;
 double keyboard_input_sensitivity_y = 0.1;
 // Repulsive force back to human
 #define HMI_COM_ACTIVATION 0.008
-#define TORQUE_CUTOFF_X 25 // 
-#define TORQUE_CUTOFF_Y 20 //25
 // #define OBS_VEL 0.008 //0.01 = 1m/s, obstacle moving speed
 
 
@@ -275,21 +273,35 @@ void obstacle_control_static(const mjModel *m, mjData *d){
      
     int ran_num = 0;
     int ran_num_old = 0;
+    int ran_num_1_3 = 0;
     int obs_num = 0;
     const float FLOAT_MIN = 0.0;
     const float FLOAT_MAX = 0.6;
     double rand_loc[7] = {0.0,};
 
     for(int i=0;i<7;i++){
-        ran_num = (rand() %5) + (1+5*i);
-        //cout <<  ran_num << "____" << ran_num_old << "\n";
-        while(ran_num - ran_num_old == 5) 
-            {
-                //cout << "while" << "\n";
-                ran_num = (rand() %5) + (1+5*i);
-                if(ran_num - ran_num_old != 5) break;
+        if(i%2 == 0){
+            ran_num = 2 + (1+5*i);
+        }else{
+            ran_num_1_3 = (rand()%2);
+            if(ran_num_1_3 == 0){
+                ran_num = 1 + (1+5*i);
+            }else{
+                ran_num = 3 + (1+5*i);
             }
+        }
+        
+        //cout <<  ran_num << "____" << ran_num_old << "\n";
+        // while(ran_num - ran_num_old == 5) 
+        //     {
+        //         //cout << "while" << "\n";
+        //         ran_num = (rand() %5) + (1+5*i);
+        //         if(ran_num - ran_num_old != 5) break;
+        //     }
         //cout << ran_num <<" \n";
+        // if(i%2 == 0){
+        //     ran_num = 3;
+        // }
         selected_static_obs.push_back(ran_num);
         ran_num_old = ran_num;  
     }
@@ -307,10 +319,10 @@ void obstacle_control_static(const mjModel *m, mjData *d){
             //cout << j << "__" << i << "__" << obs_num << "\n"; 
             if(obs_num==selected_static_obs[0] || obs_num==selected_static_obs[1] ||
                obs_num==selected_static_obs[2] || obs_num==selected_static_obs[3] ||
-               obs_num==selected_static_obs[4] || obs_num==selected_static_obs[5] || obs_num==selected_static_obs[6])
+               obs_num==selected_static_obs[4] || obs_num==selected_static_obs[5] || obs_num==selected_static_obs[6]){
             //    cout << "pass" << "\n";
             //change the initial location
-            else if(){
+            }else{
                 selected_static_obs_name = init_name + to_string(obs_num) + end_name;
                 //cout << obs_num << "__" << rand_loc[i] << "__" << selected_static_obs_name << "\n"; 
                 m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0] = rand_loc[i] + m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0];

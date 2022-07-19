@@ -15,27 +15,29 @@ using namespace std;
 
 /*   Decide cases for feedback  */
 // #define CASE1_WITHOUT_FEEDBACK  /// 1
-#define CASE2_FEEDBACK_TO_HUMAN // 2
+// #define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
-// #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
+#define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
 /* Map Cases */
-#define STATIC_MAP  // 1
-// #define DYNAMIC_MAP     // 2
+// #define STATIC_MAP  // 1
+#define DYNAMIC_MAP     // 2
 
-#define BRIGHT
-// #define DARK
+// #define BRIGHT
+#define DARK
 
 static int trial = 1; // 1 2 3 4 5
 
-static double human_x_force_gain = 1.0;
-static double human_y_force_gain = 1.0; //Just need to tune the y gain
+static double human_y_force_gain = 0.5; //Just need to tune the y gain
+#define TORQUE_CUTOFF_Y 20 //25
 
 //--------------------------------------------------------------------------------------
-
 /* Decide control input */
 // #define KEYBOARD_INPUT 
 #define HMI_INPUT
+
+static double human_x_force_gain = 1.0;
+#define TORQUE_CUTOFF_X 25 // 
 
 #ifdef CASE1_WITHOUT_FEEDBACK //NOTHING
 static int method = 1; 
