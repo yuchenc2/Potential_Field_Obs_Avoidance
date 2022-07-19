@@ -1302,12 +1302,12 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        // printf("x_force: %f, y_force: %f \n", x_force, y_force);
+        // /printf("x_force: %f, y_force: %f \n", x_force, y_force);
         // printf("y_force: %f \n", y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
-        // printf("con: %f, %f, hum: %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller, x_force, y_force);
+        printf("con: %f, hum: %f, %f \n", APF.obs_repul_force_y_controller, x_force, y_force);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");
@@ -1451,59 +1451,78 @@ std::string CovertErrorCode(int error) {
 
 int main(int argc, const char** argv)
 {
-    char filename[100];
+    // activate software
+    mj_activate("mjkey.txt");
+
     // load and compile model
-    
-#if defined STATIC_MAP && defined BRIGHT
-    strcpy(filename, "../model/satyyr_static_bright.xml");
-#endif
-#if defined STATIC_MAP && defined DARK
-    strcpy(filename, "../model/satyyr_static_dark.xml");
-#endif
-#ifdef DYNAMIC_MAP
-    strcpy(filename, "../model/satyyr_dynamic.xml");
-#endif
-    
-    // pre-initialize vr
-    v_initPre();
-    
-    //Initialize the Pro Eye system
-    EyeActivate();
+    char error[1000] = "Could not load binary model";
 
-    // initialize MuJoCo, with image size from vr
-    if( !initMuJoCo(filename, (int)(2*hmd.width), (int)hmd.height) )
-        return 0;
+// #ifdef defined STATIC_MAP && defined BRIGHT
+//     printf("1 \n");
+    m = mj_loadXML("../model/satyyr_static_bright.xml", 0, error, 1000);
+// #endif
+// #ifdef defined STATIC_MAP && defined DARK
+//     printf("2 \n");
+//     m = mj_loadXML("../model/satyyr_static_dark.xml", 0, error, 1000);
+// #endif
+// #ifdef DYNAMIC_MAP
+//     printf("3 \n");
+//     m = mj_loadXML("../model/satyyr_dynamic.xml", 0, error, 1000);
+// #endif
 
-    // post-initialize vr
-    v_initPost();
-    
+    if (!m)
+        mju_error_s("Load model error: %s", error);
+
+    // make data
+    d = mj_makeData(m);
+
+    // init GLFW
+    if (!glfwInit())
+        mju_error("Could not initialize GLFW");
+
+    // create window, make OpenGL context current, request v-sync
+    window = glfwCreateWindow(1200, 900, "Demo", NULL, NULL);
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
+
     // SATYRR Init
     SATYRR_Init(m, d);
 
-
-
     // Data logging
     if (data_save_flag)
-        myfile.open("../../mujoco-htcvive/src/data/" + to_string(method) + "_" + to_string(map) + "_" + to_string(trial) + "_" + to_string(brightness) + ".txt",ios::out);
+        myfile.open("../src/data_save.txt",ios::out);
 
-    // Robot car controller setup: install control callback
+    // controller setup: install control callback
     mjcb_control = mycontroller;
 
-    // Initialize time for Satyyr's controller
     mjtNum timezero = d->time;
     last_update = timezero-1.0/ctrl_update_freq;
-    
-    // Camera tracking the robot
-    // cam.type = mjCAMERA_TRACKING;
-    // cam.fixedcamid = mj_name2id(m, mjOBJ_CAMERA, "camera1");
-    // cam.trackbodyid = mj_name2id(m, mjOBJ_BODY, "torso");
-    // cam.azimuth = 0;
-    // cam.elevation = -18;
-    // cam.distance = 1.2;
 
-    //keyboard input installed
+
+    cam.type = mjCAMERA_TRACKING;
+    cam.fixedcamid = mj_name2id(m, mjOBJ_CAMERA, "camera1");
+    cam.trackbodyid = mj_name2id(m, mjOBJ_BODY, "torso");
+    cam.azimuth = 0;
+    cam.elevation = -18;
+    cam.distance = 1.2;
+
+    // initialize visualization data structures
+    // mjv_defaultCamera(&cam);
+    mjv_defaultOption(&vopt);
+    mjv_defaultScene(&scn);
+    mjr_defaultContext(&con);
+
+    // create scene and context
+    mjv_makeScene(m, &scn, 2000);
+    mjr_makeContext(m, &con, mjFONTSCALE_150);
+
+    // install GLFW mouse and keyboard callbacks
     glfwSetKeyCallback(window, keyboard);
+    glfwSetCursorPosCallback(window, mouse_move);
+    glfwSetMouseButtonCallback(window, mouse_button);
+    glfwSetScrollCallback(window, scroll);
 
+    
     // UDP communication
     // udp_receive
     std::thread udp(udp_receive);
@@ -1534,7 +1553,6 @@ int main(int argc, const char** argv)
     s_other_send.sin_port = htons(PORT_SEND);
 	s_other_send.sin_addr.S_un.S_addr = inet_addr(SERVER);
 
-
     // Timer for path starts
     completion_time_clock = clock();
 
@@ -1543,65 +1561,65 @@ int main(int argc, const char** argv)
     obstacle_control_dynamic_init(m,d);
 #endif
 
-    // main loop
-    double lasttm = glfwGetTime(), FPS = 10;
-    frametime = d->time;
-    while( !glfwWindowShouldClose(window) )
+
+    // run main loop, target real-time simulation and 60 fps rendering
+    while (!glfwWindowShouldClose(window))
     {
-        if(robot_failed != 1){
-            // render new frame if it is time, or if simulation was reset
-            if( (d->time-frametime)>1.0/FPS || d->time<frametime )
-            {
-                // create abstract scene
-                mjv_updateScene(m, d, &vopt, NULL, NULL, mjCAT_ALL, &scn);
-
-                mj_step(m, d);
-                // Send the simulated robot's data through UDP
-                i_send = 0;     
-                while (i_send < ROBOT_DATA_COUNT - 1 ) 
-                {
-                    strg = strg + to_string(Robot_Data[i_send]) + ",";
-                    i_send = i_send + 1;
-                }
-                strg = strg + to_string(Robot_Data[i_send]);
-                begin_main_receive = std::chrono::high_resolution_clock::now();
-                if (sendto(s_send, strg.c_str(), strg.size() + 1, 0 , (struct sockaddr *) &s_other_send, slen) == SOCKET_ERROR)
-                {
-                    printf("sendto() failed with error code : %d" , WSAGetLastError());
-                    exit(EXIT_FAILURE);
-                }
-                // cout << "Data Sent: " << strg << endl;
-                strg.clear();
-
-                // update vr poses and controller states
-                v_update();
-
-                // render in offscreen buffer
-                mjrRect viewFull = {0, 0, 2*(int)hmd.width, (int)hmd.height};
-                mjr_setBuffer(mjFB_OFFSCREEN, &con);
-                mjr_render(viewFull, &scn, &con);
-
-                // show FPS (window only, hmd clips it)
-                FPS = 0.9*FPS + 0.1/(glfwGetTime() - lasttm);
-                lasttm = glfwGetTime();
-                // char fpsinfo[20];
-                // sprintf(fpsinfo, "FPS %.0f", FPS);
-                // mjr_overlay(mjFONT_BIG, mjGRID_BOTTOMLEFT, viewFull, fpsinfo, NULL, &con);
-
-                // render to vr and window
-                v_render();
-
-                // save simulation time
-                frametime = d->time;
-            }
-
-            // simulate
+        // advance interactive simulation for 1/60 sec
+        //  Assuming MuJoCo can simulate faster than real-time, which it usually can,
+        //  this loop will finish on time for the next frame to be rendered at 60 fps.
+        //  Otherwise add a cpu timer and exit this loop when it is time to render.
+        mjtNum simstart = d->time;
+        while (d->time - simstart < 1.0 / 60.0){
             mj_step(m, d);
-
-            // update GUI
-            glfwPollEvents();
+            // Send the simulated robot's data through UDP
+            i_send = 0;     
+            while (i_send < ROBOT_DATA_COUNT - 1 ) 
+            {
+                strg = strg + to_string(Robot_Data[i_send]) + ",";
+                i_send = i_send + 1;
+            }
+            strg = strg + to_string(Robot_Data[i_send]);
+            begin_main_receive = std::chrono::high_resolution_clock::now();
+            if (sendto(s_send, strg.c_str(), strg.size() + 1, 0 , (struct sockaddr *) &s_other_send, slen) == SOCKET_ERROR)
+            {
+                printf("sendto() failed with error code : %d" , WSAGetLastError());
+                exit(EXIT_FAILURE);
+            }
+            // cout << "Data Sent: " << strg << endl;
+            strg.clear();
         }
+
+        // get framebuffer viewport
+        mjrRect viewport = {0, 0, 0, 0};
+        glfwGetFramebufferSize(window, &viewport.width, &viewport.height);
+
+        // update scene and render
+        mjv_updateScene(m, d, &vopt, NULL, &cam, mjCAT_ALL, &scn);
+        mjr_render(viewport, &scn, &con);
+
+        // swap OpenGL buffers (blocking call due to v-sync)
+        glfwSwapBuffers(window);
+
+        // process pending GUI events, call GLFW callbacks
+        glfwPollEvents();
     }
+
+    // free visualization storage
+    mjv_freeScene(&scn);
+    mjr_freeContext(&con);
+
+    // free MuJoCo model and data, deactivate
+    mj_deleteData(d);
+    mj_deleteModel(m);
+    mj_deactivate();
+
+    myfile.close();
+
+// terminate GLFW (crashes with Linux NVidia drivers)
+#if defined(__APPLE__) || defined(_WIN32)
+    glfwTerminate();
+#endif
 
     return 1;
 }

@@ -186,6 +186,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
             v_body_y = (oy[i]-ry)*cos(theta_body) + (ox[i]-rx)*sin(theta_body);
             thetaO = atan2(v_body_y, v_body_x);
             distance_each_obs = fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
+
 #endif
 #ifdef DYNAMIC_MAP
             v_body_x = (dynamic_x[i]-rx)*cos(theta_body) - (dynamic_y[i]-ry)*sin(theta_body);
@@ -304,8 +305,10 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     #if defined STATIC_MAP 
         // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
         obs_repul_force_y_controller = (wall_force_y_controller*60.0 + obs_force_y_controller*270.0)*0.001;
-        obs_repul_force_y_controller = (obs_force_y_controller*270.0)*0.001;
+        // obs_repul_force_y_controller = (obs_force_y_controller*270.0)*0.001;
     #endif
+    printf("obs_repul_force_y_controller = %f\n",obs_repul_force_y_controller);
+
     if(obs_repul_force_y_controller > 360 *M_PI/180){
         obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;
     }
