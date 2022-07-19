@@ -829,7 +829,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("X: %f, Y: %f \n", robot_x, robot_y);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
-        //("x_force: %f, y_force: %f \n",x_force, y_force);
+        printf("x_force: %f, y_force: %f \n",x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
@@ -838,7 +838,7 @@ void mycontroller(const mjModel *m, mjData *d)
         // printf("distance = %f \n",APF.distance_);
         // printf("repulsive_force_controller_slope_force: %f\n", APF.repulsive_force_controller_slope_force);
         // printf("force_to_human: %f\n", APF.repulsive_force_human_new);
-        printf("con: %f, %f, hum: %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller, x_force, y_force);
+        // printf("con: %f, %f, hum: %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller, x_force, y_force);
        
         
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
