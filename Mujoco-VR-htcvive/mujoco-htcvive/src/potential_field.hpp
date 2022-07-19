@@ -14,8 +14,8 @@ using namespace std;
 
 
 /*   Decide cases for feedback  */
-#define CASE1_WITHOUT_FEEDBACK  /// 1
-// #define CASE2_FEEDBACK_TO_HUMAN // 2
+// #define CASE1_WITHOUT_FEEDBACK  /// 1
+#define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 

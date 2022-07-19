@@ -165,23 +165,28 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
 #endif
 #ifdef DYNAMIC_MAP
             thetaO = atan2(dynamic_y[i]-ry, dynamic_x[i]-rx);
+            //v_body_x = (dynamic_y[i]-rx)*cos(theta_body) + (dynamic_y[i]-ry)*sin(theta_body);
+            //v_body_y = (dynamic_y[i]-ry)*cos(theta_body) - (dynamic_y[i]-rx)*sin(theta_body);
+            //thetaO = atan2(v_body_y, v_body_x);
             distance_each_obs = fnc_cal_distance_obs(rx, ry, dynamic_x[i], dynamic_y[i]);
 #endif
         }else if(i == Num_obstacles){ //left wall
             thetaO = 0.0;
             distance_each_obs = fnc_cal_distance_obs(rx, 0, left_wall_x, 0);
         }else if(i == Num_obstacles+1){ //top wall
-            v_body_x = (0)*cos(theta_body) + (top_wall_y-ry)*sin(theta_body);
-            v_body_y = (top_wall_y-ry)*cos(theta_body) - (0)*sin(theta_body);
-            thetaO = atan2(v_body_y, v_body_x); 
+            //v_body_x = (0)*cos(theta_body) + (top_wall_y-ry)*sin(theta_body);
+            //v_body_y = (top_wall_y-ry)*cos(theta_body) - (0)*sin(theta_body);
+            // thetaO = atan2(v_body_y, v_body_x); 
+            thetaO = atan2(top_wall_y-ry, 0); 
             distance_each_obs = fnc_cal_distance_obs(0, ry, 0, top_wall_y);
         }else if(i == Num_obstacles+2){ //right wall
             thetaO = 0.0;
             distance_each_obs = fnc_cal_distance_obs(rx, 0, right_wall_x, 0);
         }else if(i == Num_obstacles+3){ //bottom wall
-            v_body_x = (0)*cos(theta_body) + (bottom_wall_y-ry)*sin(theta_body);
-            v_body_y = (bottom_wall_y-ry)*cos(theta_body) - (0)*sin(theta_body);
-            thetaO = atan2(v_body_y, v_body_x); 
+            //v_body_x = (0)*cos(theta_body) + (bottom_wall_y-ry)*sin(theta_body);
+            //v_body_y = (bottom_wall_y-ry)*cos(theta_body) - (0)*sin(theta_body);
+            // thetaO = atan2(v_body_y, v_body_x); 
+            thetaO = atan2(bottom_wall_y-ry, 0); 
             distance_each_obs = fnc_cal_distance_obs(0, ry, 0, bottom_wall_y);
         }
         // printf("%f, %f, %f, %f, %f \n", rx, ox[i], ry, oy[i], distance_each_obs);
@@ -291,8 +296,10 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
 #if defined CASE2_FEEDBACK_TO_HUMAN || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
     // obs_repul_force_x_human = (wall_force_x_human*6.0 + obs_force_x_human*1.5)*8.0;
     // obs_repul_force_y_human = (wall_force_y_human*16.0 + obs_force_y_human*4.0)*25.0;
-    // obs_repul_force_x_human = (wall_force_x_human*6.0 + obs_force_x_human*6.0)*12.0;
+    obs_repul_force_x_human = (wall_force_x_human*6.0 + obs_force_x_human*6.0)*30.0;
     obs_repul_force_y_human = (wall_force_y_human*7 + obs_force_y_human*16.0)*35.0;
+    //obs_repul_force_x_human = (obs_force_x_human*6.0)*12.0;
+    //obs_repul_force_y_human = (obs_force_y_human*16.0)*35.0;
 #endif
     //printf("obs_force: %f %f, wall_force %f %f, total_force %f %f\n", obs_force_x_controller, obs_force_y_controller, wall_force_x_controller, wall_force_y_controller, obs_repul_force_x_controller, obs_repul_force_y_controller);
     // printf("obs_force: %f %f, wall_force %f %f, total_force %f %f\n", obs_force_x_human, obs_force_y_human, wall_force_x_human, wall_force_y_human, obs_repul_force_x_human, obs_repul_force_y_human);

@@ -308,9 +308,9 @@ void obstacle_control_static(const mjModel *m, mjData *d){
             if(obs_num==selected_static_obs[0] || obs_num==selected_static_obs[1] ||
                obs_num==selected_static_obs[2] || obs_num==selected_static_obs[3] ||
                obs_num==selected_static_obs[4] || obs_num==selected_static_obs[5] || obs_num==selected_static_obs[6])
-               cout << "pass" << "\n";
+            //    cout << "pass" << "\n";
             //change the initial location
-            else{
+            else if(){
                 selected_static_obs_name = init_name + to_string(obs_num) + end_name;
                 //cout << obs_num << "__" << rand_loc[i] << "__" << selected_static_obs_name << "\n"; 
                 m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0] = rand_loc[i] + m->body_pos[mj_name2id(m, mjOBJ_BODY,selected_static_obs_name.c_str()) * 3 + 0];
@@ -1373,7 +1373,7 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
-        // printf("con: %f, %f, hum: %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller, x_force, y_force);
+         printf("con: %f, %f, hum: %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller, x_force, y_force);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");
