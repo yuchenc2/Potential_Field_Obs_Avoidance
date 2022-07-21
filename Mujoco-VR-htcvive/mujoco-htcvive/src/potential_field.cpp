@@ -329,19 +329,19 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
 
 #ifdef CASE2_FEEDBACK_TO_HUMAN  
     #ifdef DYNAMIC_MAP
-        obs_repul_force_y_human = (wall_force_y_human*7 + obs_force_y_human*16.0)*30.0;
+        obs_repul_force_y_human = (wall_force_y_human*7 + obs_force_y_human*16.0)*15.0;
     #endif
     #ifdef STATIC_MAP
-        obs_repul_force_y_human = (wall_force_y_human*50 + obs_force_y_human*30.0)*30.0;
+        obs_repul_force_y_human = (wall_force_y_human*50 + obs_force_y_human*30.0)*15.0;    
         // obs_repul_force_y_human = (wall_force_y_human*7 + obs_force_y_human*16.0)*35.0;
     #endif
 #endif
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
     #ifdef DYNAMIC_MAP
-        obs_repul_force_y_human = (wall_force_y_human*7 + obs_force_y_human*16.0)*35.0;
+        obs_repul_force_y_human = (wall_force_y_human*7 + obs_force_y_human*16.0)*17.5;
     #endif
     #ifdef STATIC_MAP
-        obs_repul_force_y_human = (wall_force_y_human*50 + obs_force_y_human*30.0)*40.0;
+        obs_repul_force_y_human = (wall_force_y_human*50 + obs_force_y_human*30.0)*20.0;
         // obs_repul_force_y_human = (wall_force_y_human*7 + obs_force_y_human*16.0)*35.0;
     #endif
 #endif

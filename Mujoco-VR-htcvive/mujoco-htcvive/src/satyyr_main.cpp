@@ -276,7 +276,7 @@ void obstacle_control_static(const mjModel *m, mjData *d){
     int ran_num_1_3 = 0;
     int obs_num = 0;
     const float FLOAT_MIN = 0.0;
-    const float FLOAT_MAX = 0.6;
+    const float FLOAT_MAX = 0.4;
     double rand_loc[7] = {0.0,};
 
     for(int i=0;i<7;i++){
@@ -1378,14 +1378,14 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
     if(cnt % 500 == 0)
     {
         //printf("X: %f, Y: %f \n", forward_backward, compensated_des_x);
-        // printf("X: %f, Y: %f \n", robot_x, robot_y);
+        printf("X: %f, time: %f \n", robot_x, ((float)clock() - completion_time_clock)/CLOCKS_PER_SEC);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
         // printf("x_force: %f, y_force: %f \n", x_force, y_force);
         // printf("state des_x=%f, x=%f, comp_x = %f %f \n",sensitivity*forward_backward, SATYRR_S.x, compensated_des_x, compensated_des_y);
         // printf("attractive force %f, %f \n",APF.attractive_force[0], APF.attractive_force[1]);
         // printf("repulsive force all %f, %f \n",APF.obs_repul_force_x, APF.obs_repul_force_y_controller);
-         printf("con: %f, %f, hum: %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller, x_force, y_force);
+        //  printf("con: %f, %f, hum: %f, %f \n", APF.obs_repul_force_x_controller, APF.obs_repul_force_y_controller, x_force, y_force);
         // printf("comp force %f, %f comp des X %f, %f \n",compensated_des_dx,compensated_des_dth,compensated_des_x,compensated_des_th);
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");

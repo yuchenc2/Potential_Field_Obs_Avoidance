@@ -14,22 +14,24 @@ using namespace std;
 
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK  /// 1
+#define CASE1_WITHOUT_FEEDBACK  /// 1
 // #define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
-#define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
+// #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
+
+#define BRIGHT
+// #define DARK
+
+static int trial = 10; // 1 2 3 4 5
+
+
 
 /* Map Cases */
 // #define STATIC_MAP  // 1
 #define DYNAMIC_MAP     // 2
 
-// #define BRIGHT
-#define DARK
-
-static int trial = 1; // 1 2 3 4 5
-
-static double human_y_force_gain = 0.5; //Just need to tune the y gain
-#define TORQUE_CUTOFF_Y 20 //25
+static double human_y_force_gain = 1.0; //Just need to tune the y gain // person
+#define TORQUE_CUTOFF_Y 20*human_y_force_gain //25
 
 //--------------------------------------------------------------------------------------
 /* Decide control input */
