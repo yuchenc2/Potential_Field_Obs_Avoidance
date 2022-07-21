@@ -12,10 +12,15 @@ using namespace std;
 #define M_PI           3.14159265358979323846
 
 /*   Decide cases for feedback  */
-#define CASE1_WITHOUT_FEEDBACK //NOTHING
+// #define CASE1_WITHOUT_FEEDBACK //NOTHING
 // #define CASE2_FEEDBACK_TO_HUMAN 
 // #define CASE3_COMPENSATED_CONTROLLER 
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
+#define CASE5_AUTONOMOUS_ROBOT
+
+#define SIGMOID_FUNCTION
+// #define REGULAR_APF_FUNCTION
+
 
 /* Decide control input */
 #define KEYBOARD_INPUT 
@@ -24,6 +29,7 @@ using namespace std;
 /* Map Cases */
 // #define STATIC_MAP
 #define DYNAMIC_MAP
+
 
 
 //Obstacles
@@ -87,6 +93,7 @@ class Potential_Field
 
         double repulsive_force_all[2];
         double distance_each_obs;
+        double distance_;
         double thetaO;
 
         double obs_repul_force_x_human;
@@ -104,8 +111,13 @@ class Potential_Field
         double shift_x[Num_obstacles];
         double shift_y[Num_obstacles];
 
+        double thetaG;
+        double thetaG_old;
+
         double fnc_cal_distance_obs(double rx, double ry, double goal_x, double goal_y);  
-        bool fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy); 
+        bool fnc_cal_distance(double rx, double ry, double goal_x, double goal_y);
+        bool fnc_attractive_force(double dist, double rx, double ry, double goal_x, double goal_y, double theta_body);
+        bool fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy, double torso_Yaw); 
 };
 
 

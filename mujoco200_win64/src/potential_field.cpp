@@ -66,15 +66,73 @@ Potential_Field::Potential_Field()
     cnt_for_slope_controller = 0;
     cnt_for_slope_human = 0;
     distance_each_obs = 0.0;
+    distance_ = 0.0;
     thetaO = 0.0;
+
+    thetaG = 0.0;
+    thetaG_old = 0.0;
 }
+
+bool Potential_Field::fnc_cal_distance(double rx, double ry, double goal_x, double goal_y) 
+{
+    distance_ = sqrt((goal_x-rx)*(goal_x-rx) + (goal_y-ry)*(goal_y-ry));     
+    return true;
+}
+
+bool Potential_Field::fnc_attractive_force(double dist, double rx, double ry, double goal_x, double goal_y, double theta_body) 
+{
+    double Kp = 0.01;
+    double Kp_theta_G = 0.1;
+    double Kd_theta_G = 0.03;
+    double d_thetaG = 0.0;
+    const double d_star = 2.0;
+    const int MAX_FORCE = 1;
+
+    double v_body_x = (goal_x-rx)*cos(theta_body) + (goal_y-ry)*sin(theta_body);
+    double v_body_y = (goal_y-ry)*cos(theta_body) - (goal_x-rx)*sin(theta_body);
+    double thetaG = atan2(v_body_y, v_body_x);
+    // if(thetaG > 0.0){
+    //     thetaG = 1.0;
+    // }else if(thetaG < 0.0){
+    //     thetaG = -1.0;
+    // }
+    // double thetaG = atan2(goal_y-ry, goal_x-rx);
+
+    //from others
+    int goalR = 0.01;
+    double goalS = 38/5; // The spread of attraction of the goal
+    
+    if(dist < 12.5){
+        Kp = 0.017;
+    }
+
+    d_thetaG = (thetaG-thetaG_old)/(0.01/400);
+    thetaG_old = thetaG;
+
+    if (dist < goalR){
+        attractive_force[0] = 0;
+        attractive_force[1] = 0;
+    }
+    // else if((goalS+goalR >= dist) && (dist >=goalR))
+    // {
+    //     attractive_force[0] = Kp*(dist - goalR);
+    //     attractive_force[1] = Kp_theta_G*thetaG + Kd_theta_G*d_thetaG;
+    // }
+    else{
+        attractive_force[0] = Kp*goalS;
+        attractive_force[1] = Kp_theta_G*thetaG + Kd_theta_G*d_thetaG;
+    }
+
+    return true;
+}
+
 
 double Potential_Field::fnc_cal_distance_obs(double rx, double ry, double goal_x, double goal_y) 
 {
     return sqrt((goal_x-rx)*(goal_x-rx) + (goal_y-ry)*(goal_y-ry));
 }
 
-bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy)
+bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy, double torso_Yaw)
 {
     //from others
     const double obsRad = 0.2; //0.2;
@@ -92,6 +150,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     double obs_force_x_controller = 0.0;
     double obs_force_y_controller = 0.0;
     double alpha = 0.15;
+    const double beta_regular_APF = 0.1;
     double top_wall_y = 0.0;
     double bottom_wall_y = 0.0;
     double right_wall_x = 0.0;
@@ -150,33 +209,81 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         left_wall_x = -20.0;
 #endif
         
+        double theta_body = torso_Yaw;
+        double v_body_x = 0.0;
+        double v_body_y = 0.0;
+        double theta_final = 0.0;
+
         // Calculate distance
         if(i < Num_obstacles){
 #ifdef STATIC_MAP
+            // v_body_x = (ox[i]-rx)*cos(theta_body) + (oy[i]-ry)*sin(theta_body);
+            // v_body_y = (oy[i]-ry)*cos(theta_body) - (ox[i]-rx)*sin(theta_body);
+            // thetaO = atan2(v_body_y, v_body_x);
+            // if(thetaO > 0.0){
+            //     thetaO = 1.0;
+            // }else if(thetaO < 0.0){
+            //     thetaO = -1.0;
+            // }
             thetaO = atan2(oy[i]-ry, ox[i]-rx);
             distance_each_obs = fnc_cal_distance_obs(rx, ry, ox[i], oy[i]);
 #endif
 #ifdef DYNAMIC_MAP
-            thetaO = atan2(dynamic_y[i]-ry, dynamic_x[i]-rx);
+            // thetaO = atan2(dynamic_y[i]-ry, dynamic_x[i]-rx);
+            v_body_x = (dynamic_x[i]-rx)*cos(theta_body) + (dynamic_y[i]-ry)*sin(theta_body);
+            v_body_y = (dynamic_y[i]-ry)*cos(theta_body) - (dynamic_x[i]-rx)*sin(theta_body);
+            theta_final = atan2(v_body_y, v_body_x);
+            thetaO = theta_final;
+            if(thetaO > 0.0){
+                thetaO = 1.0;
+            }else if(thetaO < 0.0){
+                thetaO = -1.0;
+            }
             distance_each_obs = fnc_cal_distance_obs(rx, ry, dynamic_x[i], dynamic_y[i]);
 #endif
         }else if(i == Num_obstacles){ //left wall
             thetaO = 0.0;
             distance_each_obs = fnc_cal_distance_obs(rx, 0, left_wall_x, 0);
         }else if(i == Num_obstacles+1){ //top wall
-            thetaO = atan2(top_wall_y-ry, 0); 
+#ifdef DYNAMIC_MAP
+            // v_body_x = (0)*cos(theta_body) + (top_wall_y-ry)*sin(theta_body);
+            // v_body_y = (top_wall_y-ry)*cos(theta_body) - (0)*sin(theta_body);
+            // thetaO = atan2(v_body_y, v_body_x);
+            // if(thetaO > 0.0){
+            //     thetaO = 1.0;
+            // }else if(thetaO < 0.0){
+            //     thetaO = -1.0;
+            // }
+            thetaO = atan2(top_wall_y-ry, 0);
+#endif
+#ifdef STATIC_MAP 
+            thetaO = atan2(top_wall_y-ry, 0);
+#endif
             distance_each_obs = fnc_cal_distance_obs(0, ry, 0, top_wall_y);
         }else if(i == Num_obstacles+2){ //right wall
             thetaO = 0.0;
             distance_each_obs = fnc_cal_distance_obs(rx, 0, right_wall_x, 0);
         }else if(i == Num_obstacles+3){ //bottom wall
+#ifdef DYNAMIC_MAP     
+            // v_body_x = (0)*cos(theta_body) + (bottom_wall_y-ry)*sin(theta_body);
+            // v_body_y = (bottom_wall_y-ry)*cos(theta_body) - (0)*sin(theta_body);
+            // thetaO = atan2(v_body_y, v_body_x);
             thetaO = atan2(bottom_wall_y-ry, 0);
+            // if(thetaO > 0.0){
+            //     thetaO = 1.0;
+            // }else if(thetaO < 0.0){
+            //     thetaO = -1.0;
+            // }
+#endif
+#ifdef STATIC_MAP 
+            thetaO = atan2(bottom_wall_y-ry, 0);
+#endif 
             distance_each_obs = fnc_cal_distance_obs(0, ry, 0, bottom_wall_y);
         }
         // printf("%f, %f, %f, %f, %f \n", rx, ox[i], ry, oy[i], distance_each_obs);
 
         //controller
-#if defined CASE3_COMPENSATED_CONTROLLER || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN 
+#if defined CASE3_COMPENSATED_CONTROLLER || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN || defined CASE5_AUTONOMOUS_ROBOT
         if(distance_each_obs < (obsS + obsRad)){
             if((cnt_for_slope_controller % 400 == 0)){ //10ms = 0.01s
                 if(i < Num_obstacles){
@@ -189,12 +296,21 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
                 repulsive_force_controller_slope_lpf_old[i] = repulsive_force_controller_slope_lpf[i];
                 repulsive_force_controller_old[i] = repulsive_force_controller_new[i];
                 cnt_for_slope_controller = 0;
+                // printf("theta_final: %f \n", theta_final);
             }
-            if(repulsive_force_controller_slope_lpf[i] <= 0.0){ // If getting further away, zero out the force   
-                repulsive_force_controller_slope_lpf[i] = 0.0; //-repulsive_force_controller_slope_lpf[i];
-            }
-            
+            // if(repulsive_force_controller_slope_lpf[i] >= 0.0 && (theta_final > M_PI/2 || theta_final < -M_PI/2)){ // If getting further away, zero out the force   
+            //     repulsive_force_controller_slope_lpf[i] = 0.0; //-repulsive_force_controller_slope_lpf[i];
+            //     printf("theta_final: %f \n", theta_final);
+            // }else if(repulsive_force_controller_slope_lpf[i] >= 0.0 && (theta_final > M_PI/2 || theta_final < -M_PI/2)){ // If getting further away, zero out the force   
+            //     repulsive_force_controller_slope_lpf[i] = 0.0; //-repulsive_force_controller_slope_lpf[i];
+            //     printf("theta_final: %f \n", theta_final);
+            // }
+            #ifdef SIGMOID_FUNCTION
             repulsive_force_controller_final[i] = repulsive_force_controller_slope_lpf[i];
+            #endif
+            #ifdef REGULAR_APF_FUNCTION
+            repulsive_force_controller_final[i] = beta_regular_APF*(obsS + obsRad - distance_each_obs);
+            #endif
             repulsive_force_controller[0] = -repulsive_force_controller_final[i];
             repulsive_force_controller[1] = -repulsive_force_controller_final[i]*thetaO;
         }
@@ -257,9 +373,20 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     }
 
     // Sum wall and obs force + cutoffs
-#if defined CASE3_COMPENSATED_CONTROLLER || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN 
-    obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
-    obs_repul_force_y_controller = (wall_force_y_controller*70.0 + obs_force_y_controller*30.0)*0.001;
+#if defined CASE3_COMPENSATED_CONTROLLER || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN || defined CASE5_AUTONOMOUS_ROBOT
+    // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
+    // obs_repul_force_y_controller = (wall_force_y_controller*70.0 + obs_force_y_controller*30.0)*0.01;
+    
+#ifdef SIGMOID_FUNCTION
+    obs_repul_force_x_controller = (obs_force_x_controller*10.0)*0.003;
+    obs_repul_force_y_controller = (obs_force_y_controller*30.0)*0.006;
+#endif
+
+#ifdef REGULAR_APF_FUNCTION
+    obs_repul_force_x_controller = (obs_force_x_controller*10.0)*0.001;
+    obs_repul_force_y_controller = (obs_force_y_controller*30.0)*0.05;
+#endif
+
     if(obs_repul_force_y_controller > 360 *M_PI/180){
         obs_repul_force_y_controller = obs_repul_force_y_controller - 360 *M_PI/180;
     }
