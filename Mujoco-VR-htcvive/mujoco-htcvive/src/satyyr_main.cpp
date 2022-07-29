@@ -1457,18 +1457,18 @@ int main(int argc, const char** argv)
     // load and compile model
     char error[1000] = "Could not load binary model";
 
-// #ifdef defined STATIC_MAP && defined BRIGHT
+//#ifdef defined STATIC_MAP && defined BRIGHT
 //     printf("1 \n");
-    m = mj_loadXML("../model/satyyr_static_bright.xml", 0, error, 1000);
-// #endif
-// #ifdef defined STATIC_MAP && defined DARK
+//    m = mj_loadXML("../model/satyyr_static_bright.xml", 0, error, 1000);
+//#endif
+//#ifdef defined STATIC_MAP && defined DARK
 //     printf("2 \n");
-//     m = mj_loadXML("../model/satyyr_static_dark.xml", 0, error, 1000);
-// #endif
-// #ifdef DYNAMIC_MAP
+    // m = mj_loadXML("../model/satyyr_static_dark.xml", 0, error, 1000);
+//#endif
+//#ifdef DYNAMIC_MAP
 //     printf("3 \n");
-//     m = mj_loadXML("../model/satyyr_dynamic.xml", 0, error, 1000);
-// #endif
+   m = mj_loadXML("../model/satyyr_dynamic.xml", 0, error, 1000);
+//#endif
 
     if (!m)
         mju_error_s("Load model error: %s", error);
