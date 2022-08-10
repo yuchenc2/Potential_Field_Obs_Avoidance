@@ -1378,7 +1378,7 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
     if(cnt % 500 == 0)
     {
         //printf("X: %f, Y: %f \n", forward_backward, compensated_des_x);
-        printf("X: %f, time: %f \n", robot_x, ((float)clock() - completion_time_clock)/CLOCKS_PER_SEC);
+        //printf("X: %f, time: %f \n", robot_x, ((float)clock() - completion_time_clock)/CLOCKS_PER_SEC);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
         // printf("x_force: %f, y_force: %f \n", x_force, y_force);
@@ -1390,7 +1390,7 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
-        // printf("yaw %f, yaw %f \n", SATYRR_S.psi, SATYRR_S.y);
+        printf("yaw %f, yaw %f \n", SATYRR_S.psi, SATYRR_S.y);
         cnt = 0;
     }
 

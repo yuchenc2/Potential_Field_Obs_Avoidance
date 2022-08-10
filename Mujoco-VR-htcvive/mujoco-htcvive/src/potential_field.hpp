@@ -25,21 +25,22 @@ using namespace std;
 static int trial = 10; // 1 2 3 4 5
 
 
-
 /* Map Cases */
-// #define STATIC_MAP  // 1
-#define DYNAMIC_MAP     // 2
+#define STATIC_MAP  // 1
+// #define DYNAMIC_MAP     // 2
 
 static double human_y_force_gain = 1.0; //Just need to tune the y gain // person
-#define TORQUE_CUTOFF_Y 20*human_y_force_gain //25
 
 //--------------------------------------------------------------------------------------
+//method_map_trial_brightness
+
 /* Decide control input */
-// #define KEYBOARD_INPUT 
-#define HMI_INPUT
+#define KEYBOARD_INPUT 
+// #define HMI_INPUT
 
 static double human_x_force_gain = 1.0;
 #define TORQUE_CUTOFF_X 25 // 
+#define TORQUE_CUTOFF_Y 20*human_y_force_gain //25
 
 #ifdef CASE1_WITHOUT_FEEDBACK //NOTHING
 static int method = 1; 
