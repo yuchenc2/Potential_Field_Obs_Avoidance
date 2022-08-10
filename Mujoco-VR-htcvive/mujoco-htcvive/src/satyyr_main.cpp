@@ -59,8 +59,8 @@ float *gaze;
 
 
 /*   Decide cases for feedback  */
-#define CASE1_WITHOUT_FEEDBACK  /// 1
-// #define CASE2_FEEDBACK_TO_HUMAN // 2
+// #define CASE1_WITHOUT_FEEDBACK  /// 1
+#define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
 // #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
@@ -91,7 +91,7 @@ double keyboard_input_sensitivity_y = 0.1;
 
 #ifdef STATIC_MAP
     #define TORQUE_CUTOFF_X 25 //5 // 
-    #define TORQUE_CUTOFF_Y 20 //10 //25
+    #define TORQUE_CUTOFF_Y 30 //10 //25
 #endif
 
 #ifdef DYNAMIC_MAP
@@ -1353,7 +1353,7 @@ void mycontroller(const mjModel *m, mjData *d)
     // APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 1);
     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 0, map_choice);
     x_force = APF.obs_repul_force_x_human; // with force to human
-    y_force = APF.obs_repul_force_y_human; // with force to human
+    y_force = 3*APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right; //without repulsive force for controller
 #endif
@@ -1363,7 +1363,7 @@ void mycontroller(const mjModel *m, mjData *d)
     y_force = 0; // without force to human
     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 1, map_choice);
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + 3*APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
@@ -1386,6 +1386,7 @@ void mycontroller(const mjModel *m, mjData *d)
     // }else if(x_force < -TORQUE_CUTOFF_X){
     //     x_force = -TORQUE_CUTOFF_X;
     // }
+    x_force = 0.0;
     if(x_force > 0.0){
         x_force = 0.0;
     }else if(x_force < -TORQUE_CUTOFF_X){
