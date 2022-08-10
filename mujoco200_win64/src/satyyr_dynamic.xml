@@ -216,7 +216,6 @@
             <geom name="obstacle_50_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
         
-        <!--
         <body name="obstacle_51_body" pos="-16 0 0">
             <geom name="obstacle_51_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
@@ -248,6 +247,7 @@
             <geom name="obstacle_60_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>
         
+        <!--
         <body name="obstacle_61_body" pos="-16 -1 0">
             <geom name="obstacle_61_geom" class = "collision-default" fromto="0 0 0 0 0 1.5" size="0.2" type="capsule" material="group1" />
         </body>

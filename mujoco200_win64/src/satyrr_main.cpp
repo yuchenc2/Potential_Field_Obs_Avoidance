@@ -205,7 +205,7 @@ void obstacle_control_static(const mjModel *m, mjData *d){
     int ran_num_old = 0;
     int obs_num = 0;
     const float FLOAT_MIN = 0.0;
-    const float FLOAT_MAX = 1.0;
+    const float FLOAT_MAX = 0.4;
     double rand_loc[7] = {0.0,};
 
     for(int i=0;i<7;i++){
