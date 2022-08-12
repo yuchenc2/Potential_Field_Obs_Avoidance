@@ -86,6 +86,7 @@ SATYRR_STATE SATYRR_S;
 Potential_Field APF;
 ofstream myfile;
 bool data_save_flag = true;
+bool first_log = true;
 
 //----------------------------------- Input Setup ---------------------------------------
 
@@ -107,6 +108,7 @@ double compensated_des_dx = 0.0;
 double compensated_des_dth = 0.0;
 double compensated_des_x = 0.0;
 double compensated_des_th = 0.0;
+double compensated_des_th_up = 0.0;
 
 //------------------------------------ Obstacles ----------------------------------------
 
@@ -1281,8 +1283,8 @@ void mycontroller(const mjModel *m, mjData *d)
 APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, SATYRR_S.psi);
 
 #ifdef CASE1_WITHOUT_FEEDBACK
-    x_force = 0; // without force to human
-    y_force = 0; // without force to human
+    // x_force = 0; // without force to human
+    // y_force = 0; // without force to human
     compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right; //without repulsive force for controller
 #endif
@@ -1302,12 +1304,13 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN    
     x_force = human_x_force_gain*APF.obs_repul_force_x_human; // with force to human
     y_force = human_y_force_gain*APF.obs_repul_force_y_human; // with force to human
-    compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
+    compensated_des_dx = sensitivity_x*forward_backward; // + APF.obs_repul_force_x_controller; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right; // + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 
     compensated_des_x += compensated_des_dx*update_rate;
     compensated_des_th += compensated_des_dth*update_rate;
+    compensated_des_th_up += (sensitivity_y*left_right+APF.obs_repul_force_y_controller)*update_rate;
 
     //robot controller
     saytrr_controller(m, d, compensated_des_dx, compensated_des_dth, compensated_des_x, compensated_des_th);
@@ -1329,17 +1332,20 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
     if(abs(SATYRR_S.pitch) > 25.0*M_PI/180.0){
         robot_failed = 1;
     }
-
-    // Send to HMI
-    if(robot_failed == 0){
-        Robot_Data[0] = x_force; 
-        Robot_Data[10] = y_force;
-    }else{
-        Robot_Data[0] = 0; 
-        Robot_Data[10] = 0;
-    }
+    
     
     if (data_save_flag){
+#ifdef STATIC_MAP
+        if(first_log){
+            for(int i = 0; i<Num_obstacles; i++){
+                myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+0];
+                myfile << ", " << m->body_pos[mj_name2id(m, mjOBJ_BODY, obstacle_name[i])*3+1];
+            }
+            myfile << "\n";
+            first_log = false;
+        }
+#endif
+
         if(cnt % 10 == 0 && abs(SATYRR_S.pitch) < 1.54 ){
             myfile << d->time 
             << ", " << robot_x 
@@ -1361,8 +1367,12 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
             << ", " << APF.obs_repul_force_y_controller
             << ", " << x_force // human feedback force
             << ", " << y_force // human feedback force
-            << ", " << sensitivity_x*forward_backward
-            << ", " << sensitivity_x*left_right
+            << ", " << sensitivity_x*forward_backward //des com dx
+            << ", " << sensitivity_x*left_right //des com dyaw
+            << ", " << compensated_des_dth
+            << ", " << sensitivity_y*left_right+APF.obs_repul_force_y_controller //des comp dyaw
+            << ", " << compensated_des_th_up //des comp yaw
+
             ;
 #ifdef DYNAMIC_MAP
             const char *obstacle_name[11] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
@@ -1375,6 +1385,16 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
         } 
     }
     
+    y_force = 0.0;
+     // Send to HMI
+    if(robot_failed == 0){
+        Robot_Data[0] = x_force; 
+        Robot_Data[10] = y_force;
+    }else{
+        Robot_Data[0] = 0; 
+        Robot_Data[10] = 0;
+    }
+
     if(cnt % 500 == 0)
     {
         //printf("X: %f, Y: %f \n", forward_backward, compensated_des_x);

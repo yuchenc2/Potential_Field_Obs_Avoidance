@@ -15,9 +15,9 @@ using namespace std;
 
 /*   Decide cases for feedback  */
 // #define CASE1_WITHOUT_FEEDBACK  /// 1
-#define CASE2_FEEDBACK_TO_HUMAN // 2
+// #define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
-// #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
+#define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
 #define BRIGHT
 // #define DARK
@@ -64,13 +64,12 @@ static int brightness = 0;
 
 //Obstacles
 #ifdef STATIC_MAP
-    #define Num_obstacles 26
+    #define Num_obstacles 35
     static int map = 1;  
-    static const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body"
-                                               ,"obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body"
-                                               ,"obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body", "obstacle_16_body"
-                                               ,"obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body","obstacle_21_body","obstacle_22_body"
-                                               ,"obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body"};
+    static const char *obstacle_name[Num_obstacles] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body",
+                                                    "obstacle_11_body","obstacle_12_body","obstacle_13_body","obstacle_14_body","obstacle_15_body", "obstacle_16_body","obstacle_17_body","obstacle_18_body","obstacle_19_body","obstacle_20_body",
+                                                    "obstacle_21_body","obstacle_22_body","obstacle_23_body","obstacle_24_body","obstacle_25_body","obstacle_26_body","obstacle_27_body","obstacle_28_body","obstacle_29_body","obstacle_30_body",
+                                                    "obstacle_31_body","obstacle_32_body","obstacle_33_body","obstacle_34_body","obstacle_35_body"};
 #endif
 #ifdef DYNAMIC_MAP
     #define Num_obstacles 60

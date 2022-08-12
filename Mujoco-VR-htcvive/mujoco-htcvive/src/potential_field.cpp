@@ -220,7 +220,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         // printf("%f, %f, %f, %f, %f \n", rx, ox[i], ry, oy[i], distance_each_obs);
 
         //controller
-#if defined CASE3_COMPENSATED_CONTROLLER || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN || defined CASE1_WITHOUT_FEEDBACK  
+#if defined CASE3_COMPENSATED_CONTROLLER || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN   
         if(distance_each_obs < (obsS + obsRad)){
             if((cnt_for_slope_controller % 400 == 0)){ //10ms = 0.01s
 #ifdef DYNAMIC_MAP
@@ -259,7 +259,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         
 #endif
         //human feedback
-#if defined CASE2_FEEDBACK_TO_HUMAN || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN || defined CASE1_WITHOUT_FEEDBACK
+#if defined CASE2_FEEDBACK_TO_HUMAN || defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
         // Obstacle force
         if(distance_each_obs < (obsS + obsRad)){
             //Modified potential field force
@@ -315,7 +315,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
         obs_repul_force_y_controller = (wall_force_y_controller*70.0 + obs_force_y_controller*270.0)*0.0008;
     #endif
-    #if defined STATIC_MAP && (defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN || defined CASE1_WITHOUT_FEEDBACK)
+    #if defined STATIC_MAP && defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
         // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
         obs_repul_force_y_controller = (wall_force_y_controller*45.0 + obs_force_y_controller*200.0)*0.0006;
     #endif
@@ -336,7 +336,7 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
         // obs_repul_force_y_human = (wall_force_y_human*7 + obs_force_y_human*16.0)*35.0;
     #endif
 #endif
-#if defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN || defined CASE1_WITHOUT_FEEDBACK
+#if defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN 
     #ifdef DYNAMIC_MAP
         obs_repul_force_y_human = (wall_force_y_human*7 + obs_force_y_human*16.0)*17.5;
     #endif
