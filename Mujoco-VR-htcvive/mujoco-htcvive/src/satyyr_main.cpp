@@ -59,16 +59,16 @@ float *gaze;
 
 
 /*   Decide cases for feedback  */
-// #define CASE1_WITHOUT_FEEDBACK  /// 1
-#define CASE2_FEEDBACK_TO_HUMAN // 2
+// #define CASE1_WITHOUT_FEEDBACK  //// 1
+// #define CASE2_FEEDBACK_TO_HUMAN // 2
 // #define CASE3_COMPENSATED_CONTROLLER  // 3
-// #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
+#define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
 /* Map Cases */
 #define STATIC_MAP  // 1
 // #define DYNAMIC_MAP     // 2
 
-int trial = 1; // 1 2 3 4 5
+int trial = 6; // 1 2 3 4 5
 
 //------------------------------Trial var to change ------------------------------------------
 
@@ -1353,7 +1353,7 @@ void mycontroller(const mjModel *m, mjData *d)
     // APF.fnc_repulsive_force_all(SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset, sum_obstacle_pos_x, sum_obstacle_pos_y, Num_obstacles, 1);
     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 0, map_choice);
     x_force = APF.obs_repul_force_x_human; // with force to human
-    y_force = 3*APF.obs_repul_force_y_human; // with force to human
+    y_force = APF.obs_repul_force_y_human; // with force to human
     compensated_des_dx = sensitivity_x*forward_backward; // without repulsive force for controller
     compensated_des_dth = sensitivity_y*left_right; //without repulsive force for controller
 #endif
@@ -1363,7 +1363,7 @@ void mycontroller(const mjModel *m, mjData *d)
     y_force = 0; // without force to human
     APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacle_pos_y, 1, map_choice);
     compensated_des_dx = sensitivity_x*forward_backward + APF.obs_repul_force_x_controller; // with repulsive force for controller
-    compensated_des_dth = sensitivity_y*left_right + 3*APF.obs_repul_force_y_controller; // with repulsive force for controller
+    compensated_des_dth = sensitivity_y*left_right + APF.obs_repul_force_y_controller; // with repulsive force for controller
 #endif
 
 #ifdef CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
@@ -1391,6 +1391,7 @@ void mycontroller(const mjModel *m, mjData *d)
         x_force = 0.0;
     }else if(x_force < -TORQUE_CUTOFF_X){
         x_force = -TORQUE_CUTOFF_X;
+        //x_force = 0.0;
     }
     if(y_force > TORQUE_CUTOFF_Y){
         y_force = TORQUE_CUTOFF_Y;
@@ -1423,7 +1424,6 @@ void mycontroller(const mjModel *m, mjData *d)
             << ", " << SATYRR_S.pitch
             << ", " << SATYRR_S.dx 
             << ", " << SATYRR_S.dpitch
-
             << ", " << SATYRR_S.psi
             << ", " << SATYRR_S.dpsi
             << ", " << SATYRR_S.q[10]
@@ -1450,7 +1450,8 @@ void mycontroller(const mjModel *m, mjData *d)
     
     if(cnt % 500 == 0)
     {
-        // printf("X: %f, Y: %f \n", robot_x, robot_y);
+
+        printf("X: %f, time: %f \n", robot_x, ((float)clock() - completion_time_clock)/CLOCKS_PER_SEC);
         // printf("rx: %f, ry: %f \n", SATYRR_S.x + SATYRR_X_offset, SATYRR_S.y + SATYRR_Y_offset);
         // printf("distance_to_wall = %f, rx = %f \n", APF.distance_to_wall, SATYRR_S.x + SATYRR_X_offset);
         // printf("x_force: %f, y_force: %f \n", x_force, y_force);
