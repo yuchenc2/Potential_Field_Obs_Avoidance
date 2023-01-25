@@ -26,8 +26,8 @@ static int trial = 10; // 1 2 3 4 5
 
 
 /* Map Cases */
-#define STATIC_MAP  // 1
-// #define DYNAMIC_MAP     // 2
+// #define STATIC_MAP  // 1
+#define DYNAMIC_MAP     // 2
 
 static double human_y_force_gain = 1.0; //Just need to tune the y gain // person
 
@@ -140,6 +140,9 @@ class Potential_Field
         double randomVel_y[Num_obstacles];
         double shift_x[Num_obstacles];
         double shift_y[Num_obstacles];
+
+        double data_force_wall;
+        double data_force_obs;
 
         double fnc_cal_distance_obs(double rx, double ry, double goal_x, double goal_y);  
         bool fnc_repulsive_force_all(const mjModel *m, double rx, double ry, vector<double> ox, vector<double> oy, double torso_Yaw); 

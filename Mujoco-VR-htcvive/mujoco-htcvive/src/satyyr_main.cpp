@@ -129,8 +129,9 @@ int collision_count = 0;
 
 //------------------------------------ UDP Setup ----------------------------------------
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
-#define SERVER "169.254.159.43" //New labview computer 
-// #define SERVER "169.254.205.99"
+#define SERVER "169.254.205.107" //New labview computer
+//#define SERVER "169.254.159.43" //New labview computer 
+// #define SERVER "169.254.205.99" 
 // #define SERVER "169.254.215.171"
 #define BUFLEN 548	// Max length of buffer
 #define PORT_SEND 54004	// The port on which to send data
@@ -1372,7 +1373,8 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
             << ", " << compensated_des_dth
             << ", " << sensitivity_y*left_right+APF.obs_repul_force_y_controller //des comp dyaw
             << ", " << compensated_des_th_up //des comp yaw
-
+            << ", " << APF.data_force_wall
+            << ", " << APF.data_force_obs
             ;
 #ifdef DYNAMIC_MAP
             const char *obstacle_name[11] = {"obstacle_1_body","obstacle_2_body","obstacle_3_body","obstacle_4_body","obstacle_5_body","obstacle_6_body","obstacle_7_body","obstacle_8_body","obstacle_9_body","obstacle_10_body","obstacle_11_body"};
@@ -1385,7 +1387,6 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
         } 
     }
     
-    y_force = 0.0;
      // Send to HMI
     if(robot_failed == 0){
         Robot_Data[0] = x_force; 

@@ -67,6 +67,8 @@ Potential_Field::Potential_Field()
     cnt_for_slope_human = 0;
     distance_each_obs = 0.0;
     thetaO = 0.0;
+    data_force_wall = 0.0;
+    data_force_obs = 0.0;
 }
 
 double Potential_Field::fnc_cal_distance_obs(double rx, double ry, double goal_x, double goal_y) 
@@ -318,6 +320,8 @@ bool Potential_Field::fnc_repulsive_force_all(const mjModel *m, double rx, doubl
     #if defined STATIC_MAP && defined CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN
         // obs_repul_force_x_controller = (wall_force_x_controller*10.0 + obs_force_x_controller*10.0)*0.001;
         obs_repul_force_y_controller = (wall_force_y_controller*45.0 + obs_force_y_controller*200.0)*0.0006;
+        data_force_wall = wall_force_y_controller*45.0*0.0006;
+        data_force_obs = obs_force_y_controller*200.0*0.0006;
     #endif
 
     if(obs_repul_force_y_controller > 360 *M_PI/180){
