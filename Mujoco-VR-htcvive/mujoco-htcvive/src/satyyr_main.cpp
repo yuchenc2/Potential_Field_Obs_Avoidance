@@ -65,8 +65,8 @@ float *gaze;
 #define CASE4_COMPENSATED_CONTROLLER_WITH_FEEDBACK_TO_HUMAN // 4
 
 /* Map Cases */
-#define STATIC_MAP  // 1
-// #define DYNAMIC_MAP     // 2
+// #define STATIC_MAP  // 1
+#define DYNAMIC_MAP     // 2
 
 int trial = 6; // 1 2 3 4 5
 
@@ -191,7 +191,8 @@ int collision_count = 0;
 
 //------------------------------------ UDP Setup ----------------------------------------
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
-#define SERVER "169.254.159.43" //New labview computer 
+#define SERVER "169.254.205.107" //New labview compute
+// #define SERVER "169.254.159.43" //New labview computer 
 // #define SERVER "169.254.205.99"
 // #define SERVER "169.254.215.171"
 #define BUFLEN 548	// Max length of buffer
