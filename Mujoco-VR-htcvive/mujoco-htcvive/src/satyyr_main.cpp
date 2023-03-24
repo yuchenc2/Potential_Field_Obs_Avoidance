@@ -1411,7 +1411,9 @@ APF.fnc_repulsive_force_all(m, robot_x, robot_y, sum_obstacle_pos_x, sum_obstacl
         // printf("distance = %f \n",APF.distance_);
         // printf("\n");
         // printf("error = %f, %f \n",goal_location[0] - (SATYRR_S.x + SATYRR_X_offset), goal_location[1]- (SATYRR_S.y+SATYRR_Y_offset));
-        printf("yaw %f, yaw %f \n", SATYRR_S.psi, SATYRR_S.y);
+        // completion_time_clock = clock() - completion_time_clock;
+        printf("time: %f, X: %f \n", d->time, robot_x);
+        // printf ("Completion Time: %f second\n",((float)completion_time_clock)/CLOCKS_PER_SEC);
         cnt = 0;
     }
 
