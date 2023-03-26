@@ -22,14 +22,14 @@ using namespace std;
 #define BRIGHT
 // #define DARK
 
-static int trial = 5; // 1 2 3 4 5
+static int trial = 1; // 1 2 3 4 5
 
 
 /* Map Cases */
 // #define STATIC_MAP  // 1
 #define DYNAMIC_MAP     // 2
 
-static double human_y_force_gain = 0.7; //Just need to tune the y gain // person
+static double human_y_force_gain = 1.0; //Just need to tune the y gain // person
 
 //--------------------------------------------------------------------------------------
 //method_map_trial_brightness
