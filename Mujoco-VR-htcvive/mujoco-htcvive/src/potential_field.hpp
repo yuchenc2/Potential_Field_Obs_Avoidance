@@ -22,7 +22,7 @@ using namespace std;
 #define BRIGHT
 // #define DARK
 
-static int trial = 1; // 1 2 3 4 5
+static int trial = 10; // 1 2 3 4 5
 
 
 /* Map Cases */
